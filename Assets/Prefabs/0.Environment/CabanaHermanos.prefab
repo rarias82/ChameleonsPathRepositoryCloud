@@ -1,0 +1,295 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &61037412423499340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 834020907104249078}
+  - component: {fileID: 4340575097799420755}
+  - component: {fileID: 2006394608840171417}
+  - component: {fileID: 871922504319420659}
+  - component: {fileID: 871922504319420657}
+  - component: {fileID: 3036644265526480926}
+  - component: {fileID: 919132149622966576}
+  m_Layer: 0
+  m_Name: CabanaHermanos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &834020907104249078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61037412423499340}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
+  m_LocalPosition: {x: 92.1, y: 8.5, z: 119.5}
+  m_LocalScale: {x: 400, y: 400, z: 400}
+  m_Children:
+  - {fileID: 871922504139115248}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
+--- !u!33 &4340575097799420755
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61037412423499340}
+  m_Mesh: {fileID: -5495902117074765545, guid: ee2f357c6c892c64eb771a8bc8ade622, type: 3}
+--- !u!23 &2006394608840171417
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61037412423499340}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -876546973899608171, guid: ee2f357c6c892c64eb771a8bc8ade622, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &871922504319420659
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61037412423499340}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.009056493, y: 0.008507805, z: 0.01820036}
+  m_Center: {x: 0.013694329, y: -0.005956986, z: -0.00035742938}
+--- !u!65 &871922504319420657
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61037412423499340}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.018479116, y: 0.021795964, z: 0.01820036}
+  m_Center: {x: -0.0016239154, y: -0.0014237618, z: -0.00035742938}
+--- !u!65 &3036644265526480926
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61037412423499340}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.026024137, y: 0.014350668, z: 0.01820036}
+  m_Center: {x: 0.0021485912, y: -0.0051464024, z: -0.00035742935}
+--- !u!114 &919132149622966576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61037412423499340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 950d7858b6fca2f468ec4546185aedfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 871922504139115249}
+  isRange: 0
+  dialogueText: {fileID: 0}
+  linesA:
+  - "\xBFQui\xE9n diablos toca la maldita puerta? No aceptamos mendigos, \xA1largo
+    de aqu\xED!"
+  - "No\u2026 no vine a mendigar, su hermano me envi\xF3 para que lo vaya a buscar
+    con uno de sus caballos.\r\n"
+  - "Mi hermano\u2026JA, ese es el truco m\xE1s viejo que he o\xEDdo, si es verdad,
+    entonces dime su nombre, de seguro debes saberlo si han hablado.\n"
+  linesC:
+  - "\xBFQuien diablo toca la maldita puerta? No aceptamos mendigos \xA1largo de
+    aqu\xED!\r\n"
+  - "No.. no vine a mendigar, solo quer\xEDa saber en d\xF3nde estoy y c\xF3mo debo
+    escoger mi camino."
+  - "\xBFEso me debe importar?  Hmph si mi hermano estuviera aqu\xED podr\xEDa ayudarte,
+    no estoy para recibir a cualquiera en mi territorio.\r\n"
+  - "\u2026\u2026.\n"
+  - "Tengo algo que te puede servir pero quiero algo a cambio, se supone que el idiota
+    de mi hermano deber\xEDa haber vuelto hace unos minutos y necesito saber si sigue
+    con vida.\n"
+  - "Me haces ese favor y ver\xE9 si te puedo guiar, se llama Leahn, si vez a un
+    anciano despreocupado es \xE9l.\r\n"
+  lines:
+  - Aloooooo, hay alguien en casa.
+  - ....
+  - Al parecer no contesta nadie.
+  index: 0
+  didDialogueStart: 0
+  talkToLeahn: 0
+  nombreIncorrecto: 0
+  Options: {fileID: 0}
+  listOptions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  selector: {fileID: 0}
+  id_selector: 0
+  optionLinesA:
+  - Logan
+  - Henry
+  - Leahn
+  optionLinesC:
+  - Pensarlo un poco
+  - Negarse
+  - Aceptar
+  finishDialogue: 0
+  linesNextAIncorrecta:
+  - "Lo sab\xEDa\u2026 eres un mentiroso, largo de aqu\xED si no quieres que te corte
+    en dos."
+  linesNextACorrecta:
+  - "Si es \xE9l... \xBFQu\xE9 le pas\xF3?"
+  - Se encuentra perdido en mitad del bosque.
+  - "Ese despistado\u2026 Siempre tan feliz sin ver el camino, est\xE1 bien, solo
+    gu\xEDame d\xF3nde est\xE1 y ll\xE9vame con \xE9l."
+  linesNextCIncorrecta:
+  - "\xA1Largo de aqu\xED! si no quieres que de verdad me enoje. No me hagas perder
+    el tiempo."
+  linesNextCCorrecta:
+  - "Ok, te esperar\xE9 aqu\xED, m\xE1s te vale no tardar."
+  linesAIncorrecta:
+  - "\xBFQui\xE9n diablos toca la maldita puerta? No aceptamos mendigos, \xA1largo
+    de aqu\xED!"
+  - "No\u2026 no vine a mendigar, su hermano me envi\xF3 para que lo vaya a buscar
+    con uno de sus caballos.\r\n"
+  - "Tu otra vez... Espero que sepas cu\xE1l es el nombre de mi hermano.\n"
+  linesCIncorrecta:
+  - "\xBFTu de nuevo? m\xE1s te vale aceptar hacerme el favor de buscar y traer a
+    mi hermano."
+  linesCFinal:
+  - "M\xE1s vale que te apresures..."
+  obHenry: {fileID: 0}
+  blackScreen: {fileID: 0}
+  optionCBuscarHermano: 0
+--- !u!1 &871922504139115249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 871922504139115248}
+  - component: {fileID: 871922504139115255}
+  m_Layer: 0
+  m_Name: MarkerCasa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &871922504139115248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871922504139115249}
+  m_LocalRotation: {x: -0.6532815, y: -0.27059805, z: 0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: 0.0175, y: -0.0075, z: -0.005}
+  m_LocalScale: {x: 0.0025, y: 0.0025, z: 0.0025}
+  m_Children: []
+  m_Father: {fileID: 834020907104249078}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -45, y: -90, z: 90}
+--- !u!212 &871922504139115255
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871922504139115249}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 4a2a1336df179114dbd37fc637e86830, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.6, y: 1.6}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
