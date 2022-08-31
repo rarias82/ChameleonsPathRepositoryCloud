@@ -184,12 +184,12 @@ public class NPC_Dialogue : MonoBehaviour
     public void Navegate()
     {
 
-        if (Input.GetButtonDown("Abajo") && id_selector < listOptions.Length - 1)
+        if ((Input.GetButtonDown("Abajo") || Input.GetAxis("Vertical") == -1f) && id_selector < listOptions.Length - 1)
         {
             id_selector++;
         }
 
-        if (Input.GetButtonDown("Arriba") && id_selector > 0)
+        if ((Input.GetButtonDown("Arriba") || Input.GetAxis("Vertical") == 1f) && id_selector > 0)
         {
             id_selector--;
         }
