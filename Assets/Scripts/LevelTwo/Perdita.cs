@@ -237,10 +237,10 @@ public class Perdita : MonoBehaviour
 
             Options.SetActive(false);
 
-            //StartCoroutine(ChangeDialogue());
+			StartCoroutine(ChangeDialogue());
 
 
-        }
+		}
 
 
     }
@@ -254,6 +254,46 @@ public class Perdita : MonoBehaviour
         obNMA = GetComponent<NavMeshAgent>();
         speedNPC = obNMA.speed;
         
+    }
+
+    IEnumerator ChangeDialogue()
+    {
+        index = 0;
+        
+        switch (id_selector)
+        {
+            case 0:
+
+                lines = linesA;
+
+                break;
+
+            case 1:
+
+                lines = linesB;
+
+                break;
+
+            case 2:
+                
+                lines = linesC;
+
+                break;
+
+
+            default:
+                break;
+        }
+
+     
+
+        yield return null;
+
+        StartCoroutine(WriteDialogue());
+
+
+
+
     }
 
     // Update is called once per frame

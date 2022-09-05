@@ -409,7 +409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 166.7
+      value: 50.5
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -417,7 +417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.8
+      value: 56.1
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1055,8 +1055,16 @@ MonoBehaviour:
   isRange: 0
   speedText: 0.0625
   dialogueText: {fileID: 562720778}
-  linesA: []
-  linesB: []
+  linesA:
+  - "Lamento oir eso, espero que la encuentres, he oido que esos bosques son peligrosos
+    para una criatura peque\xF1a."
+  linesB:
+  - "Puedo ir a buscarla \xBFC\xF3mo se llama?\r\n"
+  - "Espera \xBFNo pensar\xE1s en acercarte a ella as\xED como as\xED? Se asustar\xE1
+    al verte, te dar\xE9 uno de sus bocadillos favoritos, as\xED te ganar\xE1s su
+    confianza.\r\n\n"
+  - "Se llama Jasmine, si ella huele las galletas te seguir\xE1, espero que funcione
+    \n\n"
   linesC: []
   lines:
   - "Disculpe se\xF1orita."
