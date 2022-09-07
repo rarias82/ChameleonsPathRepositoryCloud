@@ -112,17 +112,17 @@ public class NPC_Dialogue : MonoBehaviour
 
             }
 
-            numeroAnim = 2;
+            //numeroAnim = 2;
         }
 
         if (index == 3 )
         {
-            numeroAnim = 3;
+            //numeroAnim = 3;
         }
 
         if (index == 4)
         {
-            numeroAnim = 4;
+            //numeroAnim = 4;
         }
 
 
@@ -210,21 +210,21 @@ public class NPC_Dialogue : MonoBehaviour
                 case 0:
                     obRoute.StarRoute(id_selector);
                     UIManager.instance.GanarPuntos(true, UIManager.instance.puntos);
-                    numeroAnim = 5;
+                    //numeroAnim = 5;
 
                     break;
 
                 case 1:
                     obRoute.StarRoute(id_selector);
                     UIManager.instance.GanarPuntos(false, UIManager.instance.puntos);
-                    numeroAnim = 6;
+                    //numeroAnim = 6;
 
                     break;
 
                 case 2:
                     obRoute.StarRoute(id_selector);
                     UIManager.instance.GanarPuntos(false, UIManager.instance.puntos);
-                    numeroAnim = 6;
+                    //numeroAnim = 6;
                     break;
 
                 default:
@@ -336,7 +336,7 @@ public class NPC_Dialogue : MonoBehaviour
 
         mode = ModeNPC.Follow;
 
-        numeroAnim = 0;
+        //numeroAnim = 0;
 
 
     }
@@ -375,9 +375,9 @@ public class NPC_Dialogue : MonoBehaviour
         trPlayer = GameObject.FindGameObjectWithTag("Main Character").transform;
         obNMA = GetComponent<NavMeshAgent>();
         speedNPC = obNMA.speed;
-        numeroAnim = 1;
-        //houses = FindObjectOfType<HouseDialogue>();
-    }
+		numeroAnim = 1;
+		//houses = FindObjectOfType<HouseDialogue>();
+	}
 
     void RotateSon()
     {
@@ -507,11 +507,11 @@ public class NPC_Dialogue : MonoBehaviour
                 {
                     marker.SetActive(true);
                 }
-                    
 
-                    numeroAnim = 0;
 
-                    RotateSon();
+				numeroAnim = 0;
+
+				RotateSon();
                 
                 
 
@@ -525,8 +525,8 @@ public class NPC_Dialogue : MonoBehaviour
             if (other.gameObject.CompareTag("P1"))
             {
                 obNMA.speed = 0;
-                numeroAnim = 0;
-                isRange = true;
+				numeroAnim = 0;
+				isRange = true;
             }
 
         }
@@ -548,7 +548,7 @@ public class NPC_Dialogue : MonoBehaviour
                     isRange = !isRange;
                     marker.SetActive(false);
 
-                    numeroAnim = 7;
+                    //numeroAnim = 7;
                   
                 }
                 else
@@ -558,8 +558,8 @@ public class NPC_Dialogue : MonoBehaviour
                     isRange = !isRange;
                     marker.SetActive(false);
 
-                    numeroAnim = 1;
-                }
+					numeroAnim = 1;
+				}
                 
 
             }
@@ -570,9 +570,9 @@ public class NPC_Dialogue : MonoBehaviour
             if (other.gameObject.CompareTag("P1"))
             {
                 obNMA.speed = speedNPC;
-                numeroAnim = 1;
+				numeroAnim = 1;
 
-                isRange = false;
+				isRange = false;
             }
 
         }
