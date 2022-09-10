@@ -112,23 +112,18 @@ public class NPC_Dialogue : MonoBehaviour
 
             }
 
-			
-		}
-
-        if (index == 1)
-        {
-			numeroAnim = 2;
-		}
+            //numeroAnim = 2;
+        }
 
         if (index == 3 )
         {
-			numeroAnim = 3;
-		}
+            //numeroAnim = 3;
+        }
 
         if (index == 4)
         {
-			numeroAnim = 4;
-		}
+            //numeroAnim = 4;
+        }
 
 
         dialogueText.text = string.Empty;
@@ -215,9 +210,9 @@ public class NPC_Dialogue : MonoBehaviour
                 case 0:
                     obRoute.StarRoute(id_selector);
                     UIManager.instance.GanarPuntos(true, UIManager.instance.puntos);
-					numeroAnim = 5;
+                    //numeroAnim = 5;
 
-					break;
+                    break;
 
                 case 1:
                     obRoute.StarRoute(id_selector);
