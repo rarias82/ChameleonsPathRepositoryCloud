@@ -112,18 +112,24 @@ public class NPC_Dialogue : MonoBehaviour
 
             }
 
-            //numeroAnim = 2;
+          
+        }
+
+		if (index == 1)
+		{
+            numeroAnim = 2;
+
         }
 
         if (index == 3 )
         {
-            //numeroAnim = 3;
-        }
+			numeroAnim = 3;
+		}
 
         if (index == 4)
         {
-            //numeroAnim = 4;
-        }
+			numeroAnim = 4;
+		}
 
 
         dialogueText.text = string.Empty;
@@ -210,21 +216,21 @@ public class NPC_Dialogue : MonoBehaviour
                 case 0:
                     obRoute.StarRoute(id_selector);
                     UIManager.instance.GanarPuntos(true, UIManager.instance.puntos);
-                    //numeroAnim = 5;
+                    
 
                     break;
 
                 case 1:
                     obRoute.StarRoute(id_selector);
                     UIManager.instance.GanarPuntos(false, UIManager.instance.puntos);
-                    //numeroAnim = 6;
+                  
 
                     break;
 
                 case 2:
                     obRoute.StarRoute(id_selector);
                     UIManager.instance.GanarPuntos(false, UIManager.instance.puntos);
-                    //numeroAnim = 6;
+                  
                     break;
 
                 default:
@@ -271,8 +277,7 @@ public class NPC_Dialogue : MonoBehaviour
                 lines = obRoute.linesNextA;
                 changeInitialDialogue = true;
                 mode = ModeNPC.Help;
-                numeroAnim = 7;
-                //mode = ModeNPC.Help;
+                
                 houses.talkToLeahn = true; 
                 break;
 
@@ -287,7 +292,7 @@ public class NPC_Dialogue : MonoBehaviour
                 changeInitialDialogue = true;
                 //mode = ModeNPC.Help;
                 houses.talkToLeahn = true;
-                numeroAnim = 0;
+                
                 break;
 
             default:
@@ -387,7 +392,6 @@ public class NPC_Dialogue : MonoBehaviour
 
     void Walking()
     {
-
         diferenciaVector = trCaminos[numeroCamino] - transform.position;
 
         if (diferenciaVector.sqrMagnitude < (0.5f * 2f))
@@ -396,11 +400,8 @@ public class NPC_Dialogue : MonoBehaviour
             
             if (numeroCamino >= trCaminos.Length)
             {
-
                 numeroCamino = 0;
-
             }
-
             
         }
 
@@ -409,20 +410,9 @@ public class NPC_Dialogue : MonoBehaviour
 
 
     }
-    // Update is called once per frame
+ 
     void Update()
     {
-        //if (dialogueText.text == lines[index])
-        //{
-        //    UIManager.instance.icono.gameObject.SetActive(true);
-        //    Debug.Log("Funciona");
-        //}
-        //else
-        //{
-        //    UIManager.instance.icono.gameObject.SetActive(false);
-        //    Debug.Log("Funciona Si");
-        //}
-
 
         if (mode == ModeNPC.Walking)
         {
@@ -444,10 +434,6 @@ public class NPC_Dialogue : MonoBehaviour
             }
 
             Interactuar();
-
-           
-
-          
         }
 
         if (mode == ModeNPC.Follow)

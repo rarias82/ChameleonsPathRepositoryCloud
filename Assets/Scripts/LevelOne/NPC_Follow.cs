@@ -61,8 +61,51 @@ public class NPC_Follow : MonoBehaviour
     }
     public IEnumerator ContinueWriteDialogue()
     {
-       
-        
+
+        if (dObject.index == 1)
+        {
+
+			if (linesNext == linesA)
+			{
+                dObject.numeroAnim = 10;
+            }
+
+            if (linesNext == linesB)
+            {
+
+                dObject.numeroAnim = 11;
+            }
+
+            if (linesNext == linesC)
+            {
+
+                dObject.numeroAnim = 12;
+            }
+           
+        }
+
+        if (dObject.index == 3)
+        {
+
+            if (linesNext == linesA)
+            {
+                dObject.numeroAnim = 15;
+            }
+
+
+        }
+
+        if (dObject.index == 4)
+        {
+
+            if (linesNext == linesA)
+            {
+                dObject.numeroAnim = 16;
+            }
+
+
+        }
+
 
         dialogueText.text = string.Empty;
 
@@ -74,6 +117,9 @@ public class NPC_Follow : MonoBehaviour
         }
 
         UIManager.instance.icono.gameObject.SetActive(true);
+
+
+
     }
 
     void NextDialogue()
