@@ -534,9 +534,9 @@ public class NPC_Dialogue : MonoBehaviour
                     isRange = !isRange;
                     marker.SetActive(false);
 
-                    //numeroAnim = 7;
-                  
-                }
+					numeroAnim = 0;
+
+				}
                 else
                 {
                     mode = ModeNPC.Walking;
