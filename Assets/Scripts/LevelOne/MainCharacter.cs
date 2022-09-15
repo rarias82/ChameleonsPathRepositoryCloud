@@ -26,12 +26,14 @@ public class MainCharacter : MonoBehaviour
     [SerializeField] float groundDistance;
     public LayerMask layerGround;
     [SerializeField] float radius;
-    float speedMa;
+    
 
     [Header("Anim variables")]
     ////public Animator obAnim;
     public Vector3 vectorForAnim;
     Animator obAnim;
+
+    public float intervalo, animSpeed;
 
     void Awake()
     {
@@ -52,6 +54,9 @@ public class MainCharacter : MonoBehaviour
         float yStore = inputPlayer.y;
         inputPlayer.y = yStore;
 
+        intervalo = (Mathf.Abs(vectorForAnim.x) + Mathf.Abs(vectorForAnim.z));
+
+        intervalo = Mathf.Clamp(intervalo, 0f, 1f);
 
 
         if (axH != 0.0f || axV != 0.0f)
@@ -63,22 +68,28 @@ public class MainCharacter : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angulo, 0f);
 
             Vector3 moveDirection = Quaternion.Euler(0f, anguloARotar, 0f) * Vector3.forward;
-
-            speedMa = (Mathf.Abs(vectorForAnim.x) + Mathf.Abs(vectorForAnim.z));
-
-            Mathf.Clamp(speedMa,0,1);
-
-            float newSpeed =  speedMa * moveSpeed;
-
-            //moveDirection*= newSpeed;
-
+            
             Vector3.ClampMagnitude(moveDirection, 1f);
 
-            cc.Move(moveDirection * moveSpeed *  Time.deltaTime);
+            
 
-            //Vector3.ClampMagnitude(moveDirection, 1f);
 
-            Debug.Log(moveDirection.magnitude);
+			if (Input.GetButton("Sprint"))
+			{
+                moveSpeed = (MaxmoveSpeed + 2.5f);
+
+                intervalo = 1.0f;
+
+			}
+			else
+			{
+
+                moveSpeed = MaxmoveSpeed;
+
+            }
+
+            cc.Move(moveDirection * (moveSpeed * (intervalo)) * Time.deltaTime);
+
         }
 
         MoveGravity();
@@ -92,22 +103,6 @@ public class MainCharacter : MonoBehaviour
         {
             cc.slopeLimit = 45f;
             inputPlayer.y = -2.0f;
-        }
-
-        if (!isGrounded)
-        {
-
-            cc.slopeLimit = 120f;
-
-            if ((cc.collisionFlags & CollisionFlags.Above) != 0)
-            {
-                inputPlayer.y = -2.0f;
-            }
-        }
-        else
-        {
-            moveSpeed = MaxmoveSpeed;
-            rotacionSuave = 0.25f;
         }
 
         inputPlayer.y += forceGravity * Time.deltaTime * forceGravityScale;
@@ -137,7 +132,27 @@ public class MainCharacter : MonoBehaviour
 
     private void LateUpdate()
     {
-        obAnim.SetFloat("Velocidad", (Mathf.Abs(vectorForAnim.x) + Mathf.Abs(vectorForAnim.z)));
+        obAnim.SetFloat("Velocidad", intervalo);
+
+		switch (intervalo)
+		{
+            case 0.0f:
+                obAnim.speed = 1.0f;
+                break;
+
+            case 0.5f:
+                obAnim.speed = 2.0f;
+                break;
+
+            case 1f:
+                
+                obAnim.speed = animSpeed;
+                break;
+
+            default:
+				break;
+		}
+            
     }
 
     private void OnDrawGizmos()

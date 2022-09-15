@@ -292,7 +292,7 @@ public class NPC_Dialogue : MonoBehaviour
                 changeInitialDialogue = true;
                 //mode = ModeNPC.Help;
                 houses.talkToLeahn = true;
-                
+                numeroAnim = 0;
                 break;
 
             default:
@@ -341,10 +341,10 @@ public class NPC_Dialogue : MonoBehaviour
 
         mode = ModeNPC.Follow;
 
-        //numeroAnim = 0;
+		numeroAnim = 0;
 
 
-    }
+	}
 
     public void MedirDistancia()
     {
