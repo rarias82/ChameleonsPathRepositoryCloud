@@ -62,7 +62,7 @@ public class NPC_Dialogue : MonoBehaviour
     {
         MainCharacter.sharedInstance.vectorForAnim = Vector3.zero;
 
-       
+        MainCharacter.sharedInstance.intervalo = 0.0f;
 
         id_selector = 1;
 
