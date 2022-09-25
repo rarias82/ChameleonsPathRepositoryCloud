@@ -42,9 +42,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.8679245, g: 0.8216789, b: 0.289854, a: 1}
-  m_Intensity: 80
-  m_Range: 25
+  m_Color: {r: 0.8, g: 0.74968195, b: 0.17647056, a: 1}
+  m_Intensity: 200
+  m_Range: 10
   m_SpotAngle: 100
   m_InnerSpotAngle: 75
   m_CookieSize: 10
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 975813362340881018}
   - component: {fileID: 4189775371373604319}
   - component: {fileID: 2144247551496788245}
-  - component: {fileID: 9221028630231153485}
+  - component: {fileID: 5221466156001629608}
   m_Layer: 9
   m_Name: FarolPrefab
   m_TagString: Untagged
@@ -121,7 +121,7 @@ Transform:
   m_GameObject: {fileID: 486698519908333760}
   m_LocalRotation: {x: 0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 83.8, y: 1.65, z: 33}
-  m_LocalScale: {x: 62.641598, y: 132.53484, z: 92.81051}
+  m_LocalScale: {x: 62.641598, y: 132.53485, z: 92.81052}
   m_Children:
   - {fileID: 5949696371138195765}
   m_Father: {fileID: 0}
@@ -176,8 +176,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9221028630231153485
-BoxCollider:
+--- !u!136 &5221466156001629608
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -186,9 +186,10 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.02222236, y: 0.010615587, z: 0.043098558}
-  m_Center: {x: 0.00019632839, y: 0.0001822619, z: -0.0032842013}
+  m_Radius: 0.005
+  m_Height: 0.06
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5920068616482739714
 GameObject:
   m_ObjectHideFlags: 0
