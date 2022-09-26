@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 6441416547091824991}
   m_LocalRotation: {x: -0.7071064, y: -0.0007589638, z: -0.0007589638, w: 0.7071064}
   m_LocalPosition: {x: 82.8, y: 7, z: 32.7}
-  m_LocalScale: {x: 1.3857896, y: 1.7671567, z: 0.5295938}
+  m_LocalScale: {x: 1.562731, y: 1.3401635, z: 0.78326994}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -600,7 +600,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 500
+    maxNumParticles: 400
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -1361,7 +1361,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 1
+    enabled: 0
     mode: 1
     timeMode: 0
     fps: 30
@@ -4779,7 +4779,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 4
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
@@ -4799,7 +4799,7 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 1385279003812690709, guid: d422a0ace8168b64b9e44d51420651dd, type: 3}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}

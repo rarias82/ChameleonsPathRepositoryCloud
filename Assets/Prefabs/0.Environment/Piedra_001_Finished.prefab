@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 7565387626064842803}
   - component: {fileID: 6868689147170922390}
   - component: {fileID: 8698292746502597468}
-  - component: {fileID: 8649004226346885971}
+  - component: {fileID: 6502862361883162988}
+  - component: {fileID: 7927668112835504495}
   m_Layer: 0
   m_Name: Piedra_001_Finished
   m_TagString: Untagged
@@ -26,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7185061487923907209}
-  m_LocalRotation: {x: -0.5656418, y: -0.26739174, z: -0.33412287, w: 0.7049205}
-  m_LocalPosition: {x: 125.859535, y: 5.489557, z: 35.74921}
+  m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: 126.14551, y: 8.384971, z: 38.53889}
   m_LocalScale: {x: 68.01721, y: 68.01722, z: 68.01721}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -77.461, y: 0.266, z: -50.934}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &6868689147170922390
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -82,8 +83,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8649004226346885971
-MeshCollider:
+--- !u!136 &6502862361883162988
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,7 +93,21 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8678823145569952518, guid: 704090e51fb0956468ccec0cbf8ad496, type: 3}
+  m_Radius: 0.02448773
+  m_Height: 0.07273414
+  m_Direction: 1
+  m_Center: {x: 0.000365277, y: 0.017595693, z: -0.0013103044}
+--- !u!136 &7927668112835504495
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7185061487923907209}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.034284327
+  m_Height: 0.12221789
+  m_Direction: 1
+  m_Center: {x: 0.068362266, y: 0.029111061, z: 0.00864341}
