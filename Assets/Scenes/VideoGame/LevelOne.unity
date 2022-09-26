@@ -11120,6 +11120,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Caba\xF1a_Finish_V002_New_Textures"
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1fd23b0c27a82f34a83d8c873bb37e67, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fd23b0c27a82f34a83d8c873bb37e67, type: 3}
 --- !u!4 &1113208212 stripped
