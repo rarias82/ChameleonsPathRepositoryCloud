@@ -33,12 +33,17 @@ public class MainCharacter : MonoBehaviour
     public Vector3 vectorForAnim;
     Animator obAnim;
 
+    [Header("Effects")]
+    [SerializeField] ParticleSystem polvoTierra;
+    [SerializeField] ParticleSystem.EmissionModule polvoTierraEmission;
+
     public float intervalo, animSpeed;
 
     void Awake()
     {
         sharedInstance = this;
         obAnim = transform.GetComponentInChildren<Animator>();
+        polvoTierra.Stop();
     }
     void MovePlayer()
     {
@@ -61,6 +66,9 @@ public class MainCharacter : MonoBehaviour
 
         if (axH != 0.0f || axV != 0.0f)
         {
+
+
+
             float anguloARotar = Mathf.Atan2(inputMove.x, inputMove.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
 
             float angulo = Mathf.SmoothDampAngle(transform.eulerAngles.y, anguloARotar, ref velocidadRotacionSuave, rotacionSuave);
@@ -80,12 +88,24 @@ public class MainCharacter : MonoBehaviour
 
                 intervalo = 1.0f;
 
-			}
+                
+
+            }
 			else
 			{
 
                 moveSpeed = MaxmoveSpeed;
 
+            }
+
+            if (Input.GetButtonDown("Sprint"))
+            {
+                polvoTierra.Play();
+            }
+
+            if (Input.GetButtonUp("Sprint"))
+			{
+                polvoTierra.Stop();
             }
 
             cc.Move(moveDirection * (moveSpeed * (intervalo)) * Time.deltaTime);
