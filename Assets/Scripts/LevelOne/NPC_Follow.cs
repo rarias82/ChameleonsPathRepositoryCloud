@@ -110,7 +110,9 @@ public class NPC_Follow : MonoBehaviour
         dialogueText.text = string.Empty;
 
 
-        foreach (char letter in linesNext[dObject.index].ToCharArray())
+        dObject.IconDialogo(linesNext[dObject.index]);
+
+        foreach (char letter in linesNext[dObject.index].Substring(1).ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(dObject.speedText);
@@ -157,7 +159,7 @@ public class NPC_Follow : MonoBehaviour
         if (Input.GetButtonDown("Interactuar") && fillDialogueLines)
         {
 
-            if (dialogueText.text == linesNext[dObject.index])
+            if (dialogueText.text == linesNext[dObject.index].Substring(1))
             {
                 NextDialogue();
             }

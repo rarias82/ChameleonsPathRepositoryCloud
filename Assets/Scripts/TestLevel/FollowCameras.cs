@@ -55,19 +55,6 @@ public class FollowCameras : MonoBehaviour
         transform.position = new Vector3(X + offset.x, trPlayer.position.y + offset.y, Z + offset.z);
     }
 
-    void Tracking()
-    {
-        float targetX = trPlayer.position.x;
-        float targetZ = trPlayer.position.z;
-
-        
-        targetX = Mathf.Clamp(targetX, minXandZ.x, maxXandZ.x);
-        targetZ = Mathf.Clamp(targetZ, minXandZ.z, maxXandZ.z);
-       
-
-        transform.position = Vector3.Lerp(transform.position, new Vector3(posX,transform.position.y,posZ), xSmooth * Time.deltaTime);
-    }
-
     // Update is called once per frame
     void LateUpdate()
     {

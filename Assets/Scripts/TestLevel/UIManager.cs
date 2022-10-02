@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     public bool fadeFrom;
     public float fadeSpeed;
     public Image icono;
+    public Image ballonDialogue;
+
 
     [Header("Bondad Variables")]
     public Image barraBondad;
@@ -33,6 +35,7 @@ public class UIManager : MonoBehaviour
     [Header("Mapa")]
     public GameObject obMap;
     public GameObject obMapMark;
+
 
 
     public void ExitPlayGame()
@@ -96,8 +99,6 @@ public class UIManager : MonoBehaviour
         healthToModify = (currenHealth / maxHealth);
 
 
-        
-
         switch (currenHealth)
         {
             case 1:
@@ -127,8 +128,6 @@ public class UIManager : MonoBehaviour
 
 
         }
-
-
         while ((barraBondad.fillAmount < healthToModify) || (barraBondad.fillAmount > healthToModify))
         {
             barraBondad.fillAmount = Mathf.MoveTowards(barraBondad.fillAmount, healthToModify, velocidadBarra * Time.deltaTime);
@@ -140,8 +139,6 @@ public class UIManager : MonoBehaviour
 
     public void GanarPuntos(bool add, float puntos)
     {
-
-
        
             if (add)
             {
@@ -150,23 +147,14 @@ public class UIManager : MonoBehaviour
             {
                 rtCircleV = (rtCircle.position + (Vector3.right * puntos));
 
-
                 puntosCalificacion += puntos;
 
                 StartCoroutine(MoverBarra(add));
-            }//if (rtCircle.position.x <= 850.4738f)
-                //{
-               
-
-                //}
-
-
-
+            }
             }
             else
             {
-            //if (rtCircle.position.x > 449.8629f)
-            //{
+        
 
             if (puntosCalificacion > -100)
             {
@@ -179,23 +167,7 @@ public class UIManager : MonoBehaviour
 
             }
 
-
-            //}
-
         }
-
-
-            
-            
-
-            
-       
-
-
-        
-       
-        ////}
-
         
 
     }
@@ -219,6 +191,15 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+    public void PosicionarGlobo(Vector3 posicionar)
+    {
+        Vector3 posDisplay = FollowCameras.instance.MyCameras.WorldToScreenPoint(posicionar);
+        ballonDialogue.rectTransform.position = posDisplay + destiny ;
+
+
+
+    }
     private void Awake()
     {
         
@@ -228,7 +209,7 @@ public class UIManager : MonoBehaviour
         instance = this;
         icono.gameObject.SetActive(false);
         puntosCalificacion = puntos;
-        //barraBondad.fillAmount = (currenHealth / maxHealth);
+       
     }
 
     // Update is called once per frame
@@ -236,20 +217,8 @@ public class UIManager : MonoBehaviour
     {
         DialogueFadeIn();
 
-        //if (Input.GetKeyDown(KeyCode.Z))
-        //{
-        //    //StartCoroutine(UpdateUI(false, 1f));
 
-        //    GanarPuntos(false, puntos);
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-        //    //StartCoroutine(UpdateUI(true, 1f));
-        //    GanarPuntos(true, puntos);
-        //}
-
-        //Debug.Log(rtCircle.position.x);
+       
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

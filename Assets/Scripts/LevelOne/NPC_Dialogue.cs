@@ -54,13 +54,18 @@ public class NPC_Dialogue : MonoBehaviour
     [Header("Anim References")]
     public Animator obAnim;
     public int numeroAnim;
-   
+
+    
+    
+
 
 
 
     public void StartDialogue()
     {
+        
         MainCharacter.sharedInstance.vectorForAnim = Vector3.zero;
+
 
         MainCharacter.sharedInstance.intervalo = 0.0f;
 
@@ -96,6 +101,28 @@ public class NPC_Dialogue : MonoBehaviour
 
     }
 
+
+    public void IconDialogo(string lineas)
+    {
+
+        if (lineas.Trim().StartsWith("P"))
+        {
+            UIManager.instance.PosicionarGlobo(trPlayer.position);
+        }
+
+        if (lineas.Trim().StartsWith("L"))
+        {
+            UIManager.instance.PosicionarGlobo(transform.position);
+        }
+
+        if (lineas.Trim().StartsWith("H"))
+        {
+
+        }
+
+        
+    }
+
     public IEnumerator WriteDialogue()
     {
         if (index == 0)
@@ -112,10 +139,13 @@ public class NPC_Dialogue : MonoBehaviour
 
             }
 
-          
+            UIManager.instance.ballonDialogue.gameObject.SetActive(true);
         }
 
-		if (index == 1)
+        
+
+
+        if (index == 1)
 		{
             numeroAnim = 2;
 
@@ -134,13 +164,16 @@ public class NPC_Dialogue : MonoBehaviour
 
         dialogueText.text = string.Empty;
 
-        foreach (char letter in lines[index].ToCharArray())
+
+        IconDialogo(lines[index]);
+
+        foreach (char letter in lines[index].Substring(1).ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(speedText);
         }
 
-        UIManager.instance.icono.gameObject.SetActive(true);
+        
         
     }
 
@@ -245,7 +278,9 @@ public class NPC_Dialogue : MonoBehaviour
 
     public IEnumerator CloseDialogue()
     {
-        
+
+        UIManager.instance.ballonDialogue.gameObject.SetActive(false);
+
         dialogueText.text = string.Empty;
 
         UIManager.instance.fadeFrom = true;
@@ -312,6 +347,8 @@ public class NPC_Dialogue : MonoBehaviour
     public IEnumerator CloseDialogueC()
     {
 
+        UIManager.instance.ballonDialogue.gameObject.SetActive(false);
+
         dialogueText.text = string.Empty;
 
         UIManager.instance.fadeFrom = true;
@@ -342,9 +379,9 @@ public class NPC_Dialogue : MonoBehaviour
         mode = ModeNPC.Follow;
 
 		numeroAnim = 0;
+        
 
-
-	}
+    }
 
     public void MedirDistancia()
     {
@@ -374,6 +411,8 @@ public class NPC_Dialogue : MonoBehaviour
     }
     void Start()
     {
+
+        
         marker = transform.Find("Marker").gameObject;
         marker.SetActive(false);
         obCameras = Camera.main;
@@ -455,7 +494,7 @@ public class NPC_Dialogue : MonoBehaviour
 
             else if (!Options.activeInHierarchy && !nextRoute)
             {
-                if (dialogueText.text == lines[index])
+                if (dialogueText.text == lines[index].Substring(1))
                 {
                     NextDialogue();
 

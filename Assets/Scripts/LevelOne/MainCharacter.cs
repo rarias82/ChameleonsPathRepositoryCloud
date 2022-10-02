@@ -103,7 +103,7 @@ public class MainCharacter : MonoBehaviour
                 polvoTierra.Play();
             }
 
-            if (Input.GetButtonUp("Sprint"))
+            if (Input.GetButtonUp("Sprint") )
 			{
                 polvoTierra.Stop();
             }
@@ -111,6 +111,8 @@ public class MainCharacter : MonoBehaviour
             cc.Move(moveDirection * (moveSpeed * (intervalo)) * Time.deltaTime);
 
         }
+
+       
 
         MoveGravity();
     }
@@ -145,8 +147,11 @@ public class MainCharacter : MonoBehaviour
         {
             MovePlayer();
         }
-       
 
+        if (vectorForAnim == Vector3.zero)
+        {
+            polvoTierra.Stop();
+        }
 
     }
 

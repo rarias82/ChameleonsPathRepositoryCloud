@@ -18,6 +18,11 @@ public class HouseDialogue : MonoBehaviour
     [SerializeField, TextArea(4, 6)] string[] linesA;
     [SerializeField, TextArea(4, 6)] string[] linesC;
     [SerializeField, TextArea(4, 6)] string[] lines;
+    [SerializeField, TextArea(4, 6)] string[] linesExtra0;
+    [SerializeField, TextArea(4, 6)] string[] linesExtra1;
+    [SerializeField, TextArea(4, 6)] string[] linesExtra2;
+    [SerializeField, TextArea(4, 6)] string[] linesExtra3;
+    [SerializeField, TextArea(4, 6)] string[] linesExtra4;
     public int index;
     public bool didDialogueStart;
     public bool talkToLeahn;
@@ -49,6 +54,8 @@ public class HouseDialogue : MonoBehaviour
     [SerializeField, TextArea(4, 6)] string[] linesAFinal;
     [SerializeField, TextArea(4, 6)] string[] linesCFinal;
 
+    [SerializeField] int random01;
+
     [Header("Character Variables")]
     public GameObject obHenry;
     public Image blackScreen;
@@ -58,7 +65,7 @@ public class HouseDialogue : MonoBehaviour
 
     void Awake()
     {
-        marker = transform.Find("MarkerCasa").gameObject;
+       
         marker.SetActive(false);
         respuestaDada = GameObject.Find("NPC_Level_Leahn").GetComponent<NPC_Dialogue>();
         henry = FindObjectOfType<NPC_Henry>(); 
@@ -71,6 +78,8 @@ public class HouseDialogue : MonoBehaviour
     {
 
         MainCharacter.sharedInstance.vectorForAnim = Vector3.zero;
+
+        MainCharacter.sharedInstance.intervalo = 0.0f;
 
 
         finishDialogue = false;
@@ -107,10 +116,9 @@ public class HouseDialogue : MonoBehaviour
             {
                 lines = linesAFinal;
             }
-           
-        }
 
-        if (respuestaDada.nextDialogueToTalk == 2)
+        }
+        else if (respuestaDada.nextDialogueToTalk == 2)
         {
             if (talkToLeahn && !nombreIncorrecto && !optionCBuscarHermano)
             {
@@ -126,13 +134,73 @@ public class HouseDialogue : MonoBehaviour
                 lines = linesCFinal;
             }
         }
-
-
-
-
+   
         StartCoroutine(WriteDialogue());
 
     }
+
+
+    void DialogoRandom()
+    {
+        int randomIndex0 = Random.Range(0, 4);
+
+        random01 = randomIndex0;
+
+        while (random01 == randomIndex0)
+        {
+            randomIndex0 = Random.Range(0, 4);
+        }
+        switch (random01)
+        {
+            case 0:
+                lines = linesExtra0;
+                break;
+
+            case 1:
+                lines = linesExtra1;
+                break;
+
+            case 2:
+                lines = linesExtra2;
+                break;
+
+            case 3:
+                lines = linesExtra3;
+                break;
+
+            case 4:
+                lines = linesExtra4;
+                break;
+
+            default:
+                break;
+        }
+
+
+
+    }
+
+    public void IconDialogo(string lineas)
+    {
+
+        if (lineas.Trim().StartsWith("P"))
+        {
+            UIManager.instance.PosicionarGlobo(trPlayer.position);
+        }
+
+        if (lineas.Trim().StartsWith("L"))
+        {
+            UIManager.instance.PosicionarGlobo(transform.position);
+        }
+
+        if (lineas.Trim().StartsWith("H"))
+        {
+            UIManager.instance.PosicionarGlobo(transform.position);
+        }
+
+
+    }
+
 
     IEnumerator WriteDialogue()
     {
@@ -151,16 +219,22 @@ public class HouseDialogue : MonoBehaviour
                 yield return null;
 
             }
+
+            UIManager.instance.ballonDialogue.gameObject.SetActive(true);
         }
 
         dialogueText.text = string.Empty;
 
-        foreach (char letter in lines[index].ToCharArray())
+
+        IconDialogo(lines[index]);
+
+
+        foreach (char letter in lines[index].Substring(1).ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(respuestaDada.speedText);
         }
-        UIManager.instance.icono.gameObject.SetActive(true);
+        
     }
 
     public void Navegate()
@@ -286,6 +360,10 @@ public class HouseDialogue : MonoBehaviour
     }
     IEnumerator CloseDialogue()
     {
+
+
+        UIManager.instance.ballonDialogue.gameObject.SetActive(false);
+
         index = 0;
 
         dialogueText.text = string.Empty;
@@ -399,7 +477,7 @@ public class HouseDialogue : MonoBehaviour
         {
             if (talkToLeahn && !finishDialogue && !optionCBuscarHermano && !falloTiempo)
             {
-                //nextRoute = true;
+               
                 Options.SetActive(true);
             
                 if (respuestaDada.nextDialogueToTalk == 0)
@@ -468,15 +546,7 @@ public class HouseDialogue : MonoBehaviour
     void Update()
     {
 
-        //if (dialogueText.text == lines[index])
-        //{
-        //    UIManager.instance.icono.gameObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    UIManager.instance.icono.gameObject.SetActive(false);
-        //}
-
+     
         if (Options.activeInHierarchy && talkToLeahn && !respuestaDada.didDialogueStart)
         {
 
@@ -494,7 +564,7 @@ public class HouseDialogue : MonoBehaviour
 
             else if(!Options.activeInHierarchy)
             {
-                if (dialogueText.text == lines[index])
+                if (dialogueText.text == lines[index].Substring(1))
                 {
                     NextDialogue();
                 }
