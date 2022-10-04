@@ -27,7 +27,7 @@ public class HouseDialogue : MonoBehaviour
     public bool didDialogueStart;
     public bool talkToLeahn;
     public bool nombreIncorrecto;
-    //public bool toNextRoute;
+    
 
     [Header("Options References")]
     public GameObject Options;
@@ -53,14 +53,17 @@ public class HouseDialogue : MonoBehaviour
 
     [SerializeField, TextArea(4, 6)] string[] linesAFinal;
     [SerializeField, TextArea(4, 6)] string[] linesCFinal;
-
+    [SerializeField] int random00;
     [SerializeField] int random01;
+    [SerializeField] Vector3 masVector;
+
 
     [Header("Character Variables")]
     public GameObject obHenry;
     public Image blackScreen;
     public bool optionCBuscarHermano;
     public bool falloTiempo;
+    public Transform casaGO;
 
 
     void Awake()
@@ -103,6 +106,11 @@ public class HouseDialogue : MonoBehaviour
 
         if (respuestaDada.nextDialogueToTalk == 0)
         {
+
+            if (!talkToLeahn)
+            {
+                DialogoRandom();
+            }
             if (talkToLeahn && !nombreIncorrecto && !falloTiempo)
             {
                 lines = linesA;
@@ -142,13 +150,13 @@ public class HouseDialogue : MonoBehaviour
 
     void DialogoRandom()
     {
-        int randomIndex0 = Random.Range(0, 4);
+        random00 = Random.Range(0, 5);
 
-        random01 = randomIndex0;
+        random01 = random00;
 
-        while (random01 == randomIndex0)
+        while (random01 == random00)
         {
-            randomIndex0 = Random.Range(0, 4);
+            random00 = Random.Range(0, 5);
         }
         switch (random01)
         {
@@ -195,7 +203,8 @@ public class HouseDialogue : MonoBehaviour
 
         if (lineas.Trim().StartsWith("H"))
         {
-            UIManager.instance.PosicionarGlobo(transform.position);
+            UIManager.instance.PosicionarGlobo(casaGO.position);
+
         }
 
 
@@ -576,7 +585,11 @@ public class HouseDialogue : MonoBehaviour
 
         }
 
-       
+
+
+
+        
+
     }
 
     private void OnTriggerEnter(Collider other)

@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.InputSystem;
+
+//using UnityEngine.InputSystem;
 
 public class MainCharacter : MonoBehaviour
 {
@@ -10,6 +13,7 @@ public class MainCharacter : MonoBehaviour
     [SerializeField] Transform playerCamera;
 
     [Header("Move Variables")]
+    //[SerializeField] PlayerInput playerInput;
     public bool canMove;
     [SerializeField] float MaxmoveSpeed;
     [SerializeField] float moveSpeed;
@@ -32,21 +36,30 @@ public class MainCharacter : MonoBehaviour
     ////public Animator obAnim;
     public Vector3 vectorForAnim;
     Animator obAnim;
+    public float intervalo, animSpeed;
 
     [Header("Effects")]
     [SerializeField] ParticleSystem polvoTierra;
     [SerializeField] ParticleSystem.EmissionModule polvoTierraEmission;
 
-    public float intervalo, animSpeed;
 
     void Awake()
     {
         sharedInstance = this;
         obAnim = transform.GetComponentInChildren<Animator>();
-        polvoTierra.Stop();
+        
     }
+
+
+    //void OnMovimiento(InputValue valor )
+    //{
+    //    Vector2 inputMovimiento = valor.Get<Vector2>();
+    //    inputMove = new Vector3(inputMovimiento.x, 0.0f, inputMovimiento.y);
+
+    //}
     void MovePlayer()
     {
+
 
         float axH = Input.GetAxis("Horizontal");
         float axV = Input.GetAxis("Vertical");
@@ -76,46 +89,34 @@ public class MainCharacter : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angulo, 0f);
 
             Vector3 moveDirection = Quaternion.Euler(0f, anguloARotar, 0f) * Vector3.forward;
-            
+
             Vector3.ClampMagnitude(moveDirection, 1f);
 
-            
 
 
-			if (Input.GetButton("Sprint"))
-			{
+
+            if (Input.GetButton("Sprint"))
+            {
                 moveSpeed = (MaxmoveSpeed + 2.5f);
 
                 intervalo = 1.0f;
 
-                
-
             }
-			else
-			{
+            else
+            {
 
                 moveSpeed = MaxmoveSpeed;
 
-            }
-
-            if (Input.GetButtonDown("Sprint"))
-            {
-                polvoTierra.Play();
-            }
-
-            if (Input.GetButtonUp("Sprint") )
-			{
-                polvoTierra.Stop();
             }
 
             cc.Move(moveDirection * (moveSpeed * (intervalo)) * Time.deltaTime);
 
         }
 
-       
-
         MoveGravity();
     }
+
+
     void MoveGravity()
     {
 
@@ -138,6 +139,7 @@ public class MainCharacter : MonoBehaviour
         moveSpeed = MaxmoveSpeed;
         canMove = true;
         cc = GetComponent<CharacterController>();
+        polvoTierraEmission = polvoTierra.emission;
     }
 
     // Update is called once per frame
@@ -148,10 +150,8 @@ public class MainCharacter : MonoBehaviour
             MovePlayer();
         }
 
-        if (vectorForAnim == Vector3.zero)
-        {
-            polvoTierra.Stop();
-        }
+       
+
 
     }
 
@@ -163,14 +163,16 @@ public class MainCharacter : MonoBehaviour
 		{
             case 0.0f:
                 obAnim.speed = 1.0f;
+                polvoTierraEmission.rateOverTime = 0.0f;
                 break;
 
             case 0.5f:
                 obAnim.speed = 2.0f;
+                polvoTierraEmission.rateOverTime = 2.5f;
                 break;
 
             case 1f:
-                
+                polvoTierraEmission.rateOverTime = 10f;
                 obAnim.speed = animSpeed;
                 break;
 
