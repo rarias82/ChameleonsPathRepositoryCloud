@@ -38,9 +38,10 @@ public class NPC_Henry : MonoBehaviour
     [SerializeField, TextArea(4, 6)] string[] lines;
     [SerializeField, TextArea(4, 6)] string[] linesAFinal;
     [SerializeField, TextArea(4, 6)] string[] linesCFinal;
+    GameObject marker;
 
-    //[SerializeField] MeshRenderer mesh;
-
+    [Header("Anim References")]
+    public int numeroAnim;
     public Image blackScreen;
 
     // Start is called before the first frame update
@@ -277,21 +278,24 @@ public class NPC_Henry : MonoBehaviour
         cabana = GameObject.Find("CabanaHermanos").GetComponent<HouseDialogue>();
         //posInicial = transform.position;
         obNv.speed = speedMaxima;
+        marker = transform.Find("Marker").gameObject;
+        marker.SetActive(false);
+        numeroAnim = 0;
+
     }
 
+
+
+    void RotateSon()
+    {
+        Quaternion rotation = Quaternion.Euler(offset);
+        marker.transform.rotation = rotation;
+    }
     // Update is called once per frame
     void Update()
     {
 
-        //if (dialogueText.text == lines[index])
-        //{
-        //    UIManager.instance.icono.gameObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    UIManager.instance.icono.gameObject.SetActive(false);
-        //}
-
+      
 
         if (!finalMalo)
         {
@@ -453,18 +457,8 @@ public class NPC_Henry : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (mode == ModeNPCHenry.Follow)
-        {
-            if (obNv.speed > 0f)
-            {
-                obAnim.SetBool("Moverse", true);
-            }
-            else
-            {
-                obAnim.SetBool("Moverse", false);
-            }
-        }
-      
-       
+        obAnim.SetInteger("Estado", numeroAnim);
+
+
     }
 }
