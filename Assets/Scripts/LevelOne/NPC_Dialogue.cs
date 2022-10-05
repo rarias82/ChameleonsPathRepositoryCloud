@@ -90,7 +90,7 @@ public class NPC_Dialogue : MonoBehaviour
             lines = obRoute.linesNextC2;
 
             houses.obHenry.SetActive(true);
-            henry.Aparecer();
+            //henry.Aparecer();
 
             houses.didDialogueStart = false;
 

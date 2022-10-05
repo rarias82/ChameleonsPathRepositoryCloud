@@ -146,7 +146,7 @@ public class Perdita : MonoBehaviour
             {
                 listOptions[i].GetComponentInChildren<TextMeshProUGUI>().text = optionLines[i];
             }
-            //StartCoroutine(CloseDialogue());
+            
 
         }
 
