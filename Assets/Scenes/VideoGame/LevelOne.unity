@@ -4874,7 +4874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8038170414355640900, guid: 97425fd27d8de36449c56423d2ff7f26, type: 3}
       propertyPath: m_AntialiasingQuality
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8038170414355640900, guid: 97425fd27d8de36449c56423d2ff7f26, type: 3}
       propertyPath: m_RenderPostProcessing
@@ -5997,7 +5997,7 @@ Transform:
   - {fileID: 2004017812}
   - {fileID: 1306421305}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &420066571 stripped
 MonoBehaviour:
@@ -6115,63 +6115,6 @@ Transform:
   m_Father: {fileID: 1133754092}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &453783180
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 31
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 115.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 83.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (10)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1001 &463657679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6229,63 +6172,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 374a6947936c7cf45ab6f55ebb23ddc5, type: 3}
---- !u!1001 &468946118
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 106.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 23.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (15)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!4 &470238068
 Transform:
   m_ObjectHideFlags: 0
@@ -6816,234 +6702,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534452408}
   m_Mesh: {fileID: 2534964839176971238, guid: d2f853261ddecce42aa66ba9f153e14d, type: 3}
---- !u!1001 &546193532
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 48.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 60.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (4)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
---- !u!1001 &553896480
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 28
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 68.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 64.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (7)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
---- !u!1001 &555473649
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 29
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 97.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 70.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (8)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
---- !u!1001 &557494774
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 80.68
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 33.19
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1001 &557789704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7185,63 +6843,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 374a6947936c7cf45ab6f55ebb23ddc5, type: 3}
---- !u!1001 &583751528
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 32
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 112.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 69.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (11)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1001 &585184981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8047,63 +7648,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1001 &691946811
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 102.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 85.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (9)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1 &716677320
 GameObject:
   m_ObjectHideFlags: 0
@@ -8178,65 +7722,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &718625483
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 105.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 36.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (14)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1 &725868182
 GameObject:
   m_ObjectHideFlags: 0
@@ -8771,7 +8258,7 @@ Transform:
   m_GameObject: {fileID: 836754401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2376, y: 1.2376, z: 1.2376}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -10442,7 +9929,7 @@ Transform:
   - {fileID: 1021104361}
   - {fileID: 70078927}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1018407281
 PrefabInstance:
@@ -10735,63 +10222,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 374a6947936c7cf45ab6f55ebb23ddc5, type: 3}
---- !u!1001 &1048060674
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 23
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 62
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 35.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (2)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1001 &1062844990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10935,8 +10365,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.6758277, g: 0.7316049, b: 0.7924528, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.47939655, g: 0.5085662, b: 0.5377358, a: 1}
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -10981,7 +10411,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5904e-41, y: 0, z: 0, w: 2.7722085e+20}
+  m_BoundingSphereOverride: {x: 1.6255164e-38, y: 1.8459215e-38, z: 1.6255162e-38, w: 1.8367381e-38}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -11306,7 +10736,7 @@ Transform:
   - {fileID: 1414467604}
   - {fileID: 23597251}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1141139317
 PrefabInstance:
@@ -12244,63 +11674,6 @@ Transform:
   m_Father: {fileID: 403930229}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 89.98, y: 0, z: 0}
---- !u!1001 &1256956084
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 27
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 58.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 75.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (6)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1 &1259462656
 GameObject:
   m_ObjectHideFlags: 0
@@ -12337,7 +11710,7 @@ Transform:
   - {fileID: 1208694402}
   - {fileID: 130385169}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1298897536 stripped
 Transform:
@@ -14448,63 +13821,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1001 &1586738437
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 26
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 60.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 56.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (5)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1 &1598528943
 GameObject:
   m_ObjectHideFlags: 0
@@ -14779,7 +14095,7 @@ Transform:
   m_LocalScale: {x: 0.8284, y: 0.9615, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -0.299}
 --- !u!4 &1610279130
 Transform:
@@ -15432,63 +14748,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1001 &1740630366
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 84.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (1)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1 &1744827720
 GameObject:
   m_ObjectHideFlags: 0
@@ -15571,63 +14830,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1758334013
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 46
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 35.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (3)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1 &1773768685
 GameObject:
   m_ObjectHideFlags: 0
@@ -15971,63 +15173,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1001 &1789837584
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 34
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 116.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 44.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (13)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1001 &1803554160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18614,63 +17759,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1917748558}
   m_Mesh: {fileID: 2534964839176971238, guid: d2f853261ddecce42aa66ba9f153e14d, type: 3}
---- !u!1001 &1939679752
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_RootOrder
-      value: 33
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 118.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.694276
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 58.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7072302
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7069834
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 89.98
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800541371241191839, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5320196320870630181, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
-      propertyPath: m_Name
-      value: FaroCeleste (12)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e11f5addf172944fbbc88146c266b9d, type: 3}
 --- !u!1 &1951471158
 GameObject:
   m_ObjectHideFlags: 0
