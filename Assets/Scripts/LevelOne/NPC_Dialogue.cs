@@ -9,6 +9,8 @@ public enum ModeNPC
 }
 public class NPC_Dialogue : MonoBehaviour
 {
+    public static NPC_Dialogue instance;
+
     [Header("Dialogue Variables")]
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField, TextArea(4, 6)] string[] lines;
@@ -55,10 +57,11 @@ public class NPC_Dialogue : MonoBehaviour
     public Animator obAnim;
     public int numeroAnim;
 
-    
-    
 
-
+    private void Awake()
+    {
+        instance = this;
+    }
 
 
     public void StartDialogue()
@@ -392,27 +395,25 @@ public class NPC_Dialogue : MonoBehaviour
 
         MedirDistancia();
 
-        if (diferenciaVector.sqrMagnitude < (henry.distancia * 2f))
-        {
+        //if (diferenciaVector.sqrMagnitude < (henry.distancia * 2f))
+        //{
 
             
-            Debug.Log("Llego");
+        //    Debug.Log("Llego");
 
 
-        }
-        else
-        {
-            Debug.Log("No llego");
-            obNMA.SetDestination(trPlayer.position);
-        }
+        //}
+        //else
+        //{
+        //    Debug.Log("No llego");
+        //    obNMA.SetDestination(trPlayer.position);
+        //}
 
 
 
     }
     void Start()
     {
-
-        
         marker = transform.Find("Marker").gameObject;
         marker.SetActive(false);
         obCameras = Camera.main;
@@ -485,7 +486,7 @@ public class NPC_Dialogue : MonoBehaviour
 
     public void Interactuar()
     {
-        if (isRange && Input.GetButtonDown("Interactuar") && Inventory.instance.moverInv && !henry.tiempoesperando)
+        if (isRange && Input.GetButtonDown("Interactuar") && Inventory.instance.moverInv)
         {
             if (!didDialogueStart)
             {
@@ -524,14 +525,14 @@ public class NPC_Dialogue : MonoBehaviour
 
                     isRange = !isRange;
 
-                if (henry.tiempoesperando)
-                {
-                    marker.SetActive(false);
-                }
-                else
-                {
-                    marker.SetActive(true);
-                }
+                //if (henry.tiempoesperando)
+                //{
+                //    marker.SetActive(false);
+                //}
+                //else
+                //{
+                //    marker.SetActive(true);
+                //}
 
 
 				numeroAnim = 0;

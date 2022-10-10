@@ -73,7 +73,7 @@ public class HouseDialogue : MonoBehaviour
         respuestaDada = GameObject.Find("NPC_Level_Leahn").GetComponent<NPC_Dialogue>();
         henry = FindObjectOfType<NPC_Henry>(); 
         trPlayer = GameObject.Find("Player").GetComponent<Transform>();
-        obHenry.SetActive(false);
+        //obHenry.SetActive(false);
         
     }
 
@@ -527,7 +527,7 @@ public class HouseDialogue : MonoBehaviour
 
         trPlayer.position = new Vector3(99.5f, 6.079084f, 104.8f);
         obHenry.SetActive(true);
-        obHenry.transform.position = henry.posInicial;
+        //obHenry.transform.position = henry.posInicial;
         yield return new WaitForSeconds(0.5f);
         
 
@@ -538,15 +538,15 @@ public class HouseDialogue : MonoBehaviour
             yield return null;
         }
 
-        obHenry.GetComponent<NPC_Henry>().mode = ModeNPCHenry.Follow;
+        //obHenry.GetComponent<NPC_Henry>().mode = ModeNPCHenry.Follow;
         Inventory.instance.panelItem.SetActive(true);
         UIManager.instance.obMap.SetActive(true);
         UIManager.instance.obMapMark.SetActive(true);
         marker.SetActive(false);
         MainCharacter.sharedInstance.canMove = true;
 
-        obHenry.GetComponent<NPC_Henry>().tiempoesperando = true;
-        obHenry.GetComponent<NPC_Henry>().contador = 0;
+        //obHenry.GetComponent<NPC_Henry>().tiempoesperando = true;
+        //obHenry.GetComponent<NPC_Henry>().contador = 0;
     }
 
 
@@ -566,7 +566,7 @@ public class HouseDialogue : MonoBehaviour
         {
 
 
-            if (!didDialogueStart && Inventory.instance.moverInv && !henry.finalBueno)
+            if (!didDialogueStart && Inventory.instance.moverInv)
             {
                 StartDialogue();
             }
@@ -598,22 +598,22 @@ public class HouseDialogue : MonoBehaviour
             {   
                 isRange = !isRange;
 
-            if (henry.tiempoesperando)
-            {
-                marker.SetActive(false);
-            }
-            else
-            {
-                marker.SetActive(true);
-            }
+            //if (henry.tiempoesperando)
+            //{
+            //    marker.SetActive(false);
+            //}
+            //else
+            //{
+            //    marker.SetActive(true);
+            //}
 
 
-            if (henry.finalBueno || henry.finalMalo )
-            {
-                marker.SetActive(false);
+            //if (henry.finalBueno || henry.finalMalo )
+            //{
+            //    marker.SetActive(false);
 
-                isRange = false;
-            }
+            //    isRange = false;
+            //}
                 
             }
     }
