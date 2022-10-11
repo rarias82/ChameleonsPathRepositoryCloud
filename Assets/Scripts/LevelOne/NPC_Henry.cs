@@ -30,6 +30,10 @@ public class NPC_Henry : MonoBehaviour
     [SerializeField, TextArea(4, 6)] string[] lines;
     public int index;
     public bool didDialogueStart;
+    [SerializeField] int dialogoAnterior;
+    [SerializeField] int dialogoSiguiente;
+
+
 
 
     [Header("Move Variables")]
@@ -38,9 +42,10 @@ public class NPC_Henry : MonoBehaviour
     [SerializeField] Vector3[] trCaminos;
     Vector3 diferenciaVector;
     public float speedNPC;
+    public float distancia;
 
     [Header("Mode HUD Variables")]
-    public ModeNPC mode;
+    public ModeNPCHenry mode;
     [SerializeField] Vector3 offset;
     [SerializeField] string nameNPC;
     protected Transform trPlayer;
@@ -48,6 +53,12 @@ public class NPC_Henry : MonoBehaviour
     [Header("Camera References")]
     public Camera obCameras;
     public float speedZoom;
+
+    [Header("Anim")]
+    public Animator obAnim;
+    int numeroAnim;
+    Color lineColor;
+    
 
 
     private void Awake()
@@ -63,6 +74,10 @@ public class NPC_Henry : MonoBehaviour
         trPlayer = GameObject.FindGameObjectWithTag("Main Character").transform;
         obNMA = GetComponent<NavMeshAgent>();
         speedNPC = obNMA.speed;
+        obAnim = transform.Find("HenryAnim").gameObject.GetComponent<Animator>();
+        numeroAnim = 30;
+        mode = ModeNPCHenry.Follow;
+        
 
     }
 
@@ -80,15 +95,12 @@ public class NPC_Henry : MonoBehaviour
             {
                 StartDialogue();
             }
-
-            if (dialogueText.text == lines[index].Substring(1))
+            else if (dialogueText.text == lines[index].Substring(1))
             {
                 NextDialogue();
-
             }
 
             UIManager.instance.icono.gameObject.SetActive(false);
-
 
         }
 
@@ -116,10 +128,76 @@ public class NPC_Henry : MonoBehaviour
 
 
     }
+
+    void DialogoRandom()
+    {
+        dialogoAnterior = dialogoSiguiente;
+
+        dialogoSiguiente = Random.Range(0, 5);
+
+        while (dialogoSiguiente == dialogoAnterior)
+        {
+            dialogoSiguiente = Random.Range(0, 5);
+        }
+
+        switch (dialogoSiguiente)
+        {
+            case 0:
+                lines = linesA0;
+                break;
+
+            case 1:
+                lines = linesA1;
+                break;
+
+            case 2:
+                lines = linesA2;
+                break;
+
+            case 3:
+                lines = linesA3;
+                break;
+
+            case 4:
+                lines = linesA5;
+                break;
+
+            default:
+                break;
+        }
+
+
+
+    }
+
+    void FollowPlayer()
+    {
+        diferenciaVector = trPlayer.position - transform.position;
+
+
+        if (diferenciaVector.sqrMagnitude < (distancia * 2f))
+        {
+
+
+            lineColor = Color.red;
+
+
+        }
+        else
+        {
+            lineColor = Color.green;
+
+        }
+
+        Debug.DrawRay(transform.position, diferenciaVector, lineColor);
+
+        obNMA.SetDestination(trPlayer.position);
+    }
     public void StartDialogue()
     {
         MainCharacter.sharedInstance.vectorForAnim = Vector3.zero;
 
+        MainCharacter.sharedInstance.intervalo = 0.0f;
 
         MainCharacter.sharedInstance.canMove = false;
 
@@ -135,6 +213,8 @@ public class NPC_Henry : MonoBehaviour
         UIManager.instance.obMap.SetActive(false);
         UIManager.instance.obMapMark.SetActive(false);
 
+
+        DialogoRandom();
 
         StartCoroutine(WriteDialogue());
 
@@ -158,9 +238,18 @@ public class NPC_Henry : MonoBehaviour
 
         }
 
+        if (!lines[index].Trim().StartsWith("P"))
+        {
+            AnimToVar(index + 1);
+        }
+       
         dialogueText.text = string.Empty;
 
-        foreach (char letter in lines[index].ToCharArray())
+        UIManager.instance.ballonDialogue.gameObject.SetActive(true);
+
+        IconDialogo(lines[index]);
+
+        foreach (char letter in lines[index].Substring(1).ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(speedText);
@@ -196,6 +285,8 @@ public class NPC_Henry : MonoBehaviour
 
         UIManager.instance.fadeFrom = true;
 
+        
+
         while (obCameras.orthographicSize < 7.5f)
         {
             obCameras.orthographicSize += speedZoom * Time.deltaTime;
@@ -213,37 +304,79 @@ public class NPC_Henry : MonoBehaviour
 
         MainCharacter.sharedInstance.canMove = true;
 
+        numeroAnim = 0;
+
     }
 
 
+    void TurnToLogan()
+    {
+
+        Vector3 direction = trPlayer.transform.position - transform.position;
+        transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
+
+    }
+
+    void AnimToVar(int indice)
+    {
+        numeroAnim = indice;
+
+    }
+    
+
     private void Update()
     {
-        Interactuar();
-            
+
+
+        if (mode == ModeNPCHenry.Follow)
+        {
+            FollowPlayer();
+        }
+
+
+        if (mode == ModeNPCHenry.Iddle)
+        {
+            Interactuar();
+            TurnToLogan();
+
+        }
+        
+
+       
+
+        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {   
-            if (other.gameObject.CompareTag("P1"))
-            {  
-                obNMA.speed = 0;
+            if (other.gameObject.CompareTag("P1") && mode == ModeNPCHenry.Follow)
+            {
+
+                mode = ModeNPCHenry.Iddle;
+
+                obNMA.speed = 0.0f;
                 isRange = !isRange;
                 marker.SetActive(true);
-                
-                
 
-            }
+                numeroAnim = 0;
+
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
      
-            if (other.gameObject.CompareTag("P1"))
+            if (other.gameObject.CompareTag("P1") && mode == ModeNPCHenry.Iddle)
             {
 
-                    obNMA.speed = 0;
+                    mode = ModeNPCHenry.Follow;
+
+                    obNMA.speed = speedNPC;
                     isRange = !isRange;
                     marker.SetActive(false);
+
+                    numeroAnim = 30;
 
             }
               
@@ -252,7 +385,14 @@ public class NPC_Henry : MonoBehaviour
             
     }
 
-      
+    private void LateUpdate()
+    {
+        obAnim.SetInteger("EstadoAnimo", numeroAnim);
+
+
+    }
+
+
 
 
 }
