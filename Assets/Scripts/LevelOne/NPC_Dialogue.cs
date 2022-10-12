@@ -176,8 +176,10 @@ public class NPC_Dialogue : MonoBehaviour
             yield return new WaitForSeconds(speedText);
         }
 
-        
-        
+        UIManager.instance.icono.gameObject.SetActive(true);
+
+
+
     }
 
     public void NextDialogue()
