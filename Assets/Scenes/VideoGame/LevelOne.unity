@@ -29921,7 +29921,7 @@ PrefabInstance:
       objectReference: {fileID: 941444072}
     - target: {fileID: 6908791709405134097, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
       propertyPath: destiny.y
-      value: 125
+      value: 375
       objectReference: {fileID: 0}
     - target: {fileID: 6908791709405134097, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
       propertyPath: obMapMark
@@ -29973,7 +29973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6908791709533560254, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
       propertyPath: m_text
-      value: "Hola \ndsd\nsds\ndssds"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6908791709533560254, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
       propertyPath: m_margin.x
