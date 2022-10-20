@@ -3826,7 +3826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 232833403717711882, guid: ddc66abc46c2b63448cd20201b41c810, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 232833403717711887, guid: ddc66abc46c2b63448cd20201b41c810, type: 3}
       propertyPath: m_RootOrder
@@ -19073,7 +19073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: talkToLeahn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: dialogueText
@@ -19081,7 +19081,7 @@ PrefabInstance:
       objectReference: {fileID: 1973813307}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: didDialogueStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: lines.Array.data[0]
@@ -19829,7 +19829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 104.39
+      value: 56.8
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19837,7 +19837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 106.47
+      value: 23.3
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalRotation.w
