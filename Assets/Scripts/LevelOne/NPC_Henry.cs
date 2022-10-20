@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 public enum ModeNPCHenry
 {
-    Iddle, Follow, House, Final
+    Iddle, Follow, House, Final, Limites
 }
 
 public class NPC_Henry : MonoBehaviour
@@ -18,6 +18,7 @@ public class NPC_Henry : MonoBehaviour
     [SerializeField] GameObject marker;
     [SerializeField] bool isRange;
     public float speedText;
+    public bool detectarLimites;
 
     [Header("Dialogue Variables")]
     [SerializeField] TextMeshProUGUI dialogueText;
@@ -28,10 +29,15 @@ public class NPC_Henry : MonoBehaviour
     [SerializeField, TextArea(4, 6)] string[] linesA4;
     [SerializeField, TextArea(4, 6)] string[] linesA5;
     [SerializeField, TextArea(4, 6)] string[] lines;
+    [SerializeField, TextArea(4, 6)] string[] linesLogan;
+
     public int index;
     public bool didDialogueStart;
     [SerializeField] int dialogoAnterior;
     [SerializeField] int dialogoSiguiente;
+    int random00;
+    int random01;
+    public GameObject detector;
 
 
 
@@ -74,9 +80,10 @@ public class NPC_Henry : MonoBehaviour
         trPlayer = GameObject.FindGameObjectWithTag("Main Character").transform;
         obNMA = GetComponent<NavMeshAgent>();
         speedNPC = obNMA.speed;
-        obAnim = transform.Find("HenryAnim").gameObject.GetComponent<Animator>();
+       
         numeroAnim = 30;
         mode = ModeNPCHenry.Follow;
+      
         
 
     }
@@ -89,7 +96,7 @@ public class NPC_Henry : MonoBehaviour
 
     public void Interactuar()
     {
-        if (isRange && Input.GetButtonDown("Interactuar") && Inventory.instance.moverInv)
+        if ((isRange) && Input.GetButtonDown("Interactuar") && Inventory.instance.moverInv)
         {
             if (!didDialogueStart)
             {
@@ -98,10 +105,19 @@ public class NPC_Henry : MonoBehaviour
             else if (dialogueText.text == lines[index].Substring(1))
             {
                 NextDialogue();
+               
             }
+
 
             UIManager.instance.icono.gameObject.SetActive(false);
 
+
+        }
+
+        if (detectarLimites && dialogueText.text == lines[index].Substring(1) && Input.GetButtonDown("Interactuar") && Inventory.instance.moverInv)
+        {
+            StartCoroutine(CloseDialogue());
+            UIManager.instance.icono.gameObject.SetActive(false);
         }
 
         RotateSon();
@@ -170,16 +186,65 @@ public class NPC_Henry : MonoBehaviour
 
     }
 
+    IEnumerator DetectarLimites()
+    {
+        detectarLimites = true;
+        didDialogueStart = true;
+
+        MainCharacter.sharedInstance.vectorForAnim = Vector3.zero;
+
+        MainCharacter.sharedInstance.intervalo = 0.0f;
+
+        MainCharacter.sharedInstance.canMove = false;
+
+        
+
+        UIManager.instance.fadeBlack = true;
+
+       
+
+        index = 0;
+
+        Inventory.instance.panelItem.SetActive(false);
+        UIManager.instance.obMap.SetActive(false);
+        UIManager.instance.obMapMark.SetActive(false);
+
+
+
+        yield return null;
+
+        random00 = random01;
+
+        random01 = Random.Range(0, linesLogan.Length);
+
+        while (random01 == random00)
+        {
+            random01 = Random.Range(0, linesLogan.Length);
+        }
+
+        lines[0] = linesLogan[random01];
+
+
+        mode = ModeNPCHenry.Limites;
+
+        UIManager.instance.GanarPuntos(false, UIManager.instance.puntos);
+
+        StartCoroutine(WriteDialogue());
+
+    }
+
     void FollowPlayer()
     {
         diferenciaVector = trPlayer.position - transform.position;
 
 
-        if (diferenciaVector.sqrMagnitude < (distancia * 2f))
+        if (diferenciaVector.sqrMagnitude > (distancia * 2f) && !detectarLimites)
         {
 
 
             lineColor = Color.red;
+            StartCoroutine("DetectarLimites");
+            
 
 
         }
@@ -216,6 +281,8 @@ public class NPC_Henry : MonoBehaviour
 
         DialogoRandom();
 
+        FollowCameras.instance.mode = Modo.InDialogue;
+
         StartCoroutine(WriteDialogue());
 
     }
@@ -227,21 +294,50 @@ public class NPC_Henry : MonoBehaviour
 
             while (obCameras.orthographicSize > 3.5f)
             {
-                Vector3 direction = transform.position - trPlayer.transform.position;
-                trPlayer.transform.forward = Vector3.Lerp(trPlayer.transform.forward, direction, (speedZoom / 2f) * Time.deltaTime);
+                Vector3 direction = transform.position - new Vector3(trPlayer.transform.position.x, 6.079084f, trPlayer.transform.position.z);
+                Vector3 otraDirection = transform.position - trPlayer.transform.position;
+
+                if (!detectarLimites)
+                {
+                    trPlayer.transform.forward = Vector3.Lerp(trPlayer.transform.forward, direction, (speedZoom) * Time.deltaTime);
+                }
+                else
+                {
+                    trPlayer.transform.forward = Vector3.Lerp(trPlayer.transform.forward, otraDirection, (0.5f) * Time.deltaTime);
+                }
+                
 
                 obCameras.orthographicSize -= speedZoom * Time.deltaTime;
 
                 yield return null;
 
             }
+           
 
         }
 
-        if (!lines[index].Trim().StartsWith("P"))
+
+        if (!detectarLimites)
         {
-            AnimToVar(index + 1);
+
+            detector.SetActive(true);
+
+            while (FollowCameras.instance.mode == Modo.InDialogue)
+            {
+                yield return null;
+            }
+
+
+            if (!lines[index].Trim().StartsWith("P"))
+            {
+                AnimToVar(index + 1);
+            }
         }
+       
+
+
+
+       
        
         dialogueText.text = string.Empty;
 
@@ -257,21 +353,27 @@ public class NPC_Henry : MonoBehaviour
 
         UIManager.instance.icono.gameObject.SetActive(true);
 
+        
+
     }
 
     public void NextDialogue()
     {
         index++;
 
-        if ((index < lines.Length))
-        {
-            StartCoroutine(WriteDialogue());
-        }
-        else
-        {
+        
+            if ((index < lines.Length))
+            {
+                StartCoroutine(WriteDialogue());
+            }
+            else
+            {
 
-            StartCoroutine(CloseDialogue());
-        }
+                StartCoroutine(CloseDialogue());
+            }
+
+        
+
 
 
     }
@@ -285,26 +387,62 @@ public class NPC_Henry : MonoBehaviour
 
         UIManager.instance.fadeFrom = true;
 
-        
+        FollowCameras.instance.mode = Modo.InGame;
 
-        while (obCameras.orthographicSize < 7.5f)
+        if (!detectarLimites)
         {
-            obCameras.orthographicSize += speedZoom * Time.deltaTime;
-            yield return null;
+            while ((obCameras.orthographicSize < 7.5f) && offset != new Vector3(-15.00f, 12.5f, -15.00f))
+            {
+                obCameras.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
+                FollowCameras.instance.offset = Vector3.Slerp(FollowCameras.instance.offset, new Vector3(-15.00f, 12.5f, -15.00f), (speedZoom / 2.0f) * Time.deltaTime);
 
+                yield return null;
+
+            }
+
+            marker.SetActive(true);
+
+
+            numeroAnim = 0;
         }
+        else
+        {
+            while ((obCameras.orthographicSize < 7.5f) )
+            {
+                obCameras.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
+              
+
+                yield return null;
+
+            }
+        }
+
+      
+       
 
         Inventory.instance.panelItem.SetActive(true);
         UIManager.instance.obMap.SetActive(true);
         UIManager.instance.obMapMark.SetActive(true);
 
-        marker.SetActive(true);
+      
+
+
+        FollowCameras.instance.pararGiro = false;
+        detector.SetActive(false);
 
         didDialogueStart = false;
 
+      
+
         MainCharacter.sharedInstance.canMove = true;
 
-        numeroAnim = 0;
+
+
+      
+
+        detectarLimites = false;
+
+
 
     }
 
@@ -340,17 +478,24 @@ public class NPC_Henry : MonoBehaviour
             TurnToLogan();
 
         }
-        
 
-       
 
-        
+        if (mode == ModeNPCHenry.Limites)
+        {
+            Interactuar();
+            FollowPlayer();
+            
+           
+
+        }
+
+
 
     }
 
     private void OnTriggerEnter(Collider other)
     {   
-            if (other.gameObject.CompareTag("P1") && mode == ModeNPCHenry.Follow)
+            if (other.gameObject.CompareTag("P1") && (mode == ModeNPCHenry.Follow || mode == ModeNPCHenry.Limites ))
             {
 
                 mode = ModeNPCHenry.Iddle;

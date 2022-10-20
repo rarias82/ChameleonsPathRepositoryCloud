@@ -42,19 +42,35 @@ public class HouseDialogue : MonoBehaviour
 
     [Header("Dialogue Next")]
     [SerializeField, TextArea(4, 6)] string[] linesNextAIncorrecta;
+    [SerializeField, TextArea(4, 6)] string[] linesNextAIncorrecta1;
+    [SerializeField, TextArea(4, 6)] string[] linesNextAIncorrecta2;
+    [SerializeField, TextArea(4, 6)] string[] linesNextAIncorrecta3;
+    [SerializeField, TextArea(4, 6)] string[] linesNextAIncorrecta4;
+    [SerializeField, TextArea(4, 6)] string[] linesNextAIncorrecta5;
     [SerializeField, TextArea(4, 6)] string[] linesNextACorrecta;
 
     [SerializeField, TextArea(4, 6)] string[] linesNextCIncorrecta;
     [SerializeField, TextArea(4, 6)] string[] linesNextCCorrecta;
 
     [SerializeField, TextArea(4, 6)] string[] linesAIncorrecta;
+    [SerializeField, TextArea(4, 6)] string[] linesAIncorrecta1;
+    [SerializeField, TextArea(4, 6)] string[] linesAIncorrecta2;
+    [SerializeField, TextArea(4, 6)] string[] linesAIncorrecta3;
+    [SerializeField, TextArea(4, 6)] string[] linesAIncorrecta4;
     [SerializeField, TextArea(4, 6)] string[] linesCIncorrecta;
 
 
     [SerializeField, TextArea(4, 6)] string[] linesAFinal;
+
     [SerializeField, TextArea(4, 6)] string[] linesCFinal;
     [SerializeField] int random00;
     [SerializeField] int random01;
+    int random001;
+    int random011;
+    int random00c1;
+    int random01c1;
+    int random00c2;
+    int random01c2;
     [SerializeField] Vector3 masVector;
 
 
@@ -62,7 +78,7 @@ public class HouseDialogue : MonoBehaviour
     public GameObject obHenry;
     public Image blackScreen;
     public bool optionCBuscarHermano;
-    public bool falloTiempo;
+    
     public Transform casaGO;
 
 
@@ -111,19 +127,50 @@ public class HouseDialogue : MonoBehaviour
             {
                 DialogoRandom();
             }
-            if (talkToLeahn && !nombreIncorrecto && !falloTiempo)
+            if (talkToLeahn && !nombreIncorrecto )
             {
                 lines = linesA;
             }
-            if (talkToLeahn && nombreIncorrecto && !falloTiempo)
+            if (talkToLeahn && nombreIncorrecto) 
             {
-                lines = linesAIncorrecta;
+                random001 = Random.Range(0, 5);
+
+                random011 = random001;
+
+                while (random011 == random001)
+                {
+                    random001 = Random.Range(0, 5);
+                }
+                switch (random001)
+                {
+                    case 0:
+                        lines = linesAIncorrecta;
+                        break;
+
+                    case 1:
+                        lines = linesAIncorrecta1;
+                        break;
+
+                    case 2:
+                        lines = linesAIncorrecta2;
+                        break;
+
+                    case 3:
+                        lines = linesAIncorrecta3;
+                        break;
+
+                    case 4:
+                        lines = linesAIncorrecta4;
+                        break;
+
+                    default:
+                        break;
+                }
+                
+
             }
 
-            if (talkToLeahn && falloTiempo)
-            {
-                lines = linesAFinal;
-            }
+           
 
         }
         else if (respuestaDada.nextDialogueToTalk == 2)
@@ -142,6 +189,7 @@ public class HouseDialogue : MonoBehaviour
                 lines = linesCFinal;
             }
         }
+      
    
         StartCoroutine(WriteDialogue());
 
@@ -158,7 +206,7 @@ public class HouseDialogue : MonoBehaviour
         {
             random00 = Random.Range(0, 5);
         }
-        switch (random01)
+        switch (random00)
         {
             case 0:
                 lines = linesExtra0;
@@ -193,7 +241,7 @@ public class HouseDialogue : MonoBehaviour
 
         if (lineas.Trim().StartsWith("P"))
         {
-            UIManager.instance.PosicionarGlobo(trPlayer.position);
+            UIManager.instance.PosicionarGlobo(trPlayer.position/* + new Vector3(0f,50f,0f)*/);
         }
 
         if (lineas.Trim().StartsWith("L"))
@@ -221,7 +269,7 @@ public class HouseDialogue : MonoBehaviour
             {
                 Vector3 direction =  transform.position - new Vector3(trPlayer.transform.position.x, 6.079084f, trPlayer.transform.position.z);
 
-                trPlayer.transform.forward = Vector3.Lerp(trPlayer.transform.forward, direction, (respuestaDada.speedZoom / 2f) * Time.deltaTime);
+                trPlayer.transform.forward = Vector3.Lerp(trPlayer.transform.forward, direction, (respuestaDada.speedZoom) * Time.deltaTime);
 
                 respuestaDada.obCameras.orthographicSize -= respuestaDada.speedZoom * Time.deltaTime;
 
@@ -243,7 +291,10 @@ public class HouseDialogue : MonoBehaviour
             dialogueText.text += letter;
             yield return new WaitForSeconds(respuestaDada.speedText);
         }
-        
+
+
+        UIManager.instance.icono.gameObject.SetActive(true);
+
     }
 
     public void Navegate()
@@ -312,9 +363,33 @@ public class HouseDialogue : MonoBehaviour
         switch (id_selector)
         {
             case 0:
+
                 if (respuestaDada.nextDialogueToTalk == 0)
                 {
-                    lines = linesNextAIncorrecta;
+
+                    random00c1 = Random.Range(0, 3);
+
+                    random01c1 = random00c1;
+
+                    while (random01c1 == random00c1)
+                    {
+                        random00c1 = Random.Range(0, 3);
+                    }
+
+                    if (random00c1 == 0)
+                    {
+                        lines = linesNextAIncorrecta;
+                    }
+                    if (random00c1 == 1)
+                    {
+                        lines = linesNextAIncorrecta1;
+                    }
+                    if (random00c1 == 2)
+                    {
+                        lines = linesNextAIncorrecta2;
+                    }
+                  
+
                     nombreIncorrecto = true;
                 }
                 else if (respuestaDada.nextDialogueToTalk == 2)
@@ -329,7 +404,29 @@ public class HouseDialogue : MonoBehaviour
             case 1:
                 if (respuestaDada.nextDialogueToTalk == 0)
                 {
-                    lines = linesNextAIncorrecta;
+                    random00c2 = Random.Range(3, 6);
+
+                    random01c2 = random00c2;
+
+                    while (random01c2 == random00c2)
+                    {
+                        random00c2 = Random.Range(3, 6);
+                    }
+
+                    if (random00c2 == 3)
+                    {
+                        lines = linesNextAIncorrecta3;
+                    }
+                    if (random00c2 == 4)
+                    {
+                        lines = linesNextAIncorrecta4;
+                    }
+                    if (random00c2 == 5)
+                    {
+                        lines = linesNextAIncorrecta5;
+                    }
+                   
+
                     nombreIncorrecto = true;
                 }
                 else if (respuestaDada.nextDialogueToTalk == 2)
@@ -412,8 +509,8 @@ public class HouseDialogue : MonoBehaviour
                 {
                     if (talkToLeahn){
 
-                        didDialogueStart = true;
-                        StartCoroutine(FadeinOut());
+                        
+                        StartCoroutine("IniciarTransicion");
                     }
                         
 
@@ -448,21 +545,22 @@ public class HouseDialogue : MonoBehaviour
             if (!talkToLeahn)
             {
 
-                if (!falloTiempo)
-                {
-                    didDialogueStart = false;
+                
+                    
                     Inventory.instance.panelItem.SetActive(true);
                     UIManager.instance.obMap.SetActive(true);
                     UIManager.instance.obMapMark.SetActive(true);
                     marker.SetActive(true);
                     MainCharacter.sharedInstance.canMove = true;
-                }
-                else
-                {
-                    didDialogueStart = true;
-                    StartCoroutine(FadeinOut());
-                }
-                
+                    didDialogueStart = false;
+                //didDialogueStart = true;
+                //StartCoroutine(FadeinOut());
+
+
+            }
+            else
+            {
+
             }
         }
         
@@ -484,7 +582,7 @@ public class HouseDialogue : MonoBehaviour
         }
         else
         {
-            if (talkToLeahn && !finishDialogue && !optionCBuscarHermano && !falloTiempo)
+            if (talkToLeahn && !finishDialogue && !optionCBuscarHermano)
             {
                
                 Options.SetActive(true);
@@ -517,37 +615,28 @@ public class HouseDialogue : MonoBehaviour
 
     }
 
-    IEnumerator FadeinOut()
+    IEnumerator IniciarTransicion()
     {
-        while (blackScreen.color.a < 1f)
-        {
-            blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, Mathf.MoveTowards(blackScreen.color.a, 1f, 1.75f * Time.deltaTime));
-            yield return null;
-        }
 
-        trPlayer.position = new Vector3(99.5f, 6.079084f, 104.8f);
+        UIManager.instance.obAnim.SetTrigger("Start");
+        
+        yield return new WaitForSeconds(1f);
+
         obHenry.SetActive(true);
-        //obHenry.transform.position = henry.posInicial;
-        yield return new WaitForSeconds(0.5f);
-        
+        obHenry.transform.position = new Vector3(95.0f, obHenry.transform.position.y, 110.0f);
 
-        
-        while (blackScreen.color.a > 0f)
-        {
-            blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, Mathf.MoveTowards(blackScreen.color.a, 0f, 1.75f * Time.deltaTime));
-            yield return null;
-        }
+        respuestaDada.trPlayer.transform.position = new Vector3(90.0f, respuestaDada.trPlayer.transform.position.y, 100.0f);
 
-        //obHenry.GetComponent<NPC_Henry>().mode = ModeNPCHenry.Follow;
-        Inventory.instance.panelItem.SetActive(true);
-        UIManager.instance.obMap.SetActive(true);
-        UIManager.instance.obMapMark.SetActive(true);
-        marker.SetActive(false);
+        yield return new WaitForSeconds(1f);
+
+        UIManager.instance.obAnim.SetTrigger("End");
+
         MainCharacter.sharedInstance.canMove = true;
 
-        //obHenry.GetComponent<NPC_Henry>().tiempoesperando = true;
-        //obHenry.GetComponent<NPC_Henry>().contador = 0;
+
+        
     }
+
 
 
 
@@ -597,25 +686,9 @@ public class HouseDialogue : MonoBehaviour
             if (other.gameObject.CompareTag("P1") && !didDialogueStart)
             {   
                 isRange = !isRange;
+                marker.SetActive(true);
 
-            //if (henry.tiempoesperando)
-            //{
-            //    marker.SetActive(false);
-            //}
-            //else
-            //{
-            //    marker.SetActive(true);
-            //}
-
-
-            //if (henry.finalBueno || henry.finalMalo )
-            //{
-            //    marker.SetActive(false);
-
-            //    isRange = false;
-            //}
-                
-            }
+        }
     }
 
     private void OnTriggerExit(Collider other)

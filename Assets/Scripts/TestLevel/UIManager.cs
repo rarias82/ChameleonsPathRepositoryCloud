@@ -37,6 +37,8 @@ public class UIManager : MonoBehaviour
     public GameObject obMapMark;
 
 
+    [Header("Fade")]
+    public Animator obAnim;
 
     public void ExitPlayGame()
     {
@@ -195,20 +197,21 @@ public class UIManager : MonoBehaviour
     public void PosicionarGlobo(Vector3 posicionar)
     {
         Vector3 posDisplay = FollowCameras.instance.MyCameras.WorldToScreenPoint(posicionar);
-        ballonDialogue.rectTransform.position = posDisplay + destiny ;
-
-
-
+        ballonDialogue.rectTransform.position = posDisplay + destiny;
     }
+
+   
+
     private void Awake()
     {
-        
+        instance = this;
     }
     void Start()
     {
-        instance = this;
+        
         icono.gameObject.SetActive(false);
         puntosCalificacion = puntos;
+        ballonDialogue.gameObject.SetActive(false);
        
     }
 

@@ -11,14 +11,25 @@ public class NPC_Follow : MonoBehaviour
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField, TextArea(4, 6)] string[] linesA;
     [SerializeField, TextArea(4, 6)] string[] linesB;
+    [SerializeField, TextArea(4, 6)] string[] linesB1;
+    [SerializeField, TextArea(4, 6)] string[] linesB2;
+    [SerializeField, TextArea(4, 6)] string[] linesB3;
+
     [SerializeField, TextArea(4, 6)] string[] linesC;
 
     [SerializeField, TextArea(4, 6)] string[] linesNext;
 
 
     [TextArea(4, 6)]public string[] linesNextA;
+
+    [TextArea(4, 6)] public string[] linesListNextA;
+  
     [TextArea(4, 6)]public string[] linesNextB;
-    [TextArea(4, 6)]public string[] linesNextC;
+    [TextArea(4, 6)] public string[] linesNextB1;
+    [TextArea(4, 6)] public string[] linesNextB2;
+    [TextArea(4, 6)] public string[] linesNextB3;
+    [TextArea(4, 6)] public string[] linesNextB4;
+    [TextArea(4, 6)] public string[] linesNextC;
 
     [TextArea(4, 6)] public string[] linesNextC2;
 
@@ -38,7 +49,32 @@ public class NPC_Follow : MonoBehaviour
                 break;
 
             case 1:
-                linesNext = linesB;
+                dObject.random00 = Random.Range(0, 4);
+
+                dObject.random01 = dObject.random00;
+
+                while (dObject.random01 == dObject.random00)
+                {
+                    dObject.random00 = Random.Range(0, 4);
+                }
+                if (dObject.random00 == 0)
+                {
+                    linesNext = linesB;
+                }
+                if (dObject.random00 == 1)
+                {
+                    linesNext = linesB1;
+                }
+                if (dObject.random00 == 2)
+                {
+                    linesNext = linesB2;
+                }
+                if (dObject.random00 == 3)
+                {
+                    linesNext = linesB3;
+                }
+              
+                
                
                 break;
 
@@ -65,12 +101,12 @@ public class NPC_Follow : MonoBehaviour
         if (dObject.index == 1)
         {
 
-			if (linesNext == linesA)
+			if (linesNext == linesA /*|| linesNext == linesA1 || linesNext == linesA2 || linesNext == linesA3*/)
 			{
                 dObject.numeroAnim = 10;
             }
 
-            if (linesNext == linesB)
+            if (linesNext == linesB || linesNext == linesB1 || linesNext == linesB2 || linesNext == linesB3)
             {
 
                 dObject.numeroAnim = 11;
@@ -146,15 +182,6 @@ public class NPC_Follow : MonoBehaviour
 
     private void Update()
     {
-        //if (dialogueText.text == linesNext[dObject.index])
-        //{
-        //    UIManager.instance.icono.gameObject.SetActive(true);
-        //}
-        //else
-        //{
-        //    UIManager.instance.icono.gameObject.SetActive(false);
-        //}
-
 
         if (Input.GetButtonDown("Interactuar") && fillDialogueLines)
         {

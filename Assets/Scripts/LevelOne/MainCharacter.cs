@@ -51,12 +51,14 @@ public class MainCharacter : MonoBehaviour
     }
 
 
-    //void OnMovimiento(InputValue valor )
-    //{
-    //    Vector2 inputMovimiento = valor.Get<Vector2>();
-    //    inputMove = new Vector3(inputMovimiento.x, 0.0f, inputMovimiento.y);
+    public Vector3 ScreenDisplayPont(Vector3 posicionar)
+    {
+        Vector3 posDisplay = FollowCameras.instance.MyCameras.WorldToScreenPoint(posicionar);
+        return posDisplay;
 
-    //}
+
+
+    }
     void MovePlayer()
     {
 
@@ -150,8 +152,8 @@ public class MainCharacter : MonoBehaviour
             MovePlayer();
         }
 
-       
 
+        
 
     }
 

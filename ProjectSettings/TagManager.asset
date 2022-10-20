@@ -8,6 +8,7 @@ TagManager:
   - Key
   - Main Character
   - Item
+  - AnguloIndicado
   layers:
   - Default
   - TransparentFX
