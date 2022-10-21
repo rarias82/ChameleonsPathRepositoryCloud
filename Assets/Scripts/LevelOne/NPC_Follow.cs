@@ -21,6 +21,11 @@ public class NPC_Follow : MonoBehaviour
 
 
     [TextArea(4, 6)]public string[] linesNextA;
+    [TextArea(4, 6)] public string[] linesNextA1;
+    [TextArea(4, 6)] public string[] linesNextA2;
+    [TextArea(4, 6)] public string[] linesNextA3;
+    [TextArea(4, 6)] public string[] linesNextA4;
+
 
     [TextArea(4, 6)] public string[] linesListNextA;
   
@@ -32,6 +37,8 @@ public class NPC_Follow : MonoBehaviour
     [TextArea(4, 6)] public string[] linesNextC;
 
     [TextArea(4, 6)] public string[] linesNextC2;
+    int random00;
+    int random01;
 
     bool fillDialogueLines; 
 
@@ -49,27 +56,29 @@ public class NPC_Follow : MonoBehaviour
                 break;
 
             case 1:
-                dObject.random00 = Random.Range(0, 4);
+                random00 = Random.Range(0, 4);
 
-                dObject.random01 = dObject.random00;
-
-                while (dObject.random01 == dObject.random00)
+                while (random01 == random00)
                 {
-                    dObject.random00 = Random.Range(0, 4);
+                    random00 = Random.Range(0, 4);
                 }
-                if (dObject.random00 == 0)
+
+                random01 = random00;
+
+               
+                if (random00 == 0)
                 {
                     linesNext = linesB;
                 }
-                if (dObject.random00 == 1)
+                if (random00 == 1)
                 {
                     linesNext = linesB1;
                 }
-                if (dObject.random00 == 2)
+                if (random00 == 2)
                 {
                     linesNext = linesB2;
                 }
-                if (dObject.random00 == 3)
+                if (random00 == 3)
                 {
                     linesNext = linesB3;
                 }

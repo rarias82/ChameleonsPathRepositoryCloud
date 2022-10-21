@@ -66,33 +66,133 @@ public class NPC_Dialogue : MonoBehaviour
         instance = this;
     }
 
+    void CambiarDialogos() {
+
+        switch (nextDialogueToTalk)
+        {
+            case 0:
+
+                random00 = Random.Range(0, 5);
+
+
+
+                while (random01 == random00)
+                {
+                    random00 = Random.Range(0, 5);
+                }
+
+
+                random01 = random00;
+
+                if (random00 == 0)
+                {
+                    lines = obRoute.linesNextA;
+                }
+                if (random00 == 1)
+                {
+                    lines = obRoute.linesNextA1;
+                }
+                if (random00 == 2)
+                {
+                    lines = obRoute.linesNextA2;
+                }
+                if (random00 == 3)
+                {
+                    lines = obRoute.linesNextA3;
+                }
+                if (random00 == 4)
+                {
+                    lines = obRoute.linesNextA4;
+                }
+
+
+                changeInitialDialogue = true;
+                mode = ModeNPC.Help;
+
+                houses.talkToLeahn = true;
+                break;
+
+            case 1:
+
+                random00 = Random.Range(0, 5);
+
+                while (random01 == random00)
+                {
+                    random00 = Random.Range(0, 5);
+                }
+
+                random01 = random00;
+
+                
+                if (random00 == 0)
+                {
+                    lines = obRoute.linesNextB;
+                }
+                if (random00 == 1)
+                {
+                    lines = obRoute.linesNextB1;
+                }
+                if (random00 == 2)
+                {
+                    lines = obRoute.linesNextB2;
+                }
+                if (random00 == 3)
+                {
+                    lines = obRoute.linesNextB3;
+                }
+                if (random00 == 4)
+                {
+                    lines = obRoute.linesNextB4;
+                }
+
+
+                changeInitialDialogue = false;
+                numeroAnim = 0;
+                break;
+
+            case 2:
+                lines = obRoute.linesNextC;
+                changeInitialDialogue = true;
+                //mode = ModeNPC.Help;
+                houses.talkToLeahn = true;
+                numeroAnim = 0;
+                break;
+
+            default:
+                break;
+        }
+
+
+
+
+
+
+    }
+
 
     public void StartDialogue()
     {
-        
 
-
+        didDialogueStart = true;
+        index = 0;
 
         MainCharacter.sharedInstance.vectorForAnim = Vector3.zero;
-
 
         MainCharacter.sharedInstance.intervalo = 0.0f;
 
         id_selector = 1;
 
-        MainCharacter.sharedInstance.canMove = false;
-
-        didDialogueStart = true;
+        MainCharacter.sharedInstance.canMove = false;      
 
         UIManager.instance.fadeBlack = true;
 
         marker.SetActive(false);
-
-        index = 0;
+   
 
         Inventory.instance.panelItem.SetActive(false);
         UIManager.instance.obMap.SetActive(false);
         UIManager.instance.obMapMark.SetActive(false);
+ 
 
         if (houses.optionCBuscarHermano)
         {
@@ -145,7 +245,7 @@ public class NPC_Dialogue : MonoBehaviour
         if (index == 0)
         {
 
-            if (lines == obRoute.linesNextA)
+            if (lines == obRoute.linesNextA || lines == obRoute.linesNextA1 || lines == obRoute.linesNextA2 || lines == obRoute.linesNextA3 || lines == obRoute.linesNextA4)
             {
                 numeroAnim = 17;
             }
@@ -306,8 +406,13 @@ public class NPC_Dialogue : MonoBehaviour
 
     public IEnumerator CloseDialogue()
     {
+        
+        index = 0;
 
-        if (lines == obRoute.linesNextA)
+        CambiarDialogos();
+
+
+        if (lines == obRoute.linesNextA || lines == obRoute.linesNextA1 || lines == obRoute.linesNextA2 || lines == obRoute.linesNextA3 || lines == obRoute.linesNextA4)
         {
             numeroAnim = 16;
         }
@@ -345,87 +450,15 @@ public class NPC_Dialogue : MonoBehaviour
         detector.SetActive(false);
 
 
-        didDialogueStart = false;
+       
 
         MainCharacter.sharedInstance.canMove = true;
 
-        switch (nextDialogueToTalk)
-        {
-            case 0:
+       
 
-                random00 = Random.Range(0, obRoute.linesListNextA.Length);
-
-                random01 = random00;
-                while (random01 == random00)
-                {
-                    random00 = Random.Range(0, obRoute.linesListNextA.Length);
-                }
-
-                obRoute.linesNextA[0] = obRoute.linesListNextA[random00];
-
-                lines = obRoute.linesNextA;
-                changeInitialDialogue = true;
-                mode = ModeNPC.Help;
-                
-                houses.talkToLeahn = true; 
-                break;
-
-            case 1:
-
-                random00 = Random.Range(0, 5);
-
-                random01 = random00;
-
-                while (random01 == random00)
-                {
-                    random00 = Random.Range(0, 5);
-                }
-                if (random00 == 0)
-                {
-                    lines = obRoute.linesNextB;
-                }
-                if (random00 == 1)
-                {
-                    lines = obRoute.linesNextB1;
-                }
-                if (random00 == 2)
-                {
-                    lines = obRoute.linesNextB2;
-                }
-                if (random00 == 3)
-                {
-                    lines = obRoute.linesNextB3;
-                }
-                if (random00 == 4)
-                {
-                    lines = obRoute.linesNextB4;
-                }
-
-
-                changeInitialDialogue = false;
-                numeroAnim = 0;
-                break;
-
-            case 2:
-                lines = obRoute.linesNextC;
-                changeInitialDialogue = true;
-                //mode = ModeNPC.Help;
-                houses.talkToLeahn = true;
-                numeroAnim = 0;
-                break;
-
-            default:
-                break;
-        }
-
-        if (houses.optionCBuscarHermano)
-        {
-
-        }
         
-        //changeInitialDialogue = true;
 
-
+        didDialogueStart = false;
     }
 
     public IEnumerator CloseDialogueC()
@@ -500,6 +533,7 @@ public class NPC_Dialogue : MonoBehaviour
         speedNPC = obNMA.speed;
 		numeroAnim = 1;
         detector.SetActive(false);
+        
 		//houses = FindObjectOfType<HouseDialogue>();
 	}
 
@@ -544,11 +578,16 @@ public class NPC_Dialogue : MonoBehaviour
             Navegate();
         }
 
-        if (mode == ModeNPC.Help || mode == ModeNPC.Busy)
+        if ((mode == ModeNPC.Help || mode == ModeNPC.Busy))
         {
-           
+
+
+            if (!changeInitialDialogue)
+            {
                 Vector3 direction = trPlayer.transform.position - transform.position;
                 transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
+            }
+                
            
 
             Interactuar();
@@ -597,7 +636,7 @@ public class NPC_Dialogue : MonoBehaviour
             if (other.gameObject.CompareTag("P1") )
             {
 
-                if (lines == obRoute.linesNextA)
+                if (lines == obRoute.linesNextA || lines == obRoute.linesNextA1 || lines == obRoute.linesNextA2 || lines == obRoute.linesNextA3 || lines == obRoute.linesNextA4)
                 {
                     mode = ModeNPC.Help;
                     obNMA.speed = 0;
@@ -646,7 +685,7 @@ public class NPC_Dialogue : MonoBehaviour
             if (other.gameObject.CompareTag("P1"))
             {
 
-                if (lines == obRoute.linesNextA)
+                if (lines == obRoute.linesNextA || lines == obRoute.linesNextA1 || lines == obRoute.linesNextA2 || lines == obRoute.linesNextA3 || lines == obRoute.linesNextA4)
                 {
                     
                     mode = ModeNPC.Busy;

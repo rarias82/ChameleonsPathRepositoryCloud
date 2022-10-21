@@ -135,12 +135,16 @@ public class HouseDialogue : MonoBehaviour
             {
                 random001 = Random.Range(0, 5);
 
-                random011 = random001;
+                
 
                 while (random011 == random001)
                 {
                     random001 = Random.Range(0, 5);
                 }
+
+
+                random011 = random001;
+
                 switch (random001)
                 {
                     case 0:
@@ -200,12 +204,15 @@ public class HouseDialogue : MonoBehaviour
     {
         random00 = Random.Range(0, 5);
 
-        random01 = random00;
+        
 
         while (random01 == random00)
         {
             random00 = Random.Range(0, 5);
         }
+
+        random01 = random00;
+
         switch (random00)
         {
             case 0:

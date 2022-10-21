@@ -8936,8 +8936,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1123084733}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 7.9478}
-  m_LocalScale: {x: 0.035013963, y: 0.059917897, z: 33.53068}
+  m_LocalPosition: {x: 0, y: -0.0174, z: 12.6695}
+  m_LocalScale: {x: 0.035013963, y: 0.12106642, z: 42.974113}
   m_Children:
   - {fileID: 2088822060}
   m_Father: {fileID: 843640223}
@@ -13688,6 +13688,22 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
+      propertyPath: linesNextA1.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
+      propertyPath: linesNextA2.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
+      propertyPath: linesNextA3.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
+      propertyPath: linesNextA4.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
       propertyPath: linesNextB1.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -13705,7 +13721,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
       propertyPath: linesNextA.Array.data[0]
-      value: 
+      value: "LHola de nuevo querido amiguito, veo que vienes a hablarme, ejeje.\nMi
+        hermanito es un poco gru\xF1\xF3n, por lo que te recomiendo que te apresures.
+        Nos vemos."
       objectReference: {fileID: 0}
     - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
       propertyPath: linesNextA.Array.data[1]
@@ -13730,6 +13748,30 @@ PrefabInstance:
     - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
       propertyPath: linesListNextA.Array.size
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
+      propertyPath: linesNextA1.Array.data[0]
+      value: "LHola de nuevo estimado amiguito, estoy ansioso de volver a  hogar
+        \ncon mi hermanito. \xBFEstoy siendo fastidioso? jejejej soy un anciano \nmuy
+        divertido y tierno. Bueno no te quito m\xE1s tiempo, buena suerte \nal encontrar
+        nuestra casa."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
+      propertyPath: linesNextA2.Array.data[0]
+      value: "LVeo que est\xE1s perdido, ejejjej, nuestra casa queda ni tan cerca
+        ni tan lejos de este bosque, mi hermanito es un poco gru\xF1\xF3n, por lo
+        que te\nrecomiendo que te apresures. Nos vemos.\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
+      propertyPath: linesNextA3.Array.data[0]
+      value: "LMi gran amigo con aspecto de camale\xF3n, jajajaj, broma, yo se que
+        pronto encontrar\xE1s mi casa y vendr\xE1s a buscarme con mi hermano Henry."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
+      propertyPath: linesNextA4.Array.data[0]
+      value: "LRegresaste r\xE1pido, jejej, es un largo camino por recorrer. Te sugiero
+        \nseguir este caminito de tierra. Estoy ansioso por volver a Leahn. Buena
+        \nsuerte mi querido amiguito."
       objectReference: {fileID: 0}
     - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
       propertyPath: linesNextB1.Array.data[0]
@@ -13803,8 +13845,8 @@ PrefabInstance:
     - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
       propertyPath: linesListNextA.Array.data[2]
       value: "LVeo que est\xE1s perdido, ejejjej, nuestra casa queda ni tan cerca
-        ni tan\n lejos de este bosque, mi hermanito es un poco gru\xF1\xF3n, por
-        lo que te\nrecomiendo que te apresures. Nos vemos.\r\n"
+        ni tan lejos de este bosque, mi hermanito es un poco gru\xF1\xF3n, por lo
+        que te\nrecomiendo que te apresures. Nos vemos.\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
       propertyPath: linesListNextA.Array.data[3]
@@ -16465,7 +16507,7 @@ PrefabInstance:
       objectReference: {fileID: 2060966162}
     - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
       propertyPath: speedText
-      value: 0.045
+      value: 0.011
       objectReference: {fileID: 0}
     - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
       propertyPath: speedZoom
@@ -19829,7 +19871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 56.8
+      value: 179.9
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19837,7 +19879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.3
+      value: 82.2
       objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalRotation.w
