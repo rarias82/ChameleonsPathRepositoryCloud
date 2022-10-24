@@ -39,25 +39,25 @@ public class Inventory : MonoBehaviour
 
     public void UseObject()
     {
-        if (Input.GetButtonDown("Recoger"))
-        {
+        //if (Input.GetButtonDown("Recoger"))
+        //{
 
-            for (int i = 0; i < mov.Length; i++)
-            {
-                if ((mov[i].rtSlot.anchoredPosition.x == -15) && !mov[i].vacio)
-                {
+        //    for (int i = 0; i < mov.Length; i++)
+        //    {
+        //        if ((mov[i].rtSlot.anchoredPosition.x == -15) && !mov[i].vacio)
+        //        {
 
-                    if (true)
-                    {
+        //            if (true)
+        //            {
 
-                    }
-                    mov[i].gameObject.GetComponent<Slot>().Quitar();
+        //            }
+        //            mov[i].gameObject.GetComponent<Slot>().Quitar();
 
-                    return;
-                }
-            }
+        //            return;
+        //        }
+        //    }
 
-        }
+        //}
 
 
 
@@ -143,23 +143,23 @@ public class Inventory : MonoBehaviour
     {
         if (panelItem.activeInHierarchy)
         {
-            if (Input.GetButtonDown("ArribaInventario") && moverInv && !Input.GetButtonDown("AbajoInventario"))
-            {
+            //if (Input.GetButtonDown("ArribaInventario") && moverInv && !Input.GetButtonDown("AbajoInventario"))
+            //{
 
-                for (int i = 0; i < mov.Length; i++)
-                {
-                    mov[i].StartCoroutine(mov[i].PosicionarElementos(false));
-                }
-            }
+            //    for (int i = 0; i < mov.Length; i++)
+            //    {
+            //        mov[i].StartCoroutine(mov[i].PosicionarElementos(false));
+            //    }
+            //}
 
-            if (Input.GetButtonDown("AbajoInventario") && moverInv && !Input.GetButtonDown("ArribaInventario"))
-            {
+            //if (Input.GetButtonDown("AbajoInventario") && moverInv && !Input.GetButtonDown("ArribaInventario"))
+            //{
 
-                for (int i = 0; i < mov.Length; i++)
-                {
-                    mov[i].StartCoroutine(mov[i].PosicionarElementos(true));
-                }
-            }
+            //    for (int i = 0; i < mov.Length; i++)
+            //    {
+            //        mov[i].StartCoroutine(mov[i].PosicionarElementos(true));
+            //    }
+            //}
 
             if (mov[0].quieto && mov[1].quieto && mov[2].quieto)
             {

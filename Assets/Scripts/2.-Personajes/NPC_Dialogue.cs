@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 public enum ModeNPC
 {
     Help, Busy, Walking, House, Final, Follow
@@ -35,8 +36,6 @@ public class NPC_Dialogue : MonoBehaviour
     public int random00;
     public int random01;
 
-
-
     [Header("Move Variables")]
     public sbyte numeroCamino;
     NavMeshAgent obNMA;
@@ -60,12 +59,25 @@ public class NPC_Dialogue : MonoBehaviour
     public Animator obAnim;
     public int numeroAnim;
 
+    [Header("Music References")]
+    [SerializeField] AudioClip cancion;
+    public Mapa _map;
+ 
+
+    public void SetInputActions(Mapa map)
+    {
+        _map = map;
+
+    }
 
     private void Awake()
     {
         instance = this;
+
+        
     }
 
+  
     void CambiarDialogos() {
 
         switch (nextDialogueToTalk)
@@ -168,10 +180,10 @@ public class NPC_Dialogue : MonoBehaviour
 
 
     }
-
-
     public void StartDialogue()
     {
+
+
 
         didDialogueStart = true;
         index = 0;
@@ -184,14 +196,14 @@ public class NPC_Dialogue : MonoBehaviour
 
         MainCharacter.sharedInstance.canMove = false;      
 
-        UIManager.instance.fadeBlack = true;
+        UIManager.InstanceGUI.fadeBlack = true;
 
         marker.SetActive(false);
    
 
         Inventory.instance.panelItem.SetActive(false);
-        UIManager.instance.obMap.SetActive(false);
-        UIManager.instance.obMapMark.SetActive(false);
+        UIManager.InstanceGUI.obMap.SetActive(false);
+        UIManager.InstanceGUI.obMapMark.SetActive(false);
  
 
         if (houses.optionCBuscarHermano)
@@ -210,7 +222,6 @@ public class NPC_Dialogue : MonoBehaviour
         StartCoroutine(WriteDialogue());
 
     }
-
     public Vector3 ScreenDisplayPont(Vector3 posicionar)
     {
         Vector3 posDisplay = FollowCameras.instance.MyCameras.WorldToScreenPoint(posicionar);
@@ -224,12 +235,12 @@ public class NPC_Dialogue : MonoBehaviour
 
         if (lineas.Trim().StartsWith("P"))
         {
-            UIManager.instance.PosicionarGlobo(trPlayer.position);
+            UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position);
         }
 
         if (lineas.Trim().StartsWith("L"))
         {
-            UIManager.instance.PosicionarGlobo(transform.position);
+            UIManager.InstanceGUI.PosicionarGlobo(transform.position);
         }
 
         if (lineas.Trim().StartsWith("H"))
@@ -239,11 +250,12 @@ public class NPC_Dialogue : MonoBehaviour
 
         
     }
-
     public IEnumerator WriteDialogue()
     {
         if (index == 0)
         {
+
+            AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
 
             if (lines == obRoute.linesNextA || lines == obRoute.linesNextA1 || lines == obRoute.linesNextA2 || lines == obRoute.linesNextA3 || lines == obRoute.linesNextA4)
             {
@@ -291,7 +303,7 @@ public class NPC_Dialogue : MonoBehaviour
 
         IconDialogo(lines[index]);
 
-        UIManager.instance.ballonDialogue.gameObject.SetActive(true);
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
 
         foreach (char letter in lines[index].Substring(1).ToCharArray())
         {
@@ -299,12 +311,11 @@ public class NPC_Dialogue : MonoBehaviour
             yield return new WaitForSeconds(speedText);
         }
 
-        UIManager.instance.icono.gameObject.SetActive(true);
+        UIManager.InstanceGUI.icono.gameObject.SetActive(true);
 
 
 
     }
-
     public void NextDialogue()
     {
         index++;
@@ -351,24 +362,24 @@ public class NPC_Dialogue : MonoBehaviour
     public void Navegate()
     {
 
-        if ((Input.GetButtonDown("Abajo") || Input.GetAxis("Vertical") == -1f) && id_selector < listOptions.Length - 1)
+        if ((_map.Opciones.Navegar.ReadValue<Vector2>().y == -1.0f) && id_selector < listOptions.Length - 1)
         {
             id_selector++;
         }
 
-        if ((Input.GetButtonDown("Arriba") || Input.GetAxis("Vertical") == 1f) && id_selector > 0)
+        if ((_map.Opciones.Navegar.ReadValue<Vector2>().y == 1.0f) && id_selector > 0)
         {
             id_selector--;
         }
 
         selector.transform.SetParent(listOptions[id_selector].transform);
         selector.transform.position = listOptions[id_selector].transform.position;
-        
+
 
         selector.transform.SetSiblingIndex(0);
 
 
-        if (Input.GetButtonDown("Interactuar"))
+        if (_map.Jugador.Interactuar.WasPressedThisFrame())
         {
             index = 0;
 
@@ -376,22 +387,22 @@ public class NPC_Dialogue : MonoBehaviour
             {
                 case 0:
                     obRoute.StarRoute(id_selector);
-                    UIManager.instance.GanarPuntos(true, UIManager.instance.puntos);
-                    
+                    UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
+
 
                     break;
 
                 case 1:
                     obRoute.StarRoute(id_selector);
-                    UIManager.instance.GanarPuntos(false, UIManager.instance.puntos);
-                  
+                    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
+
 
                     break;
 
                 case 2:
                     obRoute.StarRoute(id_selector);
-                    UIManager.instance.GanarPuntos(false, UIManager.instance.puntos);
-                  
+                    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
+
                     break;
 
                 default:
@@ -403,10 +414,12 @@ public class NPC_Dialogue : MonoBehaviour
 
 
     }
-
     public IEnumerator CloseDialogue()
     {
-        
+
+        AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
+
+
         index = 0;
 
         CambiarDialogos();
@@ -420,11 +433,11 @@ public class NPC_Dialogue : MonoBehaviour
         FollowCameras.instance.mode = Modo.InGame;
 
 
-        UIManager.instance.ballonDialogue.gameObject.SetActive(false);
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         dialogueText.text = string.Empty;
 
-        UIManager.instance.fadeFrom = true;
+        UIManager.InstanceGUI.fadeFrom = true;
 
         while ((obCameras.orthographicSize < 7.5f) && offset != new Vector3(-15.00f, 12.5f, -15.00f))
         {
@@ -436,8 +449,8 @@ public class NPC_Dialogue : MonoBehaviour
 
 
         Inventory.instance.panelItem.SetActive(true);
-        UIManager.instance.obMap.SetActive(true);
-        UIManager.instance.obMapMark.SetActive(true);
+        UIManager.InstanceGUI.obMap.SetActive(true);
+        UIManager.InstanceGUI.obMapMark.SetActive(true);
 
         marker.SetActive(true);
 
@@ -460,15 +473,14 @@ public class NPC_Dialogue : MonoBehaviour
 
         didDialogueStart = false;
     }
-
     public IEnumerator CloseDialogueC()
     {
 
-        UIManager.instance.ballonDialogue.gameObject.SetActive(false);
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         dialogueText.text = string.Empty;
 
-        UIManager.instance.fadeFrom = true;
+        UIManager.InstanceGUI.fadeFrom = true;
 
         while (obCameras.orthographicSize < 7.5f)
         {
@@ -478,8 +490,8 @@ public class NPC_Dialogue : MonoBehaviour
         }
 
         Inventory.instance.panelItem.SetActive(true);
-        UIManager.instance.obMap.SetActive(true);
-        UIManager.instance.obMapMark.SetActive(true);
+        UIManager.InstanceGUI.obMap.SetActive(true);
+        UIManager.InstanceGUI.obMapMark.SetActive(true);
 
         marker.SetActive(true);
 
@@ -496,7 +508,6 @@ public class NPC_Dialogue : MonoBehaviour
         
 
     }
-
     public void MedirDistancia()
     {
         diferenciaVector = trPlayer.position - transform.position;
@@ -533,16 +544,28 @@ public class NPC_Dialogue : MonoBehaviour
         speedNPC = obNMA.speed;
 		numeroAnim = 1;
         detector.SetActive(false);
-        
-		//houses = FindObjectOfType<HouseDialogue>();
-	}
 
+
+
+
+        dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
+
+        //Options = GameObject.Find("DialogueOptions").gameObject;
+
+        //selector = GameObject.Find("Select").gameObject;
+
+        //listOptions[0] = GameObject.Find("Panel0").gameObject;
+        //listOptions[1] = GameObject.Find("Panel1").gameObject;
+        //listOptions[2] = GameObject.Find("Panel2").gameObject;
+
+
+        //houses = FindObjectOfType<HouseDialogue>();
+    }
     void RotateSon()
     {
         Quaternion rotation = Quaternion.Euler(offset);
         marker.transform.rotation = rotation;
     }
-
     void Walking()
     {
         diferenciaVector = trCaminos[numeroCamino] - transform.position;
@@ -563,10 +586,9 @@ public class NPC_Dialogue : MonoBehaviour
 
 
     }
- 
     void Update()
     {
-
+        
         if (mode == ModeNPC.Walking)
         {
             Walking();
@@ -575,7 +597,7 @@ public class NPC_Dialogue : MonoBehaviour
         if (Options.activeInHierarchy && !houses.didDialogueStart)
         {
             
-            Navegate();
+            //Navegate();
         }
 
         if ((mode == ModeNPC.Help || mode == ModeNPC.Busy))
@@ -590,7 +612,7 @@ public class NPC_Dialogue : MonoBehaviour
                 
            
 
-            Interactuar();
+            InteractuarSS();
         }
 
         if (mode == ModeNPC.Follow)
@@ -600,15 +622,18 @@ public class NPC_Dialogue : MonoBehaviour
 
        
     }
-
-    public void Interactuar()
+    public void InteractuarSS()
     {
-        if (isRange && Input.GetButtonDown("Interactuar") && Inventory.instance.moverInv)
+        if (isRange && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv)
         {
             if (!didDialogueStart)
             {
                 StartDialogue();
+
+
             }
+
+
 
             else if (!Options.activeInHierarchy && !nextRoute)
             {
@@ -620,7 +645,7 @@ public class NPC_Dialogue : MonoBehaviour
 
             }
 
-            UIManager.instance.icono.gameObject.SetActive(false);
+            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
 
 
         }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 using TMPro;
 public class NPC_Follow : MonoBehaviour
@@ -40,8 +41,15 @@ public class NPC_Follow : MonoBehaviour
     int random00;
     int random01;
 
-    bool fillDialogueLines; 
+    bool fillDialogueLines;
 
+
+
+
+    private void Start()
+    {
+        //vvarInput = gameObject.GetComponent<PlayerInput>();
+    }
     public void StarRoute(sbyte numeroRoute)
     {
         dObject.nextRoute = true;
@@ -163,7 +171,7 @@ public class NPC_Follow : MonoBehaviour
             yield return new WaitForSeconds(dObject.speedText);
         }
 
-        UIManager.instance.icono.gameObject.SetActive(true);
+        UIManager.InstanceGUI.icono.gameObject.SetActive(true);
 
 
 
@@ -192,7 +200,7 @@ public class NPC_Follow : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetButtonDown("Interactuar") && fillDialogueLines)
+        if (dObject._map.Jugador.Interactuar.WasPressedThisFrame() && fillDialogueLines)
         {
 
             if (dialogueText.text == linesNext[dObject.index].Substring(1))
@@ -200,7 +208,7 @@ public class NPC_Follow : MonoBehaviour
                 NextDialogue();
             }
 
-            UIManager.instance.icono.gameObject.SetActive(false);
+            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
         }
 
     }

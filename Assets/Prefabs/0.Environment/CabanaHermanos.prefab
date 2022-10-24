@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1773768685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1773768686}
+  m_Layer: 6
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1773768686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773768685}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.015, y: -0.0057, z: -0.00165}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 834020907104249078}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &61037412423499340
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +43,7 @@ GameObject:
   - component: {fileID: 871922504319420657}
   - component: {fileID: 3036644265526480926}
   - component: {fileID: 919132149622966576}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CabanaHermanos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,8 +59,9 @@ Transform:
   m_GameObject: {fileID: 61037412423499340}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 92.1, y: 8.5, z: 119.5}
-  m_LocalScale: {x: 400, y: 400, z: 400}
-  m_Children: []
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1773768686}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
@@ -45,8 +76,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.009056493, y: 0.008507805, z: 0.01820036}
-  m_Center: {x: 0.013694329, y: -0.005956986, z: -0.00035742938}
+  m_Size: {x: 0.0029978442, y: 0.0009254965, z: 0.012752614}
+  m_Center: {x: 0.013258693, y: -0.0053805956, z: 0.0024791681}
 --- !u!65 &871922504319420657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -58,8 +89,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.018479116, y: 0.021795964, z: 0.01820036}
-  m_Center: {x: -0.0016239154, y: -0.0014237618, z: -0.00035742938}
+  m_Size: {x: 0.017268753, y: 0.021674925, z: 0.01820036}
+  m_Center: {x: -0.0022290968, y: -0.0014842781, z: -0.00035742938}
 --- !u!65 &3036644265526480926
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -89,34 +120,49 @@ MonoBehaviour:
   isRange: 0
   dialogueText: {fileID: 0}
   linesA:
-  - "\xBFQui\xE9n diablos toca la maldita puerta? No aceptamos mendigos, \xA1largo
+  - "H\xBFQui\xE9n diablos toca la maldita puerta? No aceptamos mendigos, \xA1largo
     de aqu\xED!"
-  - "No\u2026 no vine a mendigar, su hermano me envi\xF3 para que lo vaya a buscar
-    con uno de sus caballos.\r\n"
-  - "Mi hermano\u2026JA, ese es el truco m\xE1s viejo que he o\xEDdo, si es verdad,
-    entonces dime su nombre, de seguro debes saberlo si han hablado.\n"
+  - "PNo, no vine a mendigar, su hermano me envi\xF3 para que lo vaya a buscar\ncon
+    uno de sus caballos.\r\n"
+  - "HMi hermano, JA, es el truco m\xE1s viejo que he o\xEDdo, si es verdad, entonces\ndime
+    su nombre, de seguro debes saberlo si han hablado.\n"
   linesC:
-  - "\xBFQuien diablo toca la maldita puerta? No aceptamos mendigos \xA1largo de
+  - "H\xBFQuien diablo toca la maldita puerta? No aceptamos mendigos \xA1largo de
     aqu\xED!\r\n"
-  - "No.. no vine a mendigar, solo quer\xEDa saber en d\xF3nde estoy y c\xF3mo debo
+  - "PNo.. no vine a mendigar, solo quer\xEDa saber en d\xF3nde estoy y c\xF3mo debo
     escoger mi camino."
-  - "\xBFEso me debe importar?  Hmph si mi hermano estuviera aqu\xED podr\xEDa ayudarte,
+  - "H\xBFEso me debe importar?  Hmph si mi hermano estuviera aqu\xED podr\xEDa ayudarte,
     no estoy para recibir a cualquiera en mi territorio.\r\n"
-  - "\u2026\u2026.\n"
-  - "Tengo algo que te puede servir pero quiero algo a cambio, se supone que el idiota
-    de mi hermano deber\xEDa haber vuelto hace unos minutos y necesito saber si sigue
-    con vida.\n"
-  - "Me haces ese favor y ver\xE9 si te puedo guiar, se llama Leahn, si vez a un
+  - "H\u2026\u2026.\n"
+  - "HTengo algo que te puede servir pero quiero algo a cambio, se supone que el
+    idiota de mi hermano deber\xEDa haber vuelto hace unos minutos y necesito saber
+    si sigue con vida.\n"
+  - "HMe haces ese favor y ver\xE9 si te puedo guiar, se llama Leahn, si vez a un
     anciano despreocupado es \xE9l.\r\n"
   lines:
-  - Aloooooo, hay alguien en casa.
-  - ....
-  - Al parecer no contesta nadie.
-  linesExtra0: []
-  linesExtra1: []
-  linesExtra2: []
-  linesExtra3: []
-  linesExtra4: []
+  - PAloooooo, hay alguien en casa.
+  - P....
+  - PAl parecer no contesta nadie.
+  linesExtra0:
+  - "PEstoy seguro que esta casa esconde algo\u2026"
+  - "PEsperar\xE9 un poco m\xE1s."
+  linesExtra1:
+  - "PSi la chimenea est\xE1 encendida es probable que alguien viva aqu\xED.\r\n"
+  - "PEsta maldita forma de camale\xF3n empieza a fastidiarme.\r\n"
+  - "P\xA1\xA1Demoniooooooos!! \xBFHay alguien en casa?"
+  linesExtra2:
+  - "P\xA1Holaaaa! Necesito ayuda urgente, estoy perdido en este bosque y llevo\nmucho
+    tiempo recorriendolo.\n\n"
+  - "PEse maldito mago me las pagar\xE1, el desgraciado sabr\xE1 quien soy.\r"
+  - "PMe hart\xE9 de esta casa."
+  linesExtra3:
+  - "PHolaaaaaa, \xBFHay alguien en casa? \xA1tengo una maldita emergencia!\r\n\n\n"
+  - "PNecesito salir de este horrible lugar.\r"
+  - "P\xA1Demonios! Al parecer no hay nadie en casa.\r"
+  linesExtra4:
+  - PHolaaaaaaaaaaaaaaaa, hola, hay un maldito hombre lagartija que necesita ayuda.
+  - "P\xA1Quien sea que pueda ayudarme! \r\n"
+  - "PCreo que se me est\xE1 acabando la paciencia.\n"
   index: 0
   didDialogueStart: 0
   talkToLeahn: 0
@@ -138,33 +184,67 @@ MonoBehaviour:
   - Aceptar
   finishDialogue: 0
   linesNextAIncorrecta:
-  - "Lo sab\xEDa\u2026 eres un mentiroso, largo de aqu\xED si no quieres que te corte
-    en dos."
+  - "HLo sab\xEDa\u2026 eres un mentiroso, largo de aqu\xED si no quieres que te
+    corte en\ndos."
+  linesNextAIncorrecta1:
+  - "H\xBFLogan? En serio, \xBFes en serio?, largo de aqu\xED si no quieres que te
+    corte \nen dos."
+  linesNextAIncorrecta2:
+  - "HEst\xE1s haciendo que pierda mi tiempo, lo sab\xEDa eres un mendigo mentiroso.\nLargo
+    de aqu\xED!!!\n"
+  linesNextAIncorrecta3:
+  - "HLo sab\xEDa, eres un maldito mentiroso, Henry es mi nombre, largo de aqu\xED
+    si no quieres que de verdad te corte en dos."
+  linesNextAIncorrecta4:
+  - "H\xBFHenry? En serio, \xBFes en serio?, es es mi maldito nombre, mentiroso no\nconoces
+    a mi hermano, largate si no quieres que te cote en dos."
+  linesNextAIncorrecta5:
+  - "HLo sab\xEDa\u2026 eres un mentiroso, largo de aqu\xED si no quieres que te
+    corte en\ndos. Mire que Henry, Henry soy yo maldito mendigo."
   linesNextACorrecta:
-  - "Si es \xE9l... \xBFQu\xE9 le pas\xF3?"
-  - Se encuentra perdido en mitad del bosque.
-  - "Ese despistado\u2026 Siempre tan feliz sin ver el camino, est\xE1 bien, solo
+  - "HSi es \xE9l... \xBFQu\xE9 le pas\xF3?"
+  - PSe encuentra perdido en mitad del bosque.
+  - "HEse despistado\u2026 Siempre tan feliz sin ver el camino, est\xE1 bien, solo
     gu\xEDame d\xF3nde est\xE1 y ll\xE9vame con \xE9l."
   linesNextCIncorrecta:
-  - "\xA1Largo de aqu\xED! si no quieres que de verdad me enoje. No me hagas perder
+  - "H\xA1Largo de aqu\xED! si no quieres que de verdad me enoje. No me hagas perder
     el tiempo."
   linesNextCCorrecta:
-  - "Ok, te esperar\xE9 aqu\xED, m\xE1s te vale no tardar."
+  - "HOk, te esperar\xE9 aqu\xED, m\xE1s te vale no tardar."
   linesAIncorrecta:
-  - "\xBFQui\xE9n diablos toca la maldita puerta? No aceptamos mendigos, \xA1largo
-    de aqu\xED!"
-  - "No\u2026 no vine a mendigar, su hermano me envi\xF3 para que lo vaya a buscar
-    con uno de sus caballos.\r\n"
-  - "Tu otra vez... Espero que sepas cu\xE1l es el nombre de mi hermano.\n"
+  - "HOtra vez alguien est\xE1 tocando la maldilta puerta."
+  - "PHola caballero, su hermano me envi\xF3 para que lo vaya a buscar con uno \nde
+    sus caballos.\r\n"
+  - "HTu otra vez... Espero que sepas cu\xE1l es el nombre de mi hermano.\n"
+  linesAIncorrecta1:
+  - 'HEspero que no sea el mismo mendigo tocando la puerta esta vez.
+
+'
+  - "LDisculpe caballero, su hermano me ha enviado aqu\xED para que vayamos a\nbuscarlo.\r\n"
+  - "HMaldici\xF3n, t\xFA de nuevo, espero que sepas su nombre est\xE1 vez..\r\n"
+  linesAIncorrecta2:
+  - "HEstoy seguro que ese mismo mendigo est\xE1 tocando la puerta de nuevo.."
+  - "LNo soy un mendigo, esta vez le dir\xE9 el nombre de su hermano."
+  - "H\xBFCu\xE1l es su nombre? y esta vez no te equivoques."
+  linesAIncorrecta3:
+  - "HS\xE9 que eres tu de nuevo maldito mendigo, respondeme con la verdad si \nno
+    quieres que me enfurezca."
+  linesAIncorrecta4:
+  - "HOtra vez tu fastidioso, no te lo volver\xE9 a repetir, di el nombre real de
+    mi\nhermano, AHORAAAAA.\r\n"
+  - "LLe juro que esta vez no me equivocar\xE9.\r\n"
+  - H Veamos, porque no te creo nada. Di el nombre de mi hermano.
   linesCIncorrecta:
-  - "\xBFTu de nuevo? m\xE1s te vale aceptar hacerme el favor de buscar y traer a
-    mi hermano."
-  linesAFinal: []
+  - "H\xBFTu de nuevo? m\xE1s te vale aceptar hacerme el favor de buscar y traer
+    a mi hermano."
+  linesAFinal:
+  - "HM\xE1s vale que te apresures esta vez..."
   linesCFinal:
-  - "M\xE1s vale que te apresures..."
+  - "HM\xE1s vale que te apresures."
   random00: 0
-  random01: 0
+  random01: 2
+  masVector: {x: 0, y: 0, z: 0}
   obHenry: {fileID: 0}
   blackScreen: {fileID: 0}
   optionCBuscarHermano: 0
-  falloTiempo: 0
+  casaGO: {fileID: 1773768686}

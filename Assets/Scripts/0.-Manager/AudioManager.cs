@@ -5,25 +5,36 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] AudioSource sfxAudioSource, musicAudioSource;
+    [SerializeField] float musicTiempo;
+    public AudioClip cancionNivel1;
+    public AudioClip cancionMenu;
 
-    public static AudioManager Instance
-    {
-        get;
-        private set;
-    }
+    public static AudioManager Instance;
+    //{
+    //    get;
+    //    private set;
+    //}
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance == null /*&& Instance != this*/)
         {
-            Destroy(this);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            
         }
         else
         {
-            Instance = this;
-            DontDestroyOnLoad(this);
+
+            Destroy(gameObject);
         }
 
+    }
+
+    private void Start()
+    {
+        StartCoroutine(ChangeMusic(cancionMenu));
+            
     }
 
     public void PlaySound(AudioClip clip)
@@ -31,18 +42,33 @@ public class AudioManager : MonoBehaviour
         sfxAudioSource.PlayOneShot(clip);
     }
 
-    private void MuteOnOff()
+
+    public IEnumerator ChangeMusic(AudioClip clip)
     {
+        while (musicAudioSource.volume != 0)
+        {
+            musicAudioSource.volume -= musicTiempo * Time.deltaTime;
 
-        musicAudioSource.mute = !musicAudioSource.mute;
+            yield return null;
+        }
+
+        musicAudioSource.clip = clip;
+        musicAudioSource.Play();
+
+        while (musicAudioSource.volume != 1)
+        {
+            musicAudioSource.volume += musicTiempo * Time.deltaTime;
+
+            yield return null;
+        }
     }
-
+   
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            MuteOnOff();
-        }
+        //if (Input.GetKeyDown(KeyCode.M))
+        //{
+        //    MuteOnOff();
+        //}
 
     }
 }

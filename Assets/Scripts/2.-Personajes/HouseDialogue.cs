@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class HouseDialogue : MonoBehaviour
 {
@@ -93,6 +94,18 @@ public class HouseDialogue : MonoBehaviour
         
     }
 
+    private void Start()
+    {
+        dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
+
+        //Options = GameObject.Find("DialogueOptions").gameObject;
+
+        //selector = GameObject.Find("Select").gameObject;
+
+        //listOptions[0] = GameObject.Find("Panel0").gameObject.GetComponentInChildren<TextMeshProUGUI>();
+        //listOptions[1] = GameObject.Find("Panel1").gameObject.GetComponentInChildren<TextMeshProUGUI>();
+        //listOptions[2] = GameObject.Find("Panel2").gameObject.GetComponentInChildren<TextMeshProUGUI>(); 
+    }
     void StartDialogue()
     {
 
@@ -109,15 +122,15 @@ public class HouseDialogue : MonoBehaviour
 
         didDialogueStart = true;
 
-        UIManager.instance.fadeBlack = true;
+        UIManager.InstanceGUI.fadeBlack = true;
 
         marker.SetActive(false);
 
         index = 0;
 
         Inventory.instance.panelItem.SetActive(false);
-        UIManager.instance.obMap.SetActive(false);
-        UIManager.instance.obMapMark.SetActive(false);
+        UIManager.InstanceGUI.obMap.SetActive(false);
+        UIManager.InstanceGUI.obMapMark.SetActive(false);
 
 
         if (respuestaDada.nextDialogueToTalk == 0)
@@ -248,17 +261,17 @@ public class HouseDialogue : MonoBehaviour
 
         if (lineas.Trim().StartsWith("P"))
         {
-            UIManager.instance.PosicionarGlobo(trPlayer.position/* + new Vector3(0f,50f,0f)*/);
+            UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position/* + new Vector3(0f,50f,0f)*/);
         }
 
         if (lineas.Trim().StartsWith("L"))
         {
-            UIManager.instance.PosicionarGlobo(transform.position);
+            UIManager.InstanceGUI.PosicionarGlobo(transform.position);
         }
 
         if (lineas.Trim().StartsWith("H"))
         {
-            UIManager.instance.PosicionarGlobo(casaGO.position);
+            UIManager.InstanceGUI.PosicionarGlobo(casaGO.position);
 
         }
 
@@ -284,7 +297,7 @@ public class HouseDialogue : MonoBehaviour
 
             }
 
-            UIManager.instance.ballonDialogue.gameObject.SetActive(true);
+            UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
         }
 
         dialogueText.text = string.Empty;
@@ -300,19 +313,19 @@ public class HouseDialogue : MonoBehaviour
         }
 
 
-        UIManager.instance.icono.gameObject.SetActive(true);
+        UIManager.InstanceGUI.icono.gameObject.SetActive(true);
 
     }
 
     public void Navegate()
     {
 
-        if (Input.GetButtonDown("Abajo") && id_selector < listOptions.Length - 1)
+        if ((respuestaDada._map.Opciones.Navegar.ReadValue<Vector2>().y == -1.0f) && id_selector < listOptions.Length - 1)
         {
             id_selector++;
         }
 
-        if (Input.GetButtonDown("Arriba") && id_selector > 0)
+        if ((respuestaDada._map.Opciones.Navegar.ReadValue<Vector2>().y == 1.0f) && id_selector > 0)
         {
             id_selector--;
         }
@@ -324,7 +337,7 @@ public class HouseDialogue : MonoBehaviour
         selector.transform.SetSiblingIndex(0);
 
 
-        if (Input.GetButtonDown("Interactuar"))
+        if (respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame())
         {
            
             
@@ -332,21 +345,21 @@ public class HouseDialogue : MonoBehaviour
             {
                 case 0:
                     
-                    UIManager.instance.GanarPuntos(false, UIManager.instance.puntos);
+                    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
                     
 
                     break;
 
                 case 1:
                   
-                    UIManager.instance.GanarPuntos(false, UIManager.instance.puntos);
+                    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
                    
                   
                     break;
 
                 case 2:
                   
-                    UIManager.instance.GanarPuntos(true, UIManager.instance.puntos);
+                    UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
                   
                     break;
 
@@ -376,12 +389,15 @@ public class HouseDialogue : MonoBehaviour
 
                     random00c1 = Random.Range(0, 3);
 
-                    random01c1 = random00c1;
+                   
 
                     while (random01c1 == random00c1)
                     {
                         random00c1 = Random.Range(0, 3);
                     }
+
+
+                    random01c1 = random00c1;
 
                     if (random00c1 == 0)
                     {
@@ -413,12 +429,14 @@ public class HouseDialogue : MonoBehaviour
                 {
                     random00c2 = Random.Range(3, 6);
 
-                    random01c2 = random00c2;
+                   
 
                     while (random01c2 == random00c2)
                     {
                         random00c2 = Random.Range(3, 6);
                     }
+
+                       random01c2 =random00c2;
 
                     if (random00c2 == 3)
                     {
@@ -475,13 +493,13 @@ public class HouseDialogue : MonoBehaviour
     {
 
 
-        UIManager.instance.ballonDialogue.gameObject.SetActive(false);
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         index = 0;
 
         dialogueText.text = string.Empty;
 
-        UIManager.instance.fadeFrom = true;
+        UIManager.InstanceGUI.fadeFrom = true;
 
         while (respuestaDada.obCameras.orthographicSize < 7.5f)
         {
@@ -494,8 +512,8 @@ public class HouseDialogue : MonoBehaviour
         {
             didDialogueStart = false;
             Inventory.instance.panelItem.SetActive(true);
-            UIManager.instance.obMap.SetActive(true);
-            UIManager.instance.obMapMark.SetActive(true);
+            UIManager.InstanceGUI.obMap.SetActive(true);
+            UIManager.InstanceGUI.obMapMark.SetActive(true);
             marker.SetActive(true);
             MainCharacter.sharedInstance.canMove = true;
         }
@@ -507,8 +525,8 @@ public class HouseDialogue : MonoBehaviour
                 {
                     didDialogueStart = false;
                     Inventory.instance.panelItem.SetActive(true);
-                    UIManager.instance.obMap.SetActive(true);
-                    UIManager.instance.obMapMark.SetActive(true);
+                    UIManager.InstanceGUI.obMap.SetActive(true);
+                    UIManager.InstanceGUI.obMapMark.SetActive(true);
                     marker.SetActive(true);
                     MainCharacter.sharedInstance.canMove = true;
                 }
@@ -531,8 +549,8 @@ public class HouseDialogue : MonoBehaviour
                 {
                     didDialogueStart = false;
                     Inventory.instance.panelItem.SetActive(true);
-                    UIManager.instance.obMap.SetActive(true);
-                    UIManager.instance.obMapMark.SetActive(true);
+                    UIManager.InstanceGUI.obMap.SetActive(true);
+                    UIManager.InstanceGUI.obMapMark.SetActive(true);
                     marker.SetActive(true);
                     MainCharacter.sharedInstance.canMove = true;
                 }
@@ -540,8 +558,8 @@ public class HouseDialogue : MonoBehaviour
                 {
                     didDialogueStart = false;
                     Inventory.instance.panelItem.SetActive(true);
-                    UIManager.instance.obMap.SetActive(true);
-                    UIManager.instance.obMapMark.SetActive(true);
+                    UIManager.InstanceGUI.obMap.SetActive(true);
+                    UIManager.InstanceGUI.obMapMark.SetActive(true);
                     marker.SetActive(true);
                     MainCharacter.sharedInstance.canMove = true;
                     optionCBuscarHermano = true;
@@ -555,8 +573,8 @@ public class HouseDialogue : MonoBehaviour
                 
                     
                     Inventory.instance.panelItem.SetActive(true);
-                    UIManager.instance.obMap.SetActive(true);
-                    UIManager.instance.obMapMark.SetActive(true);
+                    UIManager.InstanceGUI.obMap.SetActive(true);
+                    UIManager.InstanceGUI.obMapMark.SetActive(true);
                     marker.SetActive(true);
                     MainCharacter.sharedInstance.canMove = true;
                     didDialogueStart = false;
@@ -625,7 +643,7 @@ public class HouseDialogue : MonoBehaviour
     IEnumerator IniciarTransicion()
     {
 
-        UIManager.instance.obAnim.SetTrigger("Start");
+        UIManager.InstanceGUI.obAnim.SetTrigger("Start");
         
         yield return new WaitForSeconds(1f);
 
@@ -636,7 +654,7 @@ public class HouseDialogue : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        UIManager.instance.obAnim.SetTrigger("End");
+        UIManager.InstanceGUI.obAnim.SetTrigger("End");
 
         MainCharacter.sharedInstance.canMove = true;
 
@@ -658,7 +676,7 @@ public class HouseDialogue : MonoBehaviour
             Navegate();
         }
 
-        if (isRange && Input.GetButtonDown("Interactuar"))
+        if (isRange && respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame())
         {
 
 
@@ -676,7 +694,7 @@ public class HouseDialogue : MonoBehaviour
 
             }
 
-            UIManager.instance.icono.gameObject.SetActive(false);
+            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
 
 
         }

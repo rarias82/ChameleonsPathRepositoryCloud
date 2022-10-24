@@ -1533,6 +1533,7 @@ namespace TTT
 			newPrototypes[oldPrototypes.Length].texture = overlayTexture;
 			Vector2 vector = new Vector2(tileSize, tileSize);
 			newPrototypes[oldPrototypes.Length].tileSize = vector;
+			
 			myTerrain.terrainData.splatPrototypes = newPrototypes;
 			EditorUtility.SetDirty(myTerrain);
 		}

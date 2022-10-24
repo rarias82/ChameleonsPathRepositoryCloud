@@ -83,8 +83,12 @@ public class NPC_Henry : MonoBehaviour
        
         numeroAnim = 30;
         mode = ModeNPCHenry.Follow;
-      
-        
+
+
+        dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
+
+
+
 
     }
 
@@ -109,7 +113,7 @@ public class NPC_Henry : MonoBehaviour
             }
 
 
-            UIManager.instance.icono.gameObject.SetActive(false);
+            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
 
 
         }
@@ -117,7 +121,7 @@ public class NPC_Henry : MonoBehaviour
         if (detectarLimites && dialogueText.text == lines[index].Substring(1) && Input.GetButtonDown("Interactuar") && Inventory.instance.moverInv)
         {
             StartCoroutine(CloseDialogue());
-            UIManager.instance.icono.gameObject.SetActive(false);
+            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
         }
 
         RotateSon();
@@ -128,17 +132,17 @@ public class NPC_Henry : MonoBehaviour
 
         if (lineas.Trim().StartsWith("P"))
         {
-            UIManager.instance.PosicionarGlobo(trPlayer.position);
+            UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position);
         }
 
         if (lineas.Trim().StartsWith("L"))
         {
-            UIManager.instance.PosicionarGlobo(transform.position);
+            UIManager.InstanceGUI.PosicionarGlobo(transform.position);
         }
 
         if (lineas.Trim().StartsWith("H"))
         {
-            UIManager.instance.PosicionarGlobo(transform.position);
+            UIManager.InstanceGUI.PosicionarGlobo(transform.position);
 
         }
 
@@ -147,16 +151,19 @@ public class NPC_Henry : MonoBehaviour
 
     void DialogoRandom()
     {
-        dialogoAnterior = dialogoSiguiente;
+        dialogoAnterior = Random.Range(0, 5);
 
-        dialogoSiguiente = Random.Range(0, 5);
+        
 
         while (dialogoSiguiente == dialogoAnterior)
         {
-            dialogoSiguiente = Random.Range(0, 5);
+            dialogoAnterior = Random.Range(0, 5);
         }
 
-        switch (dialogoSiguiente)
+
+        dialogoSiguiente = dialogoAnterior;
+
+        switch (dialogoAnterior)
         {
             case 0:
                 lines = linesA0;
@@ -199,15 +206,15 @@ public class NPC_Henry : MonoBehaviour
 
         
 
-        UIManager.instance.fadeBlack = true;
+        UIManager.InstanceGUI.fadeBlack = true;
 
        
 
         index = 0;
 
         Inventory.instance.panelItem.SetActive(false);
-        UIManager.instance.obMap.SetActive(false);
-        UIManager.instance.obMapMark.SetActive(false);
+        UIManager.InstanceGUI.obMap.SetActive(false);
+        UIManager.InstanceGUI.obMapMark.SetActive(false);
 
 
 
@@ -227,7 +234,7 @@ public class NPC_Henry : MonoBehaviour
 
         mode = ModeNPCHenry.Limites;
 
-        UIManager.instance.GanarPuntos(false, UIManager.instance.puntos);
+        UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
 
         StartCoroutine(WriteDialogue());
 
@@ -268,15 +275,15 @@ public class NPC_Henry : MonoBehaviour
 
         didDialogueStart = true;
 
-        UIManager.instance.fadeBlack = true;
+        UIManager.InstanceGUI.fadeBlack = true;
 
         marker.SetActive(false);
 
         index = 0;
 
         Inventory.instance.panelItem.SetActive(false);
-        UIManager.instance.obMap.SetActive(false);
-        UIManager.instance.obMapMark.SetActive(false);
+        UIManager.InstanceGUI.obMap.SetActive(false);
+        UIManager.InstanceGUI.obMapMark.SetActive(false);
 
 
         DialogoRandom();
@@ -341,7 +348,7 @@ public class NPC_Henry : MonoBehaviour
        
         dialogueText.text = string.Empty;
 
-        UIManager.instance.ballonDialogue.gameObject.SetActive(true);
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
 
         IconDialogo(lines[index]);
 
@@ -351,7 +358,7 @@ public class NPC_Henry : MonoBehaviour
             yield return new WaitForSeconds(speedText);
         }
 
-        UIManager.instance.icono.gameObject.SetActive(true);
+        UIManager.InstanceGUI.icono.gameObject.SetActive(true);
 
         
 
@@ -381,11 +388,11 @@ public class NPC_Henry : MonoBehaviour
     public IEnumerator CloseDialogue()
     {
 
-        UIManager.instance.ballonDialogue.gameObject.SetActive(false);
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         dialogueText.text = string.Empty;
 
-        UIManager.instance.fadeFrom = true;
+        UIManager.InstanceGUI.fadeFrom = true;
 
         FollowCameras.instance.mode = Modo.InGame;
 
@@ -421,8 +428,8 @@ public class NPC_Henry : MonoBehaviour
        
 
         Inventory.instance.panelItem.SetActive(true);
-        UIManager.instance.obMap.SetActive(true);
-        UIManager.instance.obMapMark.SetActive(true);
+        UIManager.InstanceGUI.obMap.SetActive(true);
+        UIManager.InstanceGUI.obMapMark.SetActive(true);
 
       
 

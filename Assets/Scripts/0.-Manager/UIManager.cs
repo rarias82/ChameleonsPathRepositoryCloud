@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager instance;
+    public static UIManager InstanceGUI;
+    //{
+    //    get;
+    //    private set;
+    //}
 
     [Header("Dialogue Variables")]
     public Image blackScreen;
@@ -39,7 +44,19 @@ public class UIManager : MonoBehaviour
 
     [Header("Fade")]
     public Animator obAnim;
+    public float timeTransicion;
 
+    [Header("Canvas")]
+    [SerializeField] GameObject[] HUDLienzos;
+
+
+
+    void ForceScales()
+    {
+
+        Screen.SetResolution(1280, 720, true);
+
+    }
     public void ExitPlayGame()
     {
        
@@ -138,7 +155,6 @@ public class UIManager : MonoBehaviour
         }
 
     }
-
     public void GanarPuntos(bool add, float puntos)
     {
        
@@ -173,7 +189,6 @@ public class UIManager : MonoBehaviour
         
 
     }
-
     IEnumerator MoverBarra(bool subir)
     {
         if (subir)
@@ -193,18 +208,50 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-
     public void PosicionarGlobo(Vector3 posicionar)
     {
         Vector3 posDisplay = FollowCameras.instance.MyCameras.WorldToScreenPoint(posicionar);
         ballonDialogue.rectTransform.position = posDisplay + destiny;
     }
+    public IEnumerator Fundido()
+    {
 
-   
+        obAnim.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
+        obAnim.SetTrigger("End");
+
+    }
+
+    public void LoadNextScene()
+    {
+        int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        StartCoroutine(SceneLoading(nextScene));
+    }
+
+    public IEnumerator SceneLoading(int sceneIndex)
+    {
+        obAnim.SetTrigger("StartTransition");
+        yield return new  WaitForSeconds(timeTransicion);
+        HUDLienzos[0].SetActive(false);
+        HUDLienzos[1].SetActive(true);
+        AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
+        
+        SceneManager.LoadScene(sceneIndex);
+    }
 
     private void Awake()
     {
-        instance = this;
+        if (InstanceGUI == null /*&& Instance != this*/)
+        {
+            InstanceGUI = this;
+            DontDestroyOnLoad(gameObject);
+
+        }
+        else
+        {
+
+            Destroy(gameObject);
+        }
     }
     void Start()
     {
@@ -212,20 +259,16 @@ public class UIManager : MonoBehaviour
         icono.gameObject.SetActive(false);
         puntosCalificacion = puntos;
         ballonDialogue.gameObject.SetActive(false);
-       
+        obAnim = GameObject.Find("Cortina").GetComponent<Animator>();
+        HUDLienzos[0].SetActive(true);
+        HUDLienzos[1].SetActive(false);
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         DialogueFadeIn();
-
-
-       
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ExitPlayGame();
-        }
     }
 }

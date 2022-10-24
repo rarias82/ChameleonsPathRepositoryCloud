@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &232833403717711887
 Transform:
   m_ObjectHideFlags: 0
@@ -35,6 +35,7 @@ Transform:
   - {fileID: 3530783173565744503}
   - {fileID: 603753173647826039}
   - {fileID: 232833404464568916}
+  - {fileID: 495560420453453580}
   - {fileID: 10332482492344478}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -98,7 +99,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 3
+  m_Radius: 1.7
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -112,8 +113,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1.75
-  m_Acceleration: 5
+  m_Speed: 1.25
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 450
   m_StoppingDistance: 0
@@ -138,17 +139,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   marker: {fileID: 0}
   isRange: 0
-  speedText: 0
+  speedText: 0.045
   detectarLimites: 0
   dialogueText: {fileID: 0}
-  linesA0: []
-  linesA1: []
-  linesA2: []
-  linesA3: []
-  linesA4: []
-  linesA5: []
-  lines: []
-  linesLogan: []
+  linesA0:
+  - "HMe est\xE1s colmando la paciencia, no te quedes parado y gu\xEDame hasta\nLeahn.
+    Tengo muchas cosas que hacer y no puedo perder el tiempo.\r\n"
+  - "HEstoy hablando en serio. \xA1Ahhhhhhhh!\r\n"
+  linesA1:
+  - "H\xBFTe parece gracioso venir a hablarme? Se nos est\xE1 acabando el maldito\ntiempo,
+    no ves que es de noche y algo grave le pudo haber pasado a mi\nhermano.\r\n\n"
+  linesA2:
+  - "HEse Leahn tan despistado. Ser\xE1 mejor que nos apuremos pues hay mucho trabajo
+    en nuestro taller. No te lo volver\xE9 a repetir..."
+  - "HGu\xEDame a d\xF3nde demonios est\xE1 mi hermano.\r\n"
+  linesA3:
+  - "HNo tengo todo el tiempo del mundo. Por favor y no te lo repetir\xE9, ll\xE9vame\nde
+    una vez al lugar donde est\xE1 mi hermano.\n"
+  linesA4:
+  - "HNo tengo tiempo para hablar, solo se que debes guiarme el camino.\r Est\xE1s
+    a punto de lograr que me enoje de ver\xE1s.\r\n"
+  - "HTe lo advierto!!!, no te parecer\xE1 agradable verme enfurecido.\r\n"
+  linesA5:
+  - "PDisculpe caballero, no logro recordar el camino, este bosque me parece muy
+    grande y soy nuevo por aqu\xED.\r\n"
+  - "HEso me importa poco, solo gu\xEDame hasta donde esta Leahn.\r\n"
+  - "PEn eso estoy\u2026"
+  lines:
+  - "\xA1Te has demorado mucho! "
+  - "Me hart\xE9 de ti, adios."
+  linesLogan:
+  - "PMaldici\xF3n, el anciano se ha quedado atr\xE1s, m\xE1s vale apresurarse.\n"
+  - "PQu\xE9 anciano m\xE1s lento, ser\xE1 mejor que lo espere\u2026"
+  - "PHenry se ha quedado atr\xE1s, maldici\xF3n \xBFcu\xE1nto tardar\xE1?"
+  - "PUn momento, no veo a Henry. Nooo, se ha quedado atr\xE1s.\n"
+  - "PUn momento, \xBFd\xF3nde est\xE1 el anciano?\r\n"
   index: 0
   didDialogueStart: 0
   dialogoAnterior: 0
@@ -156,13 +181,13 @@ MonoBehaviour:
   detector: {fileID: 0}
   numeroCamino: 0
   trCaminos: []
-  speedNPC: 0
-  distancia: 2
-  mode: 0
-  offset: {x: -5, y: 0, z: -5}
+  speedNPC: 1.75
+  distancia: 145
+  mode: 1
+  offset: {x: 30, y: 45, z: 0}
   nameNPC: 
   obCameras: {fileID: 0}
-  speedZoom: 0
+  speedZoom: 3.5
   obAnim: {fileID: 7358864484052360973}
 --- !u!1 &232833404464568919
 GameObject:
@@ -260,6 +285,100 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1870905121
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 232833403717711887}
+    m_Modifications:
+    - target: {fileID: 495560420931448876, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448876, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448876, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448876, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448876, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.92387956
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.38268343
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 495560420931448882, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_Name
+      value: Marker
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+--- !u!4 &495560420453453580 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 495560420931448877, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+  m_PrefabInstance: {fileID: 1870905121}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1146816111857531804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -289,7 +408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0bf682104673f9e4ba89eb58767474ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.15
+      value: -1.106968
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0bf682104673f9e4ba89eb58767474ad, type: 3}
       propertyPath: m_LocalPosition.z
@@ -325,7 +444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0bf682104673f9e4ba89eb58767474ad, type: 3}
       propertyPath: m_Name
-      value: Henry_Finished@Angry Point (1)
+      value: HenryAnim
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0bf682104673f9e4ba89eb58767474ad, type: 3}
       propertyPath: m_IsActive
@@ -352,7 +471,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 228319072536446669}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 0bf682104673f9e4ba89eb58767474ad, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
   m_Controller: {fileID: 9100000, guid: d20b28721f3ded140ba239257e679957, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -433,6 +552,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: d20b28721f3ded140ba239257e679957, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
 --- !u!4 &3530783173565744503 stripped
@@ -470,7 +597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7589686490596641359, guid: 4288d707617ab1145a79cd7a7f38fff8, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7589686490596641359, guid: 4288d707617ab1145a79cd7a7f38fff8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -478,7 +605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7589686490596641359, guid: 4288d707617ab1145a79cd7a7f38fff8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7589686490596641359, guid: 4288d707617ab1145a79cd7a7f38fff8, type: 3}
       propertyPath: m_LocalPosition.z

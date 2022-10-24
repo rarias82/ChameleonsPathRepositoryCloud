@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.InputSystem;
+using UnityEngine.InputSystem;
 
 //using UnityEngine.InputSystem;
 
@@ -42,14 +42,26 @@ public class MainCharacter : MonoBehaviour
     [SerializeField] ParticleSystem polvoTierra;
     [SerializeField] ParticleSystem.EmissionModule polvoTierraEmission;
 
+    public Mapa _map;
+    public bool botonIn;
+
+    public NPC_Dialogue _leahn;
+
 
     void Awake()
     {
         sharedInstance = this;
         obAnim = transform.GetComponentInChildren<Animator>();
+
+        _leahn = FindObjectOfType<NPC_Dialogue>();
+        
         
     }
 
+    private void OnEnable()
+    {
+       
+    }
 
     public Vector3 ScreenDisplayPont(Vector3 posicionar)
     {
@@ -59,14 +71,16 @@ public class MainCharacter : MonoBehaviour
 
 
     }
+
+   
     void MovePlayer()
     {
 
 
-        float axH = Input.GetAxis("Horizontal");
-        float axV = Input.GetAxis("Vertical");
+        Vector2 movementInput = _map.Jugador.Move.ReadValue<Vector2>();
 
-        inputMove = new Vector3(axH, 0.0f, axV);
+
+        inputMove = new Vector3(movementInput.x, 0.0f, movementInput.y);
 
         vectorForAnim = inputMove;
         vectorForAnim = Vector3.ClampMagnitude(vectorForAnim, 1);
@@ -79,7 +93,7 @@ public class MainCharacter : MonoBehaviour
         intervalo = Mathf.Clamp(intervalo, 0f, 1f);
 
 
-        if (axH != 0.0f || axV != 0.0f)
+        if (movementInput.x != 0.0f || movementInput.y != 0.0f)
         {
 
 
@@ -97,7 +111,7 @@ public class MainCharacter : MonoBehaviour
 
 
 
-            if (Input.GetButton("Sprint"))
+            if (_map.Jugador.Sprintar.IsPressed())
             {
                 moveSpeed = (MaxmoveSpeed + 2.5f);
 
@@ -142,6 +156,10 @@ public class MainCharacter : MonoBehaviour
         canMove = true;
         cc = GetComponent<CharacterController>();
         polvoTierraEmission = polvoTierra.emission;
+
+        _map = new Mapa();
+        _leahn.SetInputActions(_map);
+        _map.Jugador.Enable();
     }
 
     // Update is called once per frame
@@ -153,8 +171,7 @@ public class MainCharacter : MonoBehaviour
         }
 
 
-        
-
+       
     }
 
     private void LateUpdate()
