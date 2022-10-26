@@ -54,13 +54,17 @@ public class MainCharacter : MonoBehaviour
         obAnim = transform.GetComponentInChildren<Animator>();
 
         _leahn = FindObjectOfType<NPC_Dialogue>();
-        
-        
+
+        _map = new Mapa();
+        _map.Jugador.Enable();
+        _map.Opciones.Enable();
+
+        _leahn.SetInputActions(_map);
     }
 
     private void OnEnable()
     {
-       
+        
     }
 
     public Vector3 ScreenDisplayPont(Vector3 posicionar)

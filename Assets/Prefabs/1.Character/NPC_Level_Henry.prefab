@@ -166,29 +166,42 @@ MonoBehaviour:
   - "HEso me importa poco, solo gu\xEDame hasta donde esta Leahn.\r\n"
   - "PEn eso estoy\u2026"
   lines:
-  - "\xA1Te has demorado mucho! "
-  - "Me hart\xE9 de ti, adios."
+  - 
   linesLogan:
   - "PMaldici\xF3n, el anciano se ha quedado atr\xE1s, m\xE1s vale apresurarse.\n"
   - "PQu\xE9 anciano m\xE1s lento, ser\xE1 mejor que lo espere\u2026"
   - "PHenry se ha quedado atr\xE1s, maldici\xF3n \xBFcu\xE1nto tardar\xE1?"
   - "PUn momento, no veo a Henry. Nooo, se ha quedado atr\xE1s.\n"
   - "PUn momento, \xBFd\xF3nde est\xE1 el anciano?\r\n"
+  linesFinalA:
+  - "HAll\xED est\xE1s.\r\n"
+  - "L\xA1Hermanito!\n\r\n"
+  - "H\xA1Nada de hermanito! \xBFQu\xE9 te pas\xF3? \xBFY tu caballo? No me digas
+    que intentastes cruzar el sendero peligroso.\r"
+  - LJijijijijiji...
+  - HNo tienes remedio.
+  - "LGracias por ayudarme, de no ser por ti de seguro ser\xEDa alimento de oso,
+    no se que te haya pasado para que seas un camale\xF3n pero espero que encuentres
+    la soluci\xF3n."
   index: 0
   didDialogueStart: 0
   dialogoAnterior: 0
   dialogoSiguiente: 0
   detector: {fileID: 0}
+  logan: 0
+  seAcabo: 0
+  hd: {fileID: 0}
   numeroCamino: 0
   trCaminos: []
   speedNPC: 1.75
-  distancia: 145
+  distancia: 80
   mode: 1
   offset: {x: 30, y: 45, z: 0}
   nameNPC: 
   obCameras: {fileID: 0}
   speedZoom: 3.5
   obAnim: {fileID: 7358864484052360973}
+  cancion: {fileID: 8300000, guid: 68b3ebcda08cbd6428f0c4c7561121d3, type: 3}
 --- !u!1 &232833404464568919
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +305,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 232833403717711887}
     m_Modifications:
+    - target: {fileID: 383882367302960868, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e30e7ad824e7f864b837c89d74b1b5e1, type: 2}
     - target: {fileID: 495560420931448876, guid: 2930bc92f2acab34ca891a16c8112d55, type: 3}
       propertyPath: m_FlipY
       value: 0
@@ -510,7 +527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.15
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
       propertyPath: m_LocalPosition.z

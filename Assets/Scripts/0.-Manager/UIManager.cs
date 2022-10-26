@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     public float fadeSpeed;
     public Image icono;
     public Image ballonDialogue;
+    public float valor; 
 
 
     [Header("Bondad Variables")]
@@ -44,6 +45,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Fade")]
     public Animator obAnim;
+    public Animator obAnimOptionsGame;
+    public int optionesActivadas;
     public float timeTransicion;
 
     [Header("Canvas")]
@@ -239,6 +242,43 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
+    public void AnimateOptions(bool activar)
+    {
+        if (activar)
+        {
+            obAnimOptionsGame.SetInteger("Show",1);
+            
+        }
+        else
+        {
+            obAnimOptionsGame.SetInteger("Show", 0);
+            
+        }
+
+
+    }
+
+    public IEnumerator FinalA()
+    {
+
+        MainCharacter.sharedInstance._map.Jugador.Disable();
+        UIManager.InstanceGUI.obAnim.SetTrigger("StartTransition");
+
+        yield return new WaitForSeconds(1f);
+        NPC_Henry.instance.gameObject.SetActive(false);
+        NPC_Dialogue.instance.gameObject.SetActive(false);
+
+
+
+        yield return new WaitForSeconds(1f);
+
+
+        MainCharacter.sharedInstance.canMove = true;
+        MainCharacter.sharedInstance._map.Jugador.Enable();
+
+
+    }
+
     private void Awake()
     {
         if (InstanceGUI == null /*&& Instance != this*/)
@@ -262,13 +302,15 @@ public class UIManager : MonoBehaviour
         obAnim = GameObject.Find("Cortina").GetComponent<Animator>();
         HUDLienzos[0].SetActive(true);
         HUDLienzos[1].SetActive(false);
-
+        Screen.SetResolution(1280,720,true);
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+
         DialogueFadeIn();
     }
 }

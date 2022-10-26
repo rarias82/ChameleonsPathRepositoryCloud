@@ -128,17 +128,17 @@ MonoBehaviour:
     su nombre, de seguro debes saberlo si han hablado.\n"
   linesC:
   - "H\xBFQuien diablo toca la maldita puerta? No aceptamos mendigos \xA1largo de
-    aqu\xED!\r\n"
+    \naqu\xED!\r\n"
   - "PNo.. no vine a mendigar, solo quer\xEDa saber en d\xF3nde estoy y c\xF3mo debo
-    escoger mi camino."
-  - "H\xBFEso me debe importar?  Hmph si mi hermano estuviera aqu\xED podr\xEDa ayudarte,
+    \nescoger mi camino."
+  - "H\xBFEso me debe importar?  Hmph si mi hermano estuviera aqu\xED podr\xEDa \nayudarte,
     no estoy para recibir a cualquiera en mi territorio.\r\n"
   - "H\u2026\u2026.\n"
   - "HTengo algo que te puede servir pero quiero algo a cambio, se supone que el
-    idiota de mi hermano deber\xEDa haber vuelto hace unos minutos y necesito saber
+    idiota de mi hermano deber\xEDa haber vuelto hace unos minutos y \nnecesito saber
     si sigue con vida.\n"
   - "HMe haces ese favor y ver\xE9 si te puedo guiar, se llama Leahn, si vez a un
-    anciano despreocupado es \xE9l.\r\n"
+    \nanciano despreocupado es \xE9l.\r\n"
   lines:
   - PAloooooo, hay alguien en casa.
   - P....
@@ -207,7 +207,7 @@ MonoBehaviour:
   - "HEse despistado\u2026 Siempre tan feliz sin ver el camino, est\xE1 bien, solo
     gu\xEDame d\xF3nde est\xE1 y ll\xE9vame con \xE9l."
   linesNextCIncorrecta:
-  - "H\xA1Largo de aqu\xED! si no quieres que de verdad me enoje. No me hagas perder
+  - "H\xA1Largo de aqu\xED! si no quieres que de verdad me enoje. No me hagas \nperder
     el tiempo."
   linesNextCCorrecta:
   - "HOk, te esperar\xE9 aqu\xED, m\xE1s te vale no tardar."
@@ -241,6 +241,9 @@ MonoBehaviour:
   - "HM\xE1s vale que te apresures esta vez..."
   linesCFinal:
   - "HM\xE1s vale que te apresures."
+  linesCFinal1: []
+  linesCFinal2: []
+  linesCFinal3: []
   random00: 0
   random01: 2
   masVector: {x: 0, y: 0, z: 0}
@@ -248,3 +251,5 @@ MonoBehaviour:
   blackScreen: {fileID: 0}
   optionCBuscarHermano: 0
   casaGO: {fileID: 1773768686}
+  cancion: {fileID: 0}
+  henryFinalA: 0

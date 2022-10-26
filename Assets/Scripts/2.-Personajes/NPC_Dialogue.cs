@@ -22,6 +22,8 @@ public class NPC_Dialogue : MonoBehaviour
     [SerializeField] NPC_Henry henry;
     public GameObject detector;
 
+    public bool seguiraLogan;
+
     [Header("Options References")]
     public GameObject Options;
     [SerializeField] GameObject[] listOptions;
@@ -35,6 +37,7 @@ public class NPC_Dialogue : MonoBehaviour
     public bool changeInitialDialogue;
     public int random00;
     public int random01;
+    public float valor;
 
     [Header("Move Variables")]
     public sbyte numeroCamino;
@@ -58,11 +61,21 @@ public class NPC_Dialogue : MonoBehaviour
     [Header("Anim References")]
     public Animator obAnim;
     public int numeroAnim;
+    public float distancia;
+    Color lineColor;
+    bool detectarLimites;
+    [SerializeField, TextArea(4, 6)] string[] linesLogan;
 
     [Header("Music References")]
     [SerializeField] AudioClip cancion;
     public Mapa _map;
- 
+    bool subir;
+    bool desactivaralgo;
+    float biblio;
+    public bool logan;
+    bool mirar;
+
+    [SerializeField] NPC_Henry enrique;
 
     public void SetInputActions(Mapa map)
     {
@@ -74,45 +87,60 @@ public class NPC_Dialogue : MonoBehaviour
     {
         instance = this;
 
+        dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
+
+        Options = GameObject.Find("DialogueOptions").gameObject;
+
+        selector = GameObject.Find("Select").gameObject;
+
+        listOptions[0] = GameObject.Find("Panel0").gameObject;
+        listOptions[1] = GameObject.Find("Panel1").gameObject;
+        listOptions[2] = GameObject.Find("Panel2").gameObject;
+    }
+
+    private void OnEnable()
+    {
         
     }
 
-  
+
     void CambiarDialogos() {
 
         switch (nextDialogueToTalk)
         {
             case 0:
 
-                random00 = Random.Range(0, 5);
 
+                random00 = random01;
+;
+                random01 = Random.Range(0, 5);
 
-
+                
                 while (random01 == random00)
                 {
-                    random00 = Random.Range(0, 5);
+                    random01 = Random.Range(0, 5);
                 }
 
 
-                random01 = random00;
+               
 
-                if (random00 == 0)
+                if (random01 == 0)
                 {
                     lines = obRoute.linesNextA;
                 }
-                if (random00 == 1)
+                if (random01 == 1)
                 {
                     lines = obRoute.linesNextA1;
                 }
-                if (random00 == 2)
+                if (random01 == 2)
                 {
                     lines = obRoute.linesNextA2;
                 }
-                if (random00 == 3)
+                if (random01 == 3)
                 {
                     lines = obRoute.linesNextA3;
                 }
-                if (random00 == 4)
+                if (random01 == 4)
                 {
                     lines = obRoute.linesNextA4;
                 }
@@ -126,33 +154,36 @@ public class NPC_Dialogue : MonoBehaviour
 
             case 1:
 
-                random00 = Random.Range(0, 5);
+                random00 = random01;
+                
+                random01 = Random.Range(0, 5);
+
 
                 while (random01 == random00)
                 {
-                    random00 = Random.Range(0, 5);
+                    random01 = Random.Range(0, 5);
                 }
 
-                random01 = random00;
 
-                
-                if (random00 == 0)
+
+
+                if (random01 == 0)
                 {
                     lines = obRoute.linesNextB;
                 }
-                if (random00 == 1)
+                if (random01 == 1)
                 {
                     lines = obRoute.linesNextB1;
                 }
-                if (random00 == 2)
+                if (random01 == 2)
                 {
                     lines = obRoute.linesNextB2;
                 }
-                if (random00 == 3)
+                if (random01 == 3)
                 {
                     lines = obRoute.linesNextB3;
                 }
-                if (random00 == 4)
+                if (random01 == 4)
                 {
                     lines = obRoute.linesNextB4;
                 }
@@ -163,9 +194,46 @@ public class NPC_Dialogue : MonoBehaviour
                 break;
 
             case 2:
-                lines = obRoute.linesNextC;
+
+                random00 = random01;
+                
+                random01 = Random.Range(0, 5);
+
+
+                while (random01 == random00)
+                {
+                    random01 = Random.Range(0, 5);
+                }
+
+
+
+
+                if (random01 == 0)
+                {
+                    lines = obRoute.linesNextC0;
+                }
+                if (random01 == 1)
+                {
+                    lines = obRoute.linesNextC01;
+                }
+                if (random01 == 2)
+                {
+                    lines = obRoute.linesNextC02;
+                }
+                if (random01 == 3)
+                {
+                    lines = obRoute.linesNextC03;
+                }
+                if (random01 == 4)
+                {
+                    lines = obRoute.linesNextC04;
+                }
+        
+
+
+               
                 changeInitialDialogue = true;
-                //mode = ModeNPC.Help;
+                mode = ModeNPC.Help;
                 houses.talkToLeahn = true;
                 numeroAnim = 0;
                 break;
@@ -206,16 +274,54 @@ public class NPC_Dialogue : MonoBehaviour
         UIManager.InstanceGUI.obMapMark.SetActive(false);
  
 
-        if (houses.optionCBuscarHermano)
+        if (houses.optionCBuscarHermano && !seguiraLogan)
         {
             lines = obRoute.linesNextC2;
 
             houses.obHenry.SetActive(true);
+            NPC_Henry.instance.mode = ModeNPCHenry.Final;
             //henry.Aparecer();
 
             houses.didDialogueStart = false;
 
             
+        }
+
+        if (seguiraLogan)
+        {
+            random00 = random01;
+            
+            random01 = Random.Range(0, 4);
+
+
+            while (random01 == random00)
+            {
+                random01 = Random.Range(0, 4);
+            }
+
+
+
+
+            if (random01 == 0)
+            {
+                lines = obRoute.linesFinalC;
+            }
+            if (random01 == 1)
+            {
+                lines = obRoute.linesFinalC1;
+            }
+            if (random01 == 2)
+            {
+                lines = obRoute.linesFinalC2;
+            }
+            if (random01 == 3)
+            {
+                lines = obRoute.linesFinalC3;
+            }
+            
+
+
+           
         }
 
         FollowCameras.instance.mode = Modo.InDialogue;
@@ -254,8 +360,16 @@ public class NPC_Dialogue : MonoBehaviour
     {
         if (index == 0)
         {
+            if (detectarLimites)
+            {
 
-            AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
+            }
+            else
+            {
+                AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
+            }
+            
+            
 
             if (lines == obRoute.linesNextA || lines == obRoute.linesNextA1 || lines == obRoute.linesNextA2 || lines == obRoute.linesNextA3 || lines == obRoute.linesNextA4)
             {
@@ -331,8 +445,9 @@ public class NPC_Dialogue : MonoBehaviour
             if (!changeInitialDialogue && !houses.optionCBuscarHermano)
             {
                 nextRoute = true;
+                UIManager.InstanceGUI.AnimateOptions(true);
 
-                Options.SetActive(true);
+                //Options.SetActive(true);
 
                 for (int i = 0; i < listOptions.Length; i++)
                 {
@@ -362,12 +477,12 @@ public class NPC_Dialogue : MonoBehaviour
     public void Navegate()
     {
 
-        if ((_map.Opciones.Navegar.ReadValue<Vector2>().y == -1.0f) && id_selector < listOptions.Length - 1)
+        if (_map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 1)
         {
             id_selector++;
         }
 
-        if ((_map.Opciones.Navegar.ReadValue<Vector2>().y == 1.0f) && id_selector > 0)
+        if (_map.Jugador.BUP.WasPressedThisFrame() && id_selector > 0)
         {
             id_selector--;
         }
@@ -475,6 +590,45 @@ public class NPC_Dialogue : MonoBehaviour
     }
     public IEnumerator CloseDialogueC()
     {
+        //index = 0;
+        //AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
+
+        //UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
+
+        //dialogueText.text = string.Empty;
+
+        //UIManager.InstanceGUI.fadeFrom = true;
+
+        //while (obCameras.orthographicSize < 7.5f)
+        //{
+        //    obCameras.orthographicSize += speedZoom * Time.deltaTime;
+        //    yield return null;
+
+        //}
+
+        //Inventory.instance.panelItem.SetActive(true);
+        //UIManager.InstanceGUI.obMap.SetActive(true);
+        //UIManager.InstanceGUI.obMapMark.SetActive(true);
+
+        //marker.SetActive(true);
+
+        //didDialogueStart = true;
+
+        //MainCharacter.sharedInstance.canMove = true;
+
+        //marker.SetActive(false);
+
+        //FollowCameras.instance.pararGiro = false;
+        //mode = ModeNPC.Follow;
+
+        //numeroAnim = 0;
+        seguiraLogan = true;
+
+        AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
+
+        index = 0;
+
+        FollowCameras.instance.mode = Modo.InGame;
 
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
@@ -482,9 +636,10 @@ public class NPC_Dialogue : MonoBehaviour
 
         UIManager.InstanceGUI.fadeFrom = true;
 
-        while (obCameras.orthographicSize < 7.5f)
+        while ((obCameras.orthographicSize < 7.5f) && offset != new Vector3(-15.00f, 12.5f, -15.00f))
         {
-            obCameras.orthographicSize += speedZoom * Time.deltaTime;
+            obCameras.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
+            FollowCameras.instance.offset = Vector3.Slerp(FollowCameras.instance.offset, new Vector3(-15.00f, 12.5f, -15.00f), (speedZoom / 2.0f) * Time.deltaTime);
             yield return null;
 
         }
@@ -495,17 +650,67 @@ public class NPC_Dialogue : MonoBehaviour
 
         marker.SetActive(true);
 
-        didDialogueStart = true;
+        FollowCameras.instance.pararGiro = false;
+        detector.SetActive(false);
 
         MainCharacter.sharedInstance.canMove = true;
 
-        marker.SetActive(false);
-
+        numeroAnim = 0;
 
         mode = ModeNPC.Follow;
 
-		numeroAnim = 0;
+        didDialogueStart = false;
+
+       
+
+
+    }
+
+    public IEnumerator CloseDialogueN()
+    {
+
+        index = 0;
+
+
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
+
+        dialogueText.text = string.Empty;
+
+        UIManager.InstanceGUI.fadeFrom = true;
+
+        FollowCameras.instance.mode = Modo.InGame;
+
+            while ((obCameras.orthographicSize < 7.5f))
+            {
+                obCameras.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
+
+
+                yield return null;
+
+            }
         
+
+
+
+
+        Inventory.instance.panelItem.SetActive(true);
+        UIManager.InstanceGUI.obMap.SetActive(true);
+        UIManager.InstanceGUI.obMapMark.SetActive(true);
+
+
+
+
+        FollowCameras.instance.pararGiro = false;
+        detector.SetActive(false);
+
+
+            detectarLimites = false;
+
+            didDialogueStart = false;
+
+            logan = false;
+
+        MainCharacter.sharedInstance.canMove = true;
 
     }
     public void MedirDistancia()
@@ -515,23 +720,84 @@ public class NPC_Dialogue : MonoBehaviour
     void Following()
     {
 
-        MedirDistancia();
-
-        //if (diferenciaVector.sqrMagnitude < (henry.distancia * 2f))
-        //{
-
-            
-        //    Debug.Log("Llego");
+        diferenciaVector = trPlayer.position - transform.position;
 
 
-        //}
-        //else
-        //{
-        //    Debug.Log("No llego");
-        //    obNMA.SetDestination(trPlayer.position);
-        //}
+        if (diferenciaVector.sqrMagnitude > (distancia * 2f) && !detectarLimites)
+        {
 
 
+            lineColor = Color.red;
+            StartCoroutine("DetectarLimites");
+
+
+
+        }
+        else
+        {
+            lineColor = Color.green;
+
+        }
+
+        Debug.DrawRay(transform.position, diferenciaVector, lineColor);
+
+        obNMA.SetDestination(trPlayer.position);
+
+
+
+    }
+
+    IEnumerator DetectarLimites()
+    {
+
+        logan = true;
+        detectarLimites = true;
+        didDialogueStart = true;
+
+        MainCharacter.sharedInstance.vectorForAnim = Vector3.zero;
+
+        MainCharacter.sharedInstance.intervalo = 0.0f;
+
+        MainCharacter.sharedInstance.canMove = false;
+
+
+
+        UIManager.InstanceGUI.fadeBlack = true;
+
+
+
+        index = 0;
+
+        Inventory.instance.panelItem.SetActive(false);
+        UIManager.InstanceGUI.obMap.SetActive(false);
+        UIManager.InstanceGUI.obMapMark.SetActive(false);
+
+
+
+        yield return null;
+
+
+        random00 = random01;
+
+        random01 = Random.Range(0, 4);
+
+
+        while (random01 == random00)
+        {
+            random01 = Random.Range(0, 4);
+        }
+
+
+
+
+        lines[0] = linesLogan[random01];
+
+
+        //mode = ModeNPCHenry.Limites;
+
+        UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
+
+        StartCoroutine(WriteDialogue());
 
     }
     void Start()
@@ -545,18 +811,11 @@ public class NPC_Dialogue : MonoBehaviour
 		numeroAnim = 1;
         detector.SetActive(false);
 
+        
 
 
 
-        dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
-
-        //Options = GameObject.Find("DialogueOptions").gameObject;
-
-        //selector = GameObject.Find("Select").gameObject;
-
-        //listOptions[0] = GameObject.Find("Panel0").gameObject;
-        //listOptions[1] = GameObject.Find("Panel1").gameObject;
-        //listOptions[2] = GameObject.Find("Panel2").gameObject;
+       
 
 
         //houses = FindObjectOfType<HouseDialogue>();
@@ -594,23 +853,24 @@ public class NPC_Dialogue : MonoBehaviour
             Walking();
         }
 
-        if (Options.activeInHierarchy && !houses.didDialogueStart)
+        if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && !houses.didDialogueStart)
         {
-            
-            //Navegate();
+
+            Navegate();
         }
 
         if ((mode == ModeNPC.Help || mode == ModeNPC.Busy))
         {
 
 
-            if (!changeInitialDialogue)
-            {
-                Vector3 direction = trPlayer.transform.position - transform.position;
-                transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
-            }
-                
-           
+            //if (!changeInitialDialogue)
+            //{
+            //    Vector3 direction = trPlayer.transform.position - transform.position;
+            //    transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
+            //}
+            Vector3 direction = trPlayer.transform.position - transform.position;
+            transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
+
 
             InteractuarSS();
         }
@@ -618,13 +878,41 @@ public class NPC_Dialogue : MonoBehaviour
         if (mode == ModeNPC.Follow)
         {
             Following();
+            InteractuarSS();
+
+            if (mirar)
+            {
+                Vector3 direction = trPlayer.transform.position - transform.position;
+                transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
+            }
+            else
+            {
+
+            }
+
         }
 
-       
+
+
+      
     }
+
+    
     public void InteractuarSS()
     {
-        if (isRange && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv)
+
+
+        if (detectarLimites && dialogueText.text == lines[index].Substring(1) && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !enrique.seAcabo)
+        {
+
+            logan = true;
+            StartCoroutine(CloseDialogueN());
+            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+        }
+
+
+
+        if (isRange && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !houses.henryFinalA && !logan && !detectarLimites && !enrique.seAcabo)
         {
             if (!didDialogueStart)
             {
@@ -635,7 +923,7 @@ public class NPC_Dialogue : MonoBehaviour
 
 
 
-            else if (!Options.activeInHierarchy && !nextRoute)
+            else if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0 && !nextRoute && !logan && !detectarLimites && !enrique.seAcabo)
             {
                 if (dialogueText.text == lines[index].Substring(1))
                 {
@@ -650,7 +938,12 @@ public class NPC_Dialogue : MonoBehaviour
 
         }
 
-        RotateSon();
+
+        if (!NPC_Henry.instance.seAcabo)
+        {
+            RotateSon();
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -666,8 +959,11 @@ public class NPC_Dialogue : MonoBehaviour
                     mode = ModeNPC.Help;
                     obNMA.speed = 0;
                     isRange = !isRange;
-
-                    marker.SetActive(true);
+                    if (!houses.henryFinalA)
+                    {
+                        marker.SetActive(true);
+                    }
+                    
 
                     numeroAnim = 17;
                 }
@@ -677,8 +973,10 @@ public class NPC_Dialogue : MonoBehaviour
                     mode = ModeNPC.Help;
                     obNMA.speed = 0;
                     isRange = !isRange;
-
-                    marker.SetActive(true);
+                    if (!houses.henryFinalA)
+                    {
+                        marker.SetActive(true);
+                    }
 
                     numeroAnim = 0;
                 }
@@ -694,9 +992,11 @@ public class NPC_Dialogue : MonoBehaviour
         {
             if (other.gameObject.CompareTag("P1"))
             {
+                mirar = true;
                 obNMA.speed = 0;
 				numeroAnim = 0;
 				isRange = true;
+                marker.SetActive(true);
             }
 
         }
@@ -741,8 +1041,9 @@ public class NPC_Dialogue : MonoBehaviour
             {
                 obNMA.speed = speedNPC;
 				numeroAnim = 1;
-
-				isRange = false;
+                marker.SetActive(false);
+                isRange = false;
+                mirar = false;
             }
 
         }

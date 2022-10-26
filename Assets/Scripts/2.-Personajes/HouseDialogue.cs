@@ -64,6 +64,9 @@ public class HouseDialogue : MonoBehaviour
     [SerializeField, TextArea(4, 6)] string[] linesAFinal;
 
     [SerializeField, TextArea(4, 6)] string[] linesCFinal;
+    [SerializeField, TextArea(4, 6)] string[] linesCFinal1;
+    [SerializeField, TextArea(4, 6)] string[] linesCFinal2;
+    [SerializeField, TextArea(4, 6)] string[] linesCFinal3;
     [SerializeField] int random00;
     [SerializeField] int random01;
     int random001;
@@ -72,6 +75,10 @@ public class HouseDialogue : MonoBehaviour
     int random01c1;
     int random00c2;
     int random01c2;
+
+    int random0cf;
+    int random1cf;
+
     [SerializeField] Vector3 masVector;
 
 
@@ -81,6 +88,11 @@ public class HouseDialogue : MonoBehaviour
     public bool optionCBuscarHermano;
     
     public Transform casaGO;
+    [Header("Music References")]
+    public AudioClip cancion;
+
+    [Header("Final References")]
+    public bool henryFinalA;
 
 
     void Awake()
@@ -91,23 +103,28 @@ public class HouseDialogue : MonoBehaviour
         henry = FindObjectOfType<NPC_Henry>(); 
         trPlayer = GameObject.Find("Player").GetComponent<Transform>();
         //obHenry.SetActive(false);
-        
+
+
+        dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
+
+        Options = GameObject.Find("DialogueOptions").gameObject;
+
+        selector = GameObject.Find("Select").gameObject;
+
+        listOptions[0] = GameObject.Find("Panel0").gameObject.GetComponentInChildren<TextMeshProUGUI>();
+        listOptions[1] = GameObject.Find("Panel1").gameObject.GetComponentInChildren<TextMeshProUGUI>();
+        listOptions[2] = GameObject.Find("Panel2").gameObject.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Start()
     {
-        dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
-
-        //Options = GameObject.Find("DialogueOptions").gameObject;
-
-        //selector = GameObject.Find("Select").gameObject;
-
-        //listOptions[0] = GameObject.Find("Panel0").gameObject.GetComponentInChildren<TextMeshProUGUI>();
-        //listOptions[1] = GameObject.Find("Panel1").gameObject.GetComponentInChildren<TextMeshProUGUI>();
-        //listOptions[2] = GameObject.Find("Panel2").gameObject.GetComponentInChildren<TextMeshProUGUI>(); 
+        
+        
     }
     void StartDialogue()
     {
+
+        
 
         MainCharacter.sharedInstance.vectorForAnim = Vector3.zero;
 
@@ -146,19 +163,23 @@ public class HouseDialogue : MonoBehaviour
             }
             if (talkToLeahn && nombreIncorrecto) 
             {
-                random001 = Random.Range(0, 5);
+
+
+                random001 = random011;
+
+                random011 = Random.Range(0, 5);
 
                 
 
                 while (random011 == random001)
                 {
-                    random001 = Random.Range(0, 5);
+                    random011 = Random.Range(0, 5);
                 }
 
 
-                random011 = random001;
+                
 
-                switch (random001)
+                switch (random011)
                 {
                     case 0:
                         lines = linesAIncorrecta;
@@ -203,7 +224,37 @@ public class HouseDialogue : MonoBehaviour
 
             if (optionCBuscarHermano)
             {
-                lines = linesCFinal;
+                random0cf = random1cf;
+
+                random1cf = Random.Range(0, 4);
+
+                while (random1cf == random0cf)
+                {
+                    random1cf = Random.Range(0, 4);
+                }
+
+                switch (random1cf)
+                {
+                    case 0:
+                        lines = linesCFinal;
+                        break;
+
+                    case 1:
+                        lines = linesCFinal1;
+                        break;
+
+                    case 2:
+                        lines = linesCFinal2;
+                        break;
+
+                    case 3:
+                        lines = linesCFinal3;
+                        break;
+                }
+
+
+
+                
             }
         }
       
@@ -215,18 +266,18 @@ public class HouseDialogue : MonoBehaviour
 
     void DialogoRandom()
     {
-        random00 = Random.Range(0, 5);
+        random00 = random01;
 
-        
+        random01 = Random.Range(0, 5);
 
         while (random01 == random00)
         {
-            random00 = Random.Range(0, 5);
+            random01 = Random.Range(0, 5);
         }
 
-        random01 = random00;
+       
 
-        switch (random00)
+        switch (random01)
         {
             case 0:
                 lines = linesExtra0;
@@ -284,6 +335,8 @@ public class HouseDialogue : MonoBehaviour
        
         if (index == 0)
         {
+            AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
+
 
             while (respuestaDada.obCameras.orthographicSize > 3.5f)
             {
@@ -320,12 +373,12 @@ public class HouseDialogue : MonoBehaviour
     public void Navegate()
     {
 
-        if ((respuestaDada._map.Opciones.Navegar.ReadValue<Vector2>().y == -1.0f) && id_selector < listOptions.Length - 1)
+        if (respuestaDada._map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 1)
         {
             id_selector++;
         }
 
-        if ((respuestaDada._map.Opciones.Navegar.ReadValue<Vector2>().y == 1.0f) && id_selector > 0)
+        if (respuestaDada._map.Jugador.BUP.WasPressedThisFrame() && id_selector > 0)
         {
             id_selector--;
         }
@@ -367,7 +420,7 @@ public class HouseDialogue : MonoBehaviour
                     break;
             }
 
-            Options.SetActive(false);
+            UIManager.InstanceGUI.AnimateOptions(false);
 
             StartCoroutine(ChangeDialogue());
 
@@ -386,28 +439,29 @@ public class HouseDialogue : MonoBehaviour
 
                 if (respuestaDada.nextDialogueToTalk == 0)
                 {
+                    random00c1 = random01c1;
 
-                    random00c1 = Random.Range(0, 3);
+                    random01c1 = Random.Range(0, 3);
 
                    
 
                     while (random01c1 == random00c1)
                     {
-                        random00c1 = Random.Range(0, 3);
+                        random01c1 = Random.Range(0, 3);
                     }
 
 
-                    random01c1 = random00c1;
+                    
 
-                    if (random00c1 == 0)
+                    if (random01c1 == 0)
                     {
                         lines = linesNextAIncorrecta;
                     }
-                    if (random00c1 == 1)
+                    if (random01c1 == 1)
                     {
                         lines = linesNextAIncorrecta1;
                     }
-                    if (random00c1 == 2)
+                    if (random01c1 == 2)
                     {
                         lines = linesNextAIncorrecta2;
                     }
@@ -427,26 +481,30 @@ public class HouseDialogue : MonoBehaviour
             case 1:
                 if (respuestaDada.nextDialogueToTalk == 0)
                 {
-                    random00c2 = Random.Range(3, 6);
+                   
+                    
+                    random00c2= random01c2;
+                        
+                    random01c2 = Random.Range(3, 6);
 
                    
 
                     while (random01c2 == random00c2)
                     {
-                        random00c2 = Random.Range(3, 6);
+                        random01c2 = Random.Range(3, 6);
                     }
 
-                       random01c2 =random00c2;
+                       
 
-                    if (random00c2 == 3)
+                    if (random01c2 == 3)
                     {
                         lines = linesNextAIncorrecta3;
                     }
-                    if (random00c2 == 4)
+                    if (random01c2 == 4)
                     {
                         lines = linesNextAIncorrecta4;
                     }
-                    if (random00c2 == 5)
+                    if (random01c2 == 5)
                     {
                         lines = linesNextAIncorrecta5;
                     }
@@ -492,7 +550,7 @@ public class HouseDialogue : MonoBehaviour
     IEnumerator CloseDialogue()
     {
 
-
+        AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         index = 0;
@@ -507,6 +565,8 @@ public class HouseDialogue : MonoBehaviour
             yield return null;
 
         }
+
+        yield return new WaitForSeconds(1.25f);
 
         if (optionCBuscarHermano)
         {
@@ -609,8 +669,8 @@ public class HouseDialogue : MonoBehaviour
         {
             if (talkToLeahn && !finishDialogue && !optionCBuscarHermano)
             {
-               
-                Options.SetActive(true);
+
+                UIManager.InstanceGUI.AnimateOptions(true);
             
                 if (respuestaDada.nextDialogueToTalk == 0)
                 {
@@ -643,7 +703,7 @@ public class HouseDialogue : MonoBehaviour
     IEnumerator IniciarTransicion()
     {
 
-        UIManager.InstanceGUI.obAnim.SetTrigger("Start");
+        UIManager.InstanceGUI.obAnim.SetTrigger("StartTransition");
         
         yield return new WaitForSeconds(1f);
 
@@ -654,10 +714,10 @@ public class HouseDialogue : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        UIManager.InstanceGUI.obAnim.SetTrigger("End");
+       
 
         MainCharacter.sharedInstance.canMove = true;
-
+        henryFinalA = true;
 
         
     }
@@ -670,7 +730,7 @@ public class HouseDialogue : MonoBehaviour
     {
 
      
-        if (Options.activeInHierarchy && talkToLeahn && !respuestaDada.didDialogueStart)
+        if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && talkToLeahn && !respuestaDada.didDialogueStart)
         {
 
             Navegate();
@@ -685,7 +745,7 @@ public class HouseDialogue : MonoBehaviour
                 StartDialogue();
             }
 
-            else if(!Options.activeInHierarchy)
+            else if(UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0)
             {
                 if (dialogueText.text == lines[index].Substring(1))
                 {

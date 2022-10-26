@@ -87,13 +87,14 @@ public class Navegar : MonoBehaviour
 
         opciones.SetBool("Aparecer", true);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
-        _map.Opciones.Enable();
+        
 
         boton.gameObject.SetActive(true);
 
         puedeSeleccionar = true;
+        _map.Opciones.Enable();
     }
 
     void Navegar1()
@@ -124,6 +125,8 @@ public class Navegar : MonoBehaviour
 
                     UIManager.InstanceGUI.LoadNextScene();
                     AudioManager.Instance.PlaySound(sonido);
+                    _map.Opciones.Disable();
+                    puedeSeleccionar = false;
 
                     break;
 

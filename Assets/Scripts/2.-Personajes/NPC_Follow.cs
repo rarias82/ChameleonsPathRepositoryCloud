@@ -35,9 +35,18 @@ public class NPC_Follow : MonoBehaviour
     [TextArea(4, 6)] public string[] linesNextB2;
     [TextArea(4, 6)] public string[] linesNextB3;
     [TextArea(4, 6)] public string[] linesNextB4;
-    [TextArea(4, 6)] public string[] linesNextC;
+    [TextArea(4, 6)] public string[] linesNextC0;
+    [TextArea(4, 6)] public string[] linesNextC01;
+    [TextArea(4, 6)] public string[] linesNextC02;
+    [TextArea(4, 6)] public string[] linesNextC03;
+    [TextArea(4, 6)] public string[] linesNextC04;
 
     [TextArea(4, 6)] public string[] linesNextC2;
+
+    [TextArea(4, 6)] public string[] linesFinalC;
+    [TextArea(4, 6)] public string[] linesFinalC1;
+    [TextArea(4, 6)] public string[] linesFinalC2;
+    [TextArea(4, 6)] public string[] linesFinalC3;
     int random00;
     int random01;
 
@@ -48,13 +57,13 @@ public class NPC_Follow : MonoBehaviour
 
     private void Start()
     {
-        //vvarInput = gameObject.GetComponent<PlayerInput>();
+        dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
     }
     public void StarRoute(sbyte numeroRoute)
     {
         dObject.nextRoute = true;
 
-        dObject.Options.SetActive(false);
+        UIManager.InstanceGUI.AnimateOptions(false);
 
         switch (numeroRoute)
         {
@@ -64,35 +73,40 @@ public class NPC_Follow : MonoBehaviour
                 break;
 
             case 1:
-                random00 = Random.Range(0, 4);
+               
+
+                random00 = random01;
+                
+                random01 = Random.Range(0, 5);
+
 
                 while (random01 == random00)
                 {
-                    random00 = Random.Range(0, 4);
+                    random01 = Random.Range(0, 5);
                 }
 
-                random01 = random00;
 
-               
-                if (random00 == 0)
+
+                if (random01 == 0)
                 {
                     linesNext = linesB;
                 }
-                if (random00 == 1)
+                if (random01 == 1)
                 {
                     linesNext = linesB1;
                 }
-                if (random00 == 2)
+                if (random01 == 2)
                 {
                     linesNext = linesB2;
                 }
-                if (random00 == 3)
+                if (random01 == 3)
                 {
                     linesNext = linesB3;
                 }
-              
-                
-               
+
+
+
+
                 break;
 
             case 2:
