@@ -939,7 +939,7 @@ public class NPC_Dialogue : MonoBehaviour
         }
 
 
-        if (!NPC_Henry.instance.seAcabo)
+        if (!henry.seAcabo)
         {
             RotateSon();
         }
