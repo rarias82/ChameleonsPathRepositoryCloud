@@ -480,11 +480,15 @@ public class NPC_Dialogue : MonoBehaviour
         if (_map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 1)
         {
             id_selector++;
+
+            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
         }
 
         if (_map.Jugador.BUP.WasPressedThisFrame() && id_selector > 0)
         {
             id_selector--;
+
+            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
         }
 
         selector.transform.SetParent(listOptions[id_selector].transform);
@@ -497,6 +501,8 @@ public class NPC_Dialogue : MonoBehaviour
         if (_map.Jugador.Interactuar.WasPressedThisFrame())
         {
             index = 0;
+
+            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
 
             switch (id_selector)
             {

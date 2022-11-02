@@ -376,11 +376,13 @@ public class HouseDialogue : MonoBehaviour
         if (respuestaDada._map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 1)
         {
             id_selector++;
+            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
         }
 
         if (respuestaDada._map.Jugador.BUP.WasPressedThisFrame() && id_selector > 0)
         {
             id_selector--;
+            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
         }
 
         selector.transform.SetParent(listOptions[id_selector].transform);
@@ -392,8 +394,9 @@ public class HouseDialogue : MonoBehaviour
 
         if (respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame())
         {
-           
-            
+
+            AudioManager.Instance.PlaySound(AudioManager.Instance.clickButton);
+
             switch (id_selector)
             {
                 case 0:

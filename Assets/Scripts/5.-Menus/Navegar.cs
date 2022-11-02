@@ -8,12 +8,13 @@ public class Navegar : MonoBehaviour
     public Mapa _map;
     public sbyte id_selector;
     public Transform boton;
+    public Transform boton1;
     public GameObject[] listOptions;
     public float valor;
     public bool iniciar = false;
     public bool puedeSeleccionar = false;
     public GameObject botones;
-    public AudioClip sonido;
+    public AudioClip sonido,seleccionar;
     public Animator logan, opciones;
 
     [SerializeField] float distancia;
@@ -39,8 +40,13 @@ public class Navegar : MonoBehaviour
             
         }
 
-       
-        
+
+        if (/*_map.Jugador.Interactuar.WasPressedThisFrame() && */!iniciar)
+        {
+
+            StartCoroutine(Comenzar());
+
+        }
 
     }
 
@@ -63,35 +69,31 @@ public class Navegar : MonoBehaviour
         }
         
 
-        if (_map.Jugador.Interactuar.WasPressedThisFrame() && !iniciar)
-        {
-
-            StartCoroutine(Comenzar());
-
-        }
+       
 
 
-        valor =_map.Opciones.Navegar.ReadValue<Vector2>().y;
+        
     }
 
-    IEnumerator Comenzar()
+    public IEnumerator Comenzar()
     {
         iniciar = true;
 
         botones.SetActive(true);
-        AudioManager.Instance.PlaySound(sonido);
+        
 
-        logan.SetBool("Aparecer",true);
+        
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(5.75f);
 
         opciones.SetBool("Aparecer", true);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
 
         
 
         boton.gameObject.SetActive(true);
+        boton1.gameObject.SetActive(true);
 
         puedeSeleccionar = true;
         _map.Opciones.Enable();
@@ -99,14 +101,17 @@ public class Navegar : MonoBehaviour
 
     void Navegar1()
     {
-        if (valor == -1 && id_selector < listOptions.Length - 1)
+        if (_map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 1)
         {
             id_selector++;
+            AudioManager.Instance.PlaySound(seleccionar);
+
         }
 
-        if (valor == 1 && id_selector > 0)
+        if (_map.Jugador.BUP.WasPressedThisFrame() && id_selector > 0)
         {
             id_selector--;
+            AudioManager.Instance.PlaySound(seleccionar);
         }
 
         boton.transform.SetParent(listOptions[id_selector].transform);
@@ -114,6 +119,12 @@ public class Navegar : MonoBehaviour
 
 
         boton.transform.SetSiblingIndex(0);
+
+        boton1.transform.SetParent(listOptions[id_selector].transform);
+        boton1.transform.position = listOptions[id_selector].transform.position - new Vector3(-distancia, 0.0f, 0.0f);
+
+
+        boton1.transform.SetSiblingIndex(0);
 
         if (_map.Jugador.Interactuar.WasPressedThisFrame())
         {
@@ -127,6 +138,8 @@ public class Navegar : MonoBehaviour
                     AudioManager.Instance.PlaySound(sonido);
                     _map.Opciones.Disable();
                     puedeSeleccionar = false;
+
+                    logan.SetBool("Aparecer", true);
 
                     break;
 

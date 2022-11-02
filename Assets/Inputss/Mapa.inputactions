@@ -558,6 +558,17 @@
                 },
                 {
                     "name": "",
+                    "id": "1e56dbd1-ad60-4c70-8f8d-e1380799544c",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BUP",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "7787aa26-4f82-4544-8f42-77d6c7e4d645",
                     "path": "<Gamepad>/dpad/down",
                     "interactions": "",
@@ -582,6 +593,17 @@
                     "name": "",
                     "id": "d934b0e5-36a7-4429-94a8-5e13a172f8ea",
                     "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BDOWN",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e83f2ab3-9bb8-4be4-9d2c-eb9ec447117f",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -8,7 +8,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] float musicTiempo;
     public AudioClip cancionNivel1;
     public AudioClip cancionMenu;
-
+    public AudioClip clickButton;
+    public AudioClip selectButton;
     public static AudioManager Instance;
     //{
     //    get;

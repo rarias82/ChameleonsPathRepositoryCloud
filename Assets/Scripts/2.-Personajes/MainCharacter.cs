@@ -36,7 +36,7 @@ public class MainCharacter : MonoBehaviour
     ////public Animator obAnim;
     public Vector3 vectorForAnim;
     Animator obAnim;
-    public float intervalo, animSpeed;
+    public float intervalo, animSpeed, animIntervalo;
 
     [Header("Effects")]
     [SerializeField] ParticleSystem polvoTierra;
@@ -96,6 +96,7 @@ public class MainCharacter : MonoBehaviour
 
         intervalo = Mathf.Clamp(intervalo, 0f, 1f);
 
+        animIntervalo = intervalo;
 
         if (movementInput.x != 0.0f || movementInput.y != 0.0f)
         {
@@ -114,12 +115,19 @@ public class MainCharacter : MonoBehaviour
 
 
 
+            if (_map.Jugador.Sprintar.WasPressedThisFrame())
+            {
+                polvoTierra.Play();
+            }
+
 
             if (_map.Jugador.Sprintar.IsPressed())
             {
-                moveSpeed = (MaxmoveSpeed + 2.5f);
+                moveSpeed = (MaxmoveSpeed + 3.25f);
 
                 intervalo = 1.0f;
+
+                animIntervalo = intervalo + 0.5f;
 
             }
             else
@@ -161,6 +169,7 @@ public class MainCharacter : MonoBehaviour
         cc = GetComponent<CharacterController>();
         polvoTierraEmission = polvoTierra.emission;
 
+        polvoTierra.Stop();
         _map = new Mapa();
         _leahn.SetInputActions(_map);
         _map.Jugador.Enable();
@@ -180,23 +189,29 @@ public class MainCharacter : MonoBehaviour
 
     private void LateUpdate()
     {
-        obAnim.SetFloat("Velocidad", intervalo);
+        
+        obAnim.SetFloat("Velocidad", animIntervalo);
 
-		switch (intervalo)
+		switch (animIntervalo)
 		{
             case 0.0f:
                 obAnim.speed = 1.0f;
-                polvoTierraEmission.rateOverTime = 0.0f;
+                
                 break;
 
             case 0.5f:
-                obAnim.speed = 2.0f;
-                polvoTierraEmission.rateOverTime = 2.5f;
+                obAnim.speed = 3.25f;
+                
                 break;
 
             case 1f:
-                polvoTierraEmission.rateOverTime = 10f;
+                
                 obAnim.speed = animSpeed;
+                break;
+
+            case 1.5f:
+
+                obAnim.speed = animSpeed + 0.5f;
                 break;
 
             default:

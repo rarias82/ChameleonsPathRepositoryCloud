@@ -304,3 +304,5 @@ MonoBehaviour:
   musicTiempo: 1
   cancionNivel1: {fileID: 8300000, guid: b0dacbebe66963b4a8e78ad53732bb0e, type: 3}
   cancionMenu: {fileID: 8300000, guid: 8046c0f05b844204ba653bb1cc6ed028, type: 3}
+  clickButton: {fileID: 8300000, guid: e1e054b76f8e5564aa50c38946e79b41, type: 3}
+  selectButton: {fileID: 8300000, guid: 7a109fa2aa33b3c4fb09897033858c59, type: 3}
