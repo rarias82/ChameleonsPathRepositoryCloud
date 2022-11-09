@@ -300,8 +300,8 @@ public class UIManager : MonoBehaviour
         puntosCalificacion = puntos;
         ballonDialogue.gameObject.SetActive(false);
         obAnim = GameObject.Find("Cortina").GetComponent<Animator>();
-        HUDLienzos[0].SetActive(true);
-        HUDLienzos[1].SetActive(false);
+        HUDLienzos[0].SetActive(false);
+        HUDLienzos[1].SetActive(true);
         Screen.SetResolution(1280,720,true);
 
     }

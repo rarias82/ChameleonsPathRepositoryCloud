@@ -46,6 +46,7 @@ public class MainCharacter : MonoBehaviour
     public bool botonIn;
 
     public NPC_Dialogue _leahn;
+    public NPC_Rana _rana;
 
 
     void Awake()
@@ -54,12 +55,14 @@ public class MainCharacter : MonoBehaviour
         obAnim = transform.GetComponentInChildren<Animator>();
 
         _leahn = FindObjectOfType<NPC_Dialogue>();
-
+        //_rana = FindObjectOfType<NPC_Rana>();
         _map = new Mapa();
         _map.Jugador.Enable();
         _map.Opciones.Enable();
 
-        _leahn.SetInputActions(_map);
+     
+
+
     }
 
     private void OnEnable()
@@ -152,7 +155,7 @@ public class MainCharacter : MonoBehaviour
 
         if (isGrounded && inputPlayer.y < 0.0f)
         {
-            cc.slopeLimit = 45f;
+            cc.slopeLimit = 0f;
             inputPlayer.y = -2.0f;
         }
 
@@ -172,6 +175,8 @@ public class MainCharacter : MonoBehaviour
         polvoTierra.Stop();
         _map = new Mapa();
         _leahn.SetInputActions(_map);
+        //_rana.SetInputActions(_map);
+
         _map.Jugador.Enable();
     }
 
@@ -192,32 +197,67 @@ public class MainCharacter : MonoBehaviour
         
         obAnim.SetFloat("Velocidad", animIntervalo);
 
-		switch (animIntervalo)
-		{
-            case 0.0f:
-                obAnim.speed = 1.0f;
-                
-                break;
 
-            case 0.5f:
-                obAnim.speed = 3.25f;
-                
-                break;
 
-            case 1f:
-                
-                obAnim.speed = animSpeed;
-                break;
+        if (animIntervalo == 0.0f)
+        {
+            obAnim.speed = 1.0f;
+        }
 
-            case 1.5f:
+        if (animIntervalo > 0.0f && animIntervalo < 1f)
+        {
+            obAnim.speed = 2f;
+        }
 
-                obAnim.speed = animSpeed + 0.5f;
-                break;
+        if (animIntervalo == 1f)
+        {
+            obAnim.speed = 2.5f;
+        }
 
-            default:
-				break;
-		}
-            
+        if (animIntervalo > 1f)
+        {
+            obAnim.speed = animSpeed + 0.5f; 
+        }
+
+        //switch (animIntervalo)
+        //{
+        //    case 0.0f:
+        //        obAnim.speed = 1.0f;
+
+        //        break;
+
+        //    case 0.1f:
+        //        obAnim.speed = 10.0f;
+
+        //        break;
+
+
+
+        //    case 0.5f:
+        //        obAnim.speed = 15.0f;
+
+        //        break;
+
+        //    case 0.8f:
+        //        obAnim.speed = 25.0f;
+
+        //        break;
+
+        //    case 1f:
+
+        //        obAnim.speed = animSpeed + 0.75f;
+        //        break;
+
+        //    case 1.5f:
+
+        //        obAnim.speed = animSpeed + 1.15f;
+
+        //        break;
+
+        //    default:
+        //        break;
+        //}
+
     }
 
     private void OnDrawGizmos()
