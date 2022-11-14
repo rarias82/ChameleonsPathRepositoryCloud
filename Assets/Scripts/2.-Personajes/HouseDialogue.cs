@@ -673,23 +673,9 @@ public class HouseDialogue : MonoBehaviour
             if (talkToLeahn && !finishDialogue && !optionCBuscarHermano)
             {
 
-                UIManager.InstanceGUI.AnimateOptions(true);
-            
-                if (respuestaDada.nextDialogueToTalk == 0)
-                {
-                    for (int i = 0; i < listOptions.Length; i++)
-                    {
-                        listOptions[i].text = optionLinesA[i];
-                    }
-                }
+                StartCoroutine(Esperar());
 
-                if (respuestaDada.nextDialogueToTalk == 2)
-                {
-                    for (int i = 0; i < listOptions.Length; i++)
-                    {
-                        listOptions[i].text = optionLinesC[i];
-                    }
-                }
+
             }
             else
             {
@@ -701,6 +687,38 @@ public class HouseDialogue : MonoBehaviour
         }
 
 
+    }
+
+    IEnumerator Esperar()
+    {
+        respuestaDada._map.Disable();
+        yield return new WaitForSeconds(1f);
+        UIManager.InstanceGUI.AnimateOptions(true);
+        yield return new WaitForSeconds(1f);
+
+
+
+        //Options.SetActive(true);
+
+        if (respuestaDada.nextDialogueToTalk == 0)
+        {
+            for (int i = 0; i < listOptions.Length; i++)
+            {
+                listOptions[i].text = optionLinesA[i];
+            }
+        }
+
+        if (respuestaDada.nextDialogueToTalk == 2)
+        {
+            for (int i = 0; i < listOptions.Length; i++)
+            {
+                listOptions[i].text = optionLinesC[i];
+            }
+        }
+
+
+        yield return new WaitForSeconds(0.5f);
+        respuestaDada._map.Enable();
     }
 
     IEnumerator IniciarTransicion()

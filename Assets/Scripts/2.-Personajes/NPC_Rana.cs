@@ -34,6 +34,14 @@ public class NPC_Rana : MonoBehaviour
     public bool animOn;
     public float numeroAnimVelocity;
 
+    [Header("Options References")]
+    public GameObject Options;
+    [SerializeField] GameObject[] listOptions;
+    [SerializeField] GameObject selector;
+    [SerializeField] sbyte id_selector;
+    [SerializeField] string[] optionLines;
+    public bool pregunta;
+
     [Header("Move Variables")]
     public sbyte numeroCamino;
     NavMeshAgent obNMA;
@@ -62,6 +70,8 @@ public class NPC_Rana : MonoBehaviour
     public AudioClip cancion;
 
 
+
+
     public void SetInputActions(Mapa map)
     {
         _map = map;
@@ -86,6 +96,16 @@ public class NPC_Rana : MonoBehaviour
         dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
 
         mapeo = FindObjectOfType<NPC_Dialogue>();
+
+        Options = GameObject.Find("DialogueOptions").gameObject;
+
+        selector = GameObject.Find("Select").gameObject;
+
+        listOptions[0] = GameObject.Find("Panel0").gameObject;
+        listOptions[1] = GameObject.Find("Panel1").gameObject;
+        listOptions[2] = GameObject.Find("Panel2").gameObject;
+
+        
     }
 
     public void Interactuar()
@@ -143,6 +163,8 @@ public class NPC_Rana : MonoBehaviour
 
     public IEnumerator WriteDialogue()
     {
+
+       
         if (index == 0)
         {
 
@@ -185,19 +207,22 @@ public class NPC_Rana : MonoBehaviour
         IconDialogo(lines[index]);
 
 
-
-        if ((index % 2 == 0) && (index <= 4))
+        if (!pregunta)
         {
-            animOn = true;
-            iniciarAnim = true;
+            if ((index % 2 == 0) && (index <= 4))
+            {
+                animOn = true;
+                iniciarAnim = true;
+            }
+            else
+            {
+                dialogueText.transform.localScale = Vector3.one;
+                iniciarAnim = false;
+                terminarAnim = false;
+                animOn = false;
+            }
         }
-        else
-        {
-            dialogueText.transform.localScale = Vector3.one;
-            iniciarAnim = false;
-            terminarAnim = false;
-            animOn = false;
-        }
+        
 
         foreach (char letter in lines[index].Substring(1).ToCharArray())
         {
@@ -292,6 +317,108 @@ public class NPC_Rana : MonoBehaviour
 
     }
 
+
+    public void Navegate()
+    {
+
+        if (mapeo._map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 1)
+        {
+            id_selector++;
+            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+        }
+
+        if (mapeo._map.Jugador.BUP.WasPressedThisFrame() && id_selector > 0)
+        {
+            id_selector--;
+            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+        }
+
+        selector.transform.SetParent(listOptions[id_selector].transform);
+        selector.transform.position = listOptions[id_selector].transform.position;
+
+
+        selector.transform.SetSiblingIndex(0);
+
+
+        if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame())
+        {
+
+            AudioManager.Instance.PlaySound(AudioManager.Instance.clickButton);
+
+            switch (id_selector)
+            {
+                case 0:
+
+                    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
+
+
+                    break;
+
+                case 1:
+
+                    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
+
+
+                    break;
+
+                case 2:
+
+                    UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
+
+                    break;
+
+                default:
+                    break;
+            }
+
+            UIManager.InstanceGUI.AnimateOptions(false);
+
+            StartCoroutine(ChangeDialogue());
+
+
+        }
+
+
+    }
+
+
+    IEnumerator ChangeDialogue()
+    {
+        index = 0;
+        pregunta = true;
+        switch (id_selector)
+        {
+            case 0:
+
+                lines = linesA0;
+
+                break;
+
+            case 1:
+
+                lines = linesB0;
+                break;
+
+            case 2:
+
+                lines = linesC0;
+                break;
+
+
+            default:
+                break;
+        }
+
+
+        yield return null;
+
+        StartCoroutine(WriteDialogue());
+
+
+
+
+    }
+
     public void NextDialogue()
     {
         index++;
@@ -303,11 +430,68 @@ public class NPC_Rana : MonoBehaviour
         else
         {
 
-            StartCoroutine(CloseDialogue());
+            if (!pregunta)
+            {
+
+                StartCoroutine(Esperar());
+
+
+            }
+            else
+            {
+                StartCoroutine(CloseDialogue());
+            }
+            //if (talkToLeahn && !finishDialogue && !optionCBuscarHermano)
+            //{
+
+            //    UIManager.InstanceGUI.AnimateOptions(true);
+
+            //    if (respuestaDada.nextDialogueToTalk == 0)
+            //    {
+            //        for (int i = 0; i < listOptions.Length; i++)
+            //        {
+            //            listOptions[i].text = optionLinesA[i];
+            //        }
+            //    }
+
+            //    if (respuestaDada.nextDialogueToTalk == 2)
+            //    {
+            //        for (int i = 0; i < listOptions.Length; i++)
+            //        {
+            //            listOptions[i].text = optionLinesC[i];
+            //        }
+            //    }
+            //}
+            //else
+            //{
+
+
+            //    StartCoroutine(CloseDialogue());
+            //}
+            
         }
 
     }
 
+
+    IEnumerator Esperar()
+    {
+        _map.Disable();
+        yield return new WaitForSeconds(1f);
+        UIManager.InstanceGUI.AnimateOptions(true);
+        yield return new WaitForSeconds(1f);
+        
+
+
+        //Options.SetActive(true);
+
+        for (int i = 0; i < listOptions.Length; i++)
+        {
+            listOptions[i].GetComponentInChildren<TextMeshProUGUI>().text = optionLines[i];
+        }
+        yield return new WaitForSeconds(0.5f);
+        _map.Enable();
+    }
     public void AnimacionTexto()
     {
 
@@ -384,6 +568,11 @@ public class NPC_Rana : MonoBehaviour
 
         if (mode == ModeNPCRana.Iddle)
         {
+
+            if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1)
+            {
+                Navegate();
+            }
             Interactuar();
             TurnToLogan();
             AnimacionTexto();

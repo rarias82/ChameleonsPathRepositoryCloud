@@ -7,38 +7,46 @@ public class Pez : MonoBehaviour
     // Start is called before the first frame update
     //[Header("Move Variables")]
     //public sbyte numeroCamino;
-    
+
     //[SerializeField] Vector3[] trCaminos;
     //Vector3 diferenciaVector;
+    public Transform model;
     public float speedNPC;
+    bool adelante = true;
     //public float distancia;
     void Walking()
     {
-        //diferenciaVector = trCaminos[numeroCamino] - transform.position;
-
-        //if (diferenciaVector.sqrMagnitude < (0.5f * 2f))
-        //{
-        //    numeroCamino++;
-
-        //    if (numeroCamino >= trCaminos.Length)
-        //    {
-        //        numeroCamino = 0;
-        //    }
-
-        //}
-
-        //transform.position = Vector3.Lerp(transform.position, trCaminos[numeroCamino], speedNPC * Time.deltaTime);
-        if (transform.position.z >=)
+        
+        if (transform.position.z >= 84.0f)
         {
-
+            adelante = false;
         }
-        transform.position += new Vector3(0,0,1).normalized * speedNPC * Time.deltaTime;
+
+        if (transform.position.z <= 16.0f)
+        {
+            adelante = true;
+        }
+
+
+        if (adelante)
+        {
+            transform.position += Vector3.forward.normalized * speedNPC * Time.deltaTime;
+            //model.rotation = Quaternion.Euler(-89.98f, 0f, 0f);
+            model.localScale = new Vector3(model.localScale.x, 100.0f, model.localScale.z);
+        }
+        else
+        {
+            transform.position += Vector3.back.normalized * speedNPC * Time.deltaTime;
+            //model.rotation = Quaternion.Euler(0f, -180f, 0f);
+            model.localScale = new Vector3(model.localScale.x, -100.0f, model.localScale.z);
+        }
+        
 
 
     }
     void Start()
     {
-        
+        model = transform.Find("Fish_Armature").transform;
     }
 
     // Update is called once per frame

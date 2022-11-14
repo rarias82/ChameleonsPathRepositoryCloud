@@ -38,6 +38,7 @@ public class NPC_Dialogue : MonoBehaviour
     public int random00;
     public int random01;
     public float valor;
+    public bool habloconLeahn;
 
     [Header("Move Variables")]
     public sbyte numeroCamino;
@@ -444,15 +445,8 @@ public class NPC_Dialogue : MonoBehaviour
 
             if (!changeInitialDialogue && !houses.optionCBuscarHermano)
             {
-                nextRoute = true;
-                UIManager.InstanceGUI.AnimateOptions(true);
 
-                //Options.SetActive(true);
-
-                for (int i = 0; i < listOptions.Length; i++)
-                {
-                    listOptions[i].GetComponentInChildren<TextMeshProUGUI>().text = optionLines[i];
-                }
+                StartCoroutine(Esperar());
             }
             else
             {
@@ -472,6 +466,25 @@ public class NPC_Dialogue : MonoBehaviour
         }
 
         
+    }
+
+    IEnumerator Esperar()
+    {
+        _map.Disable();
+        yield return new WaitForSeconds(1f);
+        UIManager.InstanceGUI.AnimateOptions(true);
+        yield return new WaitForSeconds(1f);
+        nextRoute = true;
+        
+
+        //Options.SetActive(true);
+
+        for (int i = 0; i < listOptions.Length; i++)
+        {
+            listOptions[i].GetComponentInChildren<TextMeshProUGUI>().text = optionLines[i];
+        }
+        yield return new WaitForSeconds(0.5f);
+        _map.Enable();
     }
 
     public void Navegate()
@@ -498,9 +511,11 @@ public class NPC_Dialogue : MonoBehaviour
         selector.transform.SetSiblingIndex(0);
 
 
-        if (_map.Jugador.Interactuar.WasPressedThisFrame())
+        if (_map.Jugador.Interactuar.WasPressedThisFrame() && UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1)
         {
             index = 0;
+
+            habloconLeahn = true;
 
             AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
 

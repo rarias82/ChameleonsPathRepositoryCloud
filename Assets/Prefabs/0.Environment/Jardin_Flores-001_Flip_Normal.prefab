@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 1936705385104049411}
   - component: {fileID: 4692669784446471137}
   - component: {fileID: 6515531724358253588}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Jardin_Flores_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1936705385104049411
 Transform:
@@ -106,12 +106,12 @@ GameObject:
   - component: {fileID: 8642048259864286950}
   - component: {fileID: 3758456878029838682}
   - component: {fileID: 5550899437887644817}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Jardin_Flores_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &8642048259864286950
 Transform:
@@ -200,12 +200,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6381173511930500671}
   - component: {fileID: 2221510644923982158}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Jardin_Flores-001_Flip_Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6381173511930500671
 Transform:
