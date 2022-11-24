@@ -35,7 +35,7 @@ public class MainCharacter : MonoBehaviour
     [Header("Anim variables")]
     ////public Animator obAnim;
     public Vector3 vectorForAnim;
-    Animator obAnim;
+    public Animator obAnim;
     public float intervalo, animSpeed, animIntervalo;
 
     [Header("Effects")]
@@ -60,7 +60,7 @@ public class MainCharacter : MonoBehaviour
         _map.Jugador.Enable();
         _map.Opciones.Enable();
 
-     
+        FindObjectOfType<Inventory>().SetInputActions(_map);
 
 
     }

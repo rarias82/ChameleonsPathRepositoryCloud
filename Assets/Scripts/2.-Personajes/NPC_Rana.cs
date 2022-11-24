@@ -21,6 +21,30 @@ public class NPC_Rana : MonoBehaviour
     [SerializeField, TextArea(4, 6)] string[] linesA0;
     [SerializeField, TextArea(4, 6)] string[] linesB0;
     [SerializeField, TextArea(4, 6)] string[] linesC0;
+
+    [SerializeField, TextArea(4, 6)] string[] linesEA0;
+    [SerializeField, TextArea(4, 6)] string[] linesEA1;
+    [SerializeField, TextArea(4, 6)] string[] linesEA2;
+    [SerializeField, TextArea(4, 6)] string[] linesEA3;
+    [SerializeField, TextArea(4, 6)] string[] linesEA4;
+
+    [SerializeField, TextArea(4, 6)] string[] linesEB0;
+    [SerializeField, TextArea(4, 6)] string[] linesEB1;
+    [SerializeField, TextArea(4, 6)] string[] linesEB2;
+    [SerializeField, TextArea(4, 6)] string[] linesEB3;
+    [SerializeField, TextArea(4, 6)] string[] linesEB4;
+
+    [SerializeField, TextArea(4, 6)] string[] linesEC0;
+    [SerializeField, TextArea(4, 6)] string[] linesEC1;
+    [SerializeField, TextArea(4, 6)] string[] linesEC2;
+    [SerializeField, TextArea(4, 6)] string[] linesEC3;
+    [SerializeField, TextArea(4, 6)] string[] linesEC4;
+
+    [SerializeField, TextArea(4, 6)] string[] linesFA;
+    [SerializeField, TextArea(4, 6)] string[] linesFB;
+    [SerializeField, TextArea(4, 6)] string[] linesFC;
+
+
     [SerializeField, TextArea(4, 6)] string[] lines;
     public int index;
     public bool didDialogueStart;
@@ -29,10 +53,14 @@ public class NPC_Rana : MonoBehaviour
     public Mapa _map;
     public GameObject detector;
     NPC_Dialogue mapeo;
+    [SerializeField] HouseDialogue hd;
     public bool iniciarAnim;
     public bool terminarAnim;
     public bool animOn;
     public float numeroAnimVelocity;
+    public Vector3 posOriginal;
+    int random000 = 0;
+    int random001 = 0;
 
     [Header("Options References")]
     public GameObject Options;
@@ -41,6 +69,7 @@ public class NPC_Rana : MonoBehaviour
     [SerializeField] sbyte id_selector;
     [SerializeField] string[] optionLines;
     public bool pregunta;
+    [SerializeField] sbyte nextDialogue;
 
     [Header("Move Variables")]
     public sbyte numeroCamino;
@@ -68,21 +97,33 @@ public class NPC_Rana : MonoBehaviour
 
     [Header("Music References")]
     public AudioClip cancion;
+    [SerializeField] AudioClip[] voces;
+    [SerializeField] AudioClip[] voces1;
+    int voz000, voz001;
+
+    [Header("Intanciar")]
+    public static NPC_Rana instanciaRana;
+
+    [Header("Finales")]
+    public bool finalA;
+    public Item[] objetosTodo;
 
 
 
+    private void Awake()
+    {
+        instanciaRana = this;     
+    }
 
     public void SetInputActions(Mapa map)
     {
         _map = map;
     }
-
     void RotateSon()
     {
         Quaternion rotation = Quaternion.Euler(offset);
         marker.transform.rotation = rotation;
     }
-
     private void OnEnable()
     {
         marker = transform.Find("Marker").gameObject;
@@ -105,19 +146,55 @@ public class NPC_Rana : MonoBehaviour
         listOptions[1] = GameObject.Find("Panel1").gameObject;
         listOptions[2] = GameObject.Find("Panel2").gameObject;
 
-        
-    }
+        Item[] objetosTodo = FindObjectsOfType<Item>();
 
+        foreach (Item objeto in objetosTodo)
+        {
+            objeto.gameObject.SetActive(false);
+        }
+
+
+    }
+    void VocesRandom()
+    {
+        voz000 = voz001;
+
+        voz001 = Random.Range(0, voces.Length);
+
+
+        while (voz001 == voz000)
+        {
+            voz001 = Random.Range(0, voces.Length);
+        }
+
+        AudioManager.Instance.PlaySound(voces[voz001]);
+
+    }
+    void VocesRandom1()
+    {
+        voz000 = voz001;
+
+        voz001 = Random.Range(0, voces1.Length);
+
+
+        while (voz001 == voz000)
+        {
+            voz001 = Random.Range(0, voces1.Length);
+        }
+
+        AudioManager.Instance.PlaySound(voces1[voz001]);
+
+    }
     public void Interactuar()
     {
 
-        if (isRange && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv)
+        if (isRange && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !mapeo.didDialogueStart && !mapeo.houses.didDialogueStart && !mapeo.henry.didDialogueStart)
         {
             if (!didDialogueStart)
             {
                 StartDialogue();
             }
-            else if (dialogueText.text == lines[index].Substring(1) && mapeo._map.Jugador.Interactuar.WasPressedThisFrame())
+            else if (dialogueText.text == lines[index].Substring(1) && UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0)
             {
                 NextDialogue();
 
@@ -131,12 +208,126 @@ public class NPC_Rana : MonoBehaviour
 
         RotateSon();
     }
-
     public void StartDialogue()
     {
+        if (pregunta)
+        {
+            switch (nextDialogue)
+        {
+
+            case 0:
+
+
+                random000 = random001;
+
+                random001 = Random.Range(0, 5);
+
+
+                while (random001 == random000)
+                {
+                    random001 = Random.Range(0, 5);
+                }
+
+                if (random001 == 0)
+                {
+                    lines = linesEA0;
+                }
+                if (random001 == 1)
+                {
+                    lines = linesEA1;
+                }
+                if (random001 == 2)
+                {
+                    lines = linesEA2;
+                }
+                if (random001 == 3)
+                {
+                    lines = linesEA3;
+                }
+                if (random001 == 4)
+                {
+                    lines = linesEA4;
+                }
+
+                break;
+
+            case 1:
+                random000 = random001;
+
+                random001 = Random.Range(0, 5);
+
+
+                while (random001 == random000)
+                {
+                    random001 = Random.Range(0, 5);
+                }
+
+                if (random001 == 0)
+                {
+                    lines = linesEB0;
+                }
+                if (random001 == 1)
+                {
+                    lines = linesEB1;
+                }
+                if (random001 == 2)
+                {
+                    lines = linesEB2;
+                }
+                if (random001 == 3)
+                {
+                    lines = linesEB3;
+                }
+                if (random001 == 4)
+                {
+                    lines = linesEB4;
+                }
+                break;
+
+            case 2:
+                random000 = random001;
+
+                random001 = Random.Range(0, 5);
+
+
+                while (random001 == random000)
+                {
+                    random001 = Random.Range(0, 5);
+                }
+
+                if (random001 == 0)
+                {
+                    lines = linesEC0;
+                }
+                if (random001 == 1)
+                {
+                    lines = linesEC1;
+                }
+                if (random001 == 2)
+                {
+                    lines = linesEC2;
+                }
+                if (random001 == 3)
+                {
+                    lines = linesEC3;
+                }
+                if (random001 == 4)
+                {
+                    lines = linesEC4;
+                }
+                break;
+
+            default:
+                break;
+        }
+        }
+        
+
         MainCharacter.sharedInstance.vectorForAnim = Vector3.zero;
 
         MainCharacter.sharedInstance.intervalo = 0.0f;
+
+        MainCharacter.sharedInstance.animIntervalo = 0.0f;
 
         MainCharacter.sharedInstance.canMove = false;
 
@@ -153,27 +344,33 @@ public class NPC_Rana : MonoBehaviour
         UIManager.InstanceGUI.obMapMark.SetActive(false);
 
 
-
-        FollowCameras.instance.mode = Modo.InDialogue;
-
+        DialogoFinal();
 
         StartCoroutine(WriteDialogue());
 
     }
-
     public IEnumerator WriteDialogue()
     {
+        detector.SetActive(true);
 
-       
+        
+
         if (index == 0)
         {
 
-            AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
-           
+            FollowCameras.instance.velocidadRotacion = -75.0f;
+            FollowCameras.instance.mode = Modo.Mundo;
 
+            AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
+
+            UIManager.InstanceGUI.BurbujaDialogo(0);
+
+            posOriginal = FollowCameras.instance.transform.position;
 
             while (obCameras.orthographicSize > 3.5f)
             {
+
+                
                 Vector3 direction = transform.position - new Vector3(trPlayer.transform.position.x, 6.079084f, trPlayer.transform.position.z);
                 
                 trPlayer.transform.forward = Vector3.Lerp(trPlayer.transform.forward, direction, (speedZoom) * Time.deltaTime);
@@ -185,18 +382,32 @@ public class NPC_Rana : MonoBehaviour
             }
 
             
+
+
+        }
+
+        
+
+        while (FollowCameras.instance.mode == Modo.Mundo)
+        {
+            yield return null;
+        }
+
+        if (numeroAnim >= 100 && numeroAnim < 200)
+        {
+            AnimToVar(index + 100);
+        }
+        if (numeroAnim >= 200 && numeroAnim < 300)
+        {
+            AnimToVar(index + 200);
         }
 
 
-            detector.SetActive(true);
-
-            while (FollowCameras.instance.mode == Modo.InDialogue)
-            {
-                yield return null;
-            }
-
-
-                AnimToVar(index);
+        if (numeroAnim < 100)
+        {
+            AnimToVar(index);
+        }
+        
             
         
 
@@ -221,8 +432,63 @@ public class NPC_Rana : MonoBehaviour
                 terminarAnim = false;
                 animOn = false;
             }
+
+            if (index == 1)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(4);
+            }
+
+            if (index == 2)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(7);
+            }
+
+            if (index == 2)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(0);
+            }
         }
-        
+        else
+        {
+            if (nextDialogue == 0)
+            {
+                if (index == 3)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(3);
+                }
+                if (index == 4)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(7);
+                }
+                if (index == 5)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(5);
+                }
+                if (index == 6)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(0);
+                }
+                if (index == 7)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(3);
+                }
+
+                if (index == 8)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(7);
+                }
+
+                if (index == 8)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(7);
+                }
+
+                if (index == 8)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(0);
+                }
+            }
+        }
 
         foreach (char letter in lines[index].Substring(1).ToCharArray())
         {
@@ -234,24 +500,25 @@ public class NPC_Rana : MonoBehaviour
 
 
 
-        
+
 
         //yield return new WaitForSeconds(5f);
 
         //terminarAnim = true;
-
-        UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+        if (dialogueText.text == lines[index].Substring(1))
+        {
+            UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+        }
+        
 
 
 
     }
-
     void AnimToVar(int indice)
     {
         numeroAnim = indice;
 
     }
-
     public void IconDialogo(string lineas)
     {
 
@@ -264,18 +531,26 @@ public class NPC_Rana : MonoBehaviour
         if (lineas.Trim().StartsWith("R"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
+            if (!pregunta)
+            {
+                VocesRandom();
+            }
+            else
+            {
+                VocesRandom1();
+            }
+            
 
         }
 
 
     }
-
     public IEnumerator CloseDialogue()
     {
 
+
         index = 0;
 
-     
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
       
 
@@ -285,19 +560,26 @@ public class NPC_Rana : MonoBehaviour
 
         UIManager.InstanceGUI.fadeFrom = true;
 
+        numeroAnim = 99;
+
+        //FollowCameras.instance.mode = Modo.InGame;
+
         FollowCameras.instance.mode = Modo.InGame;
 
-            while ((obCameras.orthographicSize < 7.5f) && offset != new Vector3(-15.00f, 12.5f, -15.00f))
+
+        while ((obCameras.orthographicSize < 7.5f) && FollowCameras.instance.transform.position != posOriginal /*&& offset != new Vector3(-15.00f, 12.5f, -15.00f)*/)
             {
                 obCameras.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
-                FollowCameras.instance.offset = Vector3.Slerp(FollowCameras.instance.offset, new Vector3(-15.00f, 12.5f, -15.00f), (speedZoom / 2.0f) * Time.deltaTime);
+            //FollowCameras.instance.offset = Vector3.Slerp(FollowCameras.instance.offset, new Vector3(-15.00f, 12.5f, -15.00f), (speedZoom / 2.0f) * Time.deltaTime);
 
-                yield return null;
+            FollowCameras.instance.transform.position = Vector3.Slerp(FollowCameras.instance.transform.position, posOriginal, (speedZoom / 2.0f) * Time.deltaTime);
+
+            yield return null;
 
             }
 
-       
 
+        
 
         Inventory.instance.panelItem.SetActive(true);
         UIManager.InstanceGUI.obMap.SetActive(true);
@@ -307,17 +589,29 @@ public class NPC_Rana : MonoBehaviour
         FollowCameras.instance.pararGiro = false;
         detector.SetActive(false);
 
-        MainCharacter.sharedInstance.canMove = true;
+        
          
-        marker.SetActive(true);
+        
 
-        didDialogueStart = false;
 
+        if (!finalA)
+        { 
+            MainCharacter.sharedInstance.canMove = true;
+
+            yield return new WaitForSeconds(0.001f);
+            didDialogueStart = false;
+            marker.SetActive(true);
+
+        }
+        else
+        {
+            
+            UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalARana());
+        }
+       
 
 
     }
-
-
     public void Navegate()
     {
 
@@ -348,21 +642,28 @@ public class NPC_Rana : MonoBehaviour
             switch (id_selector)
             {
                 case 0:
-
+                    numeroAnim = 100;
                     UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
+
+
+                    foreach (Item objeto in objetosTodo)
+                    {
+                        objeto.gameObject.SetActive(true);
+                    }
 
 
                     break;
 
                 case 1:
-
+                    numeroAnim = 200;
                     UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
+                    
 
 
                     break;
 
                 case 2:
-
+                    numeroAnim = 300;
                     UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
 
                     break;
@@ -373,19 +674,21 @@ public class NPC_Rana : MonoBehaviour
 
             UIManager.InstanceGUI.AnimateOptions(false);
 
-            StartCoroutine(ChangeDialogue());
+
+
+            StartCoroutine(ChangeDialogueR());
 
 
         }
 
 
     }
-
-
-    IEnumerator ChangeDialogue()
+    IEnumerator ChangeDialogueR()
     {
         index = 0;
+
         pregunta = true;
+
         switch (id_selector)
         {
             case 0:
@@ -409,7 +712,7 @@ public class NPC_Rana : MonoBehaviour
                 break;
         }
 
-
+        nextDialogue = id_selector;
         yield return null;
 
         StartCoroutine(WriteDialogue());
@@ -418,7 +721,6 @@ public class NPC_Rana : MonoBehaviour
 
 
     }
-
     public void NextDialogue()
     {
         index++;
@@ -472,25 +774,30 @@ public class NPC_Rana : MonoBehaviour
         }
 
     }
-
-
     IEnumerator Esperar()
     {
-        _map.Disable();
+
+        FollowCameras.instance.OnConfetis(0);
+        for (int i = 0; i < listOptions.Length; i++)
+        {
+            listOptions[i].GetComponentInChildren<TextMeshProUGUI>().text = optionLines[i];
+        }
+
+
+        index = 0;
+        mapeo._map.Disable();
         yield return new WaitForSeconds(1f);
         UIManager.InstanceGUI.AnimateOptions(true);
+        
         yield return new WaitForSeconds(1f);
         
 
 
         //Options.SetActive(true);
 
-        for (int i = 0; i < listOptions.Length; i++)
-        {
-            listOptions[i].GetComponentInChildren<TextMeshProUGUI>().text = optionLines[i];
-        }
+       
         yield return new WaitForSeconds(0.5f);
-        _map.Enable();
+        mapeo._map.Enable();
     }
     public void AnimacionTexto()
     {
@@ -527,7 +834,6 @@ public class NPC_Rana : MonoBehaviour
 
 
     }
-
     void TurnToLogan()
     {
 
@@ -535,7 +841,6 @@ public class NPC_Rana : MonoBehaviour
         transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
 
     }
-
     void Walking()
     {
         diferenciaVector = trCaminos[numeroCamino] - transform.position;
@@ -557,6 +862,16 @@ public class NPC_Rana : MonoBehaviour
 
     }
 
+    void DialogoFinal()
+    {
+        if (finalA)
+        {
+            lines = linesFA;
+        }
+
+
+
+    }
     private void Update()
     {
 
@@ -569,7 +884,7 @@ public class NPC_Rana : MonoBehaviour
         if (mode == ModeNPCRana.Iddle)
         {
 
-            if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1)
+            if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && (!mapeo.didDialogueStart || !mapeo.gameObject.activeInHierarchy) && !hd.didDialogueStart)
             {
                 Navegate();
             }
@@ -579,8 +894,12 @@ public class NPC_Rana : MonoBehaviour
 
         }
 
-    }
+        //if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame())
+        //{
+        //    UIManager.InstanceGUI.Temblor();
+        //}
 
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("P1") && mode == ModeNPCRana.Walk)
@@ -598,7 +917,6 @@ public class NPC_Rana : MonoBehaviour
 
         
     }
-
     private void OnTriggerExit(Collider other)
     {
 
@@ -618,7 +936,6 @@ public class NPC_Rana : MonoBehaviour
 
 
     }
-
     private void LateUpdate()
     {
         obAnim.SetInteger("EstadoAnimo", numeroAnim);

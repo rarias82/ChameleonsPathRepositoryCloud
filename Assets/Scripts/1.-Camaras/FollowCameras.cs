@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Modo
 {
-    InGame, InDialogue, Stop, Test
+    InGame, InDialogue, Stop, Test, Mundo
 }
 public class FollowCameras : MonoBehaviour
 {
@@ -35,6 +35,16 @@ public class FollowCameras : MonoBehaviour
     public bool pararGiro;
     public Transform lis;
     [SerializeField] Transform las;
+
+    [Header("Mundo Variables")]
+    public float velocidadRotacion = 20.0f;
+    public ParticleSystem confetis;
+    public ParticleSystem confetisB;
+    public ParticleSystem confetisM;
+
+
+
+
     // Start is called before the first frame update
 
     private void Awake()
@@ -50,7 +60,10 @@ public class FollowCameras : MonoBehaviour
         float X = Mathf.Clamp(posX, minXandZ.x,maxXandZ.x);
         float Z = Mathf.Clamp(posZ, minXandZ.z, maxXandZ.z);
         transform.position = new Vector3(X + offset.x, trPlayer.position.y + offset.y, Z + offset.z);
-       
+        confetis.Stop();
+        confetisB.Stop();
+        confetisM.Stop();
+
     }
 
     void GirarDialogo()
@@ -79,6 +92,17 @@ public class FollowCameras : MonoBehaviour
         transform.LookAt(trPlayer);
     }
 
+    void Mundo()
+    {
+        
+        transform.RotateAround(trPlayer.position, Vector3.up, velocidadRotacion * Time.deltaTime );
+        if (pararGiro)
+        {
+            velocidadRotacion = 0;
+            mode = Modo.Stop;
+        }
+    }
+
     void StopMove()
     {
         //posX = trPlayer.position.x;
@@ -97,6 +121,31 @@ public class FollowCameras : MonoBehaviour
         offset = camTurnAngle * offset;
         transform.position = Vector3.Slerp(transform.position, trPlayer.position + offset, xSmooth * Time.deltaTime);
         transform.LookAt(trPlayer);
+
+    }
+
+    public void OnConfetis(int seleccion)
+    {
+        switch (seleccion)
+        {
+
+            case 0:
+                confetis.Play();
+                break;
+                
+            case 1:
+                confetisB.Play();
+                break;
+
+            case 2:
+                confetisM.Play();
+                break;
+            default:
+                break;
+        }
+       
+       
+
 
     }
 
@@ -137,7 +186,10 @@ public class FollowCameras : MonoBehaviour
             StopMove();
         }
 
-       
+        if (mode == Modo.Mundo)
+        {
+            Mundo();
+        }
 
 
         MyCameras.orthographicSize = Mathf.Clamp(MyCameras.orthographicSize, 3.5f, 7.5f); // Límites

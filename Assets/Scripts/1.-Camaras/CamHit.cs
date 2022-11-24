@@ -32,7 +32,7 @@ public class CamHit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (FollowCameras.instance.mode == Modo.InDialogue)
+        if (FollowCameras.instance.mode == Modo.Mundo)
         {
             if (other.gameObject.CompareTag("AnguloIndicado"))
             {
@@ -44,11 +44,11 @@ public class CamHit : MonoBehaviour
 
             }
         }
-       
-          
 
 
-      
+
+
+
 
     }
 }

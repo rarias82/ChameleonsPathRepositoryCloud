@@ -43,13 +43,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.844
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 178
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -176,7 +176,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -302,7 +302,9 @@ MonoBehaviour:
   sfxAudioSource: {fileID: 5127602461781102215}
   musicAudioSource: {fileID: 5127602461464407591}
   musicTiempo: 1
-  cancionNivel1: {fileID: 8300000, guid: b0dacbebe66963b4a8e78ad53732bb0e, type: 3}
-  cancionMenu: {fileID: 8300000, guid: 8046c0f05b844204ba653bb1cc6ed028, type: 3}
-  clickButton: {fileID: 8300000, guid: e1e054b76f8e5564aa50c38946e79b41, type: 3}
-  selectButton: {fileID: 8300000, guid: 7a109fa2aa33b3c4fb09897033858c59, type: 3}
+  cancionNivel1: {fileID: 8300000, guid: 30d8b2fc78192d743ba1d8f858853a49, type: 3}
+  cancionMenu: {fileID: 8300000, guid: c88f193d7a1fc274fb3417c7519638b7, type: 3}
+  clickButton: {fileID: 8300000, guid: 20a70cdb263dd194a81ed12627b09ecf, type: 3}
+  selectButton: {fileID: 8300000, guid: fdc644996c52a4f4183e2c3f840d3811, type: 3}
+  selectGood: {fileID: 8300000, guid: 20a70cdb263dd194a81ed12627b09ecf, type: 3}
+  selectBad: {fileID: 8300000, guid: e1e054b76f8e5564aa50c38946e79b41, type: 3}

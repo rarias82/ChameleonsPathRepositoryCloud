@@ -14,6 +14,8 @@ public class Slot : MonoBehaviour
 
     public Transform slotIcon;
 
+    public Image Panel;
+
     public void UpdateSlot()
     {
         slotIcon.GetComponent<Image>().sprite = icon;
@@ -60,9 +62,12 @@ public class Slot : MonoBehaviour
         description = null;
         empty = true;
         icon = null;
-        slotIcon.GetComponent<Image>().sprite = null;
-        //this.GetComponent<Image>().sprite = null;
+        
         gameObject.GetComponent<MovSlot>().vacio = true;
+        Panel.sprite = null;
+        Panel.color = new Color(Panel.color.r, Panel.color.g, Panel.color.b, 0.0f);
+
+        Debug.Log("Quitar");
     }
 
 }

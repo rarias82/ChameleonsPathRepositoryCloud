@@ -46,6 +46,8 @@ public class NPC_Henry : MonoBehaviour
 
     [SerializeField] HouseDialogue hd;
 
+    public Vector3 posOriginal;
+
 
     [Header("Move Variables")]
     public sbyte numeroCamino;
@@ -72,7 +74,24 @@ public class NPC_Henry : MonoBehaviour
 
     [Header("Music References")]
     public AudioClip cancion;
+    [SerializeField] AudioClip[] voces;
+    int voz000, voz001;
 
+    void VocesRandom()
+    {
+        voz000 = voz001;
+
+        voz001 = Random.Range(0, voces.Length);
+
+
+        while (voz001 == voz000)
+        {
+            voz001 = Random.Range(0, voces.Length);
+        }
+
+        AudioManager.Instance.PlaySound(voces[voz001]);
+
+    }
     private void Awake()
     {
         instance = this;
@@ -183,6 +202,7 @@ public class NPC_Henry : MonoBehaviour
 
         if (lineas.Trim().StartsWith("H"))
         {
+            VocesRandom();
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
 
         }
@@ -307,6 +327,7 @@ public class NPC_Henry : MonoBehaviour
     public void StartDialogue()
     {
         MainCharacter.sharedInstance.vectorForAnim = Vector3.zero;
+        MainCharacter.sharedInstance.animIntervalo = 0.0f;
 
         MainCharacter.sharedInstance.intervalo = 0.0f;
 
@@ -327,7 +348,7 @@ public class NPC_Henry : MonoBehaviour
 
         DialogoRandom();
 
-        FollowCameras.instance.mode = Modo.InDialogue;
+        FollowCameras.instance.mode = Modo.Mundo;
 
 
         if (seAcabo)
@@ -344,17 +365,25 @@ public class NPC_Henry : MonoBehaviour
     {
         if (index == 0)
         {
-
+            
             if (detectarLimites)
             {
-
+                UIManager.InstanceGUI.BurbujaDialogo(1);
             }
             else
             {
+                detector.SetActive(true);
+
+                UIManager.InstanceGUI.BurbujaDialogo(0);
+
+                FollowCameras.instance.velocidadRotacion = -75.0f;
+                FollowCameras.instance.mode = Modo.Mundo;
+                
+               
                 AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
             }
-           
 
+            posOriginal = FollowCameras.instance.transform.position;
             while (obCameras.orthographicSize > 3.5f)
             {
                 Vector3 direction = transform.position - new Vector3(trPlayer.transform.position.x, 6.079084f, trPlayer.transform.position.z);
@@ -383,9 +412,9 @@ public class NPC_Henry : MonoBehaviour
         if (!detectarLimites)
         {
 
-            detector.SetActive(true);
+            
 
-            while (FollowCameras.instance.mode == Modo.InDialogue)
+            while (FollowCameras.instance.mode == Modo.Mundo)
             {
                 yield return null;
             }
@@ -406,6 +435,8 @@ public class NPC_Henry : MonoBehaviour
 
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
 
+  
+
         IconDialogo(lines[index]);
 
         foreach (char letter in lines[index].Substring(1).ToCharArray())
@@ -414,7 +445,10 @@ public class NPC_Henry : MonoBehaviour
             yield return new WaitForSeconds(speedText);
         }
 
-        UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+        if (dialogueText.text == lines[index].Substring(1))
+        {
+            UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+        }
 
 
 
@@ -441,8 +475,6 @@ public class NPC_Henry : MonoBehaviour
 
     }
 
-
-
     public IEnumerator CloseDialogue()
     {
 
@@ -463,10 +495,15 @@ public class NPC_Henry : MonoBehaviour
 
         if (!detectarLimites)
         {
-            while ((obCameras.orthographicSize < 7.5f) && offset != new Vector3(-15.00f, 12.5f, -15.00f))
+            //FollowCameras.instance.mode = Modo.InGame;
+
+
+            while ((obCameras.orthographicSize < 7.5f) && FollowCameras.instance.transform.position != posOriginal /*&& offset != new Vector3(-15.00f, 12.5f, -15.00f)*/)
             {
                 obCameras.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
-                FollowCameras.instance.offset = Vector3.Slerp(FollowCameras.instance.offset, new Vector3(-15.00f, 12.5f, -15.00f), (speedZoom / 2.0f) * Time.deltaTime);
+                //FollowCameras.instance.offset = Vector3.Slerp(FollowCameras.instance.offset, new Vector3(-15.00f, 12.5f, -15.00f), (speedZoom / 2.0f) * Time.deltaTime);
+
+                FollowCameras.instance.transform.position = Vector3.Slerp(FollowCameras.instance.transform.position, posOriginal, (speedZoom / 2.0f) * Time.deltaTime);
 
                 yield return null;
 
@@ -524,7 +561,17 @@ public class NPC_Henry : MonoBehaviour
             didDialogueStart = true;
             logan = false;
             UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalA());
+
+            if (!mapeo.rana.gameObject.GetComponent<NPC_Rana>().finalA)
+            {
+                mapeo.rana.gameObject.SetActive(true);
+            }
+            else
+            {
+                mapeo.rana.gameObject.SetActive(false);
+            }
             
+
         }
         else
         {
@@ -540,6 +587,10 @@ public class NPC_Henry : MonoBehaviour
 
 
             detectarLimites = false;
+
+            yield return new WaitForSeconds(0.001f);
+            
+            
 
             didDialogueStart = false;
             logan = false;
@@ -568,7 +619,6 @@ public class NPC_Henry : MonoBehaviour
 
     }
     
-
     private void Update()
     {
 

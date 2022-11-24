@@ -8,11 +8,13 @@ using UnityEngine.InputSystem;
 public class HouseDialogue : MonoBehaviour
 {
     // Start is called before the first frame update
+    public static HouseDialogue instancias;
     [Header("Interaction Variables")]
     [SerializeField] GameObject marker;
     [SerializeField] bool isRange;
     NPC_Dialogue respuestaDada;
     NPC_Henry henry;
+
 
     [Header("Dialogue Variables")]
     [SerializeField] TextMeshProUGUI dialogueText;
@@ -86,18 +88,40 @@ public class HouseDialogue : MonoBehaviour
     public GameObject obHenry;
     public Image blackScreen;
     public bool optionCBuscarHermano;
-    
-    public Transform casaGO;
-    [Header("Music References")]
-    public AudioClip cancion;
 
     [Header("Final References")]
     public bool henryFinalA;
+    public Transform casaGO;
+
+    [Header("Music References")]
+    public AudioClip cancion;
+    [SerializeField] AudioClip[] voces;
+
+   
+    int voz000, voz001;
+
+    void VocesRandom()
+    {
+        voz000 = voz001;
+
+        voz001 = Random.Range(0, voces.Length);
+
+
+        while (voz001 == voz000)
+        {
+            voz001 = Random.Range(0, voces.Length);
+        }
+
+        AudioManager.Instance.PlaySound(voces[voz001]);
+
+    }
 
 
     void Awake()
     {
-       
+
+        instancias = this;
+
         marker.SetActive(false);
         respuestaDada = GameObject.Find("NPC_Level_Leahn").GetComponent<NPC_Dialogue>();
         henry = FindObjectOfType<NPC_Henry>(); 
@@ -123,8 +147,9 @@ public class HouseDialogue : MonoBehaviour
     }
     void StartDialogue()
     {
+        //UIManager.InstanceGUI.BurbujaDialogo(0);
 
-        
+        MainCharacter.sharedInstance.animIntervalo = 0.0f;
 
         MainCharacter.sharedInstance.vectorForAnim = Vector3.zero;
 
@@ -156,14 +181,17 @@ public class HouseDialogue : MonoBehaviour
             if (!talkToLeahn)
             {
                 DialogoRandom();
+                UIManager.InstanceGUI.BurbujaDialogo(4);
             }
             if (talkToLeahn && !nombreIncorrecto )
             {
                 lines = linesA;
+
+                UIManager.InstanceGUI.BurbujaDialogo(0);
             }
             if (talkToLeahn && nombreIncorrecto) 
             {
-
+                UIManager.InstanceGUI.BurbujaDialogo(0);
 
                 random001 = random011;
 
@@ -213,6 +241,8 @@ public class HouseDialogue : MonoBehaviour
         }
         else if (respuestaDada.nextDialogueToTalk == 2)
         {
+            UIManager.InstanceGUI.BurbujaDialogo(0);
+
             if (talkToLeahn && !nombreIncorrecto && !optionCBuscarHermano)
             {
                 lines = linesC;
@@ -323,7 +353,7 @@ public class HouseDialogue : MonoBehaviour
         if (lineas.Trim().StartsWith("H"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(casaGO.position);
-
+            VocesRandom();
         }
 
 
@@ -355,6 +385,9 @@ public class HouseDialogue : MonoBehaviour
 
         dialogueText.text = string.Empty;
 
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
+
+       
 
         IconDialogo(lines[index]);
 
@@ -366,7 +399,10 @@ public class HouseDialogue : MonoBehaviour
         }
 
 
-        UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+        if (dialogueText.text == lines[index].Substring(1))
+        {
+            UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+        }
 
     }
 
@@ -691,14 +727,8 @@ public class HouseDialogue : MonoBehaviour
 
     IEnumerator Esperar()
     {
-        respuestaDada._map.Disable();
-        yield return new WaitForSeconds(1f);
-        UIManager.InstanceGUI.AnimateOptions(true);
-        yield return new WaitForSeconds(1f);
 
-
-
-        //Options.SetActive(true);
+        FollowCameras.instance.OnConfetis(0);
 
         if (respuestaDada.nextDialogueToTalk == 0)
         {
@@ -715,6 +745,20 @@ public class HouseDialogue : MonoBehaviour
                 listOptions[i].text = optionLinesC[i];
             }
         }
+
+
+
+        respuestaDada._map.Disable();
+        yield return new WaitForSeconds(1f);
+        UIManager.InstanceGUI.AnimateOptions(true);
+       
+        yield return new WaitForSeconds(1f);
+
+
+
+        //Options.SetActive(true);
+
+    
 
 
         yield return new WaitForSeconds(0.5f);
@@ -740,6 +784,8 @@ public class HouseDialogue : MonoBehaviour
         MainCharacter.sharedInstance.canMove = true;
         henryFinalA = true;
 
+        respuestaDada.rana.gameObject.SetActive(false);
+
         
     }
 
@@ -751,7 +797,7 @@ public class HouseDialogue : MonoBehaviour
     {
 
      
-        if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && talkToLeahn && !respuestaDada.didDialogueStart)
+        if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && talkToLeahn && !respuestaDada.didDialogueStart && (!respuestaDada.rana.didDialogueStart  || !respuestaDada.rana.gameObject.activeInHierarchy))
         {
 
             Navegate();

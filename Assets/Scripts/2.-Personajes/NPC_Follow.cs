@@ -61,6 +61,9 @@ public class NPC_Follow : MonoBehaviour
     }
     public void StarRoute(sbyte numeroRoute)
     {
+        dObject.index = 0;
+
+
         dObject.nextRoute = true;
 
         UIManager.InstanceGUI.AnimateOptions(false);
@@ -77,12 +80,12 @@ public class NPC_Follow : MonoBehaviour
 
                 random00 = random01;
                 
-                random01 = Random.Range(0, 5);
+                random01 = Random.Range(0, 4);
 
 
                 while (random01 == random00)
                 {
-                    random01 = Random.Range(0, 5);
+                    random01 = Random.Range(0, 4);
                 }
 
 
@@ -121,6 +124,8 @@ public class NPC_Follow : MonoBehaviour
 
         fillDialogueLines = true;
 
+        
+
         StartCoroutine(ContinueWriteDialogue());
 
 
@@ -135,18 +140,26 @@ public class NPC_Follow : MonoBehaviour
 			if (linesNext == linesA /*|| linesNext == linesA1 || linesNext == linesA2 || linesNext == linesA3*/)
 			{
                 dObject.numeroAnim = 10;
+
+                UIManager.InstanceGUI.BurbujaDialogo(5);  
             }
 
             if (linesNext == linesB || linesNext == linesB1 || linesNext == linesB2 || linesNext == linesB3)
             {
 
+
+
                 dObject.numeroAnim = 11;
+
+                UIManager.InstanceGUI.BurbujaDialogo(6);
             }
 
             if (linesNext == linesC)
             {
 
                 dObject.numeroAnim = 12;
+
+                UIManager.InstanceGUI.BurbujaDialogo(6);
             }
            
         }
@@ -157,6 +170,8 @@ public class NPC_Follow : MonoBehaviour
             if (linesNext == linesA)
             {
                 dObject.numeroAnim = 15;
+
+                UIManager.InstanceGUI.BurbujaDialogo(7);
             }
 
 
@@ -177,7 +192,13 @@ public class NPC_Follow : MonoBehaviour
         dialogueText.text = string.Empty;
 
 
-        dObject.IconDialogo(linesNext[dObject.index]);
+        //dObject.IconDialogo(dObject.lines[dObject.index]);
+
+        //UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
+
+
+
+        IconDialogoS(linesNext[dObject.index]);
 
         foreach (char letter in linesNext[dObject.index].Substring(1).ToCharArray())
         {
@@ -185,7 +206,11 @@ public class NPC_Follow : MonoBehaviour
             yield return new WaitForSeconds(dObject.speedText);
         }
 
-        UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+        if (dialogueText.text == linesNext[dObject.index].Substring(1))
+        {
+            UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+        }
+        
 
 
 
@@ -209,7 +234,23 @@ public class NPC_Follow : MonoBehaviour
 
     }
 
+    void IconDialogoS(string lineas)
+    {
 
+        if (lineas.Trim().StartsWith("P"))
+        {
+            UIManager.InstanceGUI.PosicionarGlobo(dObject.trPlayer.position);
+        }
+
+        if (lineas.Trim().StartsWith("L"))
+        {
+            UIManager.InstanceGUI.PosicionarGlobo(transform.position);
+            dObject.VocesRandom();
+
+        }
+
+
+    }
 
     private void Update()
     {

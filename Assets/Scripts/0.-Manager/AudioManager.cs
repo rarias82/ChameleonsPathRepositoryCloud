@@ -10,6 +10,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip cancionMenu;
     public AudioClip clickButton;
     public AudioClip selectButton;
+    public AudioClip selectGood;
+    public AudioClip selectBad;
     public static AudioManager Instance;
     //{
     //    get;

@@ -7,11 +7,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public static UIManager InstanceGUI;
-    //{
-    //    get;
-    //    private set;
-    //}
-
+   
     [Header("Dialogue Variables")]
     public Image blackScreen;
     public bool fadeBlack;
@@ -52,12 +48,26 @@ public class UIManager : MonoBehaviour
     [Header("Canvas")]
     [SerializeField] GameObject[] HUDLienzos;
 
+    [Header("Temblor")]
+    [SerializeField] float duracionTemblor = 1.0f;
+    [SerializeField] AnimationCurve curvas;
+
+    [Header("FPS")]
+    int limiteDeFrames = 180;
+
+    [Header("Burubuja")]
+    Animator animBurbuja;
 
 
-    void ForceScales()
+
+
+
+
+    void ForceScalesAndLimitFPS()
     {
 
         Screen.SetResolution(1280, 720, true);
+        Application.targetFrameRate = limiteDeFrames;
 
     }
     public void ExitPlayGame()
@@ -164,7 +174,10 @@ public class UIManager : MonoBehaviour
             if (add)
             {
 
-            if (puntosCalificacion < 300)
+            FollowCameras.instance.OnConfetis(1);
+
+
+            if (puntosCalificacion < 400)
             {
                 rtCircleV = (rtCircle.position + (Vector3.right * puntos));
 
@@ -175,9 +188,11 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-        
 
-            if (puntosCalificacion > -100)
+            FollowCameras.instance.OnConfetis(2);
+            StartCoroutine(TemblorPantalla());
+
+            if (puntosCalificacion > -200)
             {
                 rtCircleV = (rtCircle.position + (Vector3.left * puntos));
 
@@ -279,6 +294,56 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public IEnumerator FinalARana()
+    {
+
+        MainCharacter.sharedInstance._map.Jugador.Disable();
+        UIManager.InstanceGUI.obAnim.SetTrigger("StartTransition");
+
+        yield return new WaitForSeconds(1f);
+
+        FindObjectOfType<NPC_Rana>().gameObject.SetActive(false);
+
+
+        yield return new WaitForSeconds(1f);
+
+
+        MainCharacter.sharedInstance.canMove = true;
+        MainCharacter.sharedInstance._map.Jugador.Enable();
+
+
+    }
+
+    public void Temblor()
+    {
+        StartCoroutine(TemblorPantalla());
+        
+    }
+
+    IEnumerator TemblorPantalla()
+    {
+        Vector3 posInicial = FollowCameras.instance.transform.position;
+        float tiempoTranscurrido = 0.0f;
+        float fuerza = 0.0f;
+
+        while (tiempoTranscurrido < duracionTemblor)
+        {
+            tiempoTranscurrido += Time.deltaTime;
+            fuerza = curvas.Evaluate(tiempoTranscurrido/duracionTemblor);
+            FollowCameras.instance.transform.position = posInicial + (Random.insideUnitSphere * fuerza);
+            yield return null;
+        }
+
+        FollowCameras.instance.transform.position = posInicial;
+
+    }
+
+    public void BurbujaDialogo(float indice)
+    {
+        animBurbuja.SetFloat("Indicador", indice);
+
+    }
+
     private void Awake()
     {
         if (InstanceGUI == null /*&& Instance != this*/)
@@ -295,14 +360,15 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
-        
+        animBurbuja = GameObject.Find("BallonDialogue").GetComponent<Animator>();
         icono.gameObject.SetActive(false);
         puntosCalificacion = puntos;
         ballonDialogue.gameObject.SetActive(false);
         obAnim = GameObject.Find("Cortina").GetComponent<Animator>();
         HUDLienzos[0].SetActive(false);
         HUDLienzos[1].SetActive(true);
-        Screen.SetResolution(1280,720,true);
+        ForceScalesAndLimitFPS();
+        
 
     }
 
@@ -312,5 +378,9 @@ public class UIManager : MonoBehaviour
         
 
         DialogueFadeIn();
+
+       
     }
+
+
 }
