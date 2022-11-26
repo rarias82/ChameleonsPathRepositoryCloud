@@ -137,7 +137,9 @@ public class NPC_Follow : MonoBehaviour
         if (dObject.index == 1)
         {
 
-			if (linesNext == linesA /*|| linesNext == linesA1 || linesNext == linesA2 || linesNext == linesA3*/)
+            
+
+            if (linesNext == linesA /*|| linesNext == linesA1 || linesNext == linesA2 || linesNext == linesA3*/)
 			{
                 dObject.numeroAnim = 10;
 
@@ -161,8 +163,23 @@ public class NPC_Follow : MonoBehaviour
 
                 UIManager.InstanceGUI.BurbujaDialogo(6);
             }
-           
+
+
+
         }
+        else if (dObject.index == 2)
+        {
+            MainCharacter.sharedInstance.eAnim = 23;
+        }
+
+
+        //if (dObject.index == 1)
+        //{
+
+        //    
+
+        //}
+
 
         if (dObject.index == 3)
         {
@@ -173,6 +190,7 @@ public class NPC_Follow : MonoBehaviour
 
                 UIManager.InstanceGUI.BurbujaDialogo(7);
             }
+
 
 
         }

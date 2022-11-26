@@ -301,7 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxAudioSource: {fileID: 5127602461781102215}
   musicAudioSource: {fileID: 5127602461464407591}
-  musicTiempo: 1
+  musicTiempo: 2
   cancionNivel1: {fileID: 8300000, guid: 30d8b2fc78192d743ba1d8f858853a49, type: 3}
   cancionMenu: {fileID: 8300000, guid: c88f193d7a1fc274fb3417c7519638b7, type: 3}
   clickButton: {fileID: 8300000, guid: 20a70cdb263dd194a81ed12627b09ecf, type: 3}

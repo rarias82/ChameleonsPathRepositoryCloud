@@ -20,7 +20,7 @@ public class Item : MonoBehaviour
     
     void Start()
     {
-        marker.SetActive(false);
+        
     }
 
     // Update is called once per frame
@@ -39,8 +39,8 @@ public class Item : MonoBehaviour
             marker.SetActive(true);
             isRange = !isRange;
 
+            AudioManager.Instance.PlaySoundBien();
 
-            
 
             Inventory.instance.canPickUp = true;
 

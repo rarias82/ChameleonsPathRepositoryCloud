@@ -37,6 +37,7 @@ public class MainCharacter : MonoBehaviour
     public Vector3 vectorForAnim;
     public Animator obAnim;
     public float intervalo, animSpeed, animIntervalo;
+    public int eAnim;
 
     [Header("Effects")]
     [SerializeField] ParticleSystem polvoTierra;
@@ -188,8 +189,11 @@ public class MainCharacter : MonoBehaviour
             MovePlayer();
         }
 
+        if (_map.Jugador.Salir.WasPressedThisFrame())
+        {
+            UIManager.InstanceGUI.ExitPlayGame();
+        }
 
-       
     }
 
     private void LateUpdate()
@@ -218,6 +222,8 @@ public class MainCharacter : MonoBehaviour
         {
             obAnim.speed = animSpeed + 0.5f; 
         }
+
+        obAnim.SetInteger("Animo", eAnim);
 
         //switch (animIntervalo)
         //{

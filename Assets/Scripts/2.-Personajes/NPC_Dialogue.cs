@@ -269,8 +269,17 @@ public class NPC_Dialogue : MonoBehaviour
     }
     public void StartDialogue()
     {
-        
 
+        if (detectarLimites)
+        {
+            
+        }
+        else
+        {
+
+            AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
+
+        }
 
         MainCharacter.sharedInstance.animIntervalo = 0.0f;
 
@@ -391,7 +400,10 @@ public class NPC_Dialogue : MonoBehaviour
 
             if (detectarLimites)
             {
-                UIManager.InstanceGUI.BurbujaDialogo(0);
+
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+                MainCharacter.sharedInstance.eAnim = 2;
+                MainCharacter.sharedInstance.animIntervalo = 0.0f;
             }
             else
             {
@@ -401,7 +413,7 @@ public class NPC_Dialogue : MonoBehaviour
                 FollowCameras.instance.velocidadRotacion = -75.0f;
                 FollowCameras.instance.mode = Modo.Mundo;
                 
-                AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
+                
                 
             }
             
@@ -411,6 +423,68 @@ public class NPC_Dialogue : MonoBehaviour
                 numeroAnim = 17;
                 
             }
+
+
+            if (lines == obRoute.linesNextB || lines == obRoute.linesNextB1 || lines == obRoute.linesNextB2 || lines == obRoute.linesNextB3 || lines == obRoute.linesNextB4)
+            {
+                MainCharacter.sharedInstance.eAnim = 21;
+
+                if (index == 0)
+                {
+                    numeroAnim = 2;
+                }
+                if (index == 1)
+                {
+                    numeroAnim = 3;
+                }
+                if (index == 2)
+                {
+                    numeroAnim = 4;
+                }
+            }
+
+            if (lines == obRoute.linesNextC0 || lines == obRoute.linesNextC01 || lines == obRoute.linesNextC02 || lines == obRoute.linesNextC03 || lines == obRoute.linesNextC04)
+            {
+                MainCharacter.sharedInstance.eAnim = 20;
+
+                if (index == 0)
+                {
+                    numeroAnim = 2;
+                }
+                if (index == 1)
+                {
+                    numeroAnim = 3;
+                }
+                if (index == 2)
+                {
+                    numeroAnim = 4;
+                }
+            }
+
+
+            if (lines == obRoute.linesNextC2)
+            {
+                if (index == 0)
+                {
+                    MainCharacter.sharedInstance.eAnim = 20;
+                }
+
+                if (index == 1)
+                {
+                    numeroAnim = 2;
+                }
+
+                if (index == 2)
+                {
+                    MainCharacter.sharedInstance.eAnim = 21;
+                }
+
+                if (index == 3)
+                {
+                    numeroAnim = 3;
+                }
+            }
+            
 
             posOriginal = FollowCameras.instance.transform.position;
 
@@ -433,7 +507,29 @@ public class NPC_Dialogue : MonoBehaviour
             yield return null;
         }
 
-        
+
+
+        if (index == 0)
+        {
+            
+
+            if (!habloconLeahn)
+            {
+                MainCharacter.sharedInstance.eAnim = 20;
+            }
+        }
+
+        if (index == 2)
+        {
+
+
+            if (!habloconLeahn)
+            {
+                MainCharacter.sharedInstance.eAnim = 21;
+            }
+            
+        }
+
         if (index == 1)
 		{
             if (!habloconLeahn)
@@ -441,6 +537,7 @@ public class NPC_Dialogue : MonoBehaviour
                 numeroAnim = 2;
             }
             
+
         }
 
         if (index == 3 )
@@ -471,6 +568,9 @@ public class NPC_Dialogue : MonoBehaviour
 
         if (habloconLeahn)
         {
+
+
+
             if (index == 1)
             {
 
@@ -617,6 +717,7 @@ public class NPC_Dialogue : MonoBehaviour
                     UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
                     UIManager.InstanceGUI.BurbujaDialogo(7);
 
+
                     break;
 
                 case 1:
@@ -636,7 +737,7 @@ public class NPC_Dialogue : MonoBehaviour
                     break;
             }
 
-            
+            MainCharacter.sharedInstance.eAnim = 22;
 
             nextDialogueToTalk = id_selector;
         }
@@ -645,6 +746,8 @@ public class NPC_Dialogue : MonoBehaviour
     }
     public IEnumerator CloseDialogue()
     {
+
+        detector.SetActive(true);
 
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
 
@@ -660,7 +763,7 @@ public class NPC_Dialogue : MonoBehaviour
             
         }
 
-        FollowCameras.instance.mode = Modo.InGame;
+        
 
 
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
@@ -669,16 +772,31 @@ public class NPC_Dialogue : MonoBehaviour
 
         UIManager.InstanceGUI.fadeFrom = true;
 
-        while ((obCameras.orthographicSize < 7.5f) && FollowCameras.instance.transform.position != posOriginal /*&& offset != new Vector3(-15.00f, 12.5f, -15.00f)*/)
-        {
-            obCameras.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
-            //FollowCameras.instance.offset = Vector3.Slerp(FollowCameras.instance.offset, new Vector3(-15.00f, 12.5f, -15.00f), (speedZoom / 2.0f) * Time.deltaTime);
+        FollowCameras.instance.velocidadRotacion = -75f;
+        FollowCameras.instance.mode = Modo.MundoAlreves;
 
-            FollowCameras.instance.transform.position = Vector3.Slerp(FollowCameras.instance.transform.position, posOriginal, (speedZoom / 2.0f) * Time.deltaTime);
+        while (Camera.main.orthographicSize < 7.5f)
+        {
+            Camera.main.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
+
+            //FollowCameras.instance.transform.position = Vector3.Lerp(FollowCameras.instance.transform.position, posOriginal.transform.position, (speedZoom / 2.0f) * Time.deltaTime);
+
+            //Vector3 currentAngle = new Vector3(
+            //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.x, posOriginal.transform.rotation.eulerAngles.x, (speedZoom / 2.0f) * Time.deltaTime),
+            //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.y, posOriginal.transform.rotation.eulerAngles.y, (speedZoom / 2.0f) * Time.deltaTime),
+            //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.z, posOriginal.transform.rotation.eulerAngles.z, (speedZoom / 2.0f) * Time.deltaTime)
+            //);
 
             yield return null;
 
         }
+
+        while (FollowCameras.instance.mode == Modo.MundoAlreves)
+        {
+            yield return null;
+        }
+
+        FollowCameras.instance.mode = Modo.InGame;
 
 
         Inventory.instance.panelItem.SetActive(true);
@@ -701,70 +819,61 @@ public class NPC_Dialogue : MonoBehaviour
         MainCharacter.sharedInstance.canMove = true;
 
 
+        MainCharacter.sharedInstance.eAnim = 0; 
 
-
-        yield return new WaitForSeconds(0.001f);
+        yield return new WaitForSeconds(0.01f);
         marker.SetActive(true);
         didDialogueStart = false;
     }
     public IEnumerator CloseDialogueC()
     {
-        //index = 0;
-        //AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
+        detector.SetActive(true);
 
-        //UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
+        MainCharacter.sharedInstance.eAnim = 0;
 
-        //dialogueText.text = string.Empty;
-
-        //UIManager.InstanceGUI.fadeFrom = true;
-
-        //while (obCameras.orthographicSize < 7.5f)
-        //{
-        //    obCameras.orthographicSize += speedZoom * Time.deltaTime;
-        //    yield return null;
-
-        //}
-
-        //Inventory.instance.panelItem.SetActive(true);
-        //UIManager.InstanceGUI.obMap.SetActive(true);
-        //UIManager.InstanceGUI.obMapMark.SetActive(true);
-
-        //marker.SetActive(true);
-
-        //didDialogueStart = true;
-
-        //MainCharacter.sharedInstance.canMove = true;
-
-        //marker.SetActive(false);
-
-        //FollowCameras.instance.pararGiro = false;
-        //mode = ModeNPC.Follow;
-
-        //numeroAnim = 0;
         seguiraLogan = true;
 
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
 
         index = 0;
 
+        FollowCameras.instance.velocidadRotacion = -75f;
+        FollowCameras.instance.mode = Modo.MundoAlreves;
+
+        while (Camera.main.orthographicSize < 7.5f)
+        {
+            Camera.main.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
+
+            //FollowCameras.instance.transform.position = Vector3.Lerp(FollowCameras.instance.transform.position, posOriginal.transform.position, (speedZoom / 2.0f) * Time.deltaTime);
+
+            //Vector3 currentAngle = new Vector3(
+            //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.x, posOriginal.transform.rotation.eulerAngles.x, (speedZoom / 2.0f) * Time.deltaTime),
+            //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.y, posOriginal.transform.rotation.eulerAngles.y, (speedZoom / 2.0f) * Time.deltaTime),
+            //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.z, posOriginal.transform.rotation.eulerAngles.z, (speedZoom / 2.0f) * Time.deltaTime)
+            //);
+
+            yield return null;
+
+        }
+
+        while (FollowCameras.instance.mode == Modo.MundoAlreves)
+        {
+            yield return null;
+        }
+
+
         FollowCameras.instance.mode = Modo.InGame;
 
-        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
+ 
+
+        
 
         dialogueText.text = string.Empty;
 
         UIManager.InstanceGUI.fadeFrom = true;
 
-        while ((obCameras.orthographicSize < 7.5f) && FollowCameras.instance.transform.position != posOriginal /*&& offset != new Vector3(-15.00f, 12.5f, -15.00f)*/)
-        {
-            obCameras.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
-            //FollowCameras.instance.offset = Vector3.Slerp(FollowCameras.instance.offset, new Vector3(-15.00f, 12.5f, -15.00f), (speedZoom / 2.0f) * Time.deltaTime);
-
-            FollowCameras.instance.transform.position = Vector3.Slerp(FollowCameras.instance.transform.position, posOriginal, (speedZoom / 2.0f) * Time.deltaTime);
-
-            yield return null;
-
-        }
+       
 
         Inventory.instance.panelItem.SetActive(true);
         UIManager.InstanceGUI.obMap.SetActive(true);
@@ -786,7 +895,7 @@ public class NPC_Dialogue : MonoBehaviour
 
         
 
-        yield return new WaitForSeconds(0.001f);
+        yield return new WaitForSeconds(0.01f);
         marker.SetActive(true);
         didDialogueStart = false;
 
@@ -795,10 +904,10 @@ public class NPC_Dialogue : MonoBehaviour
 
     public IEnumerator CloseDialogueN()
     {
-
+        
         index = 0;
 
-
+        MainCharacter.sharedInstance.eAnim = 0;
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         dialogueText.text = string.Empty;
@@ -833,7 +942,9 @@ public class NPC_Dialogue : MonoBehaviour
 
             detectarLimites = false;
 
-            didDialogueStart = false;
+
+        yield return new WaitForSeconds(0.01f);
+        didDialogueStart = false;
 
             logan = false;
 
@@ -1047,7 +1158,7 @@ public class NPC_Dialogue : MonoBehaviour
 
 
 
-            else if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0 && !nextRoute && !logan && !detectarLimites && !enrique.seAcabo && !rana.didDialogueStart && !houses.didDialogueStart)
+            else if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0 && !nextRoute && !logan && !detectarLimites && !enrique.seAcabo && /*!rana.didDialogueStart*/ /*&&*/ !houses.didDialogueStart)
             {
                 if (dialogueText.text == lines[index].Substring(1))
                 {

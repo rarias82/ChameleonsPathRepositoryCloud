@@ -204,6 +204,7 @@ public class NPC_Henry : MonoBehaviour
         {
             VocesRandom();
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
+            UIManager.InstanceGUI.BurbujaDialogo(8);
 
         }
 
@@ -348,7 +349,7 @@ public class NPC_Henry : MonoBehaviour
 
         DialogoRandom();
 
-        FollowCameras.instance.mode = Modo.Mundo;
+        
 
 
         if (seAcabo)
@@ -365,16 +366,21 @@ public class NPC_Henry : MonoBehaviour
     {
         if (index == 0)
         {
+
+
             
+
             if (detectarLimites)
             {
-                UIManager.InstanceGUI.BurbujaDialogo(1);
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+                MainCharacter.sharedInstance.eAnim = 2;
+                MainCharacter.sharedInstance.animIntervalo = 0.0f;
             }
             else
             {
                 detector.SetActive(true);
 
-                UIManager.InstanceGUI.BurbujaDialogo(0);
+                UIManager.InstanceGUI.BurbujaDialogo(8);
 
                 FollowCameras.instance.velocidadRotacion = -75.0f;
                 FollowCameras.instance.mode = Modo.Mundo;
@@ -388,6 +394,13 @@ public class NPC_Henry : MonoBehaviour
             {
                 Vector3 direction = transform.position - new Vector3(trPlayer.transform.position.x, 6.079084f, trPlayer.transform.position.z);
                 Vector3 otraDirection = transform.position - new Vector3(trPlayer.transform.position.x, 6.079084f, trPlayer.transform.position.z);
+
+                //if (seAcabo)
+                //{
+
+                //}
+                //Vector3 directionL = transform.position - new Vector3(mapeo.transform.position.x, 6.079084f, mapeo.transform.position.z);
+                //Vector3 otraDirectionL = transform.position - new Vector3(mapeo.transform.position.x, 6.079084f, mapeo.transform.position.z);
 
                 if (!detectarLimites)
                 {
@@ -405,6 +418,31 @@ public class NPC_Henry : MonoBehaviour
 
             }
            
+
+        }
+
+        if (lines == linesA5)
+        {
+
+            if ((index == 0) || (index == 2))
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(1);
+            }
+            
+        }
+
+        if (lines == linesFinalA)
+        {
+            if (index % 2 == 0)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(7);
+            }
+            else
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(3);
+            }
+
+
 
         }
 
@@ -477,8 +515,11 @@ public class NPC_Henry : MonoBehaviour
 
     public IEnumerator CloseDialogue()
     {
-
+        detector.SetActive(true);
         index = 0;
+
+        MainCharacter.sharedInstance.eAnim = 0;
+
 
         if (!logan)
         {
@@ -491,23 +532,39 @@ public class NPC_Henry : MonoBehaviour
 
         UIManager.InstanceGUI.fadeFrom = true;
 
-        FollowCameras.instance.mode = Modo.InGame;
+        
 
         if (!detectarLimites)
         {
             //FollowCameras.instance.mode = Modo.InGame;
 
 
-            while ((obCameras.orthographicSize < 7.5f) && FollowCameras.instance.transform.position != posOriginal /*&& offset != new Vector3(-15.00f, 12.5f, -15.00f)*/)
-            {
-                obCameras.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
-                //FollowCameras.instance.offset = Vector3.Slerp(FollowCameras.instance.offset, new Vector3(-15.00f, 12.5f, -15.00f), (speedZoom / 2.0f) * Time.deltaTime);
+            FollowCameras.instance.velocidadRotacion = -75f;
+            FollowCameras.instance.mode = Modo.MundoAlreves;
 
-                FollowCameras.instance.transform.position = Vector3.Slerp(FollowCameras.instance.transform.position, posOriginal, (speedZoom / 2.0f) * Time.deltaTime);
+            while (Camera.main.orthographicSize < 7.5f)
+            {
+                Camera.main.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
+
+                //FollowCameras.instance.transform.position = Vector3.Lerp(FollowCameras.instance.transform.position, posOriginal.transform.position, (speedZoom / 2.0f) * Time.deltaTime);
+
+                //Vector3 currentAngle = new Vector3(
+                //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.x, posOriginal.transform.rotation.eulerAngles.x, (speedZoom / 2.0f) * Time.deltaTime),
+                //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.y, posOriginal.transform.rotation.eulerAngles.y, (speedZoom / 2.0f) * Time.deltaTime),
+                //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.z, posOriginal.transform.rotation.eulerAngles.z, (speedZoom / 2.0f) * Time.deltaTime)
+                //);
 
                 yield return null;
 
             }
+
+            while (FollowCameras.instance.mode == Modo.MundoAlreves)
+            {
+                yield return null;
+            }
+
+
+            FollowCameras.instance.mode = Modo.InGame;
 
             marker.SetActive(true);
 
@@ -570,6 +627,8 @@ public class NPC_Henry : MonoBehaviour
             {
                 mapeo.rana.gameObject.SetActive(false);
             }
+
+
             
 
         }
@@ -588,7 +647,7 @@ public class NPC_Henry : MonoBehaviour
 
             detectarLimites = false;
 
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(0.01f);
             
             
 
@@ -607,9 +666,19 @@ public class NPC_Henry : MonoBehaviour
     }
     void TurnToLogan()
     {
+        if (seAcabo)
+        {
+            Vector3 directionLeahn = mapeo.transform.position - transform.position;
+            transform.forward = Vector3.Lerp(transform.forward, directionLeahn, (speedZoom / 2.5f) * Time.deltaTime);
+        }
+        else
+        {
+            Vector3 direction = trPlayer.transform.position - transform.position;
+            transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
+        }
+        
 
-        Vector3 direction = trPlayer.transform.position - transform.position;
-        transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
+     
 
     }
 

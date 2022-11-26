@@ -18,6 +18,7 @@ public class Navegar : MonoBehaviour
     public Animator logan, opciones;
 
     [SerializeField] float distancia;
+    public bool puedemoverse;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -99,19 +100,41 @@ public class Navegar : MonoBehaviour
         _map.Opciones.Enable();
     }
 
-    void Navegar1()
+    void AparecerCOntroles()
     {
-        if (_map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 1)
-        {
-            id_selector++;
-            AudioManager.Instance.PlaySound(seleccionar);
 
+
+        puedemoverse = !puedemoverse;
+
+        if (!puedemoverse)
+        {
+            UIManager.InstanceGUI.ObPausas.SetActive(false);
+        }
+        else
+        {
+            UIManager.InstanceGUI.ObPausas.SetActive(true);
         }
 
-        if (_map.Jugador.BUP.WasPressedThisFrame() && id_selector > 0)
+
+    }
+
+    void Navegar1()
+    {
+        if (!puedemoverse)
         {
-            id_selector--;
-            AudioManager.Instance.PlaySound(seleccionar);
+            if (_map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 1)
+            {
+                id_selector++;
+                AudioManager.Instance.PlaySound(seleccionar);
+
+            }
+
+            if (_map.Jugador.BUP.WasPressedThisFrame() && id_selector > 0)
+            {
+                id_selector--;
+                AudioManager.Instance.PlaySound(seleccionar);
+            }
+
         }
 
         boton.transform.SetParent(listOptions[id_selector].transform);
@@ -145,8 +168,14 @@ public class Navegar : MonoBehaviour
 
                 case 1:
 
-                    UIManager.InstanceGUI.ExitPlayGame();
+                    AparecerCOntroles();
+                    
 
+                    break;
+
+                case 2:
+
+                    UIManager.InstanceGUI.ExitPlayGame();
 
                     break;
 

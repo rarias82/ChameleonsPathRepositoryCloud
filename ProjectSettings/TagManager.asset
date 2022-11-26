@@ -11,6 +11,7 @@ TagManager:
   - AnguloIndicado
   - KeyStone
   - Objeto
+  - AnguloIndicadoS
   layers:
   - Default
   - TransparentFX

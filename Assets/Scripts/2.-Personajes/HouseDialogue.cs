@@ -343,16 +343,19 @@ public class HouseDialogue : MonoBehaviour
         if (lineas.Trim().StartsWith("P"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position/* + new Vector3(0f,50f,0f)*/);
+            UIManager.InstanceGUI.BurbujaDialogo(7);
         }
 
         if (lineas.Trim().StartsWith("L"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
+
         }
 
         if (lineas.Trim().StartsWith("H"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(casaGO.position);
+            UIManager.InstanceGUI.BurbujaDialogo(8);
             VocesRandom();
         }
 
@@ -383,6 +386,8 @@ public class HouseDialogue : MonoBehaviour
             UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
         }
 
+        
+
         dialogueText.text = string.Empty;
 
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
@@ -390,6 +395,40 @@ public class HouseDialogue : MonoBehaviour
        
 
         IconDialogo(lines[index]);
+
+
+        if (index == 0)
+        {
+            MainCharacter.sharedInstance.eAnim = 1;
+            
+        }
+
+
+        if (index == 1)
+        {
+
+            MainCharacter.sharedInstance.eAnim = 2;
+
+            if (talkToLeahn)
+            {
+                
+            }
+            
+        }
+
+        if (index == 2)
+        {
+            if (talkToLeahn)
+            {
+                MainCharacter.sharedInstance.eAnim = 3;
+            }
+            else
+            {
+                MainCharacter.sharedInstance.eAnim = 3;
+            }
+
+            
+        }
 
 
         foreach (char letter in lines[index].Substring(1).ToCharArray())
@@ -593,6 +632,8 @@ public class HouseDialogue : MonoBehaviour
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         index = 0;
+
+        MainCharacter.sharedInstance.eAnim = 0;
 
         dialogueText.text = string.Empty;
 

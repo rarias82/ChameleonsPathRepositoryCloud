@@ -36,13 +36,18 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(ChangeMusic(cancionNivel1));
+        StartCoroutine(ChangeMusic(cancionMenu));
             
     }
 
     public void PlaySound(AudioClip clip)
     {
         sfxAudioSource.PlayOneShot(clip);
+    }
+
+    public void PlaySoundBien()
+    {
+        sfxAudioSource.PlayOneShot(selectGood);
     }
 
 

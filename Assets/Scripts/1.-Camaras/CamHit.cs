@@ -21,13 +21,7 @@ public class CamHit : MonoBehaviour
         Ray theRay = new Ray(rayo.transform.position, rayo.transform.TransformDirection(direction * range));
         Debug.DrawRay(rayo.transform.position, rayo.transform.TransformDirection(direction * range));
 
-        if (Physics.Raycast(theRay, out RaycastHit hit, range))
-        {
-            if (hit.collider.CompareTag("AnguloIndicado"))
-            {
-                
-            }
-        }
+      
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,7 +39,18 @@ public class CamHit : MonoBehaviour
             }
         }
 
+        if (FollowCameras.instance.mode == Modo.MundoAlreves)
+        {
+            if (other.gameObject.CompareTag("AnguloIndicadoS"))
+            {
 
+
+                FollowCameras.instance.pararGiro = true;
+
+
+
+            }
+        }
 
 
 

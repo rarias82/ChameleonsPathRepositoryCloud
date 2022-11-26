@@ -167,6 +167,7 @@ MonoBehaviour:
   logan: {fileID: 1722750389}
   opciones: {fileID: 599097773}
   distancia: 210
+  puedemoverse: 0
 --- !u!4 &142892619
 Transform:
   m_ObjectHideFlags: 0
@@ -357,7 +358,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &599097770
 PrefabInstance:
@@ -366,9 +367,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1097715334759986184, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 1120405090103575184, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: e36720d734ddf1a469583701791c3186, type: 3}
+    - target: {fileID: 1989169824247872324, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -365
       objectReference: {fileID: 0}
     - target: {fileID: 6908791709405134095, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
       propertyPath: m_Name
@@ -376,7 +381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6908791709405134096, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6908791709405134096, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -417,10 +422,6 @@ PrefabInstance:
     - target: {fileID: 6908791709405134096, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8056187206849380038, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
@@ -492,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5127602462373669959, guid: 6e51735d9f2ff9744b7fa38a34546dbb, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5127602462373669959, guid: 6e51735d9f2ff9744b7fa38a34546dbb, type: 3}
       propertyPath: m_LocalPosition.x

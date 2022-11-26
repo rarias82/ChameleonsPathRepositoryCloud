@@ -80,6 +80,33 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pausa"",
+                    ""type"": ""Button"",
+                    ""id"": ""ec85568a-9ef5-4444-a372-e5f0922cd15c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reiniciar"",
+                    ""type"": ""Button"",
+                    ""id"": ""32c04a85-6bec-43fb-8503-ef0975d3487c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Salir"",
+                    ""type"": ""Button"",
+                    ""id"": ""34bc0aab-bcb4-42a8-94c0-303fc1c8634f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -632,6 +659,105 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
                     ""action"": ""BDOWN"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c9a98b3-8282-4c70-b0bf-759682eecf36"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pausa"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6874f112-5cab-4169-abf3-86b40c9325cd"",
+                    ""path"": ""<XInputController>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pausa"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c9a3da9f-919d-40c8-b567-8b5d4d0fc0f7"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pausa"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc86a10f-d11c-4284-a824-4f4ed4ac35b7"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reiniciar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""697e805b-bca0-4037-89a4-b88d4088ad8e"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reiniciar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5151fb20-aa9c-462c-9102-bda07b49d283"",
+                    ""path"": ""<XInputController>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reiniciar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f893eeae-674e-4500-bf8f-8a31411a6336"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Salir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""951d4bb2-1a53-4cb3-af25-2be101383a98"",
+                    ""path"": ""<XInputController>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Salir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6129e420-a283-4173-94ae-0c1afb02d388"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Salir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -958,6 +1084,9 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
         m_Jugador_Interactuar = m_Jugador.FindAction("Interactuar", throwIfNotFound: true);
         m_Jugador_BUP = m_Jugador.FindAction("BUP", throwIfNotFound: true);
         m_Jugador_BDOWN = m_Jugador.FindAction("BDOWN", throwIfNotFound: true);
+        m_Jugador_Pausa = m_Jugador.FindAction("Pausa", throwIfNotFound: true);
+        m_Jugador_Reiniciar = m_Jugador.FindAction("Reiniciar", throwIfNotFound: true);
+        m_Jugador_Salir = m_Jugador.FindAction("Salir", throwIfNotFound: true);
         // Opciones
         m_Opciones = asset.FindActionMap("Opciones", throwIfNotFound: true);
         m_Opciones_Apretar = m_Opciones.FindAction("Apretar", throwIfNotFound: true);
@@ -1027,6 +1156,9 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
     private readonly InputAction m_Jugador_Interactuar;
     private readonly InputAction m_Jugador_BUP;
     private readonly InputAction m_Jugador_BDOWN;
+    private readonly InputAction m_Jugador_Pausa;
+    private readonly InputAction m_Jugador_Reiniciar;
+    private readonly InputAction m_Jugador_Salir;
     public struct JugadorActions
     {
         private @Mapa m_Wrapper;
@@ -1037,6 +1169,9 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
         public InputAction @Interactuar => m_Wrapper.m_Jugador_Interactuar;
         public InputAction @BUP => m_Wrapper.m_Jugador_BUP;
         public InputAction @BDOWN => m_Wrapper.m_Jugador_BDOWN;
+        public InputAction @Pausa => m_Wrapper.m_Jugador_Pausa;
+        public InputAction @Reiniciar => m_Wrapper.m_Jugador_Reiniciar;
+        public InputAction @Salir => m_Wrapper.m_Jugador_Salir;
         public InputActionMap Get() { return m_Wrapper.m_Jugador; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1064,6 +1199,15 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
                 @BDOWN.started -= m_Wrapper.m_JugadorActionsCallbackInterface.OnBDOWN;
                 @BDOWN.performed -= m_Wrapper.m_JugadorActionsCallbackInterface.OnBDOWN;
                 @BDOWN.canceled -= m_Wrapper.m_JugadorActionsCallbackInterface.OnBDOWN;
+                @Pausa.started -= m_Wrapper.m_JugadorActionsCallbackInterface.OnPausa;
+                @Pausa.performed -= m_Wrapper.m_JugadorActionsCallbackInterface.OnPausa;
+                @Pausa.canceled -= m_Wrapper.m_JugadorActionsCallbackInterface.OnPausa;
+                @Reiniciar.started -= m_Wrapper.m_JugadorActionsCallbackInterface.OnReiniciar;
+                @Reiniciar.performed -= m_Wrapper.m_JugadorActionsCallbackInterface.OnReiniciar;
+                @Reiniciar.canceled -= m_Wrapper.m_JugadorActionsCallbackInterface.OnReiniciar;
+                @Salir.started -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSalir;
+                @Salir.performed -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSalir;
+                @Salir.canceled -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSalir;
             }
             m_Wrapper.m_JugadorActionsCallbackInterface = instance;
             if (instance != null)
@@ -1086,6 +1230,15 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
                 @BDOWN.started += instance.OnBDOWN;
                 @BDOWN.performed += instance.OnBDOWN;
                 @BDOWN.canceled += instance.OnBDOWN;
+                @Pausa.started += instance.OnPausa;
+                @Pausa.performed += instance.OnPausa;
+                @Pausa.canceled += instance.OnPausa;
+                @Reiniciar.started += instance.OnReiniciar;
+                @Reiniciar.performed += instance.OnReiniciar;
+                @Reiniciar.canceled += instance.OnReiniciar;
+                @Salir.started += instance.OnSalir;
+                @Salir.performed += instance.OnSalir;
+                @Salir.canceled += instance.OnSalir;
             }
         }
     }
@@ -1139,6 +1292,9 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
         void OnInteractuar(InputAction.CallbackContext context);
         void OnBUP(InputAction.CallbackContext context);
         void OnBDOWN(InputAction.CallbackContext context);
+        void OnPausa(InputAction.CallbackContext context);
+        void OnReiniciar(InputAction.CallbackContext context);
+        void OnSalir(InputAction.CallbackContext context);
     }
     public interface IOpcionesActions
     {

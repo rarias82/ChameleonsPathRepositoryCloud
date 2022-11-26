@@ -92,7 +92,7 @@ public class Inventory : MonoBehaviour
         {
             if (slot[i].GetComponent<Slot>().empty)
             {
-                AudioManager.Instance.PlaySound(AudioManager.Instance.selectGood);
+                
 
                 itemObject.GetComponent<Item>().pickeUp = true;
                 slot[i].GetComponent<Slot>().item = itemObject;
@@ -195,6 +195,9 @@ public class Inventory : MonoBehaviour
         _map = new Mapa();
         
         _map.Jugador.Enable();
+
+        UIManager.InstanceGUI.HUDLienzos[0].SetActive(true);
+        UIManager.InstanceGUI.HUDLienzos[1].SetActive(false);
     }
 
 

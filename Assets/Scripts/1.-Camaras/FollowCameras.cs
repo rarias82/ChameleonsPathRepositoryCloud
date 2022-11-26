@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Modo
 {
-    InGame, InDialogue, Stop, Test, Mundo
+    InGame, InDialogue, Stop, Test, Mundo, MundoAlreves
 }
 public class FollowCameras : MonoBehaviour
 {
@@ -103,6 +103,17 @@ public class FollowCameras : MonoBehaviour
         }
     }
 
+    void MundoAlreves()
+    {
+
+        transform.RotateAround(trPlayer.position, Vector3.up, -velocidadRotacion * Time.deltaTime);
+        if (pararGiro)
+        {
+            velocidadRotacion = 0;
+            mode = Modo.InGame;
+        }
+    }
+
     void StopMove()
     {
         //posX = trPlayer.position.x;
@@ -189,6 +200,11 @@ public class FollowCameras : MonoBehaviour
         if (mode == Modo.Mundo)
         {
             Mundo();
+        }
+
+        if (mode == Modo.MundoAlreves)
+        {
+            MundoAlreves();
         }
 
 
