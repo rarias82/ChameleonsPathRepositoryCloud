@@ -107,15 +107,7 @@ public class NPC_Dialogue : MonoBehaviour
     {
         instance = this;
 
-        dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
-
-        Options = GameObject.Find("DialogueOptions").gameObject;
-
-        selector = GameObject.Find("Select").gameObject;
-
-        listOptions[0] = GameObject.Find("Panel0").gameObject;
-        listOptions[1] = GameObject.Find("Panel1").gameObject;
-        listOptions[2] = GameObject.Find("Panel2").gameObject;
+        
     }
 
     private void OnEnable()
@@ -681,7 +673,7 @@ public class NPC_Dialogue : MonoBehaviour
     public void Navegate()
     {
 
-        if (_map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 1)
+        if (_map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 2)
         {
             id_selector++;
 
@@ -727,11 +719,11 @@ public class NPC_Dialogue : MonoBehaviour
 
                     break;
 
-                case 2:
-                    obRoute.StarRoute(id_selector);
-                    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
-                    UIManager.InstanceGUI.BurbujaDialogo(2);
-                    break;
+                //case 2:
+                //    obRoute.StarRoute(id_selector);
+                //    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
+                //    UIManager.InstanceGUI.BurbujaDialogo(2);
+                //    break;
 
                 default:
                     break;
@@ -1048,11 +1040,21 @@ public class NPC_Dialogue : MonoBehaviour
 		numeroAnim = 1;
         detector.SetActive(false);
 
-        
+
+
+        dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
+
+        Options = GameObject.Find("DialogueOptions").gameObject;
+
+        selector = GameObject.Find("Select").gameObject;
+
+        listOptions[0] = GameObject.Find("Panel0").gameObject;
+        listOptions[1] = GameObject.Find("Panel1").gameObject;
+        listOptions[2] = GameObject.Find("Panel2").gameObject;
 
 
 
-       
+
 
 
         //houses = FindObjectOfType<HouseDialogue>();

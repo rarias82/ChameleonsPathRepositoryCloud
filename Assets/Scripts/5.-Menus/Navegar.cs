@@ -163,13 +163,14 @@ public class Navegar : MonoBehaviour
                     puedeSeleccionar = false;
 
                     logan.SetBool("Aparecer", true);
-
+                    _map.Jugador.Disable();
                     break;
 
                 case 1:
 
                     AparecerCOntroles();
-                    
+                    AudioManager.Instance.PlaySound(sonido);
+
 
                     break;
 

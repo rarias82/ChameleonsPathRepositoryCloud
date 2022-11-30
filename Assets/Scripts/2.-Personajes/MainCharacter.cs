@@ -53,15 +53,10 @@ public class MainCharacter : MonoBehaviour
     void Awake()
     {
         sharedInstance = this;
-        obAnim = transform.GetComponentInChildren<Animator>();
+        
+      
 
-        _leahn = FindObjectOfType<NPC_Dialogue>();
-        //_rana = FindObjectOfType<NPC_Rana>();
-        _map = new Mapa();
-        _map.Jugador.Enable();
-        _map.Opciones.Enable();
-
-        FindObjectOfType<Inventory>().SetInputActions(_map);
+        
 
 
     }
@@ -166,6 +161,10 @@ public class MainCharacter : MonoBehaviour
     }
     void Start()
     {
+
+        obAnim = transform.GetComponentInChildren<Animator>();
+
+        _leahn = FindObjectOfType<NPC_Dialogue>();
         // Incicializar las variables principales
         playerCamera = Camera.main.transform;
         moveSpeed = MaxmoveSpeed;
@@ -178,7 +177,7 @@ public class MainCharacter : MonoBehaviour
         _leahn.SetInputActions(_map);
         //_rana.SetInputActions(_map);
 
-        _map.Jugador.Enable();
+        //_map.Jugador.Enable();
     }
 
     // Update is called once per frame

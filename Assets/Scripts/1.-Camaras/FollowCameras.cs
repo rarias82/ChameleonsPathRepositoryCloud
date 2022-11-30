@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Modo
 {
-    InGame, InDialogue, Stop, Test, Mundo, MundoAlreves
+    InGame, InDialogue, Stop, Test, Mundo, MundoAlreves, Principio
 }
 public class FollowCameras : MonoBehaviour
 {
@@ -41,6 +41,11 @@ public class FollowCameras : MonoBehaviour
     public ParticleSystem confetis;
     public ParticleSystem confetisB;
     public ParticleSystem confetisM;
+
+    [Header("Principio Variables")]
+    [SerializeField] Transform[] puntosASeguir;
+    [SerializeField] float transitionSpeed;
+    [SerializeField] Transform puntoActual;
 
 
 
@@ -135,6 +140,13 @@ public class FollowCameras : MonoBehaviour
 
     }
 
+    void Interpolar()
+    {
+
+
+
+    }
+
     public void OnConfetis(int seleccion)
     {
         switch (seleccion)
@@ -205,6 +217,11 @@ public class FollowCameras : MonoBehaviour
         if (mode == Modo.MundoAlreves)
         {
             MundoAlreves();
+        }
+
+        if (mode == Modo.Principio)
+        {
+            Interpolar();
         }
 
 

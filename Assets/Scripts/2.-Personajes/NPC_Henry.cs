@@ -77,6 +77,10 @@ public class NPC_Henry : MonoBehaviour
     [SerializeField] AudioClip[] voces;
     int voz000, voz001;
 
+    [Header("Efectos")]
+    [SerializeField] ParticleSystem polvoTierra;
+    
+
     void VocesRandom()
     {
         voz000 = voz001;
@@ -106,7 +110,7 @@ public class NPC_Henry : MonoBehaviour
         obNMA = GetComponent<NavMeshAgent>();
         speedNPC = obNMA.speed;
 
-
+        polvoTierra.Stop();
 
         if (hd.optionCBuscarHermano)
         {
@@ -138,6 +142,8 @@ public class NPC_Henry : MonoBehaviour
     public void Interactuar()
     {
 
+
+
         if (isRange && NPC_Dialogue.instance.isRange && Inventory.instance.moverInv && !logan && !mapeo.logan)
         {
             if (!didDialogueStart)
@@ -164,6 +170,8 @@ public class NPC_Henry : MonoBehaviour
             StartCoroutine(CloseDialogue());
             UIManager.InstanceGUI.icono.gameObject.SetActive(false);
         }
+
+
 
         if ((isRange) && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !seAcabo)
         {
@@ -772,17 +780,30 @@ public class NPC_Henry : MonoBehaviour
 
                     mode = ModeNPCHenry.Follow;
 
-                    obNMA.speed = speedNPC;
+                    
                     isRange = !isRange;
                     marker.SetActive(false);
 
-                    numeroAnim = 30;
+                    StartCoroutine(Esperar());
+            //obNMA.speed = speedNPC;
+            
 
-            }
+
+        }
               
 
 
             
+    }
+
+    IEnumerator Esperar()
+    {
+
+        
+        yield return new WaitForSeconds(0.25f);
+        polvoTierra.Play();
+        numeroAnim = 30;
+        obNMA.speed = speedNPC;
     }
 
     private void LateUpdate()

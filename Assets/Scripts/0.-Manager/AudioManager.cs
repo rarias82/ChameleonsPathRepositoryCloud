@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(ChangeMusic(cancionMenu));
+        //StartCoroutine(ChangeMusic(cancionMenu));
             
     }
 

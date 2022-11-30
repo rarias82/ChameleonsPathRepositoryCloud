@@ -144,6 +144,13 @@ public class NPC_Rana : MonoBehaviour
 
         //numeroAnim = 400;
 
+       
+
+
+    }
+
+    void Start()
+    {
         dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
 
         mapeo = FindObjectOfType<NPC_Dialogue>();
@@ -162,8 +169,6 @@ public class NPC_Rana : MonoBehaviour
         {
             objeto.gameObject.SetActive(false);
         }
-
-
     }
     void VocesRandom()
     {

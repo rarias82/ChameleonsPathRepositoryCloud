@@ -122,9 +122,14 @@ public class HouseDialogue : MonoBehaviour
 
         instancias = this;
 
+       
+    }
+
+    private void Start()
+    {
         marker.SetActive(false);
         respuestaDada = GameObject.Find("NPC_Level_Leahn").GetComponent<NPC_Dialogue>();
-        henry = FindObjectOfType<NPC_Henry>(); 
+        henry = FindObjectOfType<NPC_Henry>();
         trPlayer = GameObject.Find("Player").GetComponent<Transform>();
         //obHenry.SetActive(false);
 
@@ -138,12 +143,7 @@ public class HouseDialogue : MonoBehaviour
         listOptions[0] = GameObject.Find("Panel0").gameObject.GetComponentInChildren<TextMeshProUGUI>();
         listOptions[1] = GameObject.Find("Panel1").gameObject.GetComponentInChildren<TextMeshProUGUI>();
         listOptions[2] = GameObject.Find("Panel2").gameObject.GetComponentInChildren<TextMeshProUGUI>();
-    }
 
-    private void Start()
-    {
-        
-        
     }
     void StartDialogue()
     {

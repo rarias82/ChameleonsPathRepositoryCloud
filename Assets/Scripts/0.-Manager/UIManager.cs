@@ -77,20 +77,12 @@ public class UIManager : MonoBehaviour
     public GameObject ObGameOver;
     public bool isGameOver;
 
+    [Header("Comics")]
+    public Sprite[] vinetas;
+    public Image colocarImagen;
 
-
-
-
-    //if (sceneName == "Intro" || sceneName == "Intro2")
-    //{
-    //    escenaCierraAuto = true;
-    //    siguienEscena = "Hab_Randolph 1";
-    //    puedeMoverse = false;
-
-    //}
-
-
-
+    [Header("Icrementador")]
+    public int etapa;
 
     void ForceScalesAndLimitFPS()
     {
@@ -287,13 +279,7 @@ public class UIManager : MonoBehaviour
         obAnim.SetTrigger("StartTransition");
         
         yield return new  WaitForSeconds(timeTransicion);
-        HUDLienzos[0].SetActive(false);
-        HUDLienzos[1].SetActive(true);
-        AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
-
-
-
-
+     
         SceneManager.LoadScene(sceneIndex);
     }
 
@@ -331,20 +317,6 @@ public class UIManager : MonoBehaviour
         MainCharacter.sharedInstance.canMove = true;
         MainCharacter.sharedInstance._map.Jugador.Enable();
 
-
-    }
-
-    public void Terminar()
-    {
-        if ((encenderTecla))
-        {
-
-            if (MainCharacter.sharedInstance._map.Jugador.Reiniciar.WasPressedThisFrame())
-            {
-                StartCoroutine(Reiniciar());
-            }
-        }
-        
 
     }
 
@@ -469,74 +441,75 @@ public class UIManager : MonoBehaviour
 
             Destroy(gameObject);
         }
-    }
-    void Start()
-    {
-
-        ObPausas.SetActive(false);
-        icono.gameObject.SetActive(false);
-        puntosCalificacion = puntos;
-        ballonDialogue.gameObject.SetActive(false);
-        
-
-       
-        ForceScalesAndLimitFPS();
-
 
         
-
     }
+   
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+    void Start()
+    {
 
+
+
+
+
+
+
+
+
+    }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        StartCoroutine("ComenzarNivel");
+        StartCoroutine(ComenzarEscena());
     }
 
     public void Pausas()
     {
-        if (encenderTecla)
-        {
-            if (MainCharacter.sharedInstance._map.Jugador.Pausa.WasPressedThisFrame())
-            {
-                isPaused = !isPaused;
+        //if (encenderTecla)
+        //{
 
-                if (isPaused)
-                {
-                    Time.timeScale = 0.0f;
-                }
-                else
-                {
-                    Time.timeScale = 1.0f;
-                }
-            }
-        }
+        //    if (GameManager.InstancieInput.mapeoControles.Jugador.Interactuar.WasPressedThisFrame())
+        //    {
+        //        isPaused = !isPaused;
+
+        //        if (isPaused)
+        //        {
+        //            Time.timeScale = 0.0f;
+        //        }
+        //        else
+        //        {
+        //            Time.timeScale = 1.0f;
+        //        }
+        //    }
+            
+        //    {
+            
+        //    }
+        //}
 
     }
 
     public void ShowPausas()
     {
-        if (juegoPausas)
-        {
-            if (isPaused)
-            {
-                ObPausas.SetActive(true);
+        //if (juegoPausas)
+        //{
+        //    if (isPaused)
+        //    {
+        //        ObPausas.SetActive(true);
 
 
-            }
-            else
-            {
-                ObPausas.SetActive(false);
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        ObPausas.SetActive(false);
+        //    }
+        //}
 
 
     }
-
-
 
     public IEnumerator Reiniciar()
     {
@@ -567,52 +540,111 @@ public class UIManager : MonoBehaviour
 
     }
 
-   
-
-    IEnumerator ComenzarNivel()
+    IEnumerator ComenzarEscena()
     {
-       
+        Debug.Log("CargarEscena");
         currentScene = SceneManager.GetActiveScene();
         sceneName = currentScene.name;
 
-        if (sceneName == "LevelOne")
+        etapa++;
+
+        if (sceneName == "MenuStart")
         {
-            
-            manto = GameObject.Find("CuentaRegresivaMargen");
-            manto.SetActive(false);
-            carrera = GameObject.Find("LineaCarrera");
-            carrera.SetActive(false);
-            obstaculos = GameObject.Find("Obstaculos");
-            obstaculos.SetActive(false);
-            HUDLienzos[0].SetActive(false);
-            HUDLienzos[1].SetActive(true);
+            colocarImagen.gameObject.SetActive(false);
+            HUDLienzos[0].SetActive(true);
+            HUDLienzos[1].SetActive(false);
 
-            encenderTecla = true;
-            juegoPausas = true;
-
-            originalPoseCircle = rtCircle.transform.position;
-
-
-
+            encenderTecla = false;
+            juegoPausas = false;
 
             ObPausas.SetActive(false);
             icono.gameObject.SetActive(false);
             puntosCalificacion = puntos;
             ballonDialogue.gameObject.SetActive(false);
-
-           
-
-
             ForceScalesAndLimitFPS();
 
+            AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionMenu));
+
         }
-       
+
+        if (sceneName == "Comic")
+        {
+            colocarImagen.gameObject.SetActive(true);
+            HUDLienzos[0].SetActive(false);
+            HUDLienzos[1].SetActive(false);
+            StartCoroutine(Diapos());
+            
+
+        }
+
+        if (sceneName == "LevelOne")
+        {
+            GameManager.InstancieInput.ActivarInput();
+
+            HUDLienzos[0].SetActive(false);
+            HUDLienzos[1].SetActive(true);
+            colocarImagen.gameObject.SetActive(false);
+
+
+
+            if (etapa == 3)
+            {
+                carrera = GameObject.Find("LineaCarrera");
+                obstaculos = GameObject.Find("Obstaculos");
+                
+
+                
+            }
+            
+            manto.SetActive(false);
+            
+            carrera.SetActive(false);
+            
+            obstaculos.SetActive(false);
+            
+
+            encenderTecla = true;
+            juegoPausas = true;
+
+            originalPoseCircle = rtCircle.transform.position;
+            ObPausas.SetActive(false);
+            icono.gameObject.SetActive(false);
+            puntosCalificacion = puntos;
+            ballonDialogue.gameObject.SetActive(false);
+            ForceScalesAndLimitFPS();
+
+
+
+            AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
+
+            yield return new WaitForSeconds(2.75f);
+
+            MainCharacter.sharedInstance._map.Jugador.Enable();
+
+        }
+
+      
+
 
         yield return null;
 
 
 
     
+
+    }
+
+    IEnumerator Diapos()
+    {
+       
+        for (int i = 0; i < vinetas.Length; i++)
+        {
+            colocarImagen.sprite = vinetas[i];
+
+            yield return new WaitForSeconds(5f);
+        }
+
+        UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.SceneLoading(2));
 
     }
 

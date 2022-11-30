@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] Mapa _map;
+    
     public GameObject[] slot;
     public GameObject inventory,selector;
     public bool inventoryEnabled;
@@ -79,11 +79,6 @@ public class Inventory : MonoBehaviour
 
 
     }
-    public void SetInputActions(Mapa map)
-    {
-        _map = map;
-
-    }
     public void AddItem(GameObject itemObject, int itemID, string itemType, string itemDescription, Sprite itemIcon)
     {
 
@@ -103,8 +98,6 @@ public class Inventory : MonoBehaviour
 
                 itemObject.transform.parent = slot[i].transform;
 
-
-                //slot[i].GetComponent<Slot>().UpdateSlot();
 
 
                 slot[i].GetComponent<Slot>().empty = false;
@@ -159,8 +152,8 @@ public class Inventory : MonoBehaviour
     }
     void Start()
     {
-        slotFolder = GameObject.Find("SlotHandler");
-        allSlots = slotFolder.transform.childCount;
+        
+        allSlots = 3;
 
         slot = new GameObject[allSlots];
 
@@ -187,15 +180,7 @@ public class Inventory : MonoBehaviour
 
         id_selectorM = 1;
 
-        //for (int i = 0; i < pos.Length; i++)
-        //{
-        //    pos[0] = rtSlot[0].position;
-        //}
-
-        _map = new Mapa();
-        
-        _map.Jugador.Enable();
-
+   
         UIManager.InstanceGUI.HUDLienzos[0].SetActive(true);
         UIManager.InstanceGUI.HUDLienzos[1].SetActive(false);
     }
