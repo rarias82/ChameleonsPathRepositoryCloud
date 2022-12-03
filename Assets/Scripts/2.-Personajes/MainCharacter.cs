@@ -42,6 +42,8 @@ public class MainCharacter : MonoBehaviour
     [Header("Effects")]
     [SerializeField] ParticleSystem polvoTierra;
     [SerializeField] ParticleSystem.EmissionModule polvoTierraEmission;
+    [SerializeField] AudioClip[] vocesProtagonista;
+    int rvozLogan0, rvozLogan1;
 
     public Mapa _map;
     public bool botonIn;
@@ -53,12 +55,6 @@ public class MainCharacter : MonoBehaviour
     void Awake()
     {
         sharedInstance = this;
-        
-      
-
-        
-
-
     }
 
     private void OnEnable()
@@ -75,7 +71,6 @@ public class MainCharacter : MonoBehaviour
 
     }
 
-   
     void MovePlayer()
     {
 
@@ -142,8 +137,18 @@ public class MainCharacter : MonoBehaviour
 
         MoveGravity();
     }
+    public void VozLogan()
+    {
+        rvozLogan1 = rvozLogan0;
+        rvozLogan0 = Random.Range(0, vocesProtagonista.Length);
 
+        while (rvozLogan0 == rvozLogan1)
+        {
+            rvozLogan0 = Random.Range(0, vocesProtagonista.Length);
+        }
 
+        AudioManager.Instance.PlaySound(vocesProtagonista[rvozLogan0]);
+    }
     void MoveGravity()
     {
 
@@ -179,8 +184,6 @@ public class MainCharacter : MonoBehaviour
 
         //_map.Jugador.Enable();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (canMove)
@@ -194,13 +197,9 @@ public class MainCharacter : MonoBehaviour
         }
 
     }
-
     private void LateUpdate()
-    {
-        
+    {   
         obAnim.SetFloat("Velocidad", animIntervalo);
-
-
 
         if (animIntervalo == 0.0f)
         {
@@ -264,7 +263,6 @@ public class MainCharacter : MonoBehaviour
         //}
 
     }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

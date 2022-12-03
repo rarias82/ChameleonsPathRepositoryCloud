@@ -144,8 +144,9 @@ public class NPC_Rana : MonoBehaviour
 
         //numeroAnim = 400;
 
-       
 
+
+      
 
     }
 
@@ -169,6 +170,7 @@ public class NPC_Rana : MonoBehaviour
         {
             objeto.gameObject.SetActive(false);
         }
+
     }
     void VocesRandom()
     {
@@ -221,7 +223,7 @@ public class NPC_Rana : MonoBehaviour
         }
 
         
-        RotateSon();
+        
     }
     public void StartDialogue()
     {
@@ -369,9 +371,9 @@ public class NPC_Rana : MonoBehaviour
     }
     public IEnumerator WriteDialogue()
     {
-        detector.SetActive(true);
+        //detector.SetActive(true);
 
-        
+        marker.SetActive(false);
 
         if (index == 0)
         {
@@ -400,7 +402,9 @@ public class NPC_Rana : MonoBehaviour
 
             }
 
-            
+            detector.SetActive(true);
+
+
 
 
         }
@@ -587,6 +591,7 @@ public class NPC_Rana : MonoBehaviour
         if (lineas.Trim().StartsWith("P"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position);
+            MainCharacter.sharedInstance.VozLogan();
         }
 
       
@@ -714,13 +719,14 @@ public class NPC_Rana : MonoBehaviour
         if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame())
         {
 
-            AudioManager.Instance.PlaySound(AudioManager.Instance.clickButton);
+            
 
             MainCharacter.sharedInstance.eAnim = 22;
 
             switch (id_selector)
             {
                 case 0:
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
                     numeroAnim = 100;
                     UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
 
@@ -734,6 +740,7 @@ public class NPC_Rana : MonoBehaviour
                     break;
 
                 case 1:
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
                     numeroAnim = 200;
                     UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
                     finalB = true;
@@ -743,6 +750,7 @@ public class NPC_Rana : MonoBehaviour
                         break;
 
                 case 2:
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectGood);
                     numeroAnim = 200;
                     UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
                     finalB = true;
@@ -1004,11 +1012,8 @@ public class NPC_Rana : MonoBehaviour
         {
             Walking();
         }
-
-
         if (mode == ModeNPCRana.Iddle)
         {
-
             if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && (!mapeo.didDialogueStart || !mapeo.gameObject.activeInHierarchy) && !hd.didDialogueStart)
             {
                 Navegate();
@@ -1016,31 +1021,24 @@ public class NPC_Rana : MonoBehaviour
             Interactuar();
             TurnToLogan();
             AnimacionTexto();
-
         }
 
         if (mode == ModeNPCRana.FinalB)
-        {
-
-           
+        {          
             Interactuar();
-            TurnToLogan();
-            
-
+            TurnToLogan();     
         }
-
 
         if (mode == ModeNPCRana.Carrera)
         {
-
             Carrera();
-
         }
-
         //if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame())
         //{
         //    UIManager.InstanceGUI.Temblor();
         //}
+
+        RotateSon();
 
     }
     private void OnTriggerEnter(Collider other)
@@ -1055,6 +1053,8 @@ public class NPC_Rana : MonoBehaviour
             marker.SetActive(true);
             numeroAnim = 99;
 
+            
+
         }
 
         if (other.gameObject.CompareTag("P1") && mode == ModeNPCRana.FinalB)
@@ -1066,8 +1066,10 @@ public class NPC_Rana : MonoBehaviour
             isRange = true;
             marker.SetActive(true);
             numeroAnim = 99;
+
+
             
-            
+
 
         }
 
@@ -1099,6 +1101,8 @@ public class NPC_Rana : MonoBehaviour
             isRange = !isRange;
             marker.SetActive(false);
             numeroAnim = 30;
+
+            
 
         }
 

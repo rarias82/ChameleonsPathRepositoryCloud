@@ -9,7 +9,7 @@ using UnityEngine.AI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager InstanceGUI;
-   
+
     [Header("Dialogue Variables")]
     public Image blackScreen;
     public bool fadeBlack;
@@ -17,13 +17,13 @@ public class UIManager : MonoBehaviour
     public float fadeSpeed;
     public Image icono;
     public Image ballonDialogue;
-    public float valor; 
-
+    public float valor;
+    [SerializeField] TextMeshProUGUI dialogos;
 
     [Header("Bondad Variables")]
     public Image barraBondad;
     public float currenHealth;
-    public float maxHealth; 
+    public float maxHealth;
     public float healthToModify;
     public float velocidadBarra;
     public Color32 colorBarra;
@@ -35,13 +35,11 @@ public class UIManager : MonoBehaviour
     public Vector3 destiny;
     public float puntos;
     public float puntosCalificacion;
-
     public Vector3 originalPoseCircle;
 
     [Header("Mapa")]
     public GameObject obMap;
     public GameObject obMapMark;
-
 
     [Header("Fade")]
     public Animator obAnim;
@@ -57,13 +55,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] AnimationCurve curvas;
 
     [Header("FPS")]
-    int limiteDeFrames = 180;
+    int limiteDeFrames = 250;
 
     [Header("Burubuja")]
     public Animator animBurbuja;
 
     [Header("Timer")]
     [SerializeField] TextMeshProUGUI cuentaTexto;
+
     public GameObject obstaculos, carrera, manto;
     public Scene currentScene;
     public string sceneName;
@@ -74,15 +73,23 @@ public class UIManager : MonoBehaviour
     public GameObject ObPausas;
     public bool juegoPausas;
 
-    public GameObject ObGameOver;
-    public bool isGameOver;
-
     [Header("Comics")]
-    public Sprite[] vinetas;
-    public Image colocarImagen;
+    public Image[] listaVinetas1;
 
     [Header("Icrementador")]
     public int etapa;
+
+    [Header("Game Over1")]
+    public sbyte id_selectorGO;
+
+    public GameObject[] listOptionsGO;
+    public GameObject ObGameOver;
+    public bool isGameOver;
+    public GameObject selectorGO;
+
+    
+ 
+
 
     void ForceScalesAndLimitFPS()
     {
@@ -93,15 +100,15 @@ public class UIManager : MonoBehaviour
     }
     public void ExitPlayGame()
     {
-       
+
 
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
 
-        
+
     }
     public void DialogueFadeIn()
     {
@@ -148,7 +155,7 @@ public class UIManager : MonoBehaviour
                 currenHealth = 0;
             }
         }
-             
+
         healthToModify = (currenHealth / maxHealth);
 
 
@@ -158,25 +165,25 @@ public class UIManager : MonoBehaviour
                 barraBondad.color = new Color32(190, 75, 50, 255);
                 break;
             case 2:
-                barraBondad.color = new Color32(190, 100, 50,255);
+                barraBondad.color = new Color32(190, 100, 50, 255);
                 break;
             case 3:
-                barraBondad.color = new Color32(190, 125, 50,255);
+                barraBondad.color = new Color32(190, 125, 50, 255);
                 break;
             case 4:
-                barraBondad.color = new Color32(190, 150, 50,255);
+                barraBondad.color = new Color32(190, 150, 50, 255);
                 break;
             case 5:
-                barraBondad.color = new Color32(190, 175, 50,255);
+                barraBondad.color = new Color32(190, 175, 50, 255);
                 break;
             case 6:
-                barraBondad.color = new Color32(175, 190, 50,255);
+                barraBondad.color = new Color32(175, 190, 50, 255);
                 break;
             case 7:
-                barraBondad.color = new Color32(150, 190, 50,255);
+                barraBondad.color = new Color32(150, 190, 50, 255);
                 break;
             case 8:
-                barraBondad.color = new Color32(125, 190, 50,255);
+                barraBondad.color = new Color32(125, 190, 50, 255);
                 break;
 
 
@@ -191,9 +198,9 @@ public class UIManager : MonoBehaviour
     }
     public void GanarPuntos(bool add, float puntos)
     {
-       
-            if (add)
-            {
+
+        if (add)
+        {
 
             FollowCameras.instance.OnConfetis(1);
 
@@ -206,9 +213,9 @@ public class UIManager : MonoBehaviour
 
                 StartCoroutine(MoverBarra(add));
             }
-            }
-            else
-            {
+        }
+        else
+        {
 
             FollowCameras.instance.OnConfetis(2);
             StartCoroutine(TemblorPantalla());
@@ -223,15 +230,18 @@ public class UIManager : MonoBehaviour
                 StartCoroutine(MoverBarra(add));
 
             }
-
-
-            if (puntosCalificacion < -200)
+            else
             {
-                //ObGameOver.SetActive(true);
+                FinDelJuego();
             }
 
+
+            
+
         }
+
         
+
 
     }
     IEnumerator MoverBarra(bool subir)
@@ -266,20 +276,18 @@ public class UIManager : MonoBehaviour
         obAnim.SetTrigger("End");
 
     }
-
     public void LoadNextScene()
     {
         int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
         StartCoroutine(SceneLoading(nextScene));
 
     }
-
     public IEnumerator SceneLoading(int sceneIndex)
     {
         obAnim.SetTrigger("StartTransition");
-        
-        yield return new  WaitForSeconds(timeTransicion);
-     
+
+        yield return new WaitForSeconds(timeTransicion);
+
         SceneManager.LoadScene(sceneIndex);
     }
 
@@ -287,13 +295,13 @@ public class UIManager : MonoBehaviour
     {
         if (activar)
         {
-            obAnimOptionsGame.SetInteger("Show",1);
-            
+            obAnimOptionsGame.SetInteger("Show", 1);
+
         }
         else
         {
             obAnimOptionsGame.SetInteger("Show", 0);
-            
+
         }
 
 
@@ -336,7 +344,7 @@ public class UIManager : MonoBehaviour
 
         FindObjectOfType<NPC_Rana>().gameObject.SetActive(false);
 
-       
+
 
 
         yield return new WaitForSeconds(1f);
@@ -353,14 +361,14 @@ public class UIManager : MonoBehaviour
         FindObjectOfType<NPC_Rana>().gameObject.GetComponent<NavMeshAgent>().enabled = false;
         carrera.SetActive(true);
         obstaculos.SetActive(true);
-        
-        
+
+
 
         UIManager.InstanceGUI.obAnim.SetTrigger("StartTransition");
 
         yield return new WaitForSeconds(1f);
-        
-        
+
+
         MainCharacter.sharedInstance.transform.position = new Vector3(138.4f, 6.079084f, 132.3f);
         FindObjectOfType<NPC_Rana>().gameObject.transform.position = new Vector3(140f, 6f, 128f);
         FindObjectOfType<NPC_Rana>().numeroAnim = 99;
@@ -387,7 +395,7 @@ public class UIManager : MonoBehaviour
 
         FindObjectOfType<NPC_Rana>().gameObject.GetComponent<NavMeshAgent>().enabled = true;
 
-      
+
 
 
         FindObjectOfType<NPC_Rana>().mode = ModeNPCRana.Carrera;
@@ -401,7 +409,7 @@ public class UIManager : MonoBehaviour
     public void Temblor()
     {
         StartCoroutine(TemblorPantalla());
-        
+
     }
 
     IEnumerator TemblorPantalla()
@@ -413,7 +421,7 @@ public class UIManager : MonoBehaviour
         while (tiempoTranscurrido < duracionTemblor)
         {
             tiempoTranscurrido += Time.deltaTime;
-            fuerza = curvas.Evaluate(tiempoTranscurrido/duracionTemblor);
+            fuerza = curvas.Evaluate(tiempoTranscurrido / duracionTemblor);
             FollowCameras.instance.transform.position = posInicial + (Random.insideUnitSphere * fuerza);
             yield return null;
         }
@@ -425,6 +433,62 @@ public class UIManager : MonoBehaviour
     public void BurbujaDialogo(float indice)
     {
         animBurbuja.SetFloat("Indicador", indice);
+
+    }
+
+    public void FinDelJuego()
+    {
+        ObGameOver.SetActive(true);
+        Time.timeScale = 0.0f;
+        
+        
+
+    }
+
+    void NavegarGO()
+    {
+
+        if (MainCharacter.sharedInstance._map.Jugador.BDOWN.WasPressedThisFrame() && id_selectorGO < listOptionsGO.Length - 1)
+        {
+            id_selectorGO++;
+            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+
+        }
+
+        if (MainCharacter.sharedInstance._map.Jugador.BUP.WasPressedThisFrame() && id_selectorGO > 0)
+        {
+            id_selectorGO++; ;
+            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+        }
+
+        selectorGO.transform.SetParent(listOptionsGO[id_selectorGO].transform);
+        selectorGO.transform.position = listOptionsGO[id_selectorGO].transform.position;
+
+
+        selectorGO.transform.SetSiblingIndex(0);
+
+
+
+        if (MainCharacter.sharedInstance._map.Jugador.Interactuar.WasPressedThisFrame())
+        {
+
+
+            switch (id_selectorGO)
+            {
+                case 0:
+
+
+                    break;
+
+                case 1:
+
+
+                    break;
+
+
+            }
+
+        }
 
     }
 
@@ -513,13 +577,14 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator Reiniciar()
     {
-
+        blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, 0); fadeBlack = false; fadeFrom = false; dialogos.text = string.Empty;
         //UIManager.InstanceGUI.obAnim.SetTrigger("StartTransition");
 
         yield return new WaitForSeconds(1f);
 
         FindObjectOfType<NPC_Rana>().objetosTodo[0].gameObject.SetActive(false);
         FindObjectOfType<NPC_Rana>().objetosTodo[0].gameObject.SetActive(false);
+
         Inventory.instance.slot[0].GetComponent<Slot>().Quitar();
         FindObjectOfType<NPC_Rana>().finalA = false;
 
@@ -528,12 +593,11 @@ public class UIManager : MonoBehaviour
 
 
         rtCircle.transform.position = originalPoseCircle;
+
         ObGameOver.SetActive(false);
 
+
         int nextScene = SceneManager.GetActiveScene().buildIndex;
-
-
-
         StartCoroutine(SceneLoading(nextScene));
 
 
@@ -550,10 +614,10 @@ public class UIManager : MonoBehaviour
 
         if (sceneName == "MenuStart")
         {
-            colocarImagen.gameObject.SetActive(false);
+            
             HUDLienzos[0].SetActive(true);
             HUDLienzos[1].SetActive(false);
-
+            HUDLienzos[2].SetActive(false);
             encenderTecla = false;
             juegoPausas = false;
 
@@ -569,9 +633,10 @@ public class UIManager : MonoBehaviour
 
         if (sceneName == "Comic")
         {
-            colocarImagen.gameObject.SetActive(true);
+            
             HUDLienzos[0].SetActive(false);
             HUDLienzos[1].SetActive(false);
+            HUDLienzos[2].SetActive(true);
             StartCoroutine(Diapos());
             
 
@@ -583,7 +648,8 @@ public class UIManager : MonoBehaviour
 
             HUDLienzos[0].SetActive(false);
             HUDLienzos[1].SetActive(true);
-            colocarImagen.gameObject.SetActive(false);
+            HUDLienzos[2].SetActive(false);
+
 
 
 
@@ -591,9 +657,6 @@ public class UIManager : MonoBehaviour
             {
                 carrera = GameObject.Find("LineaCarrera");
                 obstaculos = GameObject.Find("Obstaculos");
-                
-
-                
             }
             
             manto.SetActive(false);
@@ -617,9 +680,11 @@ public class UIManager : MonoBehaviour
 
             AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
 
-            yield return new WaitForSeconds(2.75f);
+            //yield return new WaitForSeconds(2.75f);
 
-            MainCharacter.sharedInstance._map.Jugador.Enable();
+            //MainCharacter.sharedInstance._map.Jugador.Enable();
+
+            //FollowCameras.instance.mode = Modo.Principio;
 
         }
 
@@ -636,12 +701,18 @@ public class UIManager : MonoBehaviour
 
     IEnumerator Diapos()
     {
-       
-        for (int i = 0; i < vinetas.Length; i++)
-        {
-            colocarImagen.sprite = vinetas[i];
 
-            yield return new WaitForSeconds(5f);
+       
+        for (int i = 0; i < listaVinetas1.Length; i++)
+        {
+
+            while (listaVinetas1[i].color.a != 1)
+            {
+                listaVinetas1[i].color = new Color(listaVinetas1[i].color.r, listaVinetas1[i].color.g, listaVinetas1[i].color.b, Mathf.MoveTowards(listaVinetas1[i].color.a, 1f, fadeSpeed * Time.deltaTime));
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(2.5f);
         }
 
         UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.SceneLoading(2));
@@ -657,6 +728,10 @@ public class UIManager : MonoBehaviour
 
         DialogueFadeIn();
 
+        if (ObGameOver.activeInHierarchy)
+        {
+            NavegarGO();
+        }
       
 
 

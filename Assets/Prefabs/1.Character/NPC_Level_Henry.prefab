@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &232833403717711887
 Transform:
   m_ObjectHideFlags: 0
@@ -114,8 +114,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1.25
-  m_Acceleration: 10
+  m_Speed: 4.5
+  m_Acceleration: 25
   avoidancePriority: 50
   m_AngularSpeed: 450
   m_StoppingDistance: 0
@@ -174,11 +174,21 @@ MonoBehaviour:
   - "PHenry se ha quedado atr\xE1s, maldici\xF3n \xBFcu\xE1nto tardar\xE1?"
   - "PUn momento, no veo a Henry. Nooo, se ha quedado atr\xE1s.\n"
   - "PUn momento, \xBFd\xF3nde est\xE1 el anciano?\r\n"
+  linesLogan0:
+  - "PMaldici\xF3n, el anciano se ha quedado atr\xE1s, m\xE1s vale apresurarse."
+  linesLogan1:
+  - "PQu\xE9 anciano m\xE1s lento, ser\xE1 mejor que lo espere\u2026"
+  linesLogan2:
+  - "PHenry se ha quedado atr\xE1s, maldici\xF3n \xBFcu\xE1nto tardar\xE1?"
+  linesLogan3:
+  - "PUn momento, no veo a Henry. Nooo, se ha quedado atr\xE1s."
+  linesLogan4:
+  - "PUn momento, \xBFd\xF3nde est\xE1 el anciano?\r"
   linesFinalA:
   - "HAll\xED est\xE1s.\r\n"
   - "L\xA1Hermanito!\n\r\n"
   - "H\xA1Nada de hermanito! \xBFQu\xE9 te pas\xF3? \xBFY tu caballo? No me digas
-    que intentastes cruzar el sendero peligroso.\r"
+    que\nintentastes cruzar el sendero peligroso.\r"
   - LJijijijijiji...
   - HNo tienes remedio.
   - "LGracias por ayudarme, de no ser por ti de seguro ser\xEDa alimento de oso,
@@ -196,15 +206,19 @@ MonoBehaviour:
   numeroCamino: 0
   trCaminos: []
   speedNPC: 1.75
-  distancia: 80
+  distancia: 155
   mode: 1
   offset: {x: 30, y: 45, z: 0}
   nameNPC: 
   obCameras: {fileID: 0}
   speedZoom: 3.5
   obAnim: {fileID: 7358864484052360973}
-  cancion: {fileID: 8300000, guid: 68b3ebcda08cbd6428f0c4c7561121d3, type: 3}
-  voces: []
+  cancion: {fileID: 8300000, guid: 0fe9b4c36e88ea94da96f2332b0544b4, type: 3}
+  voces:
+  - {fileID: 8300000, guid: 20487ec23e9cc854c9a00b7dfe00f5f0, type: 3}
+  - {fileID: 8300000, guid: ed58030ae5acf5247bf5d23cfdfe34d7, type: 3}
+  - {fileID: 8300000, guid: a59eba3ea99eb534eb701a457a0a7f07, type: 3}
+  - {fileID: 8300000, guid: 0879e3ff133967c40ab3c19044d1ac27, type: 3}
   polvoTierra: {fileID: 7505871044521096671}
 --- !u!1 &232833404464568919
 GameObject:
@@ -298,7 +312,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.55
+  m_Radius: 1.225
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -531,7 +545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -1.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -600,49 +614,109 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 232833403717711887}
     m_Modifications:
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: ShapeModule.type
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: useRigidbodyForVelocity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: ShapeModule.m_Rotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: EmissionModule.m_BurstCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 8.9917
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.02
+      value: -1.075
       objectReference: {fileID: 0}
     - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.02
+      value: 0.23
       objectReference: {fileID: 0}
     - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.05000046
       objectReference: {fileID: 0}
     - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.99842983
       objectReference: {fileID: 0}
     - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.025225274
       objectReference: {fileID: 0}
     - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.0012632608
       objectReference: {fileID: 0}
     - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -174.273
       objectReference: {fileID: 0}
     - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -0.29101562
       objectReference: {fileID: 0}
     - target: {fileID: 6179262326971758350, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 2.9089966
       objectReference: {fileID: 0}
     - target: {fileID: 8279257108663445513, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: m_Name

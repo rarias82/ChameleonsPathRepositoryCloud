@@ -55,6 +55,11 @@ public class NPC_Follow : MonoBehaviour
 
 
 
+    private void OnEnable()
+    {
+        
+    }
+
     private void Start()
     {
         dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
@@ -133,7 +138,7 @@ public class NPC_Follow : MonoBehaviour
     }
     public IEnumerator ContinueWriteDialogue()
     {
-
+        
         if (dObject.index == 1)
         {
 
@@ -258,6 +263,7 @@ public class NPC_Follow : MonoBehaviour
         if (lineas.Trim().StartsWith("P"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(dObject.trPlayer.position);
+            MainCharacter.sharedInstance.VozLogan();
         }
 
         if (lineas.Trim().StartsWith("L"))

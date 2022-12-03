@@ -52,7 +52,12 @@ public class HouseDialogue : MonoBehaviour
     [SerializeField, TextArea(4, 6)] string[] linesNextAIncorrecta5;
     [SerializeField, TextArea(4, 6)] string[] linesNextACorrecta;
 
-    [SerializeField, TextArea(4, 6)] string[] linesNextCIncorrecta;
+    [SerializeField, TextArea(4, 6)] string[] linesNextCIncorrecta0;
+    [SerializeField, TextArea(4, 6)] string[] linesNextCIncorrecta1;
+    [SerializeField, TextArea(4, 6)] string[] linesNextCIncorrecta2;
+    [SerializeField, TextArea(4, 6)] string[] linesNextCIncorrecta3;
+    [SerializeField, TextArea(4, 6)] string[] linesNextCIncorrecta4;
+    [SerializeField, TextArea(4, 6)] string[] linesNextCIncorrecta5;
     [SerializeField, TextArea(4, 6)] string[] linesNextCCorrecta;
 
     [SerializeField, TextArea(4, 6)] string[] linesAIncorrecta;
@@ -61,6 +66,10 @@ public class HouseDialogue : MonoBehaviour
     [SerializeField, TextArea(4, 6)] string[] linesAIncorrecta3;
     [SerializeField, TextArea(4, 6)] string[] linesAIncorrecta4;
     [SerializeField, TextArea(4, 6)] string[] linesCIncorrecta;
+    [SerializeField, TextArea(4, 6)] string[] linesCIncorrecta1;
+    [SerializeField, TextArea(4, 6)] string[] linesCIncorrecta2;
+    [SerializeField, TextArea(4, 6)] string[] linesCIncorrecta3;
+    [SerializeField, TextArea(4, 6)] string[] linesCIncorrecta4;
 
 
     [SerializeField, TextArea(4, 6)] string[] linesAFinal;
@@ -80,6 +89,12 @@ public class HouseDialogue : MonoBehaviour
 
     int random0cf;
     int random1cf;
+
+    int rrc0;
+    int rrc1;
+
+    int respuestaC0;
+    int respuestaC1;
 
     [SerializeField] Vector3 masVector;
 
@@ -125,7 +140,7 @@ public class HouseDialogue : MonoBehaviour
        
     }
 
-    private void Start()
+    private void OnEnable()
     {
         marker.SetActive(false);
         respuestaDada = GameObject.Find("NPC_Level_Leahn").GetComponent<NPC_Dialogue>();
@@ -134,6 +149,11 @@ public class HouseDialogue : MonoBehaviour
         //obHenry.SetActive(false);
 
 
+       
+    }
+
+    private void Start()
+    {
         dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
 
         Options = GameObject.Find("DialogueOptions").gameObject;
@@ -249,7 +269,39 @@ public class HouseDialogue : MonoBehaviour
             }
             if (talkToLeahn && nombreIncorrecto && !optionCBuscarHermano)
             {
-                lines = linesCIncorrecta;
+                respuestaC0 = respuestaC1;
+
+                respuestaC1 = Random.Range(0, 5);
+
+                while (respuestaC1 == respuestaC0)
+                {
+                    respuestaC1 = Random.Range(0, 5);
+                }
+
+                if (respuestaC1 == 0)
+                {
+                    lines = linesCIncorrecta;
+                }
+                if (respuestaC1 == 1)
+                {
+                    lines = linesCIncorrecta1;
+                }
+                if (respuestaC1 == 2)
+                {
+                    lines = linesCIncorrecta2;
+                }
+                if (respuestaC1 == 3)
+                {
+                    lines = linesCIncorrecta3;
+                }
+                if (respuestaC1 == 4)
+                {
+                    lines = linesCIncorrecta4;
+                }
+                
+
+
+
             }
 
             if (optionCBuscarHermano)
@@ -292,8 +344,6 @@ public class HouseDialogue : MonoBehaviour
         StartCoroutine(WriteDialogue());
 
     }
-
-
     void DialogoRandom()
     {
         random00 = random01;
@@ -336,7 +386,6 @@ public class HouseDialogue : MonoBehaviour
 
 
     }
-
     public void IconDialogo(string lineas)
     {
 
@@ -344,6 +393,7 @@ public class HouseDialogue : MonoBehaviour
         {
             UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position/* + new Vector3(0f,50f,0f)*/);
             UIManager.InstanceGUI.BurbujaDialogo(7);
+            MainCharacter.sharedInstance.VozLogan();
         }
 
         if (lineas.Trim().StartsWith("L"))
@@ -361,8 +411,6 @@ public class HouseDialogue : MonoBehaviour
 
 
     }
-
-
     IEnumerator WriteDialogue()
     {
        
@@ -444,7 +492,6 @@ public class HouseDialogue : MonoBehaviour
         }
 
     }
-
     public void Navegate()
     {
 
@@ -470,28 +517,30 @@ public class HouseDialogue : MonoBehaviour
         if (respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame())
         {
 
-            AudioManager.Instance.PlaySound(AudioManager.Instance.clickButton);
+            
 
             switch (id_selector)
             {
                 case 0:
-                    
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
                     UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
-                    
+                    index = 0;
 
                     break;
 
                 case 1:
-                  
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
                     UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
-                   
-                  
+                    index = 0;
+
                     break;
 
                 case 2:
                   
                     UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
-                  
+                    AudioManager.Instance.PlaySoundBien();
+                    index = 0;
+
                     break;
 
                 default:
@@ -507,7 +556,6 @@ public class HouseDialogue : MonoBehaviour
 
 
     }
-
     IEnumerator ChangeDialogue()
     {
         index = 0;
@@ -549,7 +597,44 @@ public class HouseDialogue : MonoBehaviour
                 }
                 else if (respuestaDada.nextDialogueToTalk == 2)
                 {
-                    lines = linesNextCIncorrecta;
+
+                    rrc0 = rrc1;
+                    rrc1 = Random.Range(0, 6);
+
+
+
+                    while (rrc1 == rrc0)
+                    {
+                        rrc1 = Random.Range(0, 6);
+                    }
+
+                    if (rrc1 == 0)
+                    {
+                        lines = linesNextCIncorrecta0;
+                    }
+                    if (rrc1 == 1)
+                    {
+                        lines = linesNextCIncorrecta1;
+                    }
+                    if (rrc1 == 2)
+                    {
+                        lines = linesNextCIncorrecta2;
+                    }
+                    if (rrc1 == 3)
+                    {
+                        lines = linesNextCIncorrecta3;
+                    }
+                    if (rrc1 == 4)
+                    {
+                        lines = linesNextCIncorrecta4;
+                    }
+                    if (rrc1 == 5)
+                    {
+                        lines = linesNextCIncorrecta5;
+                    }
+
+
+
                     nombreIncorrecto = true;
                 }
                
@@ -592,7 +677,40 @@ public class HouseDialogue : MonoBehaviour
                 }
                 else if (respuestaDada.nextDialogueToTalk == 2)
                 {
-                    lines = linesNextCIncorrecta;
+                    rrc0 = rrc1;
+                    rrc1 = Random.Range(0, 6);
+
+
+
+                    while (rrc1 == rrc0)
+                    {
+                        rrc1 = Random.Range(0, 6);
+                    }
+
+                    if (rrc1 == 0)
+                    {
+                        lines = linesNextCIncorrecta0;
+                    }
+                    if (rrc1 == 1)
+                    {
+                        lines = linesNextCIncorrecta1;
+                    }
+                    if (rrc1 == 2)
+                    {
+                        lines = linesNextCIncorrecta2;
+                    }
+                    if (rrc1 == 3)
+                    {
+                        lines = linesNextCIncorrecta3;
+                    }
+                    if (rrc1 == 4)
+                    {
+                        lines = linesNextCIncorrecta4;
+                    }
+                    if (rrc1 == 5)
+                    {
+                        lines = linesNextCIncorrecta5;
+                    }
                     nombreIncorrecto = true;
                 }
                 break;
@@ -736,7 +854,6 @@ public class HouseDialogue : MonoBehaviour
 
 
     }
-
     public void NextDialogue()
     {
         index++;
@@ -765,7 +882,6 @@ public class HouseDialogue : MonoBehaviour
 
 
     }
-
     IEnumerator Esperar()
     {
 
@@ -805,7 +921,6 @@ public class HouseDialogue : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         respuestaDada._map.Enable();
     }
-
     IEnumerator IniciarTransicion()
     {
 
@@ -830,10 +945,7 @@ public class HouseDialogue : MonoBehaviour
         
     }
 
-
-
-
-    // Update is called once per frame
+ 
     void Update()
     {
 
@@ -873,7 +985,6 @@ public class HouseDialogue : MonoBehaviour
         
 
     }
-
     private void OnTriggerEnter(Collider other)
     {      
             if (other.gameObject.CompareTag("P1") && !didDialogueStart)
@@ -883,7 +994,6 @@ public class HouseDialogue : MonoBehaviour
 
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("P1") /*&& !didDialogueStart*/)

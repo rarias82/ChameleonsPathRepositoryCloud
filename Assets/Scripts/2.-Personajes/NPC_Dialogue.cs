@@ -14,15 +14,13 @@ public class NPC_Dialogue : MonoBehaviour
 
     [Header("Dialogue Variables")]
     [SerializeField] TextMeshProUGUI dialogueText;
-     [TextArea(4, 6)] public string[] lines;
+    [TextArea(4, 6)] public string[] lines;
     public float speedText;
     public int index;
     public bool didDialogueStart;
     public HouseDialogue houses;
     public NPC_Henry henry;
-    
     public GameObject detector;
-
     public bool seguiraLogan;
 
     [Header("Options References")]
@@ -66,7 +64,11 @@ public class NPC_Dialogue : MonoBehaviour
     public float distancia;
     Color lineColor;
     bool detectarLimites;
-    [SerializeField, TextArea(4, 6)] string[] linesLogan;
+   
+    [SerializeField, TextArea(4, 6)] string[] linesLogan0;
+    [SerializeField, TextArea(4, 6)] string[] linesLogan1;
+    [SerializeField, TextArea(4, 6)] string[] linesLogan2;
+    [SerializeField, TextArea(4, 6)] string[] linesLogan3;
 
     [Header("Music References")]
     [SerializeField] AudioClip cancion;
@@ -81,13 +83,15 @@ public class NPC_Dialogue : MonoBehaviour
     int voz000, voz001;
     [SerializeField] NPC_Henry enrique;
     public Vector3 posOriginal;
+    
 
+    [Header("Efectos")]
+    [SerializeField] ParticleSystem polvoTierra;
     public void SetInputActions(Mapa map)
     {
         _map = map;
 
     }
-
     public void VocesRandom()
     {
         voz000 = voz001;
@@ -109,11 +113,42 @@ public class NPC_Dialogue : MonoBehaviour
 
         
     }
-
     private void OnEnable()
     {
-        
+        marker = transform.Find("Marker").gameObject;
+        marker.SetActive(false);
+        obCameras = Camera.main;
+        trPlayer = GameObject.FindGameObjectWithTag("Main Character").transform;
+        obNMA = GetComponent<NavMeshAgent>();
+        speedNPC = obNMA.speed;
+        numeroAnim = 1;
+        detector.SetActive(false);
+        polvoTierra.Stop();
+
+
     }
+    void Start()
+    {
+
+            dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
+
+            Options = GameObject.Find("DialogueOptions").gameObject;
+
+            selector = GameObject.Find("Select").gameObject;
+
+            listOptions[0] = GameObject.Find("Panel0").gameObject;
+            listOptions[1] = GameObject.Find("Panel1").gameObject;
+            listOptions[2] = GameObject.Find("Panel2").gameObject;
+        
+
+
+
+
+
+        //houses = FindObjectOfType<HouseDialogue>();
+    }
+
+   
     void CambiarDialogos() {
 
         switch (nextDialogueToTalk)
@@ -299,10 +334,13 @@ public class NPC_Dialogue : MonoBehaviour
 
         if (houses.optionCBuscarHermano && !seguiraLogan)
         {
+             // antes estab en closedialoguec
+
             lines = obRoute.linesNextC2;
 
             houses.obHenry.SetActive(true);
-            NPC_Henry.instance.mode = ModeNPCHenry.Final;
+            //NPC_Henry.instance.mode = ModeNPCHenry.Final;
+            NPC_Henry.instance.mode = ModeNPCHenry.FinalC;
             //henry.Aparecer();
 
             houses.didDialogueStart = false;
@@ -323,9 +361,6 @@ public class NPC_Dialogue : MonoBehaviour
             {
                 random01 = Random.Range(0, 4);
             }
-
-
-
 
             if (random01 == 0)
             {
@@ -369,6 +404,7 @@ public class NPC_Dialogue : MonoBehaviour
         if (lineas.Trim().StartsWith("P"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position);
+            MainCharacter.sharedInstance.VozLogan();
         }
 
         if (lineas.Trim().StartsWith("L"))
@@ -386,6 +422,9 @@ public class NPC_Dialogue : MonoBehaviour
     }
     public IEnumerator WriteDialogue()
     {
+
+        marker.SetActive(false);
+
         if (index == 0)
         {
             UIManager.InstanceGUI.BurbujaDialogo(0);
@@ -396,26 +435,23 @@ public class NPC_Dialogue : MonoBehaviour
                 UIManager.InstanceGUI.BurbujaDialogo(2);
                 MainCharacter.sharedInstance.eAnim = 2;
                 MainCharacter.sharedInstance.animIntervalo = 0.0f;
+
+                AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
             }
             else
             {
-                detector.SetActive(true);
-
+                //detector.SetActive(true);
 
                 FollowCameras.instance.velocidadRotacion = -75.0f;
                 FollowCameras.instance.mode = Modo.Mundo;
-                
-                
-                
+                       
             }
             
-
             if (lines == obRoute.linesNextA || lines == obRoute.linesNextA1 || lines == obRoute.linesNextA2 || lines == obRoute.linesNextA3 || lines == obRoute.linesNextA4)
             {
                 numeroAnim = 17;
                 
             }
-
 
             if (lines == obRoute.linesNextB || lines == obRoute.linesNextB1 || lines == obRoute.linesNextB2 || lines == obRoute.linesNextB3 || lines == obRoute.linesNextB4)
             {
@@ -453,7 +489,6 @@ public class NPC_Dialogue : MonoBehaviour
                 }
             }
 
-
             if (lines == obRoute.linesNextC2)
             {
                 if (index == 0)
@@ -477,7 +512,6 @@ public class NPC_Dialogue : MonoBehaviour
                 }
             }
             
-
             posOriginal = FollowCameras.instance.transform.position;
 
             while (obCameras.orthographicSize > 3.5f)
@@ -488,9 +522,10 @@ public class NPC_Dialogue : MonoBehaviour
                 obCameras.orthographicSize -= speedZoom * Time.deltaTime;
 
                 yield return null;
-
             }
-            
+
+            if (!detectarLimites)
+            detector.SetActive(true);
 
         }
 
@@ -499,12 +534,9 @@ public class NPC_Dialogue : MonoBehaviour
             yield return null;
         }
 
-
-
         if (index == 0)
         {
             
-
             if (!habloconLeahn)
             {
                 MainCharacter.sharedInstance.eAnim = 20;
@@ -557,12 +589,8 @@ public class NPC_Dialogue : MonoBehaviour
             
         }
 
-
         if (habloconLeahn)
         {
-
-
-
             if (index == 1)
             {
 
@@ -606,10 +634,6 @@ public class NPC_Dialogue : MonoBehaviour
             UIManager.InstanceGUI.icono.gameObject.SetActive(true);
         }
 
-       
-
-
-
     }
     public void NextDialogue()
     {
@@ -637,6 +661,7 @@ public class NPC_Dialogue : MonoBehaviour
                 else
                 {
                     StartCoroutine(CloseDialogueC());
+
                 }
                 
             }
@@ -673,17 +698,15 @@ public class NPC_Dialogue : MonoBehaviour
     public void Navegate()
     {
 
-        if (_map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 2)
+        if (_map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 1)
         {
             id_selector++;
-
             AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
         }
 
         if (_map.Jugador.BUP.WasPressedThisFrame() && id_selector > 0)
         {
             id_selector--;
-
             AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
         }
 
@@ -700,11 +723,12 @@ public class NPC_Dialogue : MonoBehaviour
 
             habloconLeahn = true;
 
-            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+            
 
             switch (id_selector)
             {
                 case 0:
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectGood);
                     obRoute.StarRoute(id_selector);
                     UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
                     UIManager.InstanceGUI.BurbujaDialogo(7);
@@ -713,17 +737,19 @@ public class NPC_Dialogue : MonoBehaviour
                     break;
 
                 case 1:
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
                     obRoute.StarRoute(id_selector);
                     UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
                     UIManager.InstanceGUI.BurbujaDialogo(2);
 
                     break;
 
-                //case 2:
-                //    obRoute.StarRoute(id_selector);
-                //    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
-                //    UIManager.InstanceGUI.BurbujaDialogo(2);
-                //    break;
+                case 2:
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
+                    obRoute.StarRoute(id_selector);
+                    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
+                    UIManager.InstanceGUI.BurbujaDialogo(2);
+                    break;
 
                 default:
                     break;
@@ -743,7 +769,6 @@ public class NPC_Dialogue : MonoBehaviour
 
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
 
-
         index = 0;
 
         CambiarDialogos();
@@ -755,9 +780,6 @@ public class NPC_Dialogue : MonoBehaviour
             
         }
 
-        
-
-
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         dialogueText.text = string.Empty;
@@ -795,9 +817,6 @@ public class NPC_Dialogue : MonoBehaviour
         UIManager.InstanceGUI.obMap.SetActive(true);
         UIManager.InstanceGUI.obMapMark.SetActive(true);
 
-        
-
-        
 
         nextRoute = false;
 
@@ -806,29 +825,38 @@ public class NPC_Dialogue : MonoBehaviour
         detector.SetActive(false);
 
 
-       
 
-        MainCharacter.sharedInstance.canMove = true;
-
-
+        
         MainCharacter.sharedInstance.eAnim = 0; 
 
         yield return new WaitForSeconds(0.01f);
         marker.SetActive(true);
+        
         didDialogueStart = false;
+        MainCharacter.sharedInstance.canMove = true;
     }
     public IEnumerator CloseDialogueC()
     {
-        detector.SetActive(true);
-
-        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
-        MainCharacter.sharedInstance.eAnim = 0;
-
+        
+        rana.gameObject.SetActive(false);
         seguiraLogan = true;
+
+        detector.SetActive(true);
 
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
 
         index = 0;
+
+        //CambiarDialogos();
+
+        numeroAnim = 0;
+        MainCharacter.sharedInstance.eAnim = 0;
+
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
+
+        dialogueText.text = string.Empty;
+
+        UIManager.InstanceGUI.fadeFrom = true;
 
         FollowCameras.instance.velocidadRotacion = -75f;
         FollowCameras.instance.mode = Modo.MundoAlreves;
@@ -837,13 +865,6 @@ public class NPC_Dialogue : MonoBehaviour
         {
             Camera.main.orthographicSize += (speedZoom / 2.0f) * Time.deltaTime;
 
-            //FollowCameras.instance.transform.position = Vector3.Lerp(FollowCameras.instance.transform.position, posOriginal.transform.position, (speedZoom / 2.0f) * Time.deltaTime);
-
-            //Vector3 currentAngle = new Vector3(
-            //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.x, posOriginal.transform.rotation.eulerAngles.x, (speedZoom / 2.0f) * Time.deltaTime),
-            //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.y, posOriginal.transform.rotation.eulerAngles.y, (speedZoom / 2.0f) * Time.deltaTime),
-            //Mathf.Lerp(FollowCameras.instance.transform.rotation.eulerAngles.z, posOriginal.transform.rotation.eulerAngles.z, (speedZoom / 2.0f) * Time.deltaTime)
-            //);
 
             yield return null;
 
@@ -854,49 +875,36 @@ public class NPC_Dialogue : MonoBehaviour
             yield return null;
         }
 
-
         FollowCameras.instance.mode = Modo.InGame;
 
- 
-
-        
-
-        dialogueText.text = string.Empty;
-
-        UIManager.InstanceGUI.fadeFrom = true;
-
-       
 
         Inventory.instance.panelItem.SetActive(true);
         UIManager.InstanceGUI.obMap.SetActive(true);
         UIManager.InstanceGUI.obMapMark.SetActive(true);
 
-      
+       
+
+
+        nextRoute = false;
+
 
         FollowCameras.instance.pararGiro = false;
         detector.SetActive(false);
-
-        MainCharacter.sharedInstance.canMove = true;
-
-        numeroAnim = 0;
-        
-
-        mode = ModeNPC.Follow;
-
-        rana.gameObject.SetActive(false);
 
         
 
         yield return new WaitForSeconds(0.01f);
         marker.SetActive(true);
+
         didDialogueStart = false;
+        MainCharacter.sharedInstance.canMove = true;
 
-
+        mode = ModeNPC.Follow;
+        obNMA.speed = 0;
     }
-
     public IEnumerator CloseDialogueN()
     {
-        
+        Debug.Log("closeN");
         index = 0;
 
         MainCharacter.sharedInstance.eAnim = 0;
@@ -973,7 +981,11 @@ public class NPC_Dialogue : MonoBehaviour
 
         obNMA.SetDestination(trPlayer.position);
 
-
+        if (obNMA.speed == 0)
+        {
+            Vector3 direction = trPlayer.transform.position - transform.position;
+            transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
+        }
 
     }
     IEnumerator DetectarLimites()
@@ -1019,7 +1031,27 @@ public class NPC_Dialogue : MonoBehaviour
 
 
 
-        lines[0] = linesLogan[random01];
+        switch (random01)
+        {
+            case 0:
+                lines = linesLogan0;
+                break;
+
+            case 1:
+                lines = linesLogan1;
+                break;
+
+            case 2:
+                lines = linesLogan2;
+                break;
+
+            case 3:
+                lines = linesLogan3;
+                break;
+
+        }
+
+       
 
 
         //mode = ModeNPCHenry.Limites;
@@ -1028,36 +1060,6 @@ public class NPC_Dialogue : MonoBehaviour
 
         StartCoroutine(WriteDialogue());
 
-    }
-    void Start()
-    {
-        marker = transform.Find("Marker").gameObject;
-        marker.SetActive(false);
-        obCameras = Camera.main;
-        trPlayer = GameObject.FindGameObjectWithTag("Main Character").transform;
-        obNMA = GetComponent<NavMeshAgent>();
-        speedNPC = obNMA.speed;
-		numeroAnim = 1;
-        detector.SetActive(false);
-
-
-
-        dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
-
-        Options = GameObject.Find("DialogueOptions").gameObject;
-
-        selector = GameObject.Find("Select").gameObject;
-
-        listOptions[0] = GameObject.Find("Panel0").gameObject;
-        listOptions[1] = GameObject.Find("Panel1").gameObject;
-        listOptions[2] = GameObject.Find("Panel2").gameObject;
-
-
-
-
-
-
-        //houses = FindObjectOfType<HouseDialogue>();
     }
     void RotateSon()
     {
@@ -1131,13 +1133,19 @@ public class NPC_Dialogue : MonoBehaviour
 
         }
 
+        if (mode == ModeNPC.Final)
+        {
+            Vector3 directionH = enrique.gameObject.transform.position - transform.position;
+            transform.forward = Vector3.Lerp(transform.forward, directionH, (speedZoom / 2.5f) * Time.deltaTime);
+        }
 
+
+        RotateSon();
 
       
     }
     public void InteractuarSS()
     {
-
 
         if (detectarLimites && dialogueText.text == lines[index].Substring(1) && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !enrique.seAcabo)
         {
@@ -1145,22 +1153,19 @@ public class NPC_Dialogue : MonoBehaviour
             logan = true;
             StartCoroutine(CloseDialogueN());
             UIManager.InstanceGUI.icono.gameObject.SetActive(false);
-        }
-
-
+        }//Cuando Logan se aleja
 
         if (isRange && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !houses.henryFinalA && !logan && !detectarLimites && !enrique.seAcabo)
         {
+
+            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+
             if (!didDialogueStart)
             {
                 StartDialogue();
 
-
             }
-
-
-
-            else if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0 && !nextRoute && !logan && !detectarLimites && !enrique.seAcabo && /*!rana.didDialogueStart*/ /*&&*/ !houses.didDialogueStart)
+            else if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0 && !nextRoute && !logan && !detectarLimites && !enrique.seAcabo && !houses.didDialogueStart)
             {
                 if (dialogueText.text == lines[index].Substring(1))
                 {
@@ -1170,19 +1175,16 @@ public class NPC_Dialogue : MonoBehaviour
 
             }
 
-            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+            
 
+        } // Dialogo Normal
 
-        }
-
-
-        if (!henry.seAcabo)
-        {
-            RotateSon();
-        }
+        //if (!henry.seAcabo)
+        //{
+        //    RotateSon();
+        //}
         
     }
-
     private void OnTriggerEnter(Collider other)
     {
         
@@ -1232,17 +1234,25 @@ public class NPC_Dialogue : MonoBehaviour
             if (other.gameObject.CompareTag("P1"))
             {
                 mirar = true;
-                obNMA.speed = 0;
+                obNMA.speed = 0f;
 				numeroAnim = 0;
                 
                 isRange = true;
                 marker.SetActive(true);
+
+                obAnim.speed = 1.0f;
             }
 
         }
 
     }
-
+    IEnumerator EsperarCorrer()
+    {
+        yield return new WaitForSeconds(0.25f);
+        polvoTierra.Play();
+        numeroAnim = 1;
+        obNMA.speed = 4.2f;
+    }
     private void OnTriggerExit(Collider other)
     {
         if (mode == ModeNPC.Help || mode == ModeNPC.Busy)
@@ -1279,17 +1289,19 @@ public class NPC_Dialogue : MonoBehaviour
         {
             if (other.gameObject.CompareTag("P1"))
             {
-                obNMA.speed = speedNPC;
-				numeroAnim = 1;
+                
+				
                 marker.SetActive(false);
                 isRange = false;
                 mirar = false;
+
+                StartCoroutine(EsperarCorrer());
+                obAnim.speed = 2.0f;
             }
 
         }
 
     }
-
     private void LateUpdate()
     {
         obAnim.SetInteger("EstadoAnimo", numeroAnim);

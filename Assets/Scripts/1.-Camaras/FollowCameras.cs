@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public enum Modo
 {
@@ -45,9 +47,10 @@ public class FollowCameras : MonoBehaviour
     [Header("Principio Variables")]
     [SerializeField] Transform[] puntosASeguir;
     [SerializeField] float transitionSpeed;
-    [SerializeField] Transform puntoActual;
+    //[SerializeField] Transform puntoActual;
+    public int indexSeguir = 0;
 
-
+    //public VolumeProfile vp;
 
 
     // Start is called before the first frame update
@@ -57,18 +60,24 @@ public class FollowCameras : MonoBehaviour
         instance = this;
     }
     void Start()
-    {    
-        mode = Modo.InGame;
+    {
+       
+
+    }
+
+    private void OnEnable()
+    {
+        mode = Modo.Principio;
+        //mode = Modo.InGame;
         trPlayer = GameObject.FindGameObjectWithTag("Main Character").transform;
         posX = trPlayer.position.x;
         posZ = trPlayer.position.z;
-        float X = Mathf.Clamp(posX, minXandZ.x,maxXandZ.x);
+        float X = Mathf.Clamp(posX, minXandZ.x, maxXandZ.x);
         float Z = Mathf.Clamp(posZ, minXandZ.z, maxXandZ.z);
-        transform.position = new Vector3(X + offset.x, trPlayer.position.y + offset.y, Z + offset.z);
+        //transform.position = new Vector3(X + offset.x, trPlayer.position.y + offset.y, Z + offset.z);
         confetis.Stop();
         confetisB.Stop();
         confetisM.Stop();
-
     }
 
     void GirarDialogo()
@@ -142,8 +151,34 @@ public class FollowCameras : MonoBehaviour
 
     void Interpolar()
     {
+        Vector3 diferenciaVector = puntosASeguir[indexSeguir].position - transform.position;
 
+        Vector3 actualAngle = new Vector3(
+            Mathf.MoveTowards(transform.rotation.eulerAngles.x, puntosASeguir[indexSeguir].rotation.eulerAngles.x, Time.deltaTime * transitionSpeed),
+            Mathf.MoveTowards(transform.rotation.eulerAngles.y, puntosASeguir[indexSeguir].rotation.eulerAngles.y, Time.deltaTime * transitionSpeed),
+            Mathf.MoveTowards(transform.rotation.eulerAngles.z, puntosASeguir[indexSeguir].rotation.eulerAngles.z, Time.deltaTime * transitionSpeed)
+              );
+            
+       
+            
+          
 
+        if (diferenciaVector.sqrMagnitude < (0.2f * 2f))
+        {
+            indexSeguir++;
+
+            if (indexSeguir >= puntosASeguir.Length)
+            {
+                indexSeguir = 0;
+                mode = Modo.InGame;
+                MainCharacter.sharedInstance._map.Jugador.Enable();
+
+            }
+
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, puntosASeguir[indexSeguir].position, Time.deltaTime * transitionSpeed);
+        transform.eulerAngles = actualAngle;
 
     }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5873358176729465788}
   - component: {fileID: 5873358176729465789}
   - component: {fileID: 5873358176729465790}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Ampolleta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 7036661992410921877}
   - component: {fileID: 5063111980038344543}
   - component: {fileID: 4033552325844474547}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PosteLuz
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   m_Component:
   - component: {fileID: 487099756944191126}
   - component: {fileID: 3599147079944103037}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8094628563504065845}
   m_LocalRotation: {x: -1, y: -0, z: -0, w: 0.00000008940697}
-  m_LocalPosition: {x: 0, y: 0, z: -0.013}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0065}
   m_LocalScale: {x: 0.036352847, y: 0.017181903, z: 0.024536023}
   m_Children: []
   m_Father: {fileID: 6199457060043240496}
@@ -222,7 +222,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 75
+  m_Intensity: 80
   m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -259,7 +259,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8183
   m_RenderingLayerMask: 1
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
