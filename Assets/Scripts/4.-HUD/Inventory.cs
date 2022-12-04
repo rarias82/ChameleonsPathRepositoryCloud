@@ -125,8 +125,8 @@ public class Inventory : MonoBehaviour
                     objeto.gameObject.SetActive(false);
                 }
 
-                slot[0].GetComponent<Slot>().empty = true;
-                slot[2].GetComponent<Slot>().empty = true;
+                slot[0].GetComponent<Slot>().empty = false;
+                slot[2].GetComponent<Slot>().empty = false;
 
                 
 
@@ -186,56 +186,7 @@ public class Inventory : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        //if (panelItem.activeInHierarchy)
-        //{
-        //    //if (Input.GetButtonDown("ArribaInventario") && moverInv && !Input.GetButtonDown("AbajoInventario"))
-        //    //{
-
-        //    //    for (int i = 0; i < mov.Length; i++)
-        //    //    {
-        //    //        mov[i].StartCoroutine(mov[i].PosicionarElementos(false));
-        //    //    }
-        //    //}
-
-        //    //if (Input.GetButtonDown("AbajoInventario") && moverInv && !Input.GetButtonDown("ArribaInventario"))
-        //    //{
-
-        //    //    for (int i = 0; i < mov.Length; i++)
-        //    //    {
-        //    //        mov[i].StartCoroutine(mov[i].PosicionarElementos(true));
-        //    //    }
-        //    //}
-
-        //    //if (mov[0].quieto && mov[1].quieto && mov[2].quieto)
-        //    //{
-        //    //    moverInv = true;
-        //    //}
-        //    //else
-        //    //{
-        //    //    moverInv = false;
-
-
-        //    //}
-
-
-        //    //if (!canPickUp)
-        //    //{
-        //    //    UseObject();
-        //    //}
-        //}
-     
-
-
-
-    }
-
-    void LateUpdate()
-    {
-        //invAnim.
-        
-    }
+   
 }
     
   

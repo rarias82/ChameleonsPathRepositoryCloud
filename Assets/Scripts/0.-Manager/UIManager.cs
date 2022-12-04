@@ -22,12 +22,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Bondad Variables")]
     public Image barraBondad;
-    public float currenHealth;
-    public float maxHealth;
-    public float healthToModify;
     public float velocidadBarra;
-    public Color32 colorBarra;
-
+    
     [Header("Circle Variables")]
     public Image circulo;
     public RectTransform rtCircle;
@@ -63,7 +59,7 @@ public class UIManager : MonoBehaviour
     [Header("Timer")]
     [SerializeField] TextMeshProUGUI cuentaTexto;
 
-    public GameObject obstaculos, carrera, manto;
+    public GameObject manto;
     public Scene currentScene;
     public string sceneName;
 
@@ -72,24 +68,23 @@ public class UIManager : MonoBehaviour
     public bool isPaused;
     public GameObject ObPausas;
     public bool juegoPausas;
+    public GameObject obCartelPausa;
+    public bool estaPausados;
 
     [Header("Comics")]
     public Image[] listaVinetas1;
+    public string comicTextos;
+    public TextMeshProUGUI textoComics;
 
     [Header("Icrementador")]
     public int etapa;
 
     [Header("Game Over1")]
     public sbyte id_selectorGO;
-
     public GameObject[] listOptionsGO;
     public GameObject ObGameOver;
     public bool isGameOver;
     public GameObject selectorGO;
-
-    
- 
-
 
     void ForceScalesAndLimitFPS()
     {
@@ -135,67 +130,6 @@ public class UIManager : MonoBehaviour
         }
 
     }
-    IEnumerator UpdateUI(bool add, float cantidad)
-    {
-        if (add)
-        {
-            currenHealth += cantidad;
-
-            if (currenHealth > maxHealth)
-            {
-                currenHealth = maxHealth;
-            }
-        }
-        else
-        {
-            currenHealth -= cantidad;
-
-            if (currenHealth < 0)
-            {
-                currenHealth = 0;
-            }
-        }
-
-        healthToModify = (currenHealth / maxHealth);
-
-
-        switch (currenHealth)
-        {
-            case 1:
-                barraBondad.color = new Color32(190, 75, 50, 255);
-                break;
-            case 2:
-                barraBondad.color = new Color32(190, 100, 50, 255);
-                break;
-            case 3:
-                barraBondad.color = new Color32(190, 125, 50, 255);
-                break;
-            case 4:
-                barraBondad.color = new Color32(190, 150, 50, 255);
-                break;
-            case 5:
-                barraBondad.color = new Color32(190, 175, 50, 255);
-                break;
-            case 6:
-                barraBondad.color = new Color32(175, 190, 50, 255);
-                break;
-            case 7:
-                barraBondad.color = new Color32(150, 190, 50, 255);
-                break;
-            case 8:
-                barraBondad.color = new Color32(125, 190, 50, 255);
-                break;
-
-
-        }
-        while ((barraBondad.fillAmount < healthToModify) || (barraBondad.fillAmount > healthToModify))
-        {
-            barraBondad.fillAmount = Mathf.MoveTowards(barraBondad.fillAmount, healthToModify, velocidadBarra * Time.deltaTime);
-
-            yield return null;
-        }
-
-    }
     public void GanarPuntos(bool add, float puntos)
     {
 
@@ -230,14 +164,25 @@ public class UIManager : MonoBehaviour
                 StartCoroutine(MoverBarra(add));
 
             }
-            else
-            {
-                FinDelJuego();
-            }
+            //else
+            //{
+            //    FinDelJuego();
+            //}
 
 
             
 
+        }
+
+        if (puntosCalificacion == -200)
+        {   
+            
+            
+            isGameOver = true;
+            
+            
+            
+            
         }
 
         
@@ -327,7 +272,6 @@ public class UIManager : MonoBehaviour
 
 
     }
-
     public IEnumerator FinalARana()
     {
 
@@ -337,8 +281,8 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         if (FindObjectOfType<NPC_Rana>().finalB2)
         {
-            carrera.SetActive(false);
-            obstaculos.SetActive(false);
+            FindObjectOfType<NPC_Rana>().carrera.SetActive(false);
+            FindObjectOfType<NPC_Rana>().obstaculos.SetActive(false);
 
         }
 
@@ -355,12 +299,11 @@ public class UIManager : MonoBehaviour
 
 
     }
-
     public IEnumerator FinalBRana()
     {
         FindObjectOfType<NPC_Rana>().gameObject.GetComponent<NavMeshAgent>().enabled = false;
-        carrera.SetActive(true);
-        obstaculos.SetActive(true);
+        FindObjectOfType<NPC_Rana>().carrera.SetActive(true);
+        FindObjectOfType<NPC_Rana>().obstaculos.SetActive(true);
 
 
 
@@ -411,14 +354,13 @@ public class UIManager : MonoBehaviour
         StartCoroutine(TemblorPantalla());
 
     }
-
     IEnumerator TemblorPantalla()
     {
         Vector3 posInicial = FollowCameras.instance.transform.position;
         float tiempoTranscurrido = 0.0f;
         float fuerza = 0.0f;
 
-        while (tiempoTranscurrido < duracionTemblor)
+        while (tiempoTranscurrido < duracionTemblor && !UIManager.InstanceGUI.isGameOver)
         {
             tiempoTranscurrido += Time.deltaTime;
             fuerza = curvas.Evaluate(tiempoTranscurrido / duracionTemblor);
@@ -438,11 +380,23 @@ public class UIManager : MonoBehaviour
 
     public void FinDelJuego()
     {
+        dialogos.text = string.Empty;
         ObGameOver.SetActive(true);
-        Time.timeScale = 0.0f;
         
-        
+    }
 
+    public void MostrarCartelPausa()
+    {
+        estaPausados = !estaPausados;
+
+        if (estaPausados)
+        {
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+        }
     }
 
     void NavegarGO()
@@ -457,7 +411,7 @@ public class UIManager : MonoBehaviour
 
         if (MainCharacter.sharedInstance._map.Jugador.BUP.WasPressedThisFrame() && id_selectorGO > 0)
         {
-            id_selectorGO++; ;
+            id_selectorGO--; ;
             AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
         }
 
@@ -472,20 +426,22 @@ public class UIManager : MonoBehaviour
         if (MainCharacter.sharedInstance._map.Jugador.Interactuar.WasPressedThisFrame())
         {
 
-
             switch (id_selectorGO)
             {
                 case 0:
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+                    MainCharacter.sharedInstance._map.Jugador.Disable();
+                    StartCoroutine(Reiniciar());
 
 
                     break;
 
                 case 1:
-
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+                    MainCharacter.sharedInstance._map.Jugador.Disable();
+                    StartCoroutine(VolverMenu());
 
                     break;
-
-
             }
 
         }
@@ -508,7 +464,6 @@ public class UIManager : MonoBehaviour
 
         
     }
-   
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -530,63 +485,17 @@ public class UIManager : MonoBehaviour
         StartCoroutine(ComenzarEscena());
     }
 
-    public void Pausas()
-    {
-        //if (encenderTecla)
-        //{
-
-        //    if (GameManager.InstancieInput.mapeoControles.Jugador.Interactuar.WasPressedThisFrame())
-        //    {
-        //        isPaused = !isPaused;
-
-        //        if (isPaused)
-        //        {
-        //            Time.timeScale = 0.0f;
-        //        }
-        //        else
-        //        {
-        //            Time.timeScale = 1.0f;
-        //        }
-        //    }
-            
-        //    {
-            
-        //    }
-        //}
-
-    }
-
-    public void ShowPausas()
-    {
-        //if (juegoPausas)
-        //{
-        //    if (isPaused)
-        //    {
-        //        ObPausas.SetActive(true);
-
-
-        //    }
-        //    else
-        //    {
-        //        ObPausas.SetActive(false);
-        //    }
-        //}
-
-
-    }
+   
 
     public IEnumerator Reiniciar()
     {
         blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, 0); fadeBlack = false; fadeFrom = false; dialogos.text = string.Empty;
-        //UIManager.InstanceGUI.obAnim.SetTrigger("StartTransition");
+ 
 
-        yield return new WaitForSeconds(1f);
+        
 
-        FindObjectOfType<NPC_Rana>().objetosTodo[0].gameObject.SetActive(false);
-        FindObjectOfType<NPC_Rana>().objetosTodo[0].gameObject.SetActive(false);
-
-        Inventory.instance.slot[0].GetComponent<Slot>().Quitar();
-        FindObjectOfType<NPC_Rana>().finalA = false;
+        Inventory.instance.slot[1].GetComponent<Slot>().Quitar();
+        
 
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
 
@@ -598,7 +507,44 @@ public class UIManager : MonoBehaviour
 
 
         int nextScene = SceneManager.GetActiveScene().buildIndex;
+
+
+        yield return null;
+
+        Time.timeScale = 1.0f;
+
         StartCoroutine(SceneLoading(nextScene));
+
+
+
+    }
+    public IEnumerator VolverMenu()
+    {
+        blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, 0); fadeBlack = false; fadeFrom = false; dialogos.text = string.Empty;
+
+
+       
+
+        Inventory.instance.slot[1].GetComponent<Slot>().Quitar();
+        
+
+        AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
+
+
+
+        rtCircle.transform.position = originalPoseCircle;
+
+        ObGameOver.SetActive(false);
+
+
+        int nextScene = SceneManager.GetActiveScene().buildIndex;
+
+
+        yield return null;
+
+        Time.timeScale = 1.0f;
+
+        StartCoroutine(SceneLoading(nextScene-2));
 
 
 
@@ -614,7 +560,7 @@ public class UIManager : MonoBehaviour
 
         if (sceneName == "MenuStart")
         {
-            
+            dialogos.text = string.Empty;
             HUDLienzos[0].SetActive(true);
             HUDLienzos[1].SetActive(false);
             HUDLienzos[2].SetActive(false);
@@ -629,21 +575,28 @@ public class UIManager : MonoBehaviour
 
             AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionMenu));
 
+
+            isGameOver = false;
         }
 
         if (sceneName == "Comic")
         {
-            
+            dialogos.text = string.Empty;
             HUDLienzos[0].SetActive(false);
             HUDLienzos[1].SetActive(false);
             HUDLienzos[2].SetActive(true);
-            StartCoroutine(Diapos());
-            
 
+            foreach (Image miniImagen in listaVinetas1)
+            {
+                miniImagen.color = new Color(miniImagen.color.r, miniImagen.color.g, miniImagen.color.b, 0.0f); 
+            }
+
+            isGameOver = false;
         }
 
         if (sceneName == "LevelOne")
         {
+            dialogos.text = string.Empty;
             GameManager.InstancieInput.ActivarInput();
 
             HUDLienzos[0].SetActive(false);
@@ -651,19 +604,9 @@ public class UIManager : MonoBehaviour
             HUDLienzos[2].SetActive(false);
 
 
-
-
-            if (etapa == 3)
-            {
-                carrera = GameObject.Find("LineaCarrera");
-                obstaculos = GameObject.Find("Obstaculos");
-            }
-            
             manto.SetActive(false);
             
-            carrera.SetActive(false);
             
-            obstaculos.SetActive(false);
             
 
             encenderTecla = true;
@@ -680,11 +623,7 @@ public class UIManager : MonoBehaviour
 
             AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
 
-            //yield return new WaitForSeconds(2.75f);
-
-            //MainCharacter.sharedInstance._map.Jugador.Enable();
-
-            //FollowCameras.instance.mode = Modo.Principio;
+            isGameOver = false;
 
         }
 
@@ -699,36 +638,15 @@ public class UIManager : MonoBehaviour
 
     }
 
-    IEnumerator Diapos()
-    {
+  
 
-       
-        for (int i = 0; i < listaVinetas1.Length; i++)
-        {
-
-            while (listaVinetas1[i].color.a != 1)
-            {
-                listaVinetas1[i].color = new Color(listaVinetas1[i].color.r, listaVinetas1[i].color.g, listaVinetas1[i].color.b, Mathf.MoveTowards(listaVinetas1[i].color.a, 1f, fadeSpeed * Time.deltaTime));
-                yield return null;
-            }
-
-            yield return new WaitForSeconds(2.5f);
-        }
-
-        UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.SceneLoading(2));
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        Pausas();
-
-        ShowPausas();
+       
 
         DialogueFadeIn();
 
-        if (ObGameOver.activeInHierarchy)
+        if (ObGameOver.activeInHierarchy && isGameOver)
         {
             NavegarGO();
         }

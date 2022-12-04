@@ -143,7 +143,7 @@ public class NPC_Henry : MonoBehaviour
     }
     public void Interactuar()
     {
-        if (isRange && NPC_Dialogue.instance.isRange && Inventory.instance.moverInv && !logan && !mapeo.logan)
+        if (isRange && NPC_Dialogue.instance.isRange && Inventory.instance.moverInv && !logan && !mapeo.logan && !UIManager.InstanceGUI.isGameOver)
         {
             if (!didDialogueStart)
             {
@@ -167,7 +167,7 @@ public class NPC_Henry : MonoBehaviour
             UIManager.InstanceGUI.icono.gameObject.SetActive(false);
         } // Cuando Logan se aleja
 
-        if ((isRange) && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !seAcabo)
+        if ((isRange) && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !seAcabo && !UIManager.InstanceGUI.isGameOver)
         {
             if (!didDialogueStart && !logan && !detectarLimites)
             {
@@ -656,7 +656,10 @@ public class NPC_Henry : MonoBehaviour
             MainCharacter.sharedInstance.canMove = true;
         }
 
-      
+        if (UIManager.InstanceGUI.isGameOver)
+        {
+            UIManager.InstanceGUI.FinDelJuego();
+        }
 
     }
     public void Final()
@@ -722,7 +725,7 @@ public class NPC_Henry : MonoBehaviour
         }
         if (mode == ModeNPCHenry.FinalC)
         {
-            if (isRange && NPC_Dialogue.instance.isRange && Inventory.instance.moverInv && !logan && !mapeo.logan)
+            if (isRange && NPC_Dialogue.instance.isRange && Inventory.instance.moverInv && !logan && !mapeo.logan && !UIManager.InstanceGUI.isGameOver)
             {
                 if (!didDialogueStart)
                 {

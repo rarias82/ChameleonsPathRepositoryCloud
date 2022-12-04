@@ -39577,6 +39577,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: KeyMagic001 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1710071294890189992, guid: 008b0eb8808848449b7896511f8476f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710071294890189992, guid: 008b0eb8808848449b7896511f8476f8, type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
     - target: {fileID: 1710071294890189998, guid: 008b0eb8808848449b7896511f8476f8, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -51780,7 +51788,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5905e-41, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 4.5905e-41, y: 0, z: 0, w: 6e-44}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -53002,6 +53010,10 @@ PrefabInstance:
       value: "HResponde la opci\xF3n correcta y deja de fastidiar."
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesAIncorrecta4.Array.data[2]
+      value: HVeamos, porque no te creo nada. Di el nombre de mi hermano.
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCIncorrecta1.Array.data[0]
       value: "HEsta es la \xFAltima vez que dejo que invadas mi propiedad. Hazme
         el maldito favor  de una vez."
@@ -53077,11 +53089,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta0.Array.data[0]
-      value: "HInvasor, sabandija v\xE1yase de aqu\xED de INMEDIAAAAAATOOOOO!!!!"
+      value: "HIIIIIInvasor, sabandija v\xE1yase de aqu\xED de INMEDIAAAAAATOOOOO!!!!"
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta0.Array.data[1]
-      value: HNo lo repetireeeeeeeeeeeeeee!!!!
+      value: HNNNNOOOOOO lo repetireeeeeeeeeeeeeee!!!!
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta1.Array.data[0]
@@ -53101,19 +53113,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta3.Array.data[0]
-      value: "Sal de aqu\xED inmediatamente si no quieres que te eche a patadas!!!!\r\n"
+      value: "HSal de aqu\xED inmediatamente si no quieres que te eche a patadas!!!!\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta3.Array.data[1]
-      value: SAAAAAAAAAAAAAAAl!!!
+      value: HSAAAAAAAAAAAAAAAl!!!
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta4.Array.data[0]
-      value: Nada que pensar ni negarse ni que cuartos, no quieres ayudar y punto.
+      value: HNAAAAADAAAA que pensar ni negarse ni que cuartos, no quieres ayudar
+        y punto.
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta4.Array.data[1]
-      value: "No quieres no quieres, \xA1ahora sal de mi propiedad!"
+      value: "HNNNOOOO quieres no quieres, \xA1ahora sal de mi propiedad!"
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta5.Array.data[0]
@@ -53123,7 +53136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta5.Array.data[1]
-      value: "Adi\xF3s y no vuelvas.\r\n"
+      value: "HAdi\xF3s y no vuelvas.\r\n"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
@@ -53153,6 +53166,14 @@ PrefabInstance:
     - target: {fileID: 1710071294890189992, guid: 008b0eb8808848449b7896511f8476f8, type: 3}
       propertyPath: m_Name
       value: KeyMagic001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710071294890189992, guid: 008b0eb8808848449b7896511f8476f8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710071294890189992, guid: 008b0eb8808848449b7896511f8476f8, type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     - target: {fileID: 1710071294890189998, guid: 008b0eb8808848449b7896511f8476f8, type: 3}
       propertyPath: m_RootOrder

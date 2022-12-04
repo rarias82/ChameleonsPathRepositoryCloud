@@ -176,7 +176,7 @@ public class Navegar : MonoBehaviour
 
                 case 2:
 
-                    UIManager.InstanceGUI.ExitPlayGame();
+                    //UIManager.InstanceGUI.ExitPlayGame();
 
                     break;
 

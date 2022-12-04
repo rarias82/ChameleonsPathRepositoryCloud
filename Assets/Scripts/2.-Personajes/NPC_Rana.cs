@@ -114,6 +114,11 @@ public class NPC_Rana : MonoBehaviour
     public bool finalB2;
     public Item[] objetosTodo;
 
+    [Header("Obstaculos / Carrera")]
+    public GameObject carrera, obstaculos;
+    bool noAbrir;
+
+
 
 
     private void Awake()
@@ -171,6 +176,15 @@ public class NPC_Rana : MonoBehaviour
             objeto.gameObject.SetActive(false);
         }
 
+
+        carrera = GameObject.Find("LineaCarrera");
+        obstaculos = GameObject.Find("Obstaculos");
+
+        carrera.SetActive(false);
+
+        obstaculos.SetActive(false);
+
+
     }
     void VocesRandom()
     {
@@ -205,7 +219,7 @@ public class NPC_Rana : MonoBehaviour
     public void Interactuar()
     {
 
-        if (isRange && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv /*&& !mapeo.didDialogueStart && !mapeo.houses.didDialogueStart && !mapeo.henry.didDialogueStart*/)
+        if (isRange && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !noAbrir/*&&*/ /*!UIManager.InstanceGUI.isGameOver*//*!noAbrir*/)
         {
             if (!didDialogueStart)
             {
@@ -671,16 +685,42 @@ public class NPC_Rana : MonoBehaviour
 
         if (finalA)
         {
-            UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalARana());
+            //if (UIManager.InstanceGUI.isGameOver)
+            //{
+            //    UIManager.InstanceGUI.FinDelJuego();
+            //}
+            //else
+            //{
+                UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalARana());
+            //}
+
+
+            
         }
         else if (finalB && !finalB2)
         {
-            UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalBRana());
+            //if (UIManager.InstanceGUI.isGameOver)
+            //{
+            //    UIManager.InstanceGUI.FinDelJuego();
+            //}
+            //else
+            //{
+                UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalBRana());
+            //}
             
         }
         else if(finalB2)
         {
-            UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalARana());
+
+            //if (UIManager.InstanceGUI.isGameOver)
+            //{
+            //    UIManager.InstanceGUI.FinDelJuego();
+            //}
+            //else
+            //{
+                UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalARana());
+            //}
+            
         }
         else
         {
@@ -689,9 +729,21 @@ public class NPC_Rana : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
             didDialogueStart = false;
             marker.SetActive(true);
+
+            if (UIManager.InstanceGUI.isGameOver)
+            {
+                noAbrir = true;
+
+                UIManager.InstanceGUI.FinDelJuego();
+            }
         }
 
         MainCharacter.sharedInstance.eAnim = 0;
+
+        //if (UIManager.InstanceGUI.isGameOver)
+        //{
+        //    UIManager.InstanceGUI.FinDelJuego();
+        //}
 
     }
     public void Navegate()
@@ -716,11 +768,11 @@ public class NPC_Rana : MonoBehaviour
         selector.transform.SetSiblingIndex(0);
 
 
-        if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame())
+        if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && !UIManager.InstanceGUI.isGameOver)
         {
 
-            
 
+            index = 0;
             MainCharacter.sharedInstance.eAnim = 22;
 
             switch (id_selector)
@@ -742,7 +794,7 @@ public class NPC_Rana : MonoBehaviour
                 case 1:
                     AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
                     numeroAnim = 200;
-                    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
+                    UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
                     finalB = true;
 
 
@@ -832,40 +884,14 @@ public class NPC_Rana : MonoBehaviour
             {
 
                 StartCoroutine(Esperar());
-
+                index = 0;
 
             }
             else
             {
                 StartCoroutine(CloseDialogue());
             }
-            //if (talkToLeahn && !finishDialogue && !optionCBuscarHermano)
-            //{
-
-            //    UIManager.InstanceGUI.AnimateOptions(true);
-
-            //    if (respuestaDada.nextDialogueToTalk == 0)
-            //    {
-            //        for (int i = 0; i < listOptions.Length; i++)
-            //        {
-            //            listOptions[i].text = optionLinesA[i];
-            //        }
-            //    }
-
-            //    if (respuestaDada.nextDialogueToTalk == 2)
-            //    {
-            //        for (int i = 0; i < listOptions.Length; i++)
-            //        {
-            //            listOptions[i].text = optionLinesC[i];
-            //        }
-            //    }
-            //}
-            //else
-            //{
-
-
-            //    StartCoroutine(CloseDialogue());
-            //}
+           
             
         }
 

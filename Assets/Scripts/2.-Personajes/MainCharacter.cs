@@ -13,7 +13,7 @@ public class MainCharacter : MonoBehaviour
     [SerializeField] Transform playerCamera;
 
     [Header("Move Variables")]
-    //[SerializeField] PlayerInput playerInput;
+    
     public bool canMove;
     [SerializeField] float MaxmoveSpeed;
     [SerializeField] float moveSpeed;
@@ -51,6 +51,9 @@ public class MainCharacter : MonoBehaviour
     public NPC_Dialogue _leahn;
     public NPC_Rana _rana;
 
+    [Header("Pausas")]
+    bool puedePausar = true;
+    
 
     void Awake()
     {
@@ -191,10 +194,19 @@ public class MainCharacter : MonoBehaviour
             MovePlayer();
         }
 
-        if (_map.Jugador.Salir.WasPressedThisFrame())
+        
+
+        if (puedePausar)
         {
-            UIManager.InstanceGUI.ExitPlayGame();
+
+            Vector2 movementInput = _map.Jugador.Move.ReadValue<Vector2>();
+
+            if (_map.Jugador.Pausa.WasPressedThisFrame()  && movementInput.magnitude == 0)
+            {
+                UIManager.InstanceGUI.MostrarCartelPausa();
+            }
         }
+
 
     }
     private void LateUpdate()
@@ -271,9 +283,18 @@ public class MainCharacter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Item"))
+        if (!other.gameObject.CompareTag("Item"))
         {
-           
+            puedePausar = false;
+        }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Item"))
+        {
+            puedePausar = true;
         }
     }
 

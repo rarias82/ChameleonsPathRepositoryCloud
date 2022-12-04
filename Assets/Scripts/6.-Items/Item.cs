@@ -53,18 +53,18 @@ public class Item : MonoBehaviour
     
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("P1"))
-        {
-            marker.SetActive(false);
-            isRange = !isRange;
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("P1"))
+    //    {
+    //        marker.SetActive(false);
+    //        isRange = !isRange;
 
-            Inventory.instance.canPickUp = false;
-        }
+    //        Inventory.instance.canPickUp = false;
+    //    }
 
 
-    }
+    //}
 
     
                  

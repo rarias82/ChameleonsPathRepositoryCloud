@@ -67,24 +67,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Reiniciar",
-                    "type": "Button",
-                    "id": "32c04a85-6bec-43fb-8503-ef0975d3487c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Salir",
-                    "type": "Button",
-                    "id": "34bc0aab-bcb4-42a8-94c0-303fc1c8634f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -640,28 +622,6 @@
                 },
                 {
                     "name": "",
-                    "id": "6c9a98b3-8282-4c70-b0bf-759682eecf36",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pausa",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6874f112-5cab-4169-abf3-86b40c9325cd",
-                    "path": "<XInputController>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pausa",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "c9a3da9f-919d-40c8-b567-8b5d4d0fc0f7",
                     "path": "<Keyboard>/p",
                     "interactions": "",
@@ -673,67 +633,23 @@
                 },
                 {
                     "name": "",
-                    "id": "dc86a10f-d11c-4284-a824-4f4ed4ac35b7",
-                    "path": "<Keyboard>/r",
+                    "id": "82803256-89e4-490a-b084-c09415152c12",
+                    "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reiniciar",
+                    "action": "Pausa",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "697e805b-bca0-4037-89a4-b88d4088ad8e",
-                    "path": "<Gamepad>/select",
+                    "id": "4c0e0ed0-5902-406b-b915-e3af5dbbc959",
+                    "path": "<XInputController>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reiniciar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5151fb20-aa9c-462c-9102-bda07b49d283",
-                    "path": "<XInputController>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reiniciar",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f893eeae-674e-4500-bf8f-8a31411a6336",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Salir",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "951d4bb2-1a53-4cb3-af25-2be101383a98",
-                    "path": "<XInputController>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Salir",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6129e420-a283-4173-94ae-0c1afb02d388",
-                    "path": "<Keyboard>/u",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Salir",
+                    "action": "Pausa",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

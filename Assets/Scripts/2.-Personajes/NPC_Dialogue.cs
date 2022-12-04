@@ -87,6 +87,7 @@ public class NPC_Dialogue : MonoBehaviour
 
     [Header("Efectos")]
     [SerializeField] ParticleSystem polvoTierra;
+    bool noAbrir;
     public void SetInputActions(Mapa map)
     {
         _map = map;
@@ -147,8 +148,7 @@ public class NPC_Dialogue : MonoBehaviour
 
         //houses = FindObjectOfType<HouseDialogue>();
     }
-
-   
+ 
     void CambiarDialogos() {
 
         switch (nextDialogueToTalk)
@@ -385,7 +385,7 @@ public class NPC_Dialogue : MonoBehaviour
         }
 
 
-
+        index = 0;
 
         StartCoroutine(WriteDialogue());
 
@@ -651,6 +651,7 @@ public class NPC_Dialogue : MonoBehaviour
             {
 
                 StartCoroutine(Esperar());
+                index = 0;
             }
             else
             {
@@ -717,7 +718,7 @@ public class NPC_Dialogue : MonoBehaviour
         selector.transform.SetSiblingIndex(0);
 
 
-        if (_map.Jugador.Interactuar.WasPressedThisFrame() && UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1)
+        if (_map.Jugador.Interactuar.WasPressedThisFrame() && UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && !UIManager.InstanceGUI.isGameOver)
         {
             index = 0;
 
@@ -834,10 +835,16 @@ public class NPC_Dialogue : MonoBehaviour
         
         didDialogueStart = false;
         MainCharacter.sharedInstance.canMove = true;
+
+        if (UIManager.InstanceGUI.isGameOver)
+        {
+            UIManager.InstanceGUI.FinDelJuego();
+        }
+
     }
     public IEnumerator CloseDialogueC()
     {
-        
+        Debug.Log("Todo es posible");
         rana.gameObject.SetActive(false);
         seguiraLogan = true;
 
@@ -901,6 +908,11 @@ public class NPC_Dialogue : MonoBehaviour
 
         mode = ModeNPC.Follow;
         obNMA.speed = 0;
+
+        //if (UIManager.InstanceGUI.isGameOver)
+        //{
+        //    UIManager.InstanceGUI.FinDelJuego();
+        //}
     }
     public IEnumerator CloseDialogueN()
     {
@@ -949,6 +961,11 @@ public class NPC_Dialogue : MonoBehaviour
             logan = false;
 
         MainCharacter.sharedInstance.canMove = true;
+
+        if (UIManager.InstanceGUI.isGameOver)
+        {
+            UIManager.InstanceGUI.FinDelJuego();
+        }
 
     }
     public void MedirDistancia()
@@ -1147,7 +1164,7 @@ public class NPC_Dialogue : MonoBehaviour
     public void InteractuarSS()
     {
 
-        if (detectarLimites && dialogueText.text == lines[index].Substring(1) && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !enrique.seAcabo)
+        if (detectarLimites && dialogueText.text == lines[index].Substring(1) && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !enrique.seAcabo /*&& noAbrir*/)
         {
 
             logan = true;
@@ -1155,7 +1172,7 @@ public class NPC_Dialogue : MonoBehaviour
             UIManager.InstanceGUI.icono.gameObject.SetActive(false);
         }//Cuando Logan se aleja
 
-        if (isRange && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !houses.henryFinalA && !logan && !detectarLimites && !enrique.seAcabo)
+        if (isRange && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !houses.henryFinalA && !logan && !detectarLimites && !enrique.seAcabo && !UIManager.InstanceGUI.isGameOver)
         {
 
             UIManager.InstanceGUI.icono.gameObject.SetActive(false);
@@ -1179,10 +1196,6 @@ public class NPC_Dialogue : MonoBehaviour
 
         } // Dialogo Normal
 
-        //if (!henry.seAcabo)
-        //{
-        //    RotateSon();
-        //}
         
     }
     private void OnTriggerEnter(Collider other)

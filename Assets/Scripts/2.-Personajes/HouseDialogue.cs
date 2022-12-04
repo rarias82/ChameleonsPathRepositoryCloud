@@ -111,6 +111,7 @@ public class HouseDialogue : MonoBehaviour
     [Header("Music References")]
     public AudioClip cancion;
     [SerializeField] AudioClip[] voces;
+    bool noAbrir = false;
 
    
     int voz000, voz001;
@@ -514,7 +515,7 @@ public class HouseDialogue : MonoBehaviour
         selector.transform.SetSiblingIndex(0);
 
 
-        if (respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame())
+        if (respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame() && !UIManager.InstanceGUI.isGameOver)
         {
 
             
@@ -764,91 +765,109 @@ public class HouseDialogue : MonoBehaviour
 
         }
 
-        yield return new WaitForSeconds(1.25f);
+       
+            yield return new WaitForSeconds(1.25f);
 
-        if (optionCBuscarHermano)
-        {
-            didDialogueStart = false;
-            Inventory.instance.panelItem.SetActive(true);
-            UIManager.InstanceGUI.obMap.SetActive(true);
-            UIManager.InstanceGUI.obMapMark.SetActive(true);
-            marker.SetActive(true);
-            MainCharacter.sharedInstance.canMove = true;
-        }
-        else
-        {
-            if (respuestaDada.nextDialogueToTalk == 0)
+            if (optionCBuscarHermano)
             {
-                if (nombreIncorrecto)
-                {
-                    didDialogueStart = false;
-                    Inventory.instance.panelItem.SetActive(true);
-                    UIManager.InstanceGUI.obMap.SetActive(true);
-                    UIManager.InstanceGUI.obMapMark.SetActive(true);
-                    marker.SetActive(true);
-                    MainCharacter.sharedInstance.canMove = true;
-                }
-                else 
-                {
-                    if (talkToLeahn){
-
-                        
-                        StartCoroutine("IniciarTransicion");
-                    }
-                        
-
-
-                }
-
-            }
-            if (respuestaDada.nextDialogueToTalk == 2)
-            {
-                if (nombreIncorrecto)
-                {
-                    didDialogueStart = false;
-                    Inventory.instance.panelItem.SetActive(true);
-                    UIManager.InstanceGUI.obMap.SetActive(true);
-                    UIManager.InstanceGUI.obMapMark.SetActive(true);
-                    marker.SetActive(true);
-                    MainCharacter.sharedInstance.canMove = true;
-                }
-                else if (talkToLeahn)
-                {
-                    didDialogueStart = false;
-                    Inventory.instance.panelItem.SetActive(true);
-                    UIManager.InstanceGUI.obMap.SetActive(true);
-                    UIManager.InstanceGUI.obMapMark.SetActive(true);
-                    marker.SetActive(true);
-                    MainCharacter.sharedInstance.canMove = true;
-                    optionCBuscarHermano = true;
-
-                }
-            }
-
-            if (!talkToLeahn)
-            {
-
-                
-                    
-                    Inventory.instance.panelItem.SetActive(true);
-                    UIManager.InstanceGUI.obMap.SetActive(true);
-                    UIManager.InstanceGUI.obMapMark.SetActive(true);
-                    marker.SetActive(true);
-                    MainCharacter.sharedInstance.canMove = true;
-                    didDialogueStart = false;
-                //didDialogueStart = true;
-                //StartCoroutine(FadeinOut());
-
-
+                didDialogueStart = false;
+                Inventory.instance.panelItem.SetActive(true);
+                UIManager.InstanceGUI.obMap.SetActive(true);
+                UIManager.InstanceGUI.obMapMark.SetActive(true);
+                marker.SetActive(true);
+                MainCharacter.sharedInstance.canMove = true;
             }
             else
             {
+                if (respuestaDada.nextDialogueToTalk == 0)
+                {
+                    if (nombreIncorrecto)
+                    {
+                        didDialogueStart = false;
+                        Inventory.instance.panelItem.SetActive(true);
+                        UIManager.InstanceGUI.obMap.SetActive(true);
+                        UIManager.InstanceGUI.obMapMark.SetActive(true);
+                        marker.SetActive(true);
+                        MainCharacter.sharedInstance.canMove = true;
 
+                    if (UIManager.InstanceGUI.isGameOver)
+                    {
+                        UIManager.InstanceGUI.FinDelJuego();
+                        noAbrir = true;
+                    }
+                }
+                    else
+                    {
+                        if (talkToLeahn)
+                        {
+
+
+                            StartCoroutine("IniciarTransicion");
+                        }
+
+
+
+                    }
+
+                }
+                if (respuestaDada.nextDialogueToTalk == 2)
+                {
+                    if (nombreIncorrecto)
+                    {
+                        didDialogueStart = false;
+                        Inventory.instance.panelItem.SetActive(true);
+                        UIManager.InstanceGUI.obMap.SetActive(true);
+                        UIManager.InstanceGUI.obMapMark.SetActive(true);
+                        marker.SetActive(true);
+                        MainCharacter.sharedInstance.canMove = true;
+
+                    if (UIManager.InstanceGUI.isGameOver)
+                    {
+                        UIManager.InstanceGUI.FinDelJuego();
+                        noAbrir = true;
+
+                    }
+                }
+                    else if (talkToLeahn)
+                    {
+                        didDialogueStart = false;
+                        Inventory.instance.panelItem.SetActive(true);
+                        UIManager.InstanceGUI.obMap.SetActive(true);
+                        UIManager.InstanceGUI.obMapMark.SetActive(true);
+                        marker.SetActive(true);
+                        MainCharacter.sharedInstance.canMove = true;
+                        optionCBuscarHermano = true;
+
+                    }
+                }
+
+                if (!talkToLeahn)
+                {
+
+
+
+                    Inventory.instance.panelItem.SetActive(true);
+                    UIManager.InstanceGUI.obMap.SetActive(true);
+                    UIManager.InstanceGUI.obMapMark.SetActive(true);
+                    marker.SetActive(true);
+                    MainCharacter.sharedInstance.canMove = true;
+                    didDialogueStart = false;
+                    //didDialogueStart = true;
+                    //StartCoroutine(FadeinOut());
+
+
+                }
+                else
+                {
+
+                }
             }
-        }
-        
 
-        
+
+
+       
+
+
 
 
 
@@ -868,7 +887,7 @@ public class HouseDialogue : MonoBehaviour
             {
 
                 StartCoroutine(Esperar());
-
+                index = 0;
 
             }
             else
@@ -956,7 +975,7 @@ public class HouseDialogue : MonoBehaviour
             Navegate();
         }
 
-        if (isRange && respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame())
+        if (isRange && respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame() && !noAbrir)
         {
 
 
