@@ -841,6 +841,8 @@ public class NPC_Dialogue : MonoBehaviour
             UIManager.InstanceGUI.FinDelJuego();
         }
 
+        MainCharacter.sharedInstance.puedePausar = true;
+
     }
     public IEnumerator CloseDialogueC()
     {
@@ -913,6 +915,8 @@ public class NPC_Dialogue : MonoBehaviour
         //{
         //    UIManager.InstanceGUI.FinDelJuego();
         //}
+
+        MainCharacter.sharedInstance.puedePausar = true;
     }
     public IEnumerator CloseDialogueN()
     {
@@ -966,6 +970,8 @@ public class NPC_Dialogue : MonoBehaviour
         {
             UIManager.InstanceGUI.FinDelJuego();
         }
+
+        MainCharacter.sharedInstance.puedePausar = true;
 
     }
     public void MedirDistancia()
@@ -1182,7 +1188,7 @@ public class NPC_Dialogue : MonoBehaviour
                 StartDialogue();
 
             }
-            else if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0 && !nextRoute && !logan && !detectarLimites && !enrique.seAcabo && !houses.didDialogueStart)
+            else if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0 && !nextRoute && !logan && !detectarLimites && !enrique.seAcabo /*&& !houses.didDialogueStart*/)
             {
                 if (dialogueText.text == lines[index].Substring(1))
                 {
@@ -1254,6 +1260,8 @@ public class NPC_Dialogue : MonoBehaviour
                 marker.SetActive(true);
 
                 obAnim.speed = 1.0f;
+
+                MainCharacter.sharedInstance.puedePausar = false;
             }
 
         }
@@ -1272,6 +1280,8 @@ public class NPC_Dialogue : MonoBehaviour
         {
             if (other.gameObject.CompareTag("P1"))
             {
+
+                MainCharacter.sharedInstance.puedePausar = true;
 
                 if (lines == obRoute.linesNextA || lines == obRoute.linesNextA1 || lines == obRoute.linesNextA2 || lines == obRoute.linesNextA3 || lines == obRoute.linesNextA4)
                 {
@@ -1302,8 +1312,8 @@ public class NPC_Dialogue : MonoBehaviour
         {
             if (other.gameObject.CompareTag("P1"))
             {
-                
-				
+
+                MainCharacter.sharedInstance.puedePausar = true;
                 marker.SetActive(false);
                 isRange = false;
                 mirar = false;

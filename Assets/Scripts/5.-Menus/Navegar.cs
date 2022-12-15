@@ -26,9 +26,21 @@ public class Navegar : MonoBehaviour
         _map = new Mapa();
         _map.Jugador.Enable();
 
+       
+
+    }
+
+    private void Start()
+    {
+
+        boton = GameObject.FindGameObjectWithTag("Btn1").GetComponent<Transform>();
+        boton1 = GameObject.FindGameObjectWithTag("Btn2").GetComponent<Transform>();
+
         GameObject obListAux = GameObject.Find("Botones").gameObject;
 
-        
+        boton.gameObject.SetActive(false);
+        boton1.gameObject.SetActive(false);
+
 
         int hijos = obListAux.transform.childCount;
 
@@ -38,17 +50,19 @@ public class Navegar : MonoBehaviour
         {
             listOptions[i] = obListAux.transform.GetChild(i).gameObject;
 
-            
+
         }
 
+        logan = GameObject.Find("Personaje").GetComponent<Animator>();
+        opciones = GameObject.Find("Botones").GetComponent<Animator>();
 
-        if (/*_map.Jugador.Interactuar.WasPressedThisFrame() && */!iniciar)
+
+        if (!iniciar)
         {
 
             StartCoroutine(Comenzar());
 
         }
-
     }
 
     private void OnDisable()
@@ -156,12 +170,14 @@ public class Navegar : MonoBehaviour
             switch (id_selector)
             {
                 case 0:
-
+                    UIManager.InstanceGUI.lienzoControlesMenu.transform.SetParent(null);
+                    
                     UIManager.InstanceGUI.LoadNextScene();
                     AudioManager.Instance.PlaySound(sonido);
                     _map.Opciones.Disable();
                     puedeSeleccionar = false;
-
+                   
+                    
                     logan.SetBool("Aparecer", true);
                     _map.Jugador.Disable();
                     break;

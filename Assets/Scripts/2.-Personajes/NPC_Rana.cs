@@ -694,8 +694,8 @@ public class NPC_Rana : MonoBehaviour
                 UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalARana());
             //}
 
+            MainCharacter.sharedInstance.puedePausar = true;
 
-            
         }
         else if (finalB && !finalB2)
         {
@@ -706,8 +706,8 @@ public class NPC_Rana : MonoBehaviour
             //else
             //{
                 UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalBRana());
-            //}
-            
+            //}MainCharacter.sharedInstance.puedePausar = true;
+
         }
         else if(finalB2)
         {
@@ -716,14 +716,15 @@ public class NPC_Rana : MonoBehaviour
             //{
             //    UIManager.InstanceGUI.FinDelJuego();
             //}
-            //else
+            //elseMainCharacter.sharedInstance.puedePausar = true;
             //{
-                UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalARana());
+            UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.FinalARana());
             //}
-            
+            MainCharacter.sharedInstance.puedePausar = true;
         }
         else
         {
+            MainCharacter.sharedInstance.puedePausar = true;
             MainCharacter.sharedInstance.canMove = true;
 
             yield return new WaitForSeconds(0.01f);
@@ -739,7 +740,7 @@ public class NPC_Rana : MonoBehaviour
         }
 
         MainCharacter.sharedInstance.eAnim = 0;
-
+        MainCharacter.sharedInstance.puedePausar = true;
         //if (UIManager.InstanceGUI.isGameOver)
         //{
         //    UIManager.InstanceGUI.FinDelJuego();
@@ -748,6 +749,7 @@ public class NPC_Rana : MonoBehaviour
     }
     public void Navegate()
     {
+        mapeo._map.Jugador.Enable();
 
         if (mapeo._map.Jugador.BDOWN.WasPressedThisFrame() && id_selector < listOptions.Length - 1)
         {
@@ -768,7 +770,7 @@ public class NPC_Rana : MonoBehaviour
         selector.transform.SetSiblingIndex(0);
 
 
-        if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && !UIManager.InstanceGUI.isGameOver)
+        if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame() /*&& *//*!UIManager.InstanceGUI.isGameOver*/)
         {
 
 
@@ -1040,7 +1042,7 @@ public class NPC_Rana : MonoBehaviour
         }
         if (mode == ModeNPCRana.Iddle)
         {
-            if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && (!mapeo.didDialogueStart || !mapeo.gameObject.activeInHierarchy) && !hd.didDialogueStart)
+            if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 /*&& (!mapeo.didDialogueStart || !mapeo.gameObject.activeInHierarchy) && !hd.didDialogueStart*/)
             {
                 Navegate();
             }
@@ -1079,15 +1081,17 @@ public class NPC_Rana : MonoBehaviour
             marker.SetActive(true);
             numeroAnim = 99;
 
-            
+            MainCharacter.sharedInstance.puedePausar = false;
+
+
 
         }
 
         if (other.gameObject.CompareTag("P1") && mode == ModeNPCRana.FinalB)
         {
 
-            
 
+            MainCharacter.sharedInstance.puedePausar = false;
             obNMA.speed = 0.0f;
             isRange = true;
             marker.SetActive(true);
@@ -1127,15 +1131,15 @@ public class NPC_Rana : MonoBehaviour
             isRange = !isRange;
             marker.SetActive(false);
             numeroAnim = 30;
+            MainCharacter.sharedInstance.puedePausar = true;
 
-            
 
         }
 
         if (other.gameObject.CompareTag("P1") && mode == ModeNPCRana.FinalB)
         {
 
-           
+            MainCharacter.sharedInstance.puedePausar = true;
 
             obNMA.speed = 0.0f;
             isRange = false;

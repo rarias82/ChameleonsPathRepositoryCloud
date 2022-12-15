@@ -8,6 +8,7 @@ public class Cosmic : MonoBehaviour
     public int indexVineta;
     public bool pasarDiapo = true;
     public GameObject boton, colita;
+    bool terminar;
 
     void OnEnable()
     {
@@ -33,8 +34,8 @@ public class Cosmic : MonoBehaviour
         colita = GameObject.Find("ApretarCola");
 
         boton.SetActive(false);
-        colita.SetActive(false);
-        boton.SetActive(true);
+        colita.SetActive(true);
+        //boton.SetActive(true);
 
     }
 
@@ -133,56 +134,105 @@ public class Cosmic : MonoBehaviour
 
         if (indexVineta > UIManager.InstanceGUI.listaVinetas1.Length - 1)
         {
-            indexVineta = 0;
 
-            foreach (char letter in UIManager.InstanceGUI.comicTextos.ToCharArray())
+
+
+            while (UIManager.InstanceGUI.listaVinetas1[8].color.a != 0)
             {
-                UIManager.InstanceGUI.textoComics.text += letter;
-                yield return new WaitForSeconds(0.045f);
+
+                UIManager.InstanceGUI.listaVinetas1[8].color = new Color(UIManager.InstanceGUI.listaVinetas1[8].color.r,
+                                                                        UIManager.InstanceGUI.listaVinetas1[8].color.g,
+                                                                        UIManager.InstanceGUI.listaVinetas1[8].color.b,
+                                                                        Mathf.MoveTowards(
+                                                                        UIManager.InstanceGUI.listaVinetas1[8].color.a, 0f, (0.75f) * Time.deltaTime));
+
+
+                UIManager.InstanceGUI.listaVinetas1[9].color = new Color(UIManager.InstanceGUI.listaVinetas1[9].color.r,
+                                                                              UIManager.InstanceGUI.listaVinetas1[9].color.g,
+                                                                              UIManager.InstanceGUI.listaVinetas1[9].color.b,
+                                                                              Mathf.MoveTowards(
+                                                                              UIManager.InstanceGUI.listaVinetas1[9].color.a, 0f, (0.75f) * Time.deltaTime));
+
+                UIManager.InstanceGUI.listaVinetas1[10].color = new Color(UIManager.InstanceGUI.listaVinetas1[10].color.r,
+                                                                          UIManager.InstanceGUI.listaVinetas1[10].color.g,
+                                                                          UIManager.InstanceGUI.listaVinetas1[10].color.b,
+                                                                          Mathf.MoveTowards(
+                                                                          UIManager.InstanceGUI.listaVinetas1[10].color.a, 0f, (0.75f) * Time.deltaTime));
+
+                UIManager.InstanceGUI.listaVinetas1[11].color = new Color(UIManager.InstanceGUI.listaVinetas1[11].color.r,
+                                                                          UIManager.InstanceGUI.listaVinetas1[11].color.g,
+                                                                          UIManager.InstanceGUI.listaVinetas1[11].color.b,
+                                                                          Mathf.MoveTowards(
+                                                                          UIManager.InstanceGUI.listaVinetas1[11].color.a, 0f, (0.75f) * Time.deltaTime));
+
+
+
+
+
             }
 
-         
 
 
-            UIManager.InstanceGUI.StartCoroutine(UIManager.InstanceGUI.SceneLoading(2));
+
+
+
+
+
+            UIManager.InstanceGUI.LimpiarCOmic();
+
+            UIManager.InstanceGUI.paletaComicsFinal.SetActive(true);
+
+
+            terminar = true;
+
+            indexVineta = 0;
+
+
+            //UIManager.InstanceGUI.textoComics.text = string.Empty;
+
+            //foreach (char letter in UIManager.InstanceGUI.comicTextos.ToCharArray())
+            //{
+            //    UIManager.InstanceGUI.textoComics.text += letter;
+            //    yield return new WaitForSeconds(0.055f);
+            //}
+
+            //UIManager.InstanceGUI.textoComics.text = string.Empty;
+
+
+            UIManager.InstanceGUI.LoadNextScene();
             _map.Jugador.Disable();
         }
 
 
+
+
+        if (!terminar)
+        {
+            pasarDiapo = true;
+
+            colita.SetActive(true);
+
+            //if (indexVineta == 3 || indexVineta == 8)
+            //{
+            //    boton.SetActive(false);
+            //    colita.SetActive(true);
+            //}
+            //else
+            //{
+            //    boton.SetActive(true);
+            //    colita.SetActive(false);
+            //}
+        }
+
        
-
-
-
-        pasarDiapo = true;
-
-        if (indexVineta != 4)
-        {
-            boton.SetActive(true);
-            colita.SetActive(false);
-        }
-        else
-        {
-            boton.SetActive(false);
-            colita.SetActive(true);
-        }
-
-        if (indexVineta != 9)
-        {
-            boton.SetActive(true);
-            colita.SetActive(false);
-        }
-        else
-        {
-            boton.SetActive(false);
-            colita.SetActive(true);
-        }
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_map.Jugador.Interactuar.WasPressedThisFrame() && pasarDiapo)
+        if (_map.Jugador.Interactuar.WasPressedThisFrame() && pasarDiapo && !terminar)
         {
             StartCoroutine(PasarVinetas());
             boton.SetActive(false);

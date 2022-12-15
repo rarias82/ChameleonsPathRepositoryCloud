@@ -12,6 +12,9 @@ TagManager:
   - KeyStone
   - Objeto
   - AnguloIndicadoS
+  - Controles
+  - Btn1
+  - Btn2
   layers:
   - Default
   - TransparentFX

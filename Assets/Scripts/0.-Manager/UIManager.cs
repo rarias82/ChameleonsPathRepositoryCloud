@@ -45,6 +45,8 @@ public class UIManager : MonoBehaviour
 
     [Header("Canvas")]
     public GameObject[] HUDLienzos;
+    public GameObject lienzoControlesMenu;
+    public GameObject lienzoCanvas;
 
     [Header("Temblor")]
     [SerializeField] float duracionTemblor = 1.0f;
@@ -71,10 +73,18 @@ public class UIManager : MonoBehaviour
     public GameObject obCartelPausa;
     public bool estaPausados;
 
+    public sbyte id_selectorP;
+    public GameObject[] listOptionsP;
+    public GameObject selectorP;
+
     [Header("Comics")]
     public Image[] listaVinetas1;
-    public string comicTextos;
+    [TextArea(4, 6)] public string comicTextos;
+    public string comicTextos2;
+   
     public TextMeshProUGUI textoComics;
+    public GameObject paletaComicsFinal;
+    public GameObject colita, colita2;
 
     [Header("Icrementador")]
     public int etapa;
@@ -85,6 +95,8 @@ public class UIManager : MonoBehaviour
     public GameObject ObGameOver;
     public bool isGameOver;
     public GameObject selectorGO;
+
+
 
     void ForceScalesAndLimitFPS()
     {
@@ -374,7 +386,12 @@ public class UIManager : MonoBehaviour
 
     public void BurbujaDialogo(float indice)
     {
-        animBurbuja.SetFloat("Indicador", indice);
+
+        if (animBurbuja.gameObject.activeSelf)
+        {
+            animBurbuja.SetFloat("Indicador", indice);
+        }
+       
 
     }
 
@@ -392,10 +409,12 @@ public class UIManager : MonoBehaviour
         if (estaPausados)
         {
             Time.timeScale = 0.0f;
+            obCartelPausa.SetActive(true);
         }
         else
         {
             Time.timeScale = 1.0f;
+            obCartelPausa.SetActive(false);
         }
     }
 
@@ -448,6 +467,59 @@ public class UIManager : MonoBehaviour
 
     }
 
+    void NavegarP()
+    {
+
+        if (MainCharacter.sharedInstance._map.Jugador.BDOWN.WasPressedThisFrame() && id_selectorP < listOptionsP.Length - 1)
+        {
+            id_selectorP++;
+            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+
+        }
+
+        if (MainCharacter.sharedInstance._map.Jugador.BUP.WasPressedThisFrame() && id_selectorP > 0)
+        {
+            id_selectorP--; ;
+            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+        }
+
+        selectorP.transform.SetParent(listOptionsP[id_selectorP].transform);
+        selectorP.transform.position = listOptionsP[id_selectorP].transform.position;
+
+
+        selectorP.transform.SetSiblingIndex(0);
+
+
+
+        if (MainCharacter.sharedInstance._map.Jugador.Interactuar.WasPressedThisFrame())
+        {
+
+            switch (id_selectorP)
+            {
+                case 0:
+                    obCartelPausa.SetActive(false);
+                    Time.timeScale = 1.0f;
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+                    MainCharacter.sharedInstance._map.Jugador.Disable();
+                    StartCoroutine(Reiniciar());
+
+
+                    break;
+
+                case 1:
+                    obCartelPausa.SetActive(false);
+                    Time.timeScale = 1.0f;
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+                    MainCharacter.sharedInstance._map.Jugador.Disable();
+                    StartCoroutine(VolverMenu());
+
+                    break;
+            }
+
+        }
+
+    }
+
     private void Awake()
     {
         if (InstanceGUI == null /*&& Instance != this*/)
@@ -470,7 +542,7 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
-
+        HUDLienzos[0].SetActive(false);
 
 
 
@@ -485,7 +557,6 @@ public class UIManager : MonoBehaviour
         StartCoroutine(ComenzarEscena());
     }
 
-   
 
     public IEnumerator Reiniciar()
     {
@@ -520,6 +591,10 @@ public class UIManager : MonoBehaviour
     }
     public IEnumerator VolverMenu()
     {
+
+        HUDLienzos[0].SetActive(false);
+        HUDLienzos[1].SetActive(false);
+
         blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, 0); fadeBlack = false; fadeFrom = false; dialogos.text = string.Empty;
 
 
@@ -528,7 +603,7 @@ public class UIManager : MonoBehaviour
         Inventory.instance.slot[1].GetComponent<Slot>().Quitar();
         
 
-        AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
+        AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionMenu));
 
 
 
@@ -560,10 +635,20 @@ public class UIManager : MonoBehaviour
 
         if (sceneName == "MenuStart")
         {
+            lienzoControlesMenu = GameObject.FindGameObjectWithTag("Controles");
+            UIManager.InstanceGUI.lienzoControlesMenu.SetActive(true);
+            //lienzoControlesMenu.transform.SetParent(lienzoCanvas.transform);
+            //lienzoControlesMenu.transform.SetAsFirstSibling();
+
+            UIManager.InstanceGUI.paletaComicsFinal.SetActive(false);
+
             dialogos.text = string.Empty;
-            HUDLienzos[0].SetActive(true);
+            //HUDLienzos[0].SetActive(false);
+            HUDLienzos[0].SetActive(false);
             HUDLienzos[1].SetActive(false);
-            HUDLienzos[2].SetActive(false);
+
+            obCartelPausa.SetActive(false);
+
             encenderTecla = false;
             juegoPausas = false;
 
@@ -581,27 +666,36 @@ public class UIManager : MonoBehaviour
 
         if (sceneName == "Comic")
         {
-            dialogos.text = string.Empty;
-            HUDLienzos[0].SetActive(false);
-            HUDLienzos[1].SetActive(false);
-            HUDLienzos[2].SetActive(true);
+            UIManager.InstanceGUI.lienzoControlesMenu.SetActive(false);
 
-            foreach (Image miniImagen in listaVinetas1)
-            {
-                miniImagen.color = new Color(miniImagen.color.r, miniImagen.color.g, miniImagen.color.b, 0.0f); 
-            }
+            colita.SetActive(true);
+            colita2.SetActive(true);
+            UIManager.InstanceGUI.paletaComicsFinal.SetActive(false);
+          
+            dialogos.text = string.Empty;
+            //HUDLienzos[1].SetActive(false);
+            HUDLienzos[0].SetActive(false);
+            HUDLienzos[1].SetActive(true);
+
+            obCartelPausa.SetActive(false);
+
+            LimpiarCOmic();
 
             isGameOver = false;
         }
 
         if (sceneName == "LevelOne")
         {
+            obCartelPausa.SetActive(false);
+
+            UIManager.InstanceGUI.paletaComicsFinal.SetActive(false);
+
             dialogos.text = string.Empty;
             GameManager.InstancieInput.ActivarInput();
 
-            HUDLienzos[0].SetActive(false);
-            HUDLienzos[1].SetActive(true);
-            HUDLienzos[2].SetActive(false);
+            HUDLienzos[0].SetActive(true);
+            HUDLienzos[1].SetActive(false);
+            //HUDLienzos[2].SetActive(false);
 
 
             manto.SetActive(false);
@@ -639,7 +733,14 @@ public class UIManager : MonoBehaviour
     }
 
   
+    public void LimpiarCOmic()
+    {
+        foreach (Image miniImagen in listaVinetas1)
+        {
+            miniImagen.color = new Color(miniImagen.color.r, miniImagen.color.g, miniImagen.color.b, 0.0f);
+        }
 
+    }
     void Update()
     {
        
@@ -650,8 +751,11 @@ public class UIManager : MonoBehaviour
         {
             NavegarGO();
         }
-      
 
+        if (obCartelPausa.activeInHierarchy)
+        {
+            NavegarP();
+        }
 
     }
 

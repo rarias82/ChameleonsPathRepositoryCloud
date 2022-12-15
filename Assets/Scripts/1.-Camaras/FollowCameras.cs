@@ -151,6 +151,17 @@ public class FollowCameras : MonoBehaviour
 
     void Interpolar()
     {
+        if (transitionSpeed<10.0f)
+        {
+            transitionSpeed += Time.deltaTime;
+        }
+
+        if (transitionSpeed >= 15.0f)
+        {
+            transitionSpeed = 15.0f;
+        }
+       
+
         Vector3 diferenciaVector = puntosASeguir[indexSeguir].position - transform.position;
 
         Vector3 actualAngle = new Vector3(

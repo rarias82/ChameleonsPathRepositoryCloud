@@ -193,7 +193,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.058981106, g: 0.084905684, b: 0.010012461, a: 1}
+  m_BackGroundColor: {r: 0.4397285, g: 0.4716981, b: 0.38492346, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -283,3 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2ca4a628afa38445b8d4a68e6d83284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indexVineta: 0
+  pasarDiapo: 1
+  boton: {fileID: 0}
+  colita: {fileID: 0}

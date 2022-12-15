@@ -617,7 +617,7 @@ public class NPC_Henry : MonoBehaviour
                 mapeo.rana.gameObject.SetActive(false);
             }
 
-
+            MainCharacter.sharedInstance.puedePausar = true;
             
 
         }
@@ -661,6 +661,8 @@ public class NPC_Henry : MonoBehaviour
             UIManager.InstanceGUI.FinDelJuego();
         }
 
+
+        MainCharacter.sharedInstance.puedePausar = true;
     }
     public void Final()
     {
@@ -751,7 +753,10 @@ public class NPC_Henry : MonoBehaviour
             if (other.gameObject.CompareTag("P1") && (mode == ModeNPCHenry.Follow || mode == ModeNPCHenry.Limites ))
             {
 
-                mode = ModeNPCHenry.Iddle;
+
+            MainCharacter.sharedInstance.puedePausar = false;
+
+            mode = ModeNPCHenry.Iddle;
 
                 obNMA.speed = 0.0f;
                 isRange = !isRange;
@@ -767,12 +772,12 @@ public class NPC_Henry : MonoBehaviour
         }
 
 
-        if (other.gameObject.CompareTag("P1") && (mode == ModeNPCHenry.Final) && (mode == ModeNPCHenry.FinalC))
+        if (other.gameObject.CompareTag("P1") && ((mode == ModeNPCHenry.Final) || (mode == ModeNPCHenry.FinalC)))
         {
 
-            
 
-            
+            MainCharacter.sharedInstance.puedePausar = false;
+
             isRange = !isRange;
 
            
@@ -797,8 +802,8 @@ public class NPC_Henry : MonoBehaviour
 
                     mode = ModeNPCHenry.Follow;
 
-                    
-                    isRange = !isRange;
+            MainCharacter.sharedInstance.puedePausar = true;
+            isRange = !isRange;
                     marker.SetActive(false);
 
                     StartCoroutine(Esperar());

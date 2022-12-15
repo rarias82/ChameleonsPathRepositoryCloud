@@ -52,8 +52,8 @@ public class MainCharacter : MonoBehaviour
     public NPC_Rana _rana;
 
     [Header("Pausas")]
-    bool puedePausar = true;
-    
+    public bool puedePausar = true;
+    public Vector3 mInput;
 
     void Awake()
     {
@@ -62,7 +62,7 @@ public class MainCharacter : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        puedePausar = true;
     }
 
     public Vector3 ScreenDisplayPont(Vector3 posicionar)
@@ -194,14 +194,16 @@ public class MainCharacter : MonoBehaviour
             MovePlayer();
         }
 
-        
+         mInput= _map.Jugador.Move.ReadValue<Vector2>().normalized;
+
+            Debug.Log(mInput.magnitude);
 
         if (puedePausar)
         {
 
-            Vector2 movementInput = _map.Jugador.Move.ReadValue<Vector2>();
+           
 
-            if (_map.Jugador.Pausa.WasPressedThisFrame()  && movementInput.magnitude == 0)
+            if (_map.Jugador.Pausa.WasPressedThisFrame()  && mInput.magnitude == 0)
             {
                 UIManager.InstanceGUI.MostrarCartelPausa();
             }
@@ -283,19 +285,19 @@ public class MainCharacter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("Item"))
-        {
-            puedePausar = false;
-        }
+        //if (!other.gameObject.CompareTag("Item"))
+        //{
+        //    puedePausar = false;
+        //}
     }
 
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.gameObject.CompareTag("Item"))
-        {
-            puedePausar = true;
-        }
+        //if (!other.gameObject.CompareTag("Item"))
+        //{
+        //    puedePausar = true;
+        //}
     }
 
 }

@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Comic.unity
     guid: 616af4efb5b363f438e821d4eb279b17
   - enabled: 1
-    path: Assets/Scenes/Comic2.unity
-    guid: eb7a46c8658848043a2e9f102ad2c603
-  - enabled: 1
     path: Assets/Scenes/VideoGame/LevelOne.unity
     guid: a3515cf07cfea254cb3f93982b24b305
   m_configObjects:

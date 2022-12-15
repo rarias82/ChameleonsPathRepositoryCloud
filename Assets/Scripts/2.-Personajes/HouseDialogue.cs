@@ -865,10 +865,10 @@ public class HouseDialogue : MonoBehaviour
 
 
 
-       
 
 
 
+        MainCharacter.sharedInstance.puedePausar = true;
 
 
 
@@ -969,7 +969,7 @@ public class HouseDialogue : MonoBehaviour
     {
 
      
-        if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && talkToLeahn && !respuestaDada.didDialogueStart && (!respuestaDada.rana.didDialogueStart  || !respuestaDada.rana.gameObject.activeInHierarchy))
+        if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && talkToLeahn /*&& !respuestaDada.didDialogueStart && (!respuestaDada.rana.didDialogueStart  || !respuestaDada.rana.gameObject.activeInHierarchy)*/)
         {
 
             Navegate();
@@ -1011,6 +1011,8 @@ public class HouseDialogue : MonoBehaviour
                 isRange = !isRange;
                 marker.SetActive(true);
 
+            MainCharacter.sharedInstance.puedePausar = false;
+
         }
     }
     private void OnTriggerExit(Collider other)
@@ -1019,6 +1021,8 @@ public class HouseDialogue : MonoBehaviour
         {
             isRange = !isRange;
             marker.SetActive(false);
+
+            MainCharacter.sharedInstance.puedePausar = true;
         }
     }
 }
