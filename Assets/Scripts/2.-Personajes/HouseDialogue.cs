@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class HouseDialogue : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static HouseDialogue instancias;
+    
     [Header("Interaction Variables")]
     [SerializeField] GameObject marker;
     [SerializeField] bool isRange;
@@ -133,14 +133,6 @@ public class HouseDialogue : MonoBehaviour
     }
 
 
-    void Awake()
-    {
-
-        instancias = this;
-
-       
-    }
-
     private void OnEnable()
     {
         marker.SetActive(false);
@@ -186,6 +178,7 @@ public class HouseDialogue : MonoBehaviour
         didDialogueStart = true;
 
         UIManager.InstanceGUI.fadeBlack = true;
+        UIManager.InstanceGUI.fadeBlackN = true;
 
         marker.SetActive(false);
 
@@ -395,12 +388,13 @@ public class HouseDialogue : MonoBehaviour
             UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position/* + new Vector3(0f,50f,0f)*/);
             UIManager.InstanceGUI.BurbujaDialogo(7);
             MainCharacter.sharedInstance.VozLogan();
+            UIManager.InstanceGUI.NombreDialogo("P");
         }
 
         if (lineas.Trim().StartsWith("L"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
-
+            UIManager.InstanceGUI.NombreDialogo("L");
         }
 
         if (lineas.Trim().StartsWith("H"))
@@ -408,6 +402,7 @@ public class HouseDialogue : MonoBehaviour
             UIManager.InstanceGUI.PosicionarGlobo(casaGO.position);
             UIManager.InstanceGUI.BurbujaDialogo(8);
             VocesRandom();
+            UIManager.InstanceGUI.NombreDialogo("H");
         }
 
 
@@ -438,6 +433,7 @@ public class HouseDialogue : MonoBehaviour
         
 
         dialogueText.text = string.Empty;
+        UIManager.InstanceGUI.EmptyNames();
 
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
 
@@ -515,7 +511,7 @@ public class HouseDialogue : MonoBehaviour
         selector.transform.SetSiblingIndex(0);
 
 
-        if (respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame() && !UIManager.InstanceGUI.isGameOver)
+        if (respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame() && !UIManager.InstanceGUI.isGameOver && UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1)
         {
 
             
@@ -755,7 +751,9 @@ public class HouseDialogue : MonoBehaviour
         MainCharacter.sharedInstance.eAnim = 0;
 
         dialogueText.text = string.Empty;
+        UIManager.InstanceGUI.EmptyNames();
 
+        UIManager.InstanceGUI.fadeFromN = true;
         UIManager.InstanceGUI.fadeFrom = true;
 
         while (respuestaDada.obCameras.orthographicSize < 7.5f)
@@ -960,6 +958,8 @@ public class HouseDialogue : MonoBehaviour
         henryFinalA = true;
 
         respuestaDada.rana.gameObject.SetActive(false);
+
+        UIManager.InstanceGUI.ShowHUDInGame();
 
         
     }

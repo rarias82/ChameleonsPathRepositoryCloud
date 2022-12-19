@@ -9,6 +9,7 @@ public class Cosmic : MonoBehaviour
     public bool pasarDiapo = true;
     public GameObject boton, colita;
     bool terminar;
+    bool transicion;
 
     void OnEnable()
     {
@@ -128,65 +129,54 @@ public class Cosmic : MonoBehaviour
         }
 
 
-
-
         indexVineta++;
 
         if (indexVineta > UIManager.InstanceGUI.listaVinetas1.Length - 1)
         {
 
+            //while (UIManager.InstanceGUI.listaVinetas1[8].color.a != 0)
+            //{
+
+            //    UIManager.InstanceGUI.listaVinetas1[8].color = new Color(UIManager.InstanceGUI.listaVinetas1[8].color.r,
+            //                                                            UIManager.InstanceGUI.listaVinetas1[8].color.g,
+            //                                                            UIManager.InstanceGUI.listaVinetas1[8].color.b,
+            //                                                            Mathf.MoveTowards(
+            //                                                            UIManager.InstanceGUI.listaVinetas1[8].color.a, 0f, (0.75f) * Time.deltaTime));
 
 
-            while (UIManager.InstanceGUI.listaVinetas1[8].color.a != 0)
-            {
+            //    UIManager.InstanceGUI.listaVinetas1[9].color = new Color(UIManager.InstanceGUI.listaVinetas1[9].color.r,
+            //                                                                  UIManager.InstanceGUI.listaVinetas1[9].color.g,
+            //                                                                  UIManager.InstanceGUI.listaVinetas1[9].color.b,
+            //                                                                  Mathf.MoveTowards(
+            //                                                                  UIManager.InstanceGUI.listaVinetas1[9].color.a, 0f, (0.75f) * Time.deltaTime));
 
-                UIManager.InstanceGUI.listaVinetas1[8].color = new Color(UIManager.InstanceGUI.listaVinetas1[8].color.r,
-                                                                        UIManager.InstanceGUI.listaVinetas1[8].color.g,
-                                                                        UIManager.InstanceGUI.listaVinetas1[8].color.b,
-                                                                        Mathf.MoveTowards(
-                                                                        UIManager.InstanceGUI.listaVinetas1[8].color.a, 0f, (0.75f) * Time.deltaTime));
+            //    UIManager.InstanceGUI.listaVinetas1[10].color = new Color(UIManager.InstanceGUI.listaVinetas1[10].color.r,
+            //                                                              UIManager.InstanceGUI.listaVinetas1[10].color.g,
+            //                                                              UIManager.InstanceGUI.listaVinetas1[10].color.b,
+            //                                                              Mathf.MoveTowards(
+            //                                                              UIManager.InstanceGUI.listaVinetas1[10].color.a, 0f, (0.75f) * Time.deltaTime));
 
-
-                UIManager.InstanceGUI.listaVinetas1[9].color = new Color(UIManager.InstanceGUI.listaVinetas1[9].color.r,
-                                                                              UIManager.InstanceGUI.listaVinetas1[9].color.g,
-                                                                              UIManager.InstanceGUI.listaVinetas1[9].color.b,
-                                                                              Mathf.MoveTowards(
-                                                                              UIManager.InstanceGUI.listaVinetas1[9].color.a, 0f, (0.75f) * Time.deltaTime));
-
-                UIManager.InstanceGUI.listaVinetas1[10].color = new Color(UIManager.InstanceGUI.listaVinetas1[10].color.r,
-                                                                          UIManager.InstanceGUI.listaVinetas1[10].color.g,
-                                                                          UIManager.InstanceGUI.listaVinetas1[10].color.b,
-                                                                          Mathf.MoveTowards(
-                                                                          UIManager.InstanceGUI.listaVinetas1[10].color.a, 0f, (0.75f) * Time.deltaTime));
-
-                UIManager.InstanceGUI.listaVinetas1[11].color = new Color(UIManager.InstanceGUI.listaVinetas1[11].color.r,
-                                                                          UIManager.InstanceGUI.listaVinetas1[11].color.g,
-                                                                          UIManager.InstanceGUI.listaVinetas1[11].color.b,
-                                                                          Mathf.MoveTowards(
-                                                                          UIManager.InstanceGUI.listaVinetas1[11].color.a, 0f, (0.75f) * Time.deltaTime));
-
-
-
-
-
-            }
+            //    UIManager.InstanceGUI.listaVinetas1[11].color = new Color(UIManager.InstanceGUI.listaVinetas1[11].color.r,
+            //                                                              UIManager.InstanceGUI.listaVinetas1[11].color.g,
+            //                                                              UIManager.InstanceGUI.listaVinetas1[11].color.b,
+            //                                                              Mathf.MoveTowards(
+            //                                                              UIManager.InstanceGUI.listaVinetas1[11].color.a, 0f, (0.75f) * Time.deltaTime));
 
 
 
 
 
-
-
-
-            UIManager.InstanceGUI.LimpiarCOmic();
-
-            UIManager.InstanceGUI.paletaComicsFinal.SetActive(true);
-
-
-            terminar = true;
-
+            //}
             indexVineta = 0;
+            //UIManager.InstanceGUI.LimpiarCOmic();
 
+            //UIManager.InstanceGUI.paletaComicsFinal.SetActive(true);
+
+            //terminar = true;
+
+            
+
+            Debug.Log("Dentro de terminar es true");
 
             //UIManager.InstanceGUI.textoComics.text = string.Empty;
 
@@ -199,11 +189,13 @@ public class Cosmic : MonoBehaviour
             //UIManager.InstanceGUI.textoComics.text = string.Empty;
 
 
-            UIManager.InstanceGUI.LoadNextScene();
-            _map.Jugador.Disable();
+            //UIManager.InstanceGUI.LoadNextScene();
+            //_map.Jugador.Disable();
+
+            transicion = true;
+            
+
         }
-
-
 
 
         if (!terminar)
@@ -212,16 +204,8 @@ public class Cosmic : MonoBehaviour
 
             colita.SetActive(true);
 
-            //if (indexVineta == 3 || indexVineta == 8)
-            //{
-            //    boton.SetActive(false);
-            //    colita.SetActive(true);
-            //}
-            //else
-            //{
-            //    boton.SetActive(true);
-            //    colita.SetActive(false);
-            //}
+            Debug.Log("Mostart Cola");
+
         }
 
        
@@ -232,15 +216,38 @@ public class Cosmic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_map.Jugador.Interactuar.WasPressedThisFrame() && pasarDiapo && !terminar)
+        if (_map.Jugador.Interactuar.WasPressedThisFrame())
         {
-            StartCoroutine(PasarVinetas());
-            boton.SetActive(false);
-            colita.SetActive(false);
 
+            if (pasarDiapo && !terminar & !transicion)
+            {
+                StartCoroutine(PasarVinetas());
+                boton.SetActive(false);
+                colita.SetActive(false);
+            }
+            else if (transicion)
+            {
+                UIManager.InstanceGUI.LoadNextScene();
+                _map.Jugador.Disable();
+            }
 
+        }
 
+        if (_map.Jugador.SaltarEscena.WasPressedThisFrame())
+        {
 
-        }   
+            if (pasarDiapo && !terminar & !transicion)
+            {
+                UIManager.InstanceGUI.LoadNextScene();
+                _map.Jugador.Disable();
+            }
+            //else if (transicion)
+            //{
+            //    UIManager.InstanceGUI.LoadNextScene();
+            //    _map.Jugador.Disable();
+            //}
+
+        }
+
     }
 }

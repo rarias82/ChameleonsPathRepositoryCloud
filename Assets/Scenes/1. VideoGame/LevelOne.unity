@@ -18575,7 +18575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8038170414355640902, guid: 97425fd27d8de36449c56423d2ff7f26, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 14071
+      value: 46839
       objectReference: {fileID: 0}
     - target: {fileID: 8038170414355640920, guid: 97425fd27d8de36449c56423d2ff7f26, type: 3}
       propertyPath: m_Name
@@ -19630,9 +19630,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Volume: {fileID: 0}
   m_Bloom: {fileID: 0}
-  silderMaxValue: 15
-  sildermMinValue: 0.5
-  valueRate: 1
+  silderMaxValue: 14
+  sildermMinValue: 0.75
+  valueRate: 1.5
 --- !u!1001 &446880661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42329,10 +42329,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1123084733}
     - target: {fileID: 70078927, guid: ddc66abc46c2b63448cd20201b41c810, type: 3}
+      propertyPath: linesA2.Array.data[1]
+      value: "HGu\xEDame a d\xF3nde est\xE1 mi hermano \xA1\xA1\xA1\xA1POR TODOS
+        LOS CIELOS!!!!.\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 70078927, guid: ddc66abc46c2b63448cd20201b41c810, type: 3}
+      propertyPath: linesA4.Array.data[0]
+      value: "HNo tengo tiempo para hablar, solo se que debes guiarme el camino.\r
+        Est\xE1s a punto de lograr que me enoje de veras.\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 70078927, guid: ddc66abc46c2b63448cd20201b41c810, type: 3}
+      propertyPath: linesLogan.Array.data[0]
+      value: "PNooooooo. El anciano se ha quedado atr\xE1s, m\xE1s vale apresurarse.\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 70078927, guid: ddc66abc46c2b63448cd20201b41c810, type: 3}
+      propertyPath: linesLogan.Array.data[2]
+      value: "PHenry se ha quedado atr\xE1s, noooooooo \xBFcu\xE1nto tardar\xE1?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 70078927, guid: ddc66abc46c2b63448cd20201b41c810, type: 3}
       propertyPath: linesFinalA.Array.data[5]
       value: "LGracias por ayudarme, de no ser por ti de seguro ser\xEDa alimento
         de oso,\nno se que te haya pasado para que seas un camale\xF3n pero espero
         que\nencuentres la soluci\xF3n."
+      objectReference: {fileID: 0}
+    - target: {fileID: 70078927, guid: ddc66abc46c2b63448cd20201b41c810, type: 3}
+      propertyPath: linesLogan0.Array.data[0]
+      value: "PNooooooo. El anciano se ha quedado atr\xE1s, m\xE1s vale apresurarse."
+      objectReference: {fileID: 0}
+    - target: {fileID: 70078927, guid: ddc66abc46c2b63448cd20201b41c810, type: 3}
+      propertyPath: linesLogan2.Array.data[0]
+      value: "PHenry se ha quedado atr\xE1s, noooooooo \xBFcu\xE1nto tardar\xE1?"
       objectReference: {fileID: 0}
     - target: {fileID: 232833403717711882, guid: ddc66abc46c2b63448cd20201b41c810, type: 3}
       propertyPath: m_Name
@@ -49696,6 +49722,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1123084733}
     - target: {fileID: 8823879509192488340, guid: a1e227f9d02e71241a5ffbfaf3e3b2f1, type: 3}
+      propertyPath: linesB0.Array.data[4]
+      value: "P\xA1\xA1NO SOY SU AMIGOOOO!!\n\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8823879509192488340, guid: a1e227f9d02e71241a5ffbfaf3e3b2f1, type: 3}
+      propertyPath: linesC0.Array.data[0]
+      value: "PEstimado Se\xF1or Rana, le confieso que antes era un bandido y ladr\xF3n."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8823879509192488340, guid: a1e227f9d02e71241a5ffbfaf3e3b2f1, type: 3}
       propertyPath: objetosTodo.Array.data[0]
       value: 
       objectReference: {fileID: 1237343710}
@@ -50358,19 +50392,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2951316827219354710, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
-      propertyPath: linesFinalC1.Array.data[1]
-      value: "LZzz, perd\xF3n me est\xE1 dando sue\xF1o compadre, no tengo ni la
-        menor idea\nde\u2026 donde estamos."
-      objectReference: {fileID: 0}
-    - target: {fileID: 6237125484689610230, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.003460165
-      objectReference: {fileID: 0}
-    - target: {fileID: 7657534631712151522, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
-      propertyPath: m_Acceleration
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
       propertyPath: rana
       value: 
@@ -50396,44 +50417,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2060966162}
     - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
-      propertyPath: linesLogan0.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
-      propertyPath: linesLogan1.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
-      propertyPath: linesLogan2.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
-      propertyPath: linesLogan3.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
-      propertyPath: linesLogan.Array.data[0]
-      value: "PAl parecer Leahn se ha quedado atr\xE1s, no puedo ser desagradable
-        con\n\xE9l, no lo s\xE9.\r\n"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
-      propertyPath: linesLogan0.Array.data[0]
-      value: "PAl parecer Leahn se ha quedado atr\xE1s, no puedo ser desagradable
-        con\n\xE9l, no lo s\xE9.\r"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
       propertyPath: linesLogan1.Array.data[0]
-      value: 'PDemonios, no tengo la suficiente paciencia para esperar.
+      value: 'PNo tengo la suficiente paciencia para esperar.
 
 '
-      objectReference: {fileID: 0}
-    - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
-      propertyPath: linesLogan2.Array.data[0]
-      value: "PAl parecer Leahn se est\xE1 cansando, lo esperar\xE9, que aburrimiento.\n"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7657534632363962266, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
-      propertyPath: linesLogan3.Array.data[0]
-      value: "PLeahn \xBFd\xF3nde est\xE1s? "
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03c1da90e82df08478f9a0c25609c59e, type: 3}
@@ -53860,6 +53847,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 0879e3ff133967c40ab3c19044d1ac27, type: 3}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesA.Array.data[0]
+      value: "H\xBFQui\xE9n toca la puerta? No aceptamos mendigos, \xA1largo de aqu\xED!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesA.Array.data[1]
+      value: "PNo, no vine a mendigar, su hermano me envi\xF3 para que lo vaya a
+        buscar.\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesC.Array.data[0]
+      value: "H\xBFQuien toca la puerta? No aceptamos mendigos \xA1largo de aqu\xED!\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCFinal.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -53878,11 +53878,40 @@ PrefabInstance:
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCFinal.Array.data[1]
       value: "HM\xE1s vale que regreses con mi hermano Leahn, est\xE1 empezando a
-        hacer frio en este maldito bosque."
+        hacer frio en este bosque."
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCFinal.Array.data[2]
       value: HNos vemos y apresurate.
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesExtra1.Array.data[1]
+      value: "PEsta forma de camale\xF3n empieza a fastidiarme.\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesExtra1.Array.data[2]
+      value: "P\xA1\xA1Noooooooooooo!! \xBFHay alguien en casa?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesExtra2.Array.data[1]
+      value: "PEse mago me las pagar\xE1, sabr\xE1 quien soy.\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesExtra3.Array.data[0]
+      value: "PHolaaaaaa, \xBFHay alguien en casa? \xA1tengo una emergencia!\r\n\n\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesExtra3.Array.data[1]
+      value: "PNecesito salir de este aburrido lugar.\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesExtra3.Array.data[2]
+      value: "P\xA1Nooooooo! Al parecer no hay nadie en casa.\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesExtra4.Array.data[0]
+      value: PHolaaaaaaaaaaaaaaaa, hola, hay un desamparado hombre lagartija que
+        necesita ayuda.
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: listOptions.Array.data[0]
@@ -53911,7 +53940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCFinal2.Array.data[1]
-      value: HTic tac tic tac no ves que se hace tarde en este maldito bosque.
+      value: HTic tac tic tac no ves que se hace tarde en este bosque.
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCFinal2.Array.data[2]
@@ -53919,15 +53948,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCFinal3.Array.data[0]
-      value: HVe por Leahn si no quieres que te parta en dos.
+      value: HVe por Leahn si no quieres que me enoje.
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCFinal3.Array.data[1]
-      value: "HEst\xE1s empezando a colmarme la paciencia, demonioooooos!"
+      value: "HEst\xE1s empezando a colmarme la paciencia."
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCFinal3.Array.data[2]
-      value: HVe por Leahn por un demonio.
+      value: HVe por Leahn por todos los cielos.
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: optionLinesA.Array.data[0]
@@ -53974,8 +54003,30 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesAIncorrecta.Array.data[0]
+      value: "HOtra vez alguien est\xE1 tocando la puerta."
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesAIncorrecta.Array.data[1]
+      value: "PHola caballero, su hermano me envi\xF3 para que lo vaya a buscar.\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCIncorrecta.Array.data[1]
       value: "HResponde la opci\xF3n correcta y deja de fastidiar."
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesAIncorrecta1.Array.data[2]
+      value: "HNooo, t\xFA de nuevo, espero que sepas su nombre est\xE1 vez..\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesAIncorrecta3.Array.data[0]
+      value: "HS\xE9 que eres tu de nuevo humanoide mendigo, respondeme con la verdad
+        \nsi no quieres que me enfurezca."
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesAIncorrecta4.Array.data[0]
+      value: "HOtra vez tu fastidioso, no te lo volver\xE9 a repetir, di el nombre
+        real de mi\nhermano AHORAAAAA.\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesAIncorrecta4.Array.data[2]
@@ -53984,7 +54035,7 @@ PrefabInstance:
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCIncorrecta1.Array.data[0]
       value: "HEsta es la \xFAltima vez que dejo que invadas mi propiedad. Hazme
-        el maldito favor  de una vez."
+        el favor...."
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCIncorrecta1.Array.data[1]
@@ -54008,7 +54059,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCIncorrecta3.Array.data[1]
-      value: "HResponde bien, \xA1maldici\xF3n hiciste que me enojara!"
+      value: "HResponde bien, \xA1hiciste que me enojara!"
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesCIncorrecta4.Array.data[0]
@@ -54047,17 +54098,37 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesNextAIncorrecta.Array.data[0]
+      value: "HLo sab\xEDa\u2026 eres un mentiroso, largo de aqu\xED si no quieres
+        que te lastime."
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta.Array.data[1]
       value: "H\xA1No te lo repetir\xE9!"
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesNextAIncorrecta1.Array.data[0]
+      value: "H\xBFLogan? En serio, \xBFes en serio?, largo de aqu\xED si no quieres
+        que te lastime.\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesNextAIncorrecta3.Array.data[0]
+      value: "HLo sab\xEDa, eres un humanoide mentiroso, Henry es mi nombre, largo
+        de aqu\xED si \nno quieres que de verdad te lastime."
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextAIncorrecta4.Array.data[0]
-      value: "H\xBFHenry? En serio, \xBFes en serio?, es es mi maldito nombre, mentiroso
-        no\nconoces a mi hermano, largate si no quieres que te corte en dos."
+      value: "H\xBFHenry? En serio, \xBFes en serio?, es es mi espantoso nombre,
+        mentiroso no\nconoces a mi hermano, largate si no quieres que te haga da\xF1o."
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
+      propertyPath: linesNextAIncorrecta5.Array.data[0]
+      value: "HLo sab\xEDa\u2026 eres un mentiroso, largo de aqu\xED si no quieres
+        que te lastime\nde verdad. Mire que Henry, Henry soy yo."
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta0.Array.data[0]
-      value: "HIIIIIInvasor, sabandija v\xE1yase de aqu\xED de INMEDIAAAAAATOOOOO!!!!"
+      value: "HIIIIIInvasor, v\xE1yase de aqu\xED de INMEDIAAAAAATOOOOO!!!!"
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta0.Array.data[1]
@@ -54073,7 +54144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta2.Array.data[0]
-      value: "HEres un madlito mendigo  y ego\xEDsta, \xA1vete de mi propiedad!"
+      value: "HEres mendigo  y ego\xEDsta, \xA1vete de mi propiedad!"
       objectReference: {fileID: 0}
     - target: {fileID: 919132149622966576, guid: f2ec4ea42ae0e0c41993c23ee8ed4f75, type: 3}
       propertyPath: linesNextCIncorrecta2.Array.data[1]
@@ -54293,6 +54364,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.19566
       objectReference: {fileID: 0}
+    - target: {fileID: 1583918726373465200, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -54369,6 +54444,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4467244999318712366, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5700988509182253927, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0014884564
@@ -54380,6 +54459,18 @@ PrefabInstance:
     - target: {fileID: 5700988509182253927, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.0028133744
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673027244797866182, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814317135835413986, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6814317135835413986, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8521447929231588195, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54400,6 +54491,87 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3718800405902963238, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
   m_PrefabInstance: {fileID: 3718800406537050838}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3718800406537050840 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6814317135835413986, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
+  m_PrefabInstance: {fileID: 3718800406537050838}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3718800406537050841 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4467244999318712366, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
+  m_PrefabInstance: {fileID: 3718800406537050838}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3718800406537050842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1583918726373465200, guid: a9030723db52ae14891a48212bbb1ba7, type: 3}
+  m_PrefabInstance: {fileID: 3718800406537050838}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3718800406537050843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718800406537050840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc61185025cc2548a47a40971e23964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storeInTexcoordChannel: 1
+  cospatialVertexDistance: 0.01
+--- !u!114 &3718800406537050844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718800406537050841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc61185025cc2548a47a40971e23964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storeInTexcoordChannel: 1
+  cospatialVertexDistance: 0.01
+--- !u!114 &3718800406537050845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718800406537050842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc61185025cc2548a47a40971e23964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  storeInTexcoordChannel: 1
+  cospatialVertexDistance: 0.01
+--- !u!33 &3718800406537050846
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718800406537050840}
+  m_Mesh: {fileID: 0}
+--- !u!33 &3718800406537050847
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718800406537050841}
+  m_Mesh: {fileID: 0}
+--- !u!33 &3718800406537050848
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718800406537050842}
+  m_Mesh: {fileID: 0}
 --- !u!1001 &4712311515397237568
 PrefabInstance:
   m_ObjectHideFlags: 0

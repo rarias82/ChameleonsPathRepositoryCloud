@@ -11,11 +11,16 @@ public class InicioEfectoBloom : MonoBehaviour
     [SerializeField] float silderMaxValue;
     [SerializeField] float sildermMinValue;
     [SerializeField] float valueRate;
+
+    private void Awake()
+    {
+        m_Volume = GetComponent<Volume>();
+        m_Volume.profile.TryGet(out m_Bloom);
+    }
     void Start()
     {
         // Create an instance of a bloom
-        m_Volume = GetComponent<Volume>();
-        m_Volume.profile.TryGet(out m_Bloom);
+       
 
         StartCoroutine(BloomIntensity());
        
@@ -25,13 +30,17 @@ public class InicioEfectoBloom : MonoBehaviour
     {
 
         m_Bloom.intensity.value = silderMaxValue;
+        float num = 10.0f;
 
-        while (m_Bloom.intensity.value != sildermMinValue)
+
+        while (num >  0.0f && m_Bloom.intensity.value > sildermMinValue)
         {
             m_Bloom.intensity.value -= valueRate * Time.deltaTime;
+            num -=  Time.deltaTime;
             yield return null;
         }
 
+        Debug.Log("Salio del bucle");
         m_Bloom.intensity.value = sildermMinValue;
 
     }

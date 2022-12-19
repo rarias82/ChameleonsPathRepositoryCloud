@@ -89,6 +89,15 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SaltarEscena"",
+                    ""type"": ""Button"",
+                    ""id"": ""ecbc19ea-3529-4199-a0fe-0a12e62fe5eb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -674,6 +683,39 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
                     ""action"": ""Pausa"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd3ac782-a9a5-42c6-8612-2a700e94a893"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SaltarEscena"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f37ed4fe-0f36-4da6-808b-692d1797e2c4"",
+                    ""path"": ""<XInputController>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SaltarEscena"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""54905fa4-4aa4-4ac0-b932-2409eebbf60a"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SaltarEscena"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1001,6 +1043,7 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
         m_Jugador_BUP = m_Jugador.FindAction("BUP", throwIfNotFound: true);
         m_Jugador_BDOWN = m_Jugador.FindAction("BDOWN", throwIfNotFound: true);
         m_Jugador_Pausa = m_Jugador.FindAction("Pausa", throwIfNotFound: true);
+        m_Jugador_SaltarEscena = m_Jugador.FindAction("SaltarEscena", throwIfNotFound: true);
         // Opciones
         m_Opciones = asset.FindActionMap("Opciones", throwIfNotFound: true);
         m_Opciones_Apretar = m_Opciones.FindAction("Apretar", throwIfNotFound: true);
@@ -1071,6 +1114,7 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
     private readonly InputAction m_Jugador_BUP;
     private readonly InputAction m_Jugador_BDOWN;
     private readonly InputAction m_Jugador_Pausa;
+    private readonly InputAction m_Jugador_SaltarEscena;
     public struct JugadorActions
     {
         private @Mapa m_Wrapper;
@@ -1082,6 +1126,7 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
         public InputAction @BUP => m_Wrapper.m_Jugador_BUP;
         public InputAction @BDOWN => m_Wrapper.m_Jugador_BDOWN;
         public InputAction @Pausa => m_Wrapper.m_Jugador_Pausa;
+        public InputAction @SaltarEscena => m_Wrapper.m_Jugador_SaltarEscena;
         public InputActionMap Get() { return m_Wrapper.m_Jugador; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1112,6 +1157,9 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
                 @Pausa.started -= m_Wrapper.m_JugadorActionsCallbackInterface.OnPausa;
                 @Pausa.performed -= m_Wrapper.m_JugadorActionsCallbackInterface.OnPausa;
                 @Pausa.canceled -= m_Wrapper.m_JugadorActionsCallbackInterface.OnPausa;
+                @SaltarEscena.started -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSaltarEscena;
+                @SaltarEscena.performed -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSaltarEscena;
+                @SaltarEscena.canceled -= m_Wrapper.m_JugadorActionsCallbackInterface.OnSaltarEscena;
             }
             m_Wrapper.m_JugadorActionsCallbackInterface = instance;
             if (instance != null)
@@ -1137,6 +1185,9 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
                 @Pausa.started += instance.OnPausa;
                 @Pausa.performed += instance.OnPausa;
                 @Pausa.canceled += instance.OnPausa;
+                @SaltarEscena.started += instance.OnSaltarEscena;
+                @SaltarEscena.performed += instance.OnSaltarEscena;
+                @SaltarEscena.canceled += instance.OnSaltarEscena;
             }
         }
     }
@@ -1191,6 +1242,7 @@ public partial class @Mapa : IInputActionCollection2, IDisposable
         void OnBUP(InputAction.CallbackContext context);
         void OnBDOWN(InputAction.CallbackContext context);
         void OnPausa(InputAction.CallbackContext context);
+        void OnSaltarEscena(InputAction.CallbackContext context);
     }
     public interface IOpcionesActions
     {

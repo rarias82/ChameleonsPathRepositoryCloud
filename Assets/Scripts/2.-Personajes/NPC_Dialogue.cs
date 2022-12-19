@@ -323,6 +323,7 @@ public class NPC_Dialogue : MonoBehaviour
         MainCharacter.sharedInstance.canMove = false;      
 
         UIManager.InstanceGUI.fadeBlack = true;
+        UIManager.InstanceGUI.fadeBlackN = true;
 
         marker.SetActive(false);
    
@@ -405,12 +406,15 @@ public class NPC_Dialogue : MonoBehaviour
         {
             UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position);
             MainCharacter.sharedInstance.VozLogan();
+            UIManager.InstanceGUI.NombreDialogo("P");
+
         }
 
         if (lineas.Trim().StartsWith("L"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
             VocesRandom();
+            UIManager.InstanceGUI.NombreDialogo("L");
         }
 
         if (lineas.Trim().StartsWith("H"))
@@ -785,7 +789,12 @@ public class NPC_Dialogue : MonoBehaviour
 
         dialogueText.text = string.Empty;
 
+        UIManager.InstanceGUI.EmptyNames();
+        
+
+
         UIManager.InstanceGUI.fadeFrom = true;
+        UIManager.InstanceGUI.fadeFromN = true;
 
         FollowCameras.instance.velocidadRotacion = -75f;
         FollowCameras.instance.mode = Modo.MundoAlreves;
@@ -864,8 +873,10 @@ public class NPC_Dialogue : MonoBehaviour
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         dialogueText.text = string.Empty;
+        UIManager.InstanceGUI.EmptyNames();
 
         UIManager.InstanceGUI.fadeFrom = true;
+        UIManager.InstanceGUI.fadeFromN = true;
 
         FollowCameras.instance.velocidadRotacion = -75f;
         FollowCameras.instance.mode = Modo.MundoAlreves;
@@ -916,6 +927,8 @@ public class NPC_Dialogue : MonoBehaviour
         //    UIManager.InstanceGUI.FinDelJuego();
         //}
 
+        houses.didDialogueStart = false;
+
         MainCharacter.sharedInstance.puedePausar = true;
     }
     public IEnumerator CloseDialogueN()
@@ -927,8 +940,10 @@ public class NPC_Dialogue : MonoBehaviour
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         dialogueText.text = string.Empty;
+        UIManager.InstanceGUI.EmptyNames();
 
         UIManager.InstanceGUI.fadeFrom = true;
+        UIManager.InstanceGUI.fadeFromN = true;
 
         FollowCameras.instance.mode = Modo.InGame;
 
@@ -1027,6 +1042,7 @@ public class NPC_Dialogue : MonoBehaviour
 
 
         UIManager.InstanceGUI.fadeBlack = true;
+        UIManager.InstanceGUI.fadeBlackN = true;
 
 
 

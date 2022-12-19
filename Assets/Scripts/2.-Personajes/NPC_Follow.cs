@@ -213,6 +213,7 @@ public class NPC_Follow : MonoBehaviour
 
 
         dialogueText.text = string.Empty;
+        UIManager.InstanceGUI.EmptyNames();
 
 
         //dObject.IconDialogo(dObject.lines[dObject.index]);
@@ -264,12 +265,14 @@ public class NPC_Follow : MonoBehaviour
         {
             UIManager.InstanceGUI.PosicionarGlobo(dObject.trPlayer.position);
             MainCharacter.sharedInstance.VozLogan();
+            UIManager.InstanceGUI.NombreDialogo("P");
         }
 
         if (lineas.Trim().StartsWith("L"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
             dObject.VocesRandom();
+            UIManager.InstanceGUI.NombreDialogo("L");
 
         }
 

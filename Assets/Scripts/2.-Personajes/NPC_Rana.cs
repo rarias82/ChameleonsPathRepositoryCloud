@@ -50,13 +50,11 @@ public class NPC_Rana : MonoBehaviour
     public bool didDialogueStart;
     [SerializeField] int dialogoAnterior;
     [SerializeField] int dialogoSiguiente;
-    public Mapa _map;
+    
     public GameObject detector;
     NPC_Dialogue mapeo;
     [SerializeField] HouseDialogue hd;
-    public bool iniciarAnim;
-    public bool terminarAnim;
-    public bool animOn;
+   
     public float numeroAnimVelocity;
     public Transform posOriginal;
     int random000 = 0;
@@ -105,8 +103,8 @@ public class NPC_Rana : MonoBehaviour
     [SerializeField] AudioClip[] voces1;
     int voz000, voz001;
 
-    [Header("Intanciar")]
-    public static NPC_Rana instanciaRana;
+    
+    
 
     [Header("Finales")]
     public bool finalA;
@@ -121,15 +119,12 @@ public class NPC_Rana : MonoBehaviour
 
 
 
-    private void Awake()
-    {
-        instanciaRana = this;     
-    }
+    //private void Awake()
+    //{
+            
+    //}
 
-    public void SetInputActions(Mapa map)
-    {
-        _map = map;
-    }
+    
     void RotateSon()
     {
         Quaternion rotation = Quaternion.Euler(offset);
@@ -142,12 +137,10 @@ public class NPC_Rana : MonoBehaviour
         obCameras = Camera.main;
         trPlayer = GameObject.FindGameObjectWithTag("Main Character").transform;
         obNMA = GetComponent<NavMeshAgent>();
-        speedNPC = obNMA.speed;
-
-        //obNMA.speed = 4.0f;
+        speedNPC = obNMA.speed;   
         numeroAnim = 30;
 
-        //numeroAnim = 400;
+     
 
 
 
@@ -241,6 +234,10 @@ public class NPC_Rana : MonoBehaviour
     }
     public void StartDialogue()
     {
+
+
+        UIManager.InstanceGUI.QuitarHUDInGame();
+
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
 
 
@@ -368,6 +365,7 @@ public class NPC_Rana : MonoBehaviour
         didDialogueStart = true;
 
         UIManager.InstanceGUI.fadeBlack = true;
+        UIManager.InstanceGUI.fadeBlackN = true;
 
         marker.SetActive(false);
 
@@ -385,7 +383,7 @@ public class NPC_Rana : MonoBehaviour
     }
     public IEnumerator WriteDialogue()
     {
-        //detector.SetActive(true);
+        
 
         marker.SetActive(false);
 
@@ -460,13 +458,6 @@ public class NPC_Rana : MonoBehaviour
 
 
 
-        //if (index == 7)
-        //{
-        //    MainCharacter.sharedInstance.eAnim = 0;
-        //}
-
-
-
 
         while (FollowCameras.instance.mode == Modo.Mundo)
         {
@@ -492,6 +483,7 @@ public class NPC_Rana : MonoBehaviour
         
 
         dialogueText.text = string.Empty;
+        UIManager.InstanceGUI.EmptyNames();
 
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
 
@@ -500,18 +492,6 @@ public class NPC_Rana : MonoBehaviour
 
         if (!pregunta)
         {
-            if ((index % 2 == 0) && (index <= 4))
-            {
-                animOn = true;
-                iniciarAnim = true;
-            }
-            else
-            {
-                dialogueText.transform.localScale = Vector3.one;
-                iniciarAnim = false;
-                terminarAnim = false;
-                animOn = false;
-            }
 
             if (index == 1)
             {
@@ -579,12 +559,6 @@ public class NPC_Rana : MonoBehaviour
         }
 
 
-
-
-
-        //yield return new WaitForSeconds(5f);
-
-        //terminarAnim = true;
         if (dialogueText.text == lines[index].Substring(1))
         {
             UIManager.InstanceGUI.icono.gameObject.SetActive(true);
@@ -606,11 +580,13 @@ public class NPC_Rana : MonoBehaviour
         {
             UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position);
             MainCharacter.sharedInstance.VozLogan();
+            UIManager.InstanceGUI.NombreDialogo("P");
         }
 
       
         if (lineas.Trim().StartsWith("R"))
         {
+            UIManager.InstanceGUI.NombreDialogo("R");
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
             if (!pregunta)
             {
@@ -638,8 +614,10 @@ public class NPC_Rana : MonoBehaviour
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         dialogueText.text = string.Empty;
+        UIManager.InstanceGUI.EmptyNames();
 
         UIManager.InstanceGUI.fadeFrom = true;
+        UIManager.InstanceGUI.fadeFromN = true;
 
         numeroAnim = 99;
 
@@ -770,7 +748,7 @@ public class NPC_Rana : MonoBehaviour
         selector.transform.SetSiblingIndex(0);
 
 
-        if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame() /*&& *//*!UIManager.InstanceGUI.isGameOver*/)
+        if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && !UIManager.InstanceGUI.isGameOver)
         {
 
 
@@ -923,41 +901,7 @@ public class NPC_Rana : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         mapeo._map.Enable();
     }
-    public void AnimacionTexto()
-    {
-
-
-        if (animOn)
-        {
-            if (iniciarAnim)
-            {
-                dialogueText.transform.localScale = new Vector3(Mathf.MoveTowards(dialogueText.transform.localScale.x, 0.5f, numeroAnimVelocity * Time.deltaTime), dialogueText.transform.localScale.y, dialogueText.transform.localScale.z);/*Vector3.MoveTowards(dialogueText.transform.localScale, new Vector3(0.5f, 1.0f, 1.0f), numeroAnimVelocity * Time.deltaTime);*/
-
-                if (dialogueText.transform.localScale.x == 0.5f)
-                {
-                    iniciarAnim = false;
-                    terminarAnim = true;
-
-                }
-            }
-
-            if (terminarAnim)
-            {
-                dialogueText.transform.localScale = new Vector3(Mathf.MoveTowards(dialogueText.transform.localScale.x, 1f, numeroAnimVelocity * Time.deltaTime), dialogueText.transform.localScale.y, dialogueText.transform.localScale.z);/*Vector3.MoveTowards(dialogueText.transform.localScale, new Vector3(0.5f, 1.0f, 1.0f), numeroAnimVelocity * Time.deltaTime);*/
-
-                if (dialogueText.transform.localScale.x == 1f)
-                {
-                    iniciarAnim = true;
-                    terminarAnim = false;
-
-                }
-            }
-        }
-
-       
-
-
-    }
+   
     void TurnToLogan()
     {
 
@@ -1048,7 +992,7 @@ public class NPC_Rana : MonoBehaviour
             }
             Interactuar();
             TurnToLogan();
-            AnimacionTexto();
+            //AnimacionTexto();
         }
 
         if (mode == ModeNPCRana.FinalB)

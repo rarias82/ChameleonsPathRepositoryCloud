@@ -242,7 +242,7 @@ MonoBehaviour:
   optionLines:
   - Acepta ayudarlo.
   - "Negar la petici\xF3n."
-  - Irse del lugar.
+  - Pensarlo un poco.
   nextRoute: 0
   obRoute: {fileID: 2951316827219354710}
   nextDialogueToTalk: 0
@@ -268,13 +268,16 @@ MonoBehaviour:
   obAnim: {fileID: 3939944442959103920}
   numeroAnim: 0
   distancia: 155
-  linesLogan:
-  - "PAl parecer Leahn se ha quedado atr\xE1s, no puedo ser desagradable con \xE9l,
-    no lo s\xE9.\r\n"
+  linesLogan0:
+  - "PAl parecer Leahn se ha quedado atr\xE1s, no puedo ser desagradable con\n\xE9l,
+    no lo s\xE9.\r"
+  linesLogan1:
   - 'PDemonios, no tengo la suficiente paciencia para esperar.
 
 '
+  linesLogan2:
   - "PAl parecer Leahn se est\xE1 cansando, lo esperar\xE9, que aburrimiento.\n"
+  linesLogan3:
   - "PLeahn \xBFd\xF3nde est\xE1s? "
   cancion: {fileID: 8300000, guid: 8d767ffd566d62d429fc3e8cf6c1b8b0, type: 3}
   logan: 0
@@ -429,8 +432,8 @@ MonoBehaviour:
   - "LPerd\xF3n."
   linesFinalC1:
   - "P\xBFSe\xF1or Leahn, voy por buen camino o estamos perdidos?\r\n"
-  - "LZzz, perd\xF3n me est\xE1 dando sue\xF1o compadre, no tengo ni la menor idea
-    de\u2026 donde estamos."
+  - "LZzz, perd\xF3n me est\xE1 dando sue\xF1o compadre, no tengo ni la menor idea\nde\u2026
+    donde estamos."
   linesFinalC2:
   - "P\xBFDisculpe de casualidad usted sabe acerca de un mago que castiga a la gente?"
   - "LNi idea, he vivido 20 a\xF1os en este bosque y no conozco otra realidad.\r\n"
@@ -454,7 +457,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 1.75
-  m_Acceleration: 10
+  m_Acceleration: 25
   avoidancePriority: 50
   m_AngularSpeed: 450
   m_StoppingDistance: 0
@@ -597,6 +600,10 @@ PrefabInstance:
     - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: EmissionModule.m_BurstCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: InitialModule.maxNumParticles
@@ -1083,7 +1090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -5671910290767253545, guid: e579efbb05e7a1048a92f151133a71c3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0034664674
+      value: -0.003460165
       objectReference: {fileID: 0}
     - target: {fileID: -5671910290767253545, guid: e579efbb05e7a1048a92f151133a71c3, type: 3}
       propertyPath: m_LocalRotation.w

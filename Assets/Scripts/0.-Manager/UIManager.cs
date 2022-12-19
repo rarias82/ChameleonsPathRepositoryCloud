@@ -11,14 +11,16 @@ public class UIManager : MonoBehaviour
     public static UIManager InstanceGUI;
 
     [Header("Dialogue Variables")]
-    public Image blackScreen;
-    public bool fadeBlack;
-    public bool fadeFrom;
+    [SerializeField] TextMeshProUGUI dialogos;
+    [SerializeField] TextMeshProUGUI dialogosNombre;
+    public Image blackScreen, blackScreenN;
+    public bool fadeBlack, fadeBlackN;
+    public bool fadeFrom, fadeFromN;
     public float fadeSpeed;
     public Image icono;
     public Image ballonDialogue;
     public float valor;
-    [SerializeField] TextMeshProUGUI dialogos;
+    
 
     [Header("Bondad Variables")]
     public Image barraBondad;
@@ -142,6 +144,34 @@ public class UIManager : MonoBehaviour
         }
 
     }
+
+    public void DialogueFadeInNames()
+    {
+        if (fadeBlackN)
+        {
+            blackScreenN.color = new Color(blackScreenN.color.r, blackScreenN.color.g, blackScreenN.color.b, Mathf.MoveTowards(blackScreenN.color.a, 0.75f, fadeSpeed * Time.deltaTime));
+
+            if (blackScreenN.color.a == 0.75f)
+            {
+                fadeBlackN = false;
+
+            }
+        }
+
+        if (fadeFromN)
+        {
+            blackScreenN.color = new Color(blackScreenN.color.r, blackScreenN.color.g, blackScreenN.color.b, Mathf.MoveTowards(blackScreenN.color.a, 0f, fadeSpeed * Time.deltaTime));
+
+            if (blackScreenN.color.a == 0f)
+            {
+                fadeFromN = false;
+
+            }
+        }
+
+    }
+
+
     public void GanarPuntos(bool add, float puntos)
     {
 
@@ -395,6 +425,34 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void NombreDialogo(string letraInicial)
+    {
+
+        if (letraInicial == "P")
+        {
+            dialogosNombre.text = "Logan";
+        }
+        if (letraInicial == "L")
+        {
+            dialogosNombre.text = "Leahn";
+        }
+        if (letraInicial == "H")
+        {
+            dialogosNombre.text = "Henry";
+        }
+        if (letraInicial == "R")
+        {
+            dialogosNombre.text = "Rana";
+        }
+
+
+    }
+
+    public void EmptyNames()
+    {
+        dialogosNombre.text = string.Empty;
+    }
+
     public void FinDelJuego()
     {
         dialogos.text = string.Empty;
@@ -635,10 +693,14 @@ public class UIManager : MonoBehaviour
 
         if (sceneName == "MenuStart")
         {
+
+            
+
+
             lienzoControlesMenu = GameObject.FindGameObjectWithTag("Controles");
             UIManager.InstanceGUI.lienzoControlesMenu.SetActive(true);
-            //lienzoControlesMenu.transform.SetParent(lienzoCanvas.transform);
-            //lienzoControlesMenu.transform.SetAsFirstSibling();
+            lienzoControlesMenu.transform.SetParent(lienzoCanvas.transform);
+            lienzoControlesMenu.transform.SetAsFirstSibling();
 
             UIManager.InstanceGUI.paletaComicsFinal.SetActive(false);
 
@@ -686,6 +748,11 @@ public class UIManager : MonoBehaviour
 
         if (sceneName == "LevelOne")
         {
+
+            QuitarHUDInGame();
+            ShowHUDInGame();
+
+
             obCartelPausa.SetActive(false);
 
             UIManager.InstanceGUI.paletaComicsFinal.SetActive(false);
@@ -732,7 +799,27 @@ public class UIManager : MonoBehaviour
 
     }
 
-  
+    public void QuitarHUDInGame()
+    {
+
+        Inventory.instance.panelItem.SetActive(false);
+
+        UIManager.InstanceGUI.obMap.SetActive(false);
+        UIManager.InstanceGUI.obMapMark.SetActive(false);
+
+    }
+
+    public void ShowHUDInGame()
+    {
+
+        Inventory.instance.panelItem.SetActive(true);
+
+        UIManager.InstanceGUI.obMap.SetActive(true);
+        UIManager.InstanceGUI.obMapMark.SetActive(true);
+
+    }
+
+
     public void LimpiarCOmic()
     {
         foreach (Image miniImagen in listaVinetas1)
@@ -746,6 +833,7 @@ public class UIManager : MonoBehaviour
        
 
         DialogueFadeIn();
+        DialogueFadeInNames();
 
         if (ObGameOver.activeInHierarchy && isGameOver)
         {

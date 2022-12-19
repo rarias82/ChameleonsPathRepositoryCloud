@@ -192,12 +192,14 @@ public class NPC_Henry : MonoBehaviour
         {
             UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position);
             MainCharacter.sharedInstance.VozLogan();
+            UIManager.InstanceGUI.NombreDialogo("P");
         }
 
         if (lineas.Trim().StartsWith("L"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(NPC_Dialogue.instance.transform.position);
             mapeo.VocesRandom();
+            UIManager.InstanceGUI.NombreDialogo("L");
         }
 
         if (lineas.Trim().StartsWith("H"))
@@ -205,6 +207,7 @@ public class NPC_Henry : MonoBehaviour
             VocesRandom();
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
             UIManager.InstanceGUI.BurbujaDialogo(8);
+            UIManager.InstanceGUI.NombreDialogo("H");
 
         }
 
@@ -261,6 +264,8 @@ public class NPC_Henry : MonoBehaviour
         MainCharacter.sharedInstance.canMove = false;
 
         UIManager.InstanceGUI.fadeBlack = true;
+        UIManager.InstanceGUI.fadeBlackN = true;
+
 
         index = 0;
 
@@ -344,6 +349,7 @@ public class NPC_Henry : MonoBehaviour
         didDialogueStart = true;
 
         UIManager.InstanceGUI.fadeBlack = true;
+        UIManager.InstanceGUI.fadeBlackN = true;
 
         marker.SetActive(false);
 
@@ -487,6 +493,7 @@ public class NPC_Henry : MonoBehaviour
         }
        
         dialogueText.text = string.Empty;
+        UIManager.InstanceGUI.EmptyNames();
 
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
 
@@ -539,10 +546,14 @@ public class NPC_Henry : MonoBehaviour
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
 
         dialogueText.text = string.Empty;
+        UIManager.InstanceGUI.EmptyNames();
+
+
 
         UIManager.InstanceGUI.fadeFrom = true;
+        UIManager.InstanceGUI.fadeFromN = true;
 
-        
+
 
         if (!detectarLimites)
         {
