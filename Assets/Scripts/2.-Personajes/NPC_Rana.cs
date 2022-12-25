@@ -116,15 +116,22 @@ public class NPC_Rana : MonoBehaviour
     public GameObject carrera, obstaculos;
     bool noAbrir;
 
+    [Header("Capas Outline")]
+    public GameObject capaObj;
+    public LayerMask capa;
+    public LayerMask capa0;
+
+    [Header("HacerceInvisible")]
+    public GameObject malla;
+    public CapsuleCollider choqueTrigger;
+    public GameObject choqueMasa;
+    public GameObject minimMapa;
 
 
 
-    //private void Awake()
-    //{
-            
-    //}
 
-    
+
+
     void RotateSon()
     {
         Quaternion rotation = Quaternion.Euler(offset);
@@ -140,7 +147,7 @@ public class NPC_Rana : MonoBehaviour
         speedNPC = obNMA.speed;   
         numeroAnim = 30;
 
-     
+        Debug.Log("OneBale rna");
 
 
 
@@ -150,6 +157,9 @@ public class NPC_Rana : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("OS");
+
+
         dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
 
         mapeo = FindObjectOfType<NPC_Dialogue>();
@@ -581,6 +591,11 @@ public class NPC_Rana : MonoBehaviour
             UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position);
             MainCharacter.sharedInstance.VozLogan();
             UIManager.InstanceGUI.NombreDialogo("P");
+
+
+
+            MainCharacter.sharedInstance.capaObj.layer = 17;
+            capaObj.layer = 20;
         }
 
       
@@ -588,6 +603,11 @@ public class NPC_Rana : MonoBehaviour
         {
             UIManager.InstanceGUI.NombreDialogo("R");
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
+
+            MainCharacter.sharedInstance.capaObj.layer = 20;
+            capaObj.layer = 18;
+
+
             if (!pregunta)
             {
                 VocesRandom();
@@ -723,6 +743,8 @@ public class NPC_Rana : MonoBehaviour
         //{
         //    UIManager.InstanceGUI.FinDelJuego();
         //}
+
+        VolverColores();
 
     }
     public void Navegate()
@@ -901,7 +923,13 @@ public class NPC_Rana : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         mapeo._map.Enable();
     }
-   
+
+    void VolverColores()
+    {
+
+        capaObj.layer = 18;
+        MainCharacter.sharedInstance.capaObj.layer = 17;
+    }
     void TurnToLogan()
     {
 
@@ -977,6 +1005,28 @@ public class NPC_Rana : MonoBehaviour
         }
 
     }
+
+    public void DesaparecerRana(bool verdad)
+    {
+
+        if (verdad)
+        {
+            malla.SetActive(false);
+            choqueTrigger.enabled = false;
+            choqueMasa.SetActive(false);
+            minimMapa.SetActive(false);
+        }
+        else
+        {
+            malla.SetActive(true);
+            choqueTrigger.enabled = true;
+            choqueMasa.SetActive(true);
+            minimMapa.SetActive(true);
+
+        }
+
+   
+    }
     private void Update()
     {
 
@@ -986,7 +1036,7 @@ public class NPC_Rana : MonoBehaviour
         }
         if (mode == ModeNPCRana.Iddle)
         {
-            if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 /*&& (!mapeo.didDialogueStart || !mapeo.gameObject.activeInHierarchy) && !hd.didDialogueStart*/)
+            if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && (!mapeo.didDialogueStart || !mapeo.gameObject.activeInHierarchy) && !hd.didDialogueStart)
             {
                 Navegate();
             }

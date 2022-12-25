@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3942640746677523770
+--- !u!114 &-3585250375267398818
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,36 +9,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: Outlines
+  m_Script: {fileID: 11500000, guid: dd37d03d18ee9584d881763c34816b35, type: 3}
+  m_Name: Apagado
   m_EditorClassIdentifier: 
   m_Active: 1
-  settings:
-    passTag: Outlines
-    Event: 300
-    filterSettings:
-      RenderQueueType: 0
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 32768
-      PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: 980ad4ee1b9a09c4b8dfe0281372c2ac, type: 2}
-    overrideMaterialPassIndex: 0
-    overrideDepthState: 0
-    depthCompareFunction: 4
-    enableWrite: 1
-    stencilSettings:
-      overrideStencilState: 0
-      stencilReference: 0
-      stencilCompareFunction: 8
-      passOperation: 0
-      failOperation: 0
-      zFailOperation: 0
-    cameraSettings:
-      overrideCamera: 0
-      restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
+  _outlineResources: {fileID: 11400000, guid: 231d88937a104094b8e4e0fdb8d2e77b, type: 2}
+  _outlineLayers: {fileID: 0}
+  _outlineSettings:
+    _outlineSettings: {fileID: 0}
+    _outlineColor: {r: 0.103773594, g: 0.09741012, b: 0.09741012, a: 0.59607846}
+    _outlineWidth: 2
+    _outlineIntensity: 2
+    _outlineAlphaCutoff: 0.9
+    _outlineMode: 0
+    _filterMode: 1
+    _layerMask:
+      serializedVersion: 2
+      m_Bits: 1048576
+    _renderingLayerMask: 1
+  _renderPassEvent: 400
+  _shaderPassNames: []
+--- !u!114 &-935748688737225557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd37d03d18ee9584d881763c34816b35, type: 3}
+  m_Name: LeahnOT
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  _outlineResources: {fileID: 11400000, guid: 231d88937a104094b8e4e0fdb8d2e77b, type: 2}
+  _outlineLayers: {fileID: 0}
+  _outlineSettings:
+    _outlineSettings: {fileID: 0}
+    _outlineColor: {r: 0.7264151, g: 0.6547956, b: 0.33922213, a: 1}
+    _outlineWidth: 2
+    _outlineIntensity: 2
+    _outlineAlphaCutoff: 0.9
+    _outlineMode: 0
+    _filterMode: 1
+    _layerMask:
+      serializedVersion: 2
+      m_Bits: 65536
+    _renderingLayerMask: 1
+  _renderPassEvent: 400
+  _shaderPassNames: []
 --- !u!114 &-175725167770618290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,22 +68,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd37d03d18ee9584d881763c34816b35, type: 3}
-  m_Name: NewOutlineFeature
+  m_Name: LoganOT
   m_EditorClassIdentifier: 
   m_Active: 1
   _outlineResources: {fileID: 11400000, guid: 231d88937a104094b8e4e0fdb8d2e77b, type: 2}
   _outlineLayers: {fileID: 0}
   _outlineSettings:
     _outlineSettings: {fileID: 0}
-    _outlineColor: {r: 0.7830189, g: 0.18836774, b: 0.18836774, a: 1}
-    _outlineWidth: 4
+    _outlineColor: {r: 0.5647059, g: 0.34117648, b: 0.7254902, a: 1}
+    _outlineWidth: 2
     _outlineIntensity: 2
     _outlineAlphaCutoff: 0.9
     _outlineMode: 0
     _filterMode: 1
     _layerMask:
       serializedVersion: 2
-      m_Bits: 4096
+      m_Bits: 131072
     _renderingLayerMask: 1
   _renderPassEvent: 400
   _shaderPassNames: []
@@ -83,8 +102,11 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: 3057760077313725923}
   - {fileID: -175725167770618290}
-  - {fileID: -3942640746677523770}
-  m_RendererFeatureMap: e3d5a7f096586f2a4eb6ef14e4b28ffdc62a4e4121ed48c9
+  - {fileID: -935748688737225557}
+  - {fileID: 6930223500213475512}
+  - {fileID: 8139567219388027854}
+  - {fileID: -3585250375267398818}
+  m_RendererFeatureMap: e3d5a7f096586f2a4eb6ef14e4b28ffdabb4c780868d03f3b8d849388e192d60ce9309c1428df5705ecb5977c7a13ece
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
@@ -135,3 +157,61 @@ MonoBehaviour:
     DirectLightingStrength: 0.25
     Radius: 0.075
     SampleCount: 6
+--- !u!114 &6930223500213475512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd37d03d18ee9584d881763c34816b35, type: 3}
+  m_Name: HenryOT
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  _outlineResources: {fileID: 11400000, guid: 231d88937a104094b8e4e0fdb8d2e77b, type: 2}
+  _outlineLayers: {fileID: 0}
+  _outlineSettings:
+    _outlineSettings: {fileID: 0}
+    _outlineColor: {r: 0.7254902, g: 0.34117648, b: 0.40216872, a: 1}
+    _outlineWidth: 2
+    _outlineIntensity: 2
+    _outlineAlphaCutoff: 0.9
+    _outlineMode: 0
+    _filterMode: 1
+    _layerMask:
+      serializedVersion: 2
+      m_Bits: 524288
+    _renderingLayerMask: 1
+  _renderPassEvent: 400
+  _shaderPassNames: []
+--- !u!114 &8139567219388027854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd37d03d18ee9584d881763c34816b35, type: 3}
+  m_Name: RanaOT
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  _outlineResources: {fileID: 11400000, guid: 231d88937a104094b8e4e0fdb8d2e77b, type: 2}
+  _outlineLayers: {fileID: 0}
+  _outlineSettings:
+    _outlineSettings: {fileID: 0}
+    _outlineColor: {r: 0.5645358, g: 0.34117648, b: 0.7254902, a: 1}
+    _outlineWidth: 2
+    _outlineIntensity: 2
+    _outlineAlphaCutoff: 0.9
+    _outlineMode: 0
+    _filterMode: 1
+    _layerMask:
+      serializedVersion: 2
+      m_Bits: 262144
+    _renderingLayerMask: 1
+  _renderPassEvent: 400
+  _shaderPassNames: []

@@ -131,10 +131,7 @@ MonoBehaviour:
 
 
 '
-  - 'PNo soy su amigo.
-
-
-'
+  - "P\xA1\xA1NO SOY SU AMIGOOOO!!\n\n"
   - "RTranquilo no se sulfure, es normal enojarse, es parte del cambio para\nmejorar
     como ser humano, Samuel desea que usted sea una persona\nhonesta para ser verdaderamente
     feliz. \n"
@@ -143,7 +140,7 @@ MonoBehaviour:
   - "\rPara competir, \xBFen serio?\xBFQU\xC9? Una carrera, excelente, ser\xE1 adrenalina
     pura, quiero ganar.\r\n"
   linesC0:
-  - "PEstimado Se\xF1or Rana, le confieso que antes era un bandido, ladr\xF3n y\nmiserable."
+  - "PEstimado Se\xF1or Rana, le confieso que antes era un bandido y ladr\xF3n."
   - "RAdmiro su honestidad, tuvo el valor de decir la verdad. \xA1\xA1Un momento!!
     yo\ntambi\xE9n sol\xEDa ser un malhechor.\r\n"
   - PEstoy sintiendome arrepentido, creo que quiero llorar.
@@ -228,9 +225,6 @@ MonoBehaviour:
   dialogoSiguiente: 0
   detector: {fileID: 0}
   hd: {fileID: 0}
-  iniciarAnim: 0
-  terminarAnim: 0
-  animOn: 0
   numeroAnimVelocity: 1
   posOriginal: {fileID: 0}
   Options: {fileID: 0}
@@ -292,6 +286,19 @@ MonoBehaviour:
   objetosTodo:
   - {fileID: 0}
   - {fileID: 0}
+  carrera: {fileID: 0}
+  obstaculos: {fileID: 0}
+  capaObj: {fileID: 8111399723507663359}
+  capa:
+    serializedVersion: 2
+    m_Bits: 262144
+  capa0:
+    serializedVersion: 2
+    m_Bits: 1048576
+  malla: {fileID: 8636902771375689418}
+  choqueTrigger: {fileID: 849861395}
+  choqueMasa: {fileID: 8636902771375689418}
+  minimMapa: {fileID: 6046919655571500338}
 --- !u!136 &849861395
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -603,6 +610,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4288d707617ab1145a79cd7a7f38fff8, type: 3}
+--- !u!1 &6046919655571500338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4230159182400984865, guid: 4288d707617ab1145a79cd7a7f38fff8, type: 3}
+  m_PrefabInstance: {fileID: 7592631635459488275}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3810460783390812 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7589686490596641359, guid: 4288d707617ab1145a79cd7a7f38fff8, type: 3}
@@ -670,6 +682,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2da425f15e6e74a4a937285ec684f47d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: 2da425f15e6e74a4a937285ec684f47d, type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -8191740002585371210, guid: 2da425f15e6e74a4a937285ec684f47d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1937,6 +1953,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2da425f15e6e74a4a937285ec684f47d, type: 3}
+--- !u!1 &8636902771375689418 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2da425f15e6e74a4a937285ec684f47d, type: 3}
+  m_PrefabInstance: {fileID: 8871273910212129691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8977822382641058928 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2da425f15e6e74a4a937285ec684f47d, type: 3}
@@ -1945,5 +1966,10 @@ Transform:
 --- !u!95 &3060069741073976842 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 2da425f15e6e74a4a937285ec684f47d, type: 3}
+  m_PrefabInstance: {fileID: 8871273910212129691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8111399723507663359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 2da425f15e6e74a4a937285ec684f47d, type: 3}
   m_PrefabInstance: {fileID: 8871273910212129691}
   m_PrefabAsset: {fileID: 0}

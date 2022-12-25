@@ -266,6 +266,9 @@ public class NPC_Follow : MonoBehaviour
             UIManager.InstanceGUI.PosicionarGlobo(dObject.trPlayer.position);
             MainCharacter.sharedInstance.VozLogan();
             UIManager.InstanceGUI.NombreDialogo("P");
+
+            dObject.capaObj.layer = 20;
+            MainCharacter.sharedInstance.capaObj.layer = 17;
         }
 
         if (lineas.Trim().StartsWith("L"))
@@ -274,6 +277,9 @@ public class NPC_Follow : MonoBehaviour
             dObject.VocesRandom();
             UIManager.InstanceGUI.NombreDialogo("L");
 
+
+            dObject.capaObj.layer = 16;
+            MainCharacter.sharedInstance.capaObj.layer = 20;
         }
 
 

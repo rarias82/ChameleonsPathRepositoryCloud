@@ -272,7 +272,7 @@ MonoBehaviour:
   - "PAl parecer Leahn se ha quedado atr\xE1s, no puedo ser desagradable con\n\xE9l,
     no lo s\xE9.\r"
   linesLogan1:
-  - 'PDemonios, no tengo la suficiente paciencia para esperar.
+  - 'PNo tengo la suficiente paciencia para esperar.
 
 '
   linesLogan2:
@@ -290,6 +290,13 @@ MonoBehaviour:
   enrique: {fileID: 0}
   posOriginal: {x: 0, y: 0, z: 0}
   polvoTierra: {fileID: 4140914812568156986}
+  capaObj: {fileID: 7803481126342264901}
+  capa:
+    serializedVersion: 2
+    m_Bits: 65536
+  capa0:
+    serializedVersion: 2
+    m_Bits: 1048576
 --- !u!114 &2951316827219354710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,6 +818,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e579efbb05e7a1048a92f151133a71c3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8391222552659086748, guid: e579efbb05e7a1048a92f151133a71c3, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -8349836218738816273, guid: e579efbb05e7a1048a92f151133a71c3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2190,6 +2201,11 @@ Transform:
 --- !u!95 &3939944442959103920 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: e579efbb05e7a1048a92f151133a71c3, type: 3}
+  m_PrefabInstance: {fileID: 7478204303679339041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7803481126342264901 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: e579efbb05e7a1048a92f151133a71c3, type: 3}
   m_PrefabInstance: {fileID: 7478204303679339041}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7657534632463778539

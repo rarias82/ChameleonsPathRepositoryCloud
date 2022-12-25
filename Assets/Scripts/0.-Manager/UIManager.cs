@@ -144,7 +144,6 @@ public class UIManager : MonoBehaviour
         }
 
     }
-
     public void DialogueFadeInNames()
     {
         if (fadeBlackN)
@@ -479,18 +478,18 @@ public class UIManager : MonoBehaviour
     void NavegarGO()
     {
 
-        if (MainCharacter.sharedInstance._map.Jugador.BDOWN.WasPressedThisFrame() && id_selectorGO < listOptionsGO.Length - 1)
-        {
-            id_selectorGO++;
-            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+        //if (MainCharacter.sharedInstance._map.Jugador.BDOWN.WasPressedThisFrame() && id_selectorGO < listOptionsGO.Length - 1)
+        //{
+        //    id_selectorGO++;
+        //    AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
 
-        }
+        //}
 
-        if (MainCharacter.sharedInstance._map.Jugador.BUP.WasPressedThisFrame() && id_selectorGO > 0)
-        {
-            id_selectorGO--; ;
-            AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
-        }
+        //if (MainCharacter.sharedInstance._map.Jugador.BUP.WasPressedThisFrame() && id_selectorGO > 0)
+        //{
+        //    id_selectorGO--; ;
+        //    AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+        //}
 
         selectorGO.transform.SetParent(listOptionsGO[id_selectorGO].transform);
         selectorGO.transform.position = listOptionsGO[id_selectorGO].transform.position;
@@ -513,12 +512,12 @@ public class UIManager : MonoBehaviour
 
                     break;
 
-                case 1:
-                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
-                    MainCharacter.sharedInstance._map.Jugador.Disable();
-                    StartCoroutine(VolverMenu());
+                //case 1:
+                //    AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+                //    MainCharacter.sharedInstance._map.Jugador.Disable();
+                //    StartCoroutine(VolverMenu());
 
-                    break;
+                    //break;
             }
 
         }
@@ -565,11 +564,13 @@ public class UIManager : MonoBehaviour
                     break;
 
                 case 1:
-                    obCartelPausa.SetActive(false);
-                    Time.timeScale = 1.0f;
-                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
-                    MainCharacter.sharedInstance._map.Jugador.Disable();
-                    StartCoroutine(VolverMenu());
+                    //obCartelPausa.SetActive(false);
+                    //Time.timeScale = 1.0f;
+                    //AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+                    //MainCharacter.sharedInstance._map.Jugador.Disable();
+                    //StartCoroutine(VolverMenu());
+
+                    ExitPlayGame();
 
                     break;
             }
@@ -623,7 +624,7 @@ public class UIManager : MonoBehaviour
 
         
 
-        Inventory.instance.slot[1].GetComponent<Slot>().Quitar();
+        //Inventory.instance.slot[1].GetComponent<Slot>().Quitar();
         
 
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionNivel1));
@@ -658,7 +659,7 @@ public class UIManager : MonoBehaviour
 
        
 
-        Inventory.instance.slot[1].GetComponent<Slot>().Quitar();
+        //Inventory.instance.slot[1].GetComponent<Slot>().Quitar();
         
 
         AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionMenu));
@@ -694,8 +695,8 @@ public class UIManager : MonoBehaviour
         if (sceneName == "MenuStart")
         {
 
-            
 
+            
 
             lienzoControlesMenu = GameObject.FindGameObjectWithTag("Controles");
             UIManager.InstanceGUI.lienzoControlesMenu.SetActive(true);
@@ -750,7 +751,7 @@ public class UIManager : MonoBehaviour
         {
 
             QuitarHUDInGame();
-            ShowHUDInGame();
+            QuitarHUDInGame();
 
 
             obCartelPausa.SetActive(false);
@@ -786,6 +787,8 @@ public class UIManager : MonoBehaviour
 
             isGameOver = false;
 
+            Inventory.instance.slot[1].GetComponent<Slot>().Quitar();
+
         }
 
       
@@ -806,6 +809,9 @@ public class UIManager : MonoBehaviour
 
         UIManager.InstanceGUI.obMap.SetActive(false);
         UIManager.InstanceGUI.obMapMark.SetActive(false);
+
+        dialogos.text = string.Empty;
+        dialogosNombre.text = string.Empty;
 
     }
 

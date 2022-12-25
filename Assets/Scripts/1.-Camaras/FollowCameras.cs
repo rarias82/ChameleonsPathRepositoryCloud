@@ -183,6 +183,7 @@ public class FollowCameras : MonoBehaviour
                 indexSeguir = 0;
                 mode = Modo.InGame;
                 MainCharacter.sharedInstance._map.Jugador.Enable();
+                UIManager.InstanceGUI.ShowHUDInGame();
 
             }
 

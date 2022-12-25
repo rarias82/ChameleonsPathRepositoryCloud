@@ -108,6 +108,11 @@ public class NPC_Dialogue : MonoBehaviour
         AudioManager.Instance.PlaySound(voces[voz001]);
 
     }
+
+    [Header("Capas Outline")]
+    public GameObject capaObj;
+    public LayerMask capa;
+    public LayerMask capa0;
     private void Awake()
     {
         instance = this;
@@ -148,7 +153,10 @@ public class NPC_Dialogue : MonoBehaviour
 
         //houses = FindObjectOfType<HouseDialogue>();
     }
- 
+    public void QuitarMarca()
+    {
+        marker.SetActive(false);
+    }
     void CambiarDialogos() {
 
         switch (nextDialogueToTalk)
@@ -408,6 +416,11 @@ public class NPC_Dialogue : MonoBehaviour
             MainCharacter.sharedInstance.VozLogan();
             UIManager.InstanceGUI.NombreDialogo("P");
 
+            capaObj.layer = 20;
+            MainCharacter.sharedInstance.capaObj.layer = 17;
+
+
+
         }
 
         if (lineas.Trim().StartsWith("L"))
@@ -415,6 +428,9 @@ public class NPC_Dialogue : MonoBehaviour
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
             VocesRandom();
             UIManager.InstanceGUI.NombreDialogo("L");
+
+            capaObj.layer = 16;
+            MainCharacter.sharedInstance.capaObj.layer = 20;
         }
 
         if (lineas.Trim().StartsWith("H"))
@@ -852,11 +868,18 @@ public class NPC_Dialogue : MonoBehaviour
 
         MainCharacter.sharedInstance.puedePausar = true;
 
+        VolverColores();
+
     }
     public IEnumerator CloseDialogueC()
     {
         Debug.Log("Todo es posible");
-        rana.gameObject.SetActive(false);
+
+        if (rana.gameObject.activeInHierarchy)
+        {
+            rana.DesaparecerRana(true);
+        }
+
         seguiraLogan = true;
 
         detector.SetActive(true);
@@ -927,9 +950,11 @@ public class NPC_Dialogue : MonoBehaviour
         //    UIManager.InstanceGUI.FinDelJuego();
         //}
 
-        houses.didDialogueStart = false;
+        houses.didDialogueStart = true;
 
         MainCharacter.sharedInstance.puedePausar = true;
+
+        VolverColores();
     }
     public IEnumerator CloseDialogueN()
     {
@@ -973,7 +998,7 @@ public class NPC_Dialogue : MonoBehaviour
 
             detectarLimites = false;
 
-
+        
         yield return new WaitForSeconds(0.01f);
         didDialogueStart = false;
 
@@ -981,12 +1006,28 @@ public class NPC_Dialogue : MonoBehaviour
 
         MainCharacter.sharedInstance.canMove = true;
 
+        if (!detectarLimites)
+        {
+            
+            if (!henry.seAcabo)
+            {
+                marker.SetActive(true);
+            }
+
+        }
+     
+        
+        
+
+
         if (UIManager.InstanceGUI.isGameOver)
         {
             UIManager.InstanceGUI.FinDelJuego();
         }
 
         MainCharacter.sharedInstance.puedePausar = true;
+
+        VolverColores();
 
     }
     public void MedirDistancia()
@@ -1124,6 +1165,12 @@ public class NPC_Dialogue : MonoBehaviour
 
 
 
+    }
+    void VolverColores()
+    {
+
+        capaObj.layer = 16;
+        MainCharacter.sharedInstance.capaObj.layer = 17;
     }
     void Update()
     {
@@ -1273,7 +1320,13 @@ public class NPC_Dialogue : MonoBehaviour
 				numeroAnim = 0;
                 
                 isRange = true;
-                marker.SetActive(true);
+
+
+                if (!logan)
+                {
+                    marker.SetActive(true);
+                }
+               
 
                 obAnim.speed = 1.0f;
 

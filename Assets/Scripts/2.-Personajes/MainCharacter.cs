@@ -55,6 +55,11 @@ public class MainCharacter : MonoBehaviour
     public bool puedePausar = true;
     public Vector3 mInput;
 
+    [Header("Capas Outline")]
+    public GameObject capaObj;
+    public LayerMask capa;
+    public LayerMask capa0;
+
     void Awake()
     {
         sharedInstance = this;

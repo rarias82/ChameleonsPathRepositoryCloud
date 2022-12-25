@@ -137,7 +137,7 @@ public class HouseDialogue : MonoBehaviour
     {
         marker.SetActive(false);
         respuestaDada = GameObject.Find("NPC_Level_Leahn").GetComponent<NPC_Dialogue>();
-        henry = FindObjectOfType<NPC_Henry>();
+        
         trPlayer = GameObject.Find("Player").GetComponent<Transform>();
         //obHenry.SetActive(false);
 
@@ -389,12 +389,21 @@ public class HouseDialogue : MonoBehaviour
             UIManager.InstanceGUI.BurbujaDialogo(7);
             MainCharacter.sharedInstance.VozLogan();
             UIManager.InstanceGUI.NombreDialogo("P");
+
+
+            MainCharacter.sharedInstance.capaObj.layer = 17;
+            respuestaDada.henry.capaObj.layer = 20;
         }
 
         if (lineas.Trim().StartsWith("L"))
         {
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
             UIManager.InstanceGUI.NombreDialogo("L");
+
+
+            respuestaDada.henry.capaObj.layer = 20;
+            MainCharacter.sharedInstance.capaObj.layer = 20;
+            respuestaDada.capaObj.layer = 16;
         }
 
         if (lineas.Trim().StartsWith("H"))
@@ -403,6 +412,9 @@ public class HouseDialogue : MonoBehaviour
             UIManager.InstanceGUI.BurbujaDialogo(8);
             VocesRandom();
             UIManager.InstanceGUI.NombreDialogo("H");
+
+            respuestaDada.henry.capaObj.layer = 19;
+            MainCharacter.sharedInstance.capaObj.layer = 20;
         }
 
 
@@ -793,7 +805,8 @@ public class HouseDialogue : MonoBehaviour
                         UIManager.InstanceGUI.FinDelJuego();
                         noAbrir = true;
                     }
-                }
+
+                    }
                     else
                     {
                         if (talkToLeahn)
@@ -957,7 +970,12 @@ public class HouseDialogue : MonoBehaviour
         MainCharacter.sharedInstance.canMove = true;
         henryFinalA = true;
 
-        respuestaDada.rana.gameObject.SetActive(false);
+        //condicion
+        if (respuestaDada.rana.gameObject.activeInHierarchy)
+        {
+            respuestaDada.rana.DesaparecerRana(true);
+        }
+        
 
         UIManager.InstanceGUI.ShowHUDInGame();
 
@@ -969,7 +987,7 @@ public class HouseDialogue : MonoBehaviour
     {
 
      
-        if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && talkToLeahn /*&& !respuestaDada.didDialogueStart && (!respuestaDada.rana.didDialogueStart  || !respuestaDada.rana.gameObject.activeInHierarchy)*/)
+        if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && talkToLeahn && !respuestaDada.didDialogueStart && (!respuestaDada.rana.didDialogueStart || !respuestaDada.rana.gameObject.activeInHierarchy))
         {
 
             Navegate();

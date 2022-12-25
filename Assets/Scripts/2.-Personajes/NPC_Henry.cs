@@ -87,7 +87,12 @@ public class NPC_Henry : MonoBehaviour
     int voz000, voz001;
 
     [Header("Efectos")]
-    [SerializeField] ParticleSystem polvoTierra; 
+    [SerializeField] ParticleSystem polvoTierra;
+
+    [Header("Capas Outline")]
+    public GameObject capaObj;
+    public LayerMask capa;
+    public LayerMask capa0;
 
     void VocesRandom()
     {
@@ -159,6 +164,8 @@ public class NPC_Henry : MonoBehaviour
 
         } // Dialogo Final
 
+   
+
         if (detectarLimites && dialogueText.text == lines[index].Substring(1) && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() &&  Inventory.instance.moverInv && !seAcabo) 
         {
             
@@ -193,6 +200,10 @@ public class NPC_Henry : MonoBehaviour
             UIManager.InstanceGUI.PosicionarGlobo(trPlayer.position);
             MainCharacter.sharedInstance.VozLogan();
             UIManager.InstanceGUI.NombreDialogo("P");
+
+            capaObj.layer = 20;
+            MainCharacter.sharedInstance.capaObj.layer = 17;
+
         }
 
         if (lineas.Trim().StartsWith("L"))
@@ -200,6 +211,16 @@ public class NPC_Henry : MonoBehaviour
             UIManager.InstanceGUI.PosicionarGlobo(NPC_Dialogue.instance.transform.position);
             mapeo.VocesRandom();
             UIManager.InstanceGUI.NombreDialogo("L");
+
+            capaObj.layer = 20;
+            MainCharacter.sharedInstance.capaObj.layer = 20;
+            mapeo.capaObj.layer = 16;
+
+
+
+
+
+
         }
 
         if (lineas.Trim().StartsWith("H"))
@@ -208,6 +229,9 @@ public class NPC_Henry : MonoBehaviour
             UIManager.InstanceGUI.PosicionarGlobo(transform.position);
             UIManager.InstanceGUI.BurbujaDialogo(8);
             UIManager.InstanceGUI.NombreDialogo("H");
+
+            capaObj.layer = 19;
+            MainCharacter.sharedInstance.capaObj.layer = 20;
 
         }
 
@@ -371,6 +395,8 @@ public class NPC_Henry : MonoBehaviour
         if (seAcabo)
         {
             lines = linesFinalA;
+            mapeo.QuitarMarca();
+
         }
         
 
@@ -411,14 +437,6 @@ public class NPC_Henry : MonoBehaviour
                 
                 Vector3 directionL = transform.position - new Vector3(mapeo.transform.position.x, 6.079084f, mapeo.transform.position.z);
 
-               
-
-                //if (seAcabo)
-                //{
-                //    Vector3 directionL = transform.position - new Vector3(mapeo.transform.position.x, 6.079084f, mapeo.transform.position.z);
-                //}
-
-                //Vector3 otraDirectionL = transform.position - new Vector3(mapeo.transform.position.x, 6.079084f, mapeo.transform.position.z);
                 if (seAcabo)
                 {
                     mapeo.mode = ModeNPC.Final;
@@ -580,7 +598,12 @@ public class NPC_Henry : MonoBehaviour
 
             FollowCameras.instance.mode = Modo.InGame;
 
-            marker.SetActive(true);
+            if (!seAcabo)
+            {
+                marker.SetActive(true);
+            }
+
+           
 
 
             numeroAnim = 0;
@@ -629,8 +652,13 @@ public class NPC_Henry : MonoBehaviour
             }
 
             MainCharacter.sharedInstance.puedePausar = true;
-            
 
+            marker.SetActive(false);
+
+            if (mapeo.rana.gameObject.activeInHierarchy)
+            {
+                mapeo.rana.DesaparecerRana(false);
+            }
         }
         else
         {
@@ -654,14 +682,8 @@ public class NPC_Henry : MonoBehaviour
 
             Debug.Log("Marca");
 
-            if (seAcabo)
-            {
-                marker.SetActive(false);
-            }
-            else
-            {
-                marker.SetActive(true);
-            }
+            marker.SetActive(true);
+          
             
             didDialogueStart = false;
             MainCharacter.sharedInstance.canMove = true;
@@ -674,11 +696,16 @@ public class NPC_Henry : MonoBehaviour
 
 
         MainCharacter.sharedInstance.puedePausar = true;
-    }
-    public void Final()
-    {
-       
+        VolverColores();
 
+    }
+
+
+    void VolverColores()
+    {
+
+        capaObj.layer = 19;
+        MainCharacter.sharedInstance.capaObj.layer = 17;
     }
     void TurnToLogan()
     {
@@ -695,6 +722,13 @@ public class NPC_Henry : MonoBehaviour
         
 
      
+
+    }
+    void TurnToLeahn()
+    {
+       
+            Vector3 directionLeahn = mapeo.transform.position - transform.position;
+            transform.forward = Vector3.Lerp(transform.forward, directionLeahn, (speedZoom / 2.5f) * Time.deltaTime);
 
     }
     void AnimToVar(int indice)
@@ -732,28 +766,15 @@ public class NPC_Henry : MonoBehaviour
         if (mode == ModeNPCHenry.Final)
         {
             Interactuar();
-            //FollowPlayer();
+            
 
 
         }
         if (mode == ModeNPCHenry.FinalC)
         {
-            if (isRange && NPC_Dialogue.instance.isRange && Inventory.instance.moverInv && !logan && !mapeo.logan && !UIManager.InstanceGUI.isGameOver)
-            {
-                if (!didDialogueStart)
-                {
-                    seAcabo = true;
-                    StartDialogue();
-                }
-                else if (dialogueText.text == lines[index].Substring(1) && mapeo._map.Jugador.Interactuar.WasPressedThisFrame())
-                {
-                    NextDialogue();
-
-                    UIManager.InstanceGUI.icono.gameObject.SetActive(false);
-                }
-
-
-            }
+            Interactuar();
+            TurnToLeahn();
+            
         }
 
         RotateSon();
