@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-//using UnityEngine.InputSystem;
-
 public class MainCharacter : MonoBehaviour
 {
     public static MainCharacter sharedInstance;
@@ -13,7 +10,6 @@ public class MainCharacter : MonoBehaviour
     [SerializeField] Transform playerCamera;
 
     [Header("Move Variables")]
-    
     public bool canMove;
     [SerializeField] float MaxmoveSpeed;
     [SerializeField] float moveSpeed;
@@ -22,6 +18,7 @@ public class MainCharacter : MonoBehaviour
     [SerializeField] CharacterController cc;
     [SerializeField] float rotacionSuave;
     float velocidadRotacionSuave;
+    public GameObject cara;
 
     [Header("Gravity Variables")]
     [SerializeField] float forceGravity;
@@ -31,9 +28,7 @@ public class MainCharacter : MonoBehaviour
     public LayerMask layerGround;
     [SerializeField] float radius;
     
-
     [Header("Anim variables")]
-    ////public Animator obAnim;
     public Vector3 vectorForAnim;
     public Animator obAnim;
     public float intervalo, animSpeed, animIntervalo;
@@ -69,23 +64,14 @@ public class MainCharacter : MonoBehaviour
     {
         puedePausar = true;
     }
-
     public Vector3 ScreenDisplayPont(Vector3 posicionar)
     {
         Vector3 posDisplay = FollowCameras.instance.MyCameras.WorldToScreenPoint(posicionar);
         return posDisplay;
-
-
-
     }
-
     void MovePlayer()
     {
-
-
         Vector2 movementInput = _map.Jugador.Move.ReadValue<Vector2>();
-
-
         inputMove = new Vector3(movementInput.x, 0.0f, movementInput.y);
 
         vectorForAnim = inputMove;
@@ -95,16 +81,12 @@ public class MainCharacter : MonoBehaviour
         inputPlayer.y = yStore;
 
         intervalo = (Mathf.Abs(vectorForAnim.x) + Mathf.Abs(vectorForAnim.z));
-
         intervalo = Mathf.Clamp(intervalo, 0f, 1f);
 
         animIntervalo = intervalo;
 
         if (movementInput.x != 0.0f || movementInput.y != 0.0f)
         {
-
-
-
             float anguloARotar = Mathf.Atan2(inputMove.x, inputMove.z) * Mathf.Rad2Deg + playerCamera.eulerAngles.y;
 
             float angulo = Mathf.SmoothDampAngle(transform.eulerAngles.y, anguloARotar, ref velocidadRotacionSuave, rotacionSuave);
@@ -115,32 +97,22 @@ public class MainCharacter : MonoBehaviour
 
             Vector3.ClampMagnitude(moveDirection, 1f);
 
-
-
             if (_map.Jugador.Sprintar.WasPressedThisFrame())
             {
                 polvoTierra.Play();
             }
 
-
             if (_map.Jugador.Sprintar.IsPressed())
             {
                 moveSpeed = (MaxmoveSpeed + 3.25f);
-
                 intervalo = 1.0f;
-
                 animIntervalo = intervalo + 0.5f;
-
             }
             else
             {
-
                 moveSpeed = MaxmoveSpeed;
-
             }
-
             cc.Move(moveDirection * (moveSpeed * (intervalo)) * Time.deltaTime);
-
         }
 
         MoveGravity();
@@ -169,26 +141,21 @@ public class MainCharacter : MonoBehaviour
         }
 
         inputPlayer.y += forceGravity * Time.deltaTime * forceGravityScale;
-
         cc.Move(inputPlayer * Time.deltaTime);
     }
     void Start()
     {
-
         obAnim = transform.GetComponentInChildren<Animator>();
-
         _leahn = FindObjectOfType<NPC_Dialogue>();
-        // Incicializar las variables principales
         playerCamera = Camera.main.transform;
         moveSpeed = MaxmoveSpeed;
         canMove = true;
         cc = GetComponent<CharacterController>();
         polvoTierraEmission = polvoTierra.emission;
-
         polvoTierra.Stop();
         _map = new Mapa();
-        _leahn.SetInputActions(_map);
-        //_rana.SetInputActions(_map);
+		_leahn.SetInputActions(_map); // VOLBER A ACTIVAR
+        cara = transform.Find("Cara").gameObject;
 
         //_map.Jugador.Enable();
     }
@@ -199,15 +166,10 @@ public class MainCharacter : MonoBehaviour
             MovePlayer();
         }
 
-         mInput= _map.Jugador.Move.ReadValue<Vector2>().normalized;
-
-            Debug.Log(mInput.magnitude);
+        mInput= _map.Jugador.Move.ReadValue<Vector2>().normalized;
 
         if (puedePausar)
         {
-
-           
-
             if (_map.Jugador.Pausa.WasPressedThisFrame()  && mInput.magnitude == 0)
             {
                 UIManager.InstanceGUI.MostrarCartelPausa();
@@ -242,67 +204,12 @@ public class MainCharacter : MonoBehaviour
 
         obAnim.SetInteger("Animo", eAnim);
 
-        //switch (animIntervalo)
-        //{
-        //    case 0.0f:
-        //        obAnim.speed = 1.0f;
-
-        //        break;
-
-        //    case 0.1f:
-        //        obAnim.speed = 10.0f;
-
-        //        break;
-
-
-
-        //    case 0.5f:
-        //        obAnim.speed = 15.0f;
-
-        //        break;
-
-        //    case 0.8f:
-        //        obAnim.speed = 25.0f;
-
-        //        break;
-
-        //    case 1f:
-
-        //        obAnim.speed = animSpeed + 0.75f;
-        //        break;
-
-        //    case 1.5f:
-
-        //        obAnim.speed = animSpeed + 1.15f;
-
-        //        break;
-
-        //    default:
-        //        break;
-        //}
-
+       
     }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(transform.position + (Vector3.up * groundDistance), radius);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //if (!other.gameObject.CompareTag("Item"))
-        //{
-        //    puedePausar = false;
-        //}
-    }
-
-
-    private void OnTriggerExit(Collider other)
-    {
-        //if (!other.gameObject.CompareTag("Item"))
-        //{
-        //    puedePausar = true;
-        //}
     }
 
 }

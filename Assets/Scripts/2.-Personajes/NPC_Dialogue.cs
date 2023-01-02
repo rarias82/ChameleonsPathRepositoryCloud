@@ -27,7 +27,7 @@ public class NPC_Dialogue : MonoBehaviour
     public GameObject Options;
     [SerializeField] GameObject[] listOptions;
     [SerializeField] GameObject selector;
-    [SerializeField] sbyte id_selector;
+    public sbyte id_selector;
     [SerializeField] sbyte indexQuesion;
     [SerializeField] string[] optionLines;
     public bool nextRoute;
@@ -73,9 +73,6 @@ public class NPC_Dialogue : MonoBehaviour
     [Header("Music References")]
     [SerializeField] AudioClip cancion;
     public Mapa _map;
-    bool subir;
-    bool desactivaralgo;
-    float biblio;
     public bool logan;
     bool mirar;
     public NPC_Rana rana;
@@ -83,11 +80,14 @@ public class NPC_Dialogue : MonoBehaviour
     int voz000, voz001;
     [SerializeField] NPC_Henry enrique;
     public Vector3 posOriginal;
-    
 
     [Header("Efectos")]
     [SerializeField] ParticleSystem polvoTierra;
-    bool noAbrir;
+
+    [Header("Capas Outline")]
+    public GameObject capaObj;
+    public LayerMask capa;
+    public LayerMask capa0;
     public void SetInputActions(Mapa map)
     {
         _map = map;
@@ -108,16 +108,9 @@ public class NPC_Dialogue : MonoBehaviour
         AudioManager.Instance.PlaySound(voces[voz001]);
 
     }
-
-    [Header("Capas Outline")]
-    public GameObject capaObj;
-    public LayerMask capa;
-    public LayerMask capa0;
     private void Awake()
     {
         instance = this;
-
-        
     }
     private void OnEnable()
     {
@@ -130,12 +123,10 @@ public class NPC_Dialogue : MonoBehaviour
         numeroAnim = 1;
         detector.SetActive(false);
         polvoTierra.Stop();
-
-
+    
     }
     void Start()
     {
-
             dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
 
             Options = GameObject.Find("DialogueOptions").gameObject;
@@ -145,13 +136,7 @@ public class NPC_Dialogue : MonoBehaviour
             listOptions[0] = GameObject.Find("Panel0").gameObject;
             listOptions[1] = GameObject.Find("Panel1").gameObject;
             listOptions[2] = GameObject.Find("Panel2").gameObject;
-        
-
-
-
-
-
-        //houses = FindObjectOfType<HouseDialogue>();
+   
     }
     public void QuitarMarca()
     {
@@ -258,9 +243,6 @@ public class NPC_Dialogue : MonoBehaviour
                     random01 = Random.Range(0, 5);
                 }
 
-
-
-
                 if (random01 == 0)
                 {
                     lines = obRoute.linesNextC0;
@@ -305,6 +287,7 @@ public class NPC_Dialogue : MonoBehaviour
     public void StartDialogue()
     {
 
+        
         if (detectarLimites)
         {
             
@@ -433,16 +416,11 @@ public class NPC_Dialogue : MonoBehaviour
             MainCharacter.sharedInstance.capaObj.layer = 20;
         }
 
-        if (lineas.Trim().StartsWith("H"))
-        {
-
-        }
-
         
     }
     public IEnumerator WriteDialogue()
     {
-
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
         marker.SetActive(false);
 
         if (index == 0)
@@ -460,77 +438,22 @@ public class NPC_Dialogue : MonoBehaviour
             }
             else
             {
-                //detector.SetActive(true);
+				if (lines[index].Trim().StartsWith("P"))
+				{
+                    FollowCameras.instance.velocidadRotacion = -75.0f;
+                    FollowCameras.instance.mode = Modo.Mundo;
+                }
 
-                FollowCameras.instance.velocidadRotacion = -75.0f;
-                FollowCameras.instance.mode = Modo.Mundo;
-                       
+                if (lines[index].Trim().StartsWith("L"))
+                {
+                    FollowCameras.instance.velocidadRotacion = -75.0f;
+                    FollowCameras.instance.mode = Modo.Odnum;
+                }
+
+
             }
             
-            if (lines == obRoute.linesNextA || lines == obRoute.linesNextA1 || lines == obRoute.linesNextA2 || lines == obRoute.linesNextA3 || lines == obRoute.linesNextA4)
-            {
-                numeroAnim = 17;
-                
-            }
-
-            if (lines == obRoute.linesNextB || lines == obRoute.linesNextB1 || lines == obRoute.linesNextB2 || lines == obRoute.linesNextB3 || lines == obRoute.linesNextB4)
-            {
-                MainCharacter.sharedInstance.eAnim = 21;
-
-                if (index == 0)
-                {
-                    numeroAnim = 2;
-                }
-                if (index == 1)
-                {
-                    numeroAnim = 3;
-                }
-                if (index == 2)
-                {
-                    numeroAnim = 4;
-                }
-            }
-
-            if (lines == obRoute.linesNextC0 || lines == obRoute.linesNextC01 || lines == obRoute.linesNextC02 || lines == obRoute.linesNextC03 || lines == obRoute.linesNextC04)
-            {
-                MainCharacter.sharedInstance.eAnim = 20;
-
-                if (index == 0)
-                {
-                    numeroAnim = 2;
-                }
-                if (index == 1)
-                {
-                    numeroAnim = 3;
-                }
-                if (index == 2)
-                {
-                    numeroAnim = 4;
-                }
-            }
-
-            if (lines == obRoute.linesNextC2)
-            {
-                if (index == 0)
-                {
-                    MainCharacter.sharedInstance.eAnim = 20;
-                }
-
-                if (index == 1)
-                {
-                    numeroAnim = 2;
-                }
-
-                if (index == 2)
-                {
-                    MainCharacter.sharedInstance.eAnim = 21;
-                }
-
-                if (index == 3)
-                {
-                    numeroAnim = 3;
-                }
-            }
+            
             
             posOriginal = FollowCameras.instance.transform.position;
 
@@ -545,22 +468,67 @@ public class NPC_Dialogue : MonoBehaviour
             }
 
             if (!detectarLimites)
-            detector.SetActive(true);
+			{
+                detector.SetActive(true);
+                
+                
+                yield return new WaitForSeconds(1f);
+                FollowCameras.instance.detenerGiro = true;
+                
+			}
+
 
         }
+
+		if (index > 0 && !detectarLimites)
+		{
+            GiroDeCamara();
+		}
+
+        
 
         while (FollowCameras.instance.mode == Modo.Mundo)
         {
+            UIManager.InstanceGUI.BurbujaDialogo(9);
             yield return null;
         }
 
+        while (FollowCameras.instance.mode == Modo.Odnum)
+        {
+            UIManager.InstanceGUI.BurbujaDialogo(9);
+            yield return null;
+        }
+
+        dialogueText.text = string.Empty;
+
+
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
+
+
+        IconDialogo(lines[index]);
+
         if (index == 0)
         {
-            
+
             if (!habloconLeahn)
             {
                 MainCharacter.sharedInstance.eAnim = 20;
             }
+
+
+        }
+
+        if (index == 1)
+        {
+            if (!habloconLeahn)
+            {
+                numeroAnim = 2;
+
+                UIManager.InstanceGUI.BurbujaDialogo(0);
+
+            }
+
+
         }
 
         if (index == 2)
@@ -570,34 +538,26 @@ public class NPC_Dialogue : MonoBehaviour
             if (!habloconLeahn)
             {
                 MainCharacter.sharedInstance.eAnim = 21;
-            }
-            
-        }
 
-        if (index == 1)
-		{
-            if (!habloconLeahn)
-            {
-                numeroAnim = 2;
+                UIManager.InstanceGUI.BurbujaDialogo(4);
             }
-            
 
         }
 
-        if (index == 3 )
+        if (index == 3)
         {
-			numeroAnim = 3;
+            numeroAnim = 3;
 
             if (!habloconLeahn)
             {
                 UIManager.InstanceGUI.BurbujaDialogo(1);
             }
-           
+
         }
 
         if (index == 4)
         {
-            
+
             numeroAnim = 4;
 
 
@@ -605,12 +565,18 @@ public class NPC_Dialogue : MonoBehaviour
             {
                 UIManager.InstanceGUI.BurbujaDialogo(4);
             }
-            
-            
+
+
         }
 
         if (habloconLeahn)
         {
+
+            if (index == 0)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(0);
+                Debug.Log("Pregunta");
+            }
             if (index == 1)
             {
 
@@ -632,16 +598,157 @@ public class NPC_Dialogue : MonoBehaviour
 
             }
         }
-       
 
 
-        dialogueText.text = string.Empty;
+        if (lines == obRoute.linesNextA || lines == obRoute.linesNextA1 || lines == obRoute.linesNextA2 || lines == obRoute.linesNextA3 || lines == obRoute.linesNextA4)
+        {
+            numeroAnim = 17;
+
+        }
+
+        if (lines == obRoute.linesNextB || lines == obRoute.linesNextB1 || lines == obRoute.linesNextB2 || lines == obRoute.linesNextB3 || lines == obRoute.linesNextB4)
+        {
+            MainCharacter.sharedInstance.eAnim = 21;
+
+            if (index == 0)
+            {
+                numeroAnim = 2;
+            }
+            if (index == 1)
+            {
+                numeroAnim = 3;
+            }
+            if (index == 2)
+            {
+                numeroAnim = 4;
+            }
+        }
+
+        if (lines == obRoute.linesNextC0 || lines == obRoute.linesNextC01 || lines == obRoute.linesNextC02 || lines == obRoute.linesNextC03 || lines == obRoute.linesNextC04)
+        {
+            MainCharacter.sharedInstance.eAnim = 20;
+
+            if (index == 0)
+            {
+                numeroAnim = 2;
+            }
+            if (index == 1)
+            {
+                numeroAnim = 3;
+            }
+            if (index == 2)
+            {
+                numeroAnim = 4;
+            }
+        }
+
+        if (lines == obRoute.linesNextC2)
+        {
+            if (index == 0)
+            {
+                MainCharacter.sharedInstance.eAnim = 20;
+            }
+
+            if (index == 1)
+            {
+                numeroAnim = 2;
+            }
+
+            if (index == 2)
+            {
+                MainCharacter.sharedInstance.eAnim = 21;
+            }
+
+            if (index == 3)
+            {
+                numeroAnim = 3;
+            }
+        }
 
 
-        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
+		if (seguiraLogan && lines == obRoute.linesFinalC)
+		{
+			if (index == 0)
+			{
+                numeroAnim = 30;
+                UIManager.InstanceGUI.BurbujaDialogo(5);
+            }
+            if (index == 1)
+            {
+                numeroAnim = 31;
+                UIManager.InstanceGUI.BurbujaDialogo(3);
+            }
+            if (index == 2)
+            {
+                MainCharacter.sharedInstance.eAnim = 2;
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+            if (index == 3)
+            {
+                numeroAnim = 0;
+                UIManager.InstanceGUI.BurbujaDialogo(6);
+            }
 
-        IconDialogo(lines[index]);
+        }
+        if (seguiraLogan && lines == obRoute.linesFinalC1)
+        {
+            if (index == 0)
+            {
+                MainCharacter.sharedInstance.eAnim = 2;
+                
+                UIManager.InstanceGUI.BurbujaDialogo(4);
+            }
+            if (index == 1)
+            {
+                numeroAnim = 35;
+                UIManager.InstanceGUI.BurbujaDialogo(3);
+            }
 
+        }
+        if (seguiraLogan && lines == obRoute.linesFinalC2)
+        {
+            if (index == 0)
+            {
+                MainCharacter.sharedInstance.eAnim = 20;
+                UIManager.InstanceGUI.BurbujaDialogo(4);
+            }
+
+            if (index == 1)
+            {
+                numeroAnim = 32;
+                UIManager.InstanceGUI.BurbujaDialogo(5);
+            }
+
+            if (index == 2)
+            {
+                MainCharacter.sharedInstance.eAnim = 21;
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+
+        }
+        if (seguiraLogan && lines == obRoute.linesFinalC3)
+        {
+            if (index == 0)
+            {
+                MainCharacter.sharedInstance.eAnim = 20;
+                UIManager.InstanceGUI.BurbujaDialogo(4);
+            }
+
+            if (index == 1)
+            {
+                numeroAnim = 33;
+                UIManager.InstanceGUI.BurbujaDialogo(5);
+            }
+
+            if (index == 2)
+            {
+                MainCharacter.sharedInstance.eAnim = 21;
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+
+        }
 
         foreach (char letter in lines[index].Substring(1).ToCharArray())
         {
@@ -654,6 +761,26 @@ public class NPC_Dialogue : MonoBehaviour
             UIManager.InstanceGUI.icono.gameObject.SetActive(true);
         }
 
+    }
+    public void GiroDeCamara()
+	{
+        if (lines[index].Trim().StartsWith("L"))
+        {
+            //MainCharacter.sharedInstance.cara.SetActive(false);
+
+            FollowCameras.instance.velocidadRotacion = -75.0f;
+            FollowCameras.instance.mode = Modo.Odnum;
+
+        }
+
+        if (lines[index].Trim().StartsWith("P"))
+        {
+            //MainCharacter.sharedInstance.cara.SetActive(true);
+
+            FollowCameras.instance.velocidadRotacion = -75.0f;
+            FollowCameras.instance.mode = Modo.Mundo;
+
+        }
     }
     public void NextDialogue()
     {
@@ -753,17 +880,18 @@ public class NPC_Dialogue : MonoBehaviour
                     obRoute.StarRoute(id_selector);
                     UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
                     UIManager.InstanceGUI.BurbujaDialogo(7);
-
+                    MainCharacter.sharedInstance.eAnim = 22;
+                    FollowCameras.instance.mode = Modo.Mundo;
+                    FollowCameras.instance.velocidadRotacion = -75.0f;
 
                     break;
 
                 case 1:
-                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
-                    obRoute.StarRoute(id_selector);
-                    UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
-                    UIManager.InstanceGUI.BurbujaDialogo(2);
-
-                    break;
+					AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
+					obRoute.StarRoute(id_selector);
+					UIManager.InstanceGUI.GanarPuntos(false, UIManager.InstanceGUI.puntos);
+					UIManager.InstanceGUI.BurbujaDialogo(2);
+					break;
 
                 case 2:
                     AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
@@ -776,9 +904,9 @@ public class NPC_Dialogue : MonoBehaviour
                     break;
             }
 
-            MainCharacter.sharedInstance.eAnim = 22;
+			
 
-            nextDialogueToTalk = id_selector;
+			nextDialogueToTalk = id_selector;
         }
 
 
@@ -1243,21 +1371,23 @@ public class NPC_Dialogue : MonoBehaviour
 
         if (isRange && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !houses.henryFinalA && !logan && !detectarLimites && !enrique.seAcabo && !UIManager.InstanceGUI.isGameOver)
         {
-
+            //UIManager.InstanceGUI.BurbujaDialogo(9);
             UIManager.InstanceGUI.icono.gameObject.SetActive(false);
 
             if (!didDialogueStart)
             {
                 StartDialogue();
+				//UIManager.InstanceGUI.BurbujaDialogo(9);
 
-            }
+			}
             else if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0 && !nextRoute && !logan && !detectarLimites && !enrique.seAcabo /*&& !houses.didDialogueStart*/)
             {
                 if (dialogueText.text == lines[index].Substring(1))
                 {
                     NextDialogue();
+					//UIManager.InstanceGUI.BurbujaDialogo(9);
 
-                }
+				}
 
             }
 

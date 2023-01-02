@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public enum Modo
 {
-    InGame, InDialogue, Stop, Test, Mundo, MundoAlreves, Principio
+    InGame, Stop, Mundo, Odnum, MundoAlreves, Principio, Relleno
 }
 public class FollowCameras : MonoBehaviour
 {
@@ -43,17 +43,20 @@ public class FollowCameras : MonoBehaviour
     public ParticleSystem confetis;
     public ParticleSystem confetisB;
     public ParticleSystem confetisM;
+    public float maxDistance;
+    public float currentDistance;
+    public float limiteParaDetenerCamra;
+    public LayerMask whatDetect;
+    public GameObject rayosLaser;
+    public float radiosShepre;
+    RaycastHit rh;
+    Ray ray;
+    public bool detenerGiro;
 
     [Header("Principio Variables")]
     [SerializeField] Transform[] puntosASeguir;
     [SerializeField] float transitionSpeed;
-    //[SerializeField] Transform puntoActual;
     public int indexSeguir = 0;
-
-    //public VolumeProfile vp;
-
-
-    // Start is called before the first frame update
 
     private void Awake()
     {
@@ -67,34 +70,17 @@ public class FollowCameras : MonoBehaviour
 
     private void OnEnable()
     {
-        mode = Modo.Principio;
-        //mode = Modo.InGame;
-        trPlayer = GameObject.FindGameObjectWithTag("Main Character").transform;
+		mode = Modo.Principio;
+		trPlayer = GameObject.FindGameObjectWithTag("Main Character").transform;
         posX = trPlayer.position.x;
         posZ = trPlayer.position.z;
         float X = Mathf.Clamp(posX, minXandZ.x, maxXandZ.x);
         float Z = Mathf.Clamp(posZ, minXandZ.z, maxXandZ.z);
-        //transform.position = new Vector3(X + offset.x, trPlayer.position.y + offset.y, Z + offset.z);
         confetis.Stop();
         confetisB.Stop();
         confetisM.Stop();
     }
 
-    void GirarDialogo()
-    {
-        axisH -= Time.deltaTime * numero;
-        Quaternion camTurnAngle = Quaternion.AngleAxis(axisH * smoothness, Vector3.up);
-        offset = camTurnAngle * offset;
-        transform.position = Vector3.Slerp(transform.position, trPlayer.position + offset, xSmooth * Time.deltaTime);
-        transform.LookAt(trPlayer);
-
-        if (pararGiro)
-        {
-            axisH = 0;
-            mode = Modo.Stop;
-        }
-
-    }
 
     void InGameCameras()
     {
@@ -108,12 +94,60 @@ public class FollowCameras : MonoBehaviour
 
     void Mundo()
     {
-        
+        //UIManager.InstanceGUI.BurbujaDialogo(9);
+
         transform.RotateAround(trPlayer.position, Vector3.up, velocidadRotacion * Time.deltaTime );
-        if (pararGiro)
+
+        ray = new Ray(rayosLaser.transform.position, rayosLaser.transform.forward);
+
+		if (Physics.SphereCast(ray,radiosShepre, out rh,maxDistance,whatDetect, QueryTriggerInteraction.Ignore))
+		{
+			if (rh.transform.gameObject.CompareTag("Face") && detenerGiro)
+			{
+                pararGiro = true;
+                detenerGiro = false;
+                mode = Modo.Stop;
+            }
+		}
+    }
+
+    void Odnum()
+    {
+
+        
+
+        transform.RotateAround(trPlayer.position, Vector3.up, -velocidadRotacion * Time.deltaTime);
+
+        ray = new Ray(rayosLaser.transform.position, rayosLaser.transform.forward);
+      
+        if (Physics.SphereCast(ray, radiosShepre, out rh, maxDistance, whatDetect, QueryTriggerInteraction.Ignore))
         {
-            velocidadRotacion = 0;
-            mode = Modo.Stop;
+            if (rh.transform.gameObject.CompareTag("FaceAtras") && detenerGiro)
+            {
+                pararGiro = true;
+                detenerGiro = false;
+                mode = Modo.Stop;
+            }
+        }
+
+	}
+
+    void Relleno()
+    {
+        //UIManager.InstanceGUI.BurbujaDialogo(9);
+
+        transform.RotateAround(trPlayer.position, Vector3.up, velocidadRotacion * Time.deltaTime);
+
+        ray = new Ray(rayosLaser.transform.position, rayosLaser.transform.forward);
+
+        if (Physics.SphereCast(ray, radiosShepre, out rh, maxDistance, whatDetect, QueryTriggerInteraction.Ignore))
+        {
+            if (rh.transform.gameObject.CompareTag("Face") && detenerGiro)
+            {
+                pararGiro = true;
+                detenerGiro = false;
+                mode = Modo.Stop;
+            }
         }
     }
 
@@ -121,7 +155,8 @@ public class FollowCameras : MonoBehaviour
     {
 
         transform.RotateAround(trPlayer.position, Vector3.up, -velocidadRotacion * Time.deltaTime);
-        if (pararGiro)
+
+        if (!pararGiro)
         {
             velocidadRotacion = 0;
             mode = Modo.InGame;
@@ -130,25 +165,12 @@ public class FollowCameras : MonoBehaviour
 
     void StopMove()
     {
-        //posX = trPlayer.position.x;
-        //posZ = trPlayer.position.z;
-        //float X = Mathf.Clamp(posX, minXandZ.x, maxXandZ.x);
-        //float Z = Mathf.Clamp(posZ, minXandZ.z, maxXandZ.z);
-        //transform.position = Vector3.Slerp(transform.position, new Vector3(X + offset.x, trPlayer.position.y + offset.y, Z + offset.z), xSmooth * Time.deltaTime);
-        //transform.LookAt(trPlayer);
-
+        velocidadRotacion = 0;
+        pararGiro = false;
+        detenerGiro = true;
     }
 
-    void Interludir()
-    {
-        axisH += Time.deltaTime * numero;
-        Quaternion camTurnAngle = Quaternion.AngleAxis(axisH * smoothness, Vector3.up);
-        offset = camTurnAngle * offset;
-        transform.position = Vector3.Slerp(transform.position, trPlayer.position + offset, xSmooth * Time.deltaTime);
-        transform.LookAt(trPlayer);
-
-    }
-
+   
     void Interpolar()
     {
         if (transitionSpeed<10.0f)
@@ -170,9 +192,7 @@ public class FollowCameras : MonoBehaviour
             Mathf.MoveTowards(transform.rotation.eulerAngles.z, puntosASeguir[indexSeguir].rotation.eulerAngles.z, Time.deltaTime * transitionSpeed)
               );
             
-       
-            
-          
+ 
 
         if (diferenciaVector.sqrMagnitude < (0.2f * 2f))
         {
@@ -183,9 +203,10 @@ public class FollowCameras : MonoBehaviour
                 indexSeguir = 0;
                 mode = Modo.InGame;
                 MainCharacter.sharedInstance._map.Jugador.Enable();
-                UIManager.InstanceGUI.ShowHUDInGame();
+				UIManager.InstanceGUI.ShowHUDInGame();
+				//Vuelva a activar
 
-            }
+			}
 
         }
 
@@ -222,6 +243,8 @@ public class FollowCameras : MonoBehaviour
     private void Update()
     {
        
+
+        
     }
 
     private void FixedUpdate()
@@ -233,23 +256,16 @@ public class FollowCameras : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        if (mode == Modo.Principio)
+        {
+            Interpolar();
+        }
+
         if (mode == Modo.InGame)
         {
             InGameCameras();
  
-
         }
-
-        if (mode == Modo.InDialogue)
-        {
-            GirarDialogo();
-        }
-
-        if (mode == Modo.Test)
-        {
-            Interludir();
-        }
-
 
         if (mode == Modo.Stop)
         {
@@ -261,18 +277,33 @@ public class FollowCameras : MonoBehaviour
             Mundo();
         }
 
+        if (mode == Modo.Odnum)
+        {
+            Odnum();
+        }
+
         if (mode == Modo.MundoAlreves)
         {
             MundoAlreves();
         }
 
-        if (mode == Modo.Principio)
+        if (mode == Modo.Relleno)
         {
-            Interpolar();
+            Relleno();
         }
+
+
 
 
         MyCameras.orthographicSize = Mathf.Clamp(MyCameras.orthographicSize, 3.5f, 7.5f); // Límites
 
     }
+
+	private void OnDrawGizmosSelected()
+	{
+
+        Gizmos.color = Color.green;
+        Debug.DrawLine(ray.origin, ray.direction * currentDistance);
+        Gizmos.DrawWireSphere(ray.direction * currentDistance,radiosShepre);
+	}
 }

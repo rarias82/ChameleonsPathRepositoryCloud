@@ -68,7 +68,6 @@ public class NPC_Follow : MonoBehaviour
     {
         dObject.index = 0;
 
-
         dObject.nextRoute = true;
 
         UIManager.InstanceGUI.AnimateOptions(false);
@@ -81,41 +80,41 @@ public class NPC_Follow : MonoBehaviour
                 break;
 
             case 1:
+
                
+				random00 = random01;
 
-                random00 = random01;
-                
-                random01 = Random.Range(0, 4);
-
-
-                while (random01 == random00)
-                {
-                    random01 = Random.Range(0, 4);
-                }
+				random01 = Random.Range(0, 4);
 
 
-
-                if (random01 == 0)
-                {
-                    linesNext = linesB;
-                }
-                if (random01 == 1)
-                {
-                    linesNext = linesB1;
-                }
-                if (random01 == 2)
-                {
-                    linesNext = linesB2;
-                }
-                if (random01 == 3)
-                {
-                    linesNext = linesB3;
-                }
+				while (random01 == random00)
+				{
+					random01 = Random.Range(0, 4);
+				}
 
 
 
+				if (random01 == 0)
+				{
+					linesNext = linesB;
+				}
+				if (random01 == 1)
+				{
+					linesNext = linesB1;
+				}
+				if (random01 == 2)
+				{
+					linesNext = linesB2;
+				}
+				if (random01 == 3)
+				{
+					linesNext = linesB3;
+				}
 
-                break;
+
+
+
+				break;
 
             case 2:
                 linesNext = linesC;
@@ -130,25 +129,26 @@ public class NPC_Follow : MonoBehaviour
         fillDialogueLines = true;
 
         
-
         StartCoroutine(ContinueWriteDialogue());
-
-
 
     }
     public IEnumerator ContinueWriteDialogue()
     {
-        
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
+
+
+
+
         if (dObject.index == 1)
         {
 
-            
 
-            if (linesNext == linesA /*|| linesNext == linesA1 || linesNext == linesA2 || linesNext == linesA3*/)
-			{
+
+            if (linesNext == linesA)
+            {
                 dObject.numeroAnim = 10;
 
-                UIManager.InstanceGUI.BurbujaDialogo(5);  
+                UIManager.InstanceGUI.BurbujaDialogo(5);
             }
 
             if (linesNext == linesB || linesNext == linesB1 || linesNext == linesB2 || linesNext == linesB3)
@@ -172,19 +172,11 @@ public class NPC_Follow : MonoBehaviour
 
 
         }
-        else if (dObject.index == 2)
+
+        if (dObject.index == 2)
         {
             MainCharacter.sharedInstance.eAnim = 23;
         }
-
-
-        //if (dObject.index == 1)
-        //{
-
-        //    
-
-        //}
-
 
         if (dObject.index == 3)
         {
@@ -215,14 +207,115 @@ public class NPC_Follow : MonoBehaviour
         dialogueText.text = string.Empty;
         UIManager.InstanceGUI.EmptyNames();
 
+        if (dObject.index == 0)
+        {
+            if (dObject.id_selector == 1 || dObject.id_selector == 2)
+            {
+                yield return new WaitForSeconds(UIManager.InstanceGUI.timeTransicion);
+                Debug.Log("Mas facil");
+                FollowCameras.instance.mode = Modo.Mundo;
+                FollowCameras.instance.velocidadRotacion = -75.0f;
 
-        //dObject.IconDialogo(dObject.lines[dObject.index]);
 
-        //UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
+                MainCharacter.sharedInstance.eAnim = 22;
+            }
 
 
+
+        }
+
+
+
+        if (dObject.index > 0)
+        {
+            GiroDeCamara();
+        }
+
+        Debug.Log("Follow");
+		while (FollowCameras.instance.mode == Modo.Mundo)
+		{
+			UIManager.InstanceGUI.BurbujaDialogo(9);
+			yield return null;
+		}
+
+		while (FollowCameras.instance.mode == Modo.Odnum)
+		{
+			UIManager.InstanceGUI.BurbujaDialogo(9);
+			yield return null;
+		}
+
+		
+
+       
+
+
+        
+
+
+
+
+
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
 
         IconDialogoS(linesNext[dObject.index]);
+
+        if (dObject.index == 0)
+        {
+            if (dObject.nextDialogueToTalk == 0)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(0);
+            }
+
+            if (dObject.nextDialogueToTalk == 1)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+            if (dObject.nextDialogueToTalk == 2)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+        }
+
+        if (dObject.index == 1)
+        {
+            if (dObject.nextDialogueToTalk == 0)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(5);
+            }
+            if (dObject.nextDialogueToTalk == 1)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+            if (dObject.nextDialogueToTalk == 2)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+
+        }
+
+        if (dObject.index == 2)
+        {
+            if (dObject.nextDialogueToTalk == 0)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(0);
+            }
+
+
+        }
+
+        if (dObject.index == 3)
+        {
+            if (dObject.nextDialogueToTalk == 0)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(5);
+            }
+
+
+        }
 
         foreach (char letter in linesNext[dObject.index].Substring(1).ToCharArray())
         {
@@ -238,6 +331,29 @@ public class NPC_Follow : MonoBehaviour
 
 
 
+    }
+    public void GiroDeCamara()
+    {
+
+        if (linesNext[dObject.index].Trim().StartsWith("P"))
+        {
+            //MainCharacter.sharedInstance.cara.SetActive(true);
+
+            FollowCameras.instance.velocidadRotacion = -75.0f;
+            FollowCameras.instance.mode = Modo.Mundo;
+
+        }
+
+        if (linesNext[dObject.index].Trim().StartsWith("L"))
+        {
+            //MainCharacter.sharedInstance.cara.SetActive(false);
+
+            FollowCameras.instance.velocidadRotacion = -75.0f;
+            FollowCameras.instance.mode = Modo.Odnum;
+
+        }
+
+       
     }
 
     void NextDialogue()

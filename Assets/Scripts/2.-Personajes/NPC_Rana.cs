@@ -147,7 +147,7 @@ public class NPC_Rana : MonoBehaviour
         speedNPC = obNMA.speed;   
         numeroAnim = 30;
 
-        Debug.Log("OneBale rna");
+        
 
 
 
@@ -157,7 +157,7 @@ public class NPC_Rana : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("OS");
+  
 
 
         dialogueText = GameObject.Find("Text (TMP)N").GetComponent<TextMeshProUGUI>();
@@ -401,10 +401,19 @@ public class NPC_Rana : MonoBehaviour
         {
             posOriginal = FollowCameras.instance.transform;
 
-            FollowCameras.instance.velocidadRotacion = -75.0f;
-            FollowCameras.instance.mode = Modo.Mundo;
+            if (lines[index].Trim().StartsWith("P"))
+            {
+                FollowCameras.instance.velocidadRotacion = -75.0f;
+                FollowCameras.instance.mode = Modo.Mundo;
+            }
 
-           
+            if (lines[index].Trim().StartsWith("L"))
+            {
+                FollowCameras.instance.velocidadRotacion = -75.0f;
+                FollowCameras.instance.mode = Modo.Odnum;
+            }
+
+
 
             UIManager.InstanceGUI.BurbujaDialogo(0);
 
@@ -429,7 +438,22 @@ public class NPC_Rana : MonoBehaviour
 
 
 
+		}
+		else
+		{
+            if (lines[index].Trim().StartsWith("P"))
+            {
+                FollowCameras.instance.velocidadRotacion = -75.0f;
+                FollowCameras.instance.mode = Modo.Mundo;
+            }
+
+            if (lines[index].Trim().StartsWith("L"))
+            {
+                FollowCameras.instance.velocidadRotacion = -75.0f;
+                FollowCameras.instance.mode = Modo.Odnum;
+            }
         }
+
 
         if (!pregunta)
         {
@@ -473,6 +497,11 @@ public class NPC_Rana : MonoBehaviour
         {
             yield return null;
         }
+
+		while(FollowCameras.instance.mode == Modo.Odnum)
+        {
+            yield return null;
+		}
 
         if (numeroAnim >= 100 && numeroAnim < 200)
         {

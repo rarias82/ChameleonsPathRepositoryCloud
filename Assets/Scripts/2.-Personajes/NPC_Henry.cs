@@ -421,12 +421,22 @@ public class NPC_Henry : MonoBehaviour
                 /*detector.SetActive(true);*/
 
                 UIManager.InstanceGUI.BurbujaDialogo(8);
-
-                FollowCameras.instance.velocidadRotacion = -75.0f;
-                FollowCameras.instance.mode = Modo.Mundo;
                 
                
                 AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
+
+                if (lines[index].Trim().StartsWith("P"))
+                {
+                    FollowCameras.instance.velocidadRotacion = -75.0f;
+                    FollowCameras.instance.mode = Modo.Mundo;
+                }
+
+                if (lines[index].Trim().StartsWith("L"))
+                {
+                    FollowCameras.instance.velocidadRotacion = -75.0f;
+                    FollowCameras.instance.mode = Modo.Odnum;
+                }
+
             }
 
             posOriginal = FollowCameras.instance.transform.position;
@@ -498,7 +508,30 @@ public class NPC_Henry : MonoBehaviour
 
             detector.SetActive(true);
 
+
+			if (index>0)
+			{
+                if (lines[index].Trim().StartsWith("P"))
+                {
+                    FollowCameras.instance.velocidadRotacion = -75.0f;
+                    FollowCameras.instance.mode = Modo.Mundo;
+                }
+
+                if (lines[index].Trim().StartsWith("H"))
+                {
+                    FollowCameras.instance.velocidadRotacion = -75.0f;
+                    FollowCameras.instance.mode = Modo.Odnum;
+                }
+            }
+
+
+
             while (FollowCameras.instance.mode == Modo.Mundo)
+            {
+                yield return null;
+            }
+
+            while (FollowCameras.instance.mode == Modo.Odnum)
             {
                 yield return null;
             }

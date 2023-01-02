@@ -8,6 +8,7 @@ public class Navegar : MonoBehaviour
     public Mapa _map;
     public sbyte id_selector;
     public Transform boton;
+    //public Transform efectoParticulas;
     public Transform boton1;
     public GameObject[] listOptions;
     public float valor;
@@ -32,15 +33,15 @@ public class Navegar : MonoBehaviour
 
     private void Start()
     {
+		//efectoParticulas = GameObject.FindGameObjectWithTag("vfx_stars").GetComponent<Transform>();
+		boton = GameObject.FindGameObjectWithTag("Btn1").GetComponent<Transform>();
+		boton1 = GameObject.FindGameObjectWithTag("Btn2").GetComponent<Transform>();
 
-        boton = GameObject.FindGameObjectWithTag("Btn1").GetComponent<Transform>();
-        boton1 = GameObject.FindGameObjectWithTag("Btn2").GetComponent<Transform>();
+		GameObject obListAux = GameObject.Find("Botones").gameObject;
 
-        GameObject obListAux = GameObject.Find("Botones").gameObject;
-
-        boton.gameObject.SetActive(false);
-        boton1.gameObject.SetActive(false);
-
+		boton.gameObject.SetActive(false);
+		boton1.gameObject.SetActive(false);
+		//efectoParticulas.gameObject.SetActive(false);
 
         int hijos = obListAux.transform.childCount;
 
@@ -105,10 +106,12 @@ public class Navegar : MonoBehaviour
 
         yield return new WaitForSeconds(4f);
 
-        
 
-        boton.gameObject.SetActive(true);
-        boton1.gameObject.SetActive(true);
+
+		boton.gameObject.SetActive(true);
+		boton1.gameObject.SetActive(true);
+
+		//efectoParticulas.gameObject.SetActive(true);
 
         puedeSeleccionar = true;
         _map.Opciones.Enable();
@@ -151,17 +154,21 @@ public class Navegar : MonoBehaviour
 
         }
 
+        //efectoParticulas.transform.SetParent(listOptions[id_selector].transform);
+        //efectoParticulas.transform.position = listOptions[id_selector].transform.position - new Vector3(0.0f, 0.0f, 0.0f);
+
+
+        //efectoParticulas.transform.SetSiblingIndex(0);
         boton.transform.SetParent(listOptions[id_selector].transform);
         boton.transform.position = listOptions[id_selector].transform.position - new Vector3(distancia, 0.0f, 0.0f);
-
-
         boton.transform.SetSiblingIndex(0);
 
+
         boton1.transform.SetParent(listOptions[id_selector].transform);
-        boton1.transform.position = listOptions[id_selector].transform.position - new Vector3(-distancia, 0.0f, 0.0f);
+		boton1.transform.position = listOptions[id_selector].transform.position - new Vector3(-distancia, 0.0f, 0.0f);
+		boton1.transform.SetSiblingIndex(0);
 
-
-        boton1.transform.SetSiblingIndex(0);
+        
 
         if (_map.Jugador.Interactuar.WasPressedThisFrame())
         {

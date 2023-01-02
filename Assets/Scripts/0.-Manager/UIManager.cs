@@ -170,7 +170,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-
     public void GanarPuntos(bool add, float puntos)
     {
 
@@ -397,6 +396,7 @@ public class UIManager : MonoBehaviour
     }
     IEnumerator TemblorPantalla()
     {
+
         Vector3 posInicial = FollowCameras.instance.transform.position;
         float tiempoTranscurrido = 0.0f;
         float fuerza = 0.0f;

@@ -881,7 +881,8 @@ public class HouseDialogue : MonoBehaviour
 
         MainCharacter.sharedInstance.puedePausar = true;
 
-
+        respuestaDada.capaObj.layer = 20;
+        MainCharacter.sharedInstance.capaObj.layer = 17;
 
     }
     public void NextDialogue()
