@@ -139,11 +139,76 @@ public class NPC_Follow : MonoBehaviour
 
 
 
+      
+
+
+        dialogueText.text = string.Empty;
+        UIManager.InstanceGUI.EmptyNames();
+
+        if (dObject.index == 0)
+        {
+            if (dObject.id_selector == 1 || dObject.id_selector == 2)
+            {
+                yield return new WaitForSeconds(UIManager.InstanceGUI.timeTransicion);
+                Debug.Log("Mas facil");
+                FollowCameras.instance.mode = Modo.Mundo;
+                FollowCameras.instance.velocidadRotacion = -75.0f;
+
+
+                MainCharacter.sharedInstance.eAnim = 22;
+            }
+
+
+
+        }
+
+        if (dObject.index > 0)
+        {
+            GiroDeCamara();
+        }
+
+        
+		while (FollowCameras.instance.mode == Modo.Mundo)
+		{
+			UIManager.InstanceGUI.BurbujaDialogo(9);
+			yield return null;
+		}
+
+		while (FollowCameras.instance.mode == Modo.Odnum)
+		{
+			UIManager.InstanceGUI.BurbujaDialogo(9);
+			yield return null;
+		}
+
+
+
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
+
+     
+        
+        IconDialogoS(linesNext[dObject.index]);
+
+        if (dObject.index == 0)
+        {
+            if (dObject.nextDialogueToTalk == 0)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(0);
+            }
+
+            if (dObject.nextDialogueToTalk == 1)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+            if (dObject.nextDialogueToTalk == 2)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+        }
+
         if (dObject.index == 1)
         {
-
-
-
             if (linesNext == linesA)
             {
                 dObject.numeroAnim = 10;
@@ -170,24 +235,45 @@ public class NPC_Follow : MonoBehaviour
             }
 
 
+            if (dObject.nextDialogueToTalk == 0)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(5);
+            }
+            if (dObject.nextDialogueToTalk == 1)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+            if (dObject.nextDialogueToTalk == 2)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
 
         }
 
         if (dObject.index == 2)
         {
+            if (dObject.nextDialogueToTalk == 0)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(0);
+            }
             MainCharacter.sharedInstance.eAnim = 23;
+
         }
 
         if (dObject.index == 3)
         {
-
+            if (dObject.nextDialogueToTalk == 0)
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(5);
+            }
             if (linesNext == linesA)
             {
                 dObject.numeroAnim = 15;
 
                 UIManager.InstanceGUI.BurbujaDialogo(7);
             }
-
 
 
         }
@@ -198,120 +284,6 @@ public class NPC_Follow : MonoBehaviour
             if (linesNext == linesA)
             {
                 dObject.numeroAnim = 16;
-            }
-
-
-        }
-
-
-        dialogueText.text = string.Empty;
-        UIManager.InstanceGUI.EmptyNames();
-
-        if (dObject.index == 0)
-        {
-            if (dObject.id_selector == 1 || dObject.id_selector == 2)
-            {
-                yield return new WaitForSeconds(UIManager.InstanceGUI.timeTransicion);
-                Debug.Log("Mas facil");
-                FollowCameras.instance.mode = Modo.Mundo;
-                FollowCameras.instance.velocidadRotacion = -75.0f;
-
-
-                MainCharacter.sharedInstance.eAnim = 22;
-            }
-
-
-
-        }
-
-
-
-        if (dObject.index > 0)
-        {
-            GiroDeCamara();
-        }
-
-        Debug.Log("Follow");
-		while (FollowCameras.instance.mode == Modo.Mundo)
-		{
-			UIManager.InstanceGUI.BurbujaDialogo(9);
-			yield return null;
-		}
-
-		while (FollowCameras.instance.mode == Modo.Odnum)
-		{
-			UIManager.InstanceGUI.BurbujaDialogo(9);
-			yield return null;
-		}
-
-		
-
-       
-
-
-        
-
-
-
-
-
-        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
-
-        IconDialogoS(linesNext[dObject.index]);
-
-        if (dObject.index == 0)
-        {
-            if (dObject.nextDialogueToTalk == 0)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(0);
-            }
-
-            if (dObject.nextDialogueToTalk == 1)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(2);
-            }
-
-            if (dObject.nextDialogueToTalk == 2)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(2);
-            }
-
-        }
-
-        if (dObject.index == 1)
-        {
-            if (dObject.nextDialogueToTalk == 0)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(5);
-            }
-            if (dObject.nextDialogueToTalk == 1)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(2);
-            }
-
-            if (dObject.nextDialogueToTalk == 2)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(2);
-            }
-
-
-        }
-
-        if (dObject.index == 2)
-        {
-            if (dObject.nextDialogueToTalk == 0)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(0);
-            }
-
-
-        }
-
-        if (dObject.index == 3)
-        {
-            if (dObject.nextDialogueToTalk == 0)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(5);
             }
 
 
