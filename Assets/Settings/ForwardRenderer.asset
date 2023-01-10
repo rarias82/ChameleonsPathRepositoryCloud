@@ -46,7 +46,7 @@ MonoBehaviour:
   _outlineLayers: {fileID: 0}
   _outlineSettings:
     _outlineSettings: {fileID: 0}
-    _outlineColor: {r: 0.8396226, g: 0.68843544, b: 0.20990565, a: 1}
+    _outlineColor: {r: 0.8392157, g: 0.82220143, b: 0.21176471, a: 0.3137255}
     _outlineWidth: 2
     _outlineIntensity: 2
     _outlineAlphaCutoff: 0.9
@@ -75,8 +75,8 @@ MonoBehaviour:
   _outlineLayers: {fileID: 0}
   _outlineSettings:
     _outlineSettings: {fileID: 0}
-    _outlineColor: {r: 0.5647059, g: 0.34117648, b: 0.7254902, a: 1}
-    _outlineWidth: 2
+    _outlineColor: {r: 0.63448036, g: 0.108134575, b: 0.8490566, a: 0.29411766}
+    _outlineWidth: 4
     _outlineIntensity: 2
     _outlineAlphaCutoff: 0.9
     _outlineMode: 0
@@ -106,7 +106,8 @@ MonoBehaviour:
   - {fileID: 6930223500213475512}
   - {fileID: 8139567219388027854}
   - {fileID: -3585250375267398818}
-  m_RendererFeatureMap: e3d5a7f096586f2a4eb6ef14e4b28ffdabb4c780868d03f3b8d849388e192d60ce9309c1428df5705ecb5977c7a13ece
+  - {fileID: 1782978245899886965}
+  m_RendererFeatureMap: e3d5a7f096586f2a4eb6ef14e4b28ffdabb4c780868d03f3b8d849388e192d60ce9309c1428df5705ecb5977c7a13ece75a11c9d4469be18
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
@@ -135,6 +136,35 @@ MonoBehaviour:
   m_ShadowTransparentReceive: 1
   m_RenderingMode: 0
   m_AccurateGbufferNormals: 0
+--- !u!114 &1782978245899886965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd37d03d18ee9584d881763c34816b35, type: 3}
+  m_Name: EnanoOT
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  _outlineResources: {fileID: 11400000, guid: 231d88937a104094b8e4e0fdb8d2e77b, type: 2}
+  _outlineLayers: {fileID: 0}
+  _outlineSettings:
+    _outlineSettings: {fileID: 0}
+    _outlineColor: {r: 0.21176471, g: 0.8392157, b: 0.35603416, a: 0.15686275}
+    _outlineWidth: 2
+    _outlineIntensity: 2
+    _outlineAlphaCutoff: 0.9
+    _outlineMode: 0
+    _filterMode: 1
+    _layerMask:
+      serializedVersion: 2
+      m_Bits: 4194304
+    _renderingLayerMask: 1
+  _renderPassEvent: 400
+  _shaderPassNames: []
 --- !u!114 &3057760077313725923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +204,7 @@ MonoBehaviour:
   _outlineLayers: {fileID: 0}
   _outlineSettings:
     _outlineSettings: {fileID: 0}
-    _outlineColor: {r: 0.7254902, g: 0.34117648, b: 0.40216872, a: 1}
+    _outlineColor: {r: 0.8392157, g: 0.24377522, b: 0.21176471, a: 0.3137255}
     _outlineWidth: 2
     _outlineIntensity: 2
     _outlineAlphaCutoff: 0.9
@@ -203,7 +233,7 @@ MonoBehaviour:
   _outlineLayers: {fileID: 0}
   _outlineSettings:
     _outlineSettings: {fileID: 0}
-    _outlineColor: {r: 0.5645358, g: 0.34117648, b: 0.7254902, a: 1}
+    _outlineColor: {r: 0.6093666, g: 0.21176471, b: 0.8392157, a: 0.3137255}
     _outlineWidth: 2
     _outlineIntensity: 2
     _outlineAlphaCutoff: 0.9

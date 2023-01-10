@@ -30,7 +30,10 @@ public class HouseDialogue : MonoBehaviour
     public bool didDialogueStart;
     public bool talkToLeahn;
     public bool nombreIncorrecto;
-    
+    bool escribiendo;
+    [SerializeField, TextArea(4, 6)] string consejoFinalA;
+    [SerializeField, TextArea(4, 6)] string consejoFinalC;
+
 
     [Header("Options References")]
     public GameObject Options;
@@ -453,45 +456,216 @@ public class HouseDialogue : MonoBehaviour
 
         IconDialogo(lines[index]);
 
+		if (!respuestaDada.habloconLeahn)
+		{
+            if (index == 0)
+            {
+                MainCharacter.sharedInstance.eAnim = 1;
 
-        if (index == 0)
-        {
-            MainCharacter.sharedInstance.eAnim = 1;
-            
-        }
+            }
 
 
-        if (index == 1)
-        {
+            if (index == 1)
+            {
 
-            MainCharacter.sharedInstance.eAnim = 2;
+                MainCharacter.sharedInstance.eAnim = 2;
 
-            if (talkToLeahn)
+
+            }
+
+            if (index == 2)
             {
                 
-            }
-            
-        }
-
-        if (index == 2)
-        {
-            if (talkToLeahn)
-            {
                 MainCharacter.sharedInstance.eAnim = 3;
+
             }
-            else
+		}
+		else
+		{
+			if ((lines == linesA) || (lines == linesAIncorrecta) || (lines == linesAIncorrecta1) || (lines == linesAIncorrecta2) || (lines == linesAIncorrecta3) || (lines == linesAIncorrecta4))
+			{
+				if (index == 0)
+				{
+                    UIManager.InstanceGUI.BurbujaDialogo(12);
+                    MainCharacter.sharedInstance.eAnim = 1;
+                }
+                if (index == 1)
+                    
+                {
+                    MainCharacter.sharedInstance.eAnim = 10;
+                    UIManager.InstanceGUI.BurbujaDialogo(0);
+                }
+                if (index == 2)
+                {
+                    MainCharacter.sharedInstance.eAnim = 2;
+                    UIManager.InstanceGUI.BurbujaDialogo(3);
+                }
+                
+			}
+
+            if (lines == linesC)
             {
-                MainCharacter.sharedInstance.eAnim = 3;
+                if (index == 0)
+                {
+                    MainCharacter.sharedInstance.eAnim = 1;
+                    UIManager.InstanceGUI.BurbujaDialogo(1);
+                }
+                if (index == 1)
+                {
+                    MainCharacter.sharedInstance.eAnim = 10;
+                    UIManager.InstanceGUI.BurbujaDialogo(0);
+                }
+                if (index == 2)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(7);
+                }
+
+                if (index == 4)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(0);
+                }
             }
 
-            
+			if ((lines == linesCIncorrecta) || (lines == linesCIncorrecta1) || (lines == linesCIncorrecta2) || (lines == linesCIncorrecta3) || (lines == linesCIncorrecta4) )
+			{
+                if (index == 0)
+                {
+                    MainCharacter.sharedInstance.eAnim = 1;
+                    UIManager.InstanceGUI.BurbujaDialogo(8);
+                }
+                if (index == 1)
+                {
+                    MainCharacter.sharedInstance.eAnim = 10;
+                    UIManager.InstanceGUI.BurbujaDialogo(12);
+                }
+            }
+
+
+			if ((lines == linesNextAIncorrecta) || (lines == linesNextAIncorrecta1) || (lines == linesNextAIncorrecta2) || (lines == linesNextAIncorrecta3) || (lines == linesNextAIncorrecta4) || (lines == linesNextAIncorrecta5))
+			{
+                UIManager.InstanceGUI.BurbujaDialogo(8);
+                MainCharacter.sharedInstance.eAnim = 2;
+            }
+
+            if ((lines == linesNextCIncorrecta0) || (lines == linesNextCIncorrecta1) || (lines == linesNextCIncorrecta2) || (lines == linesNextCIncorrecta3) || (lines == linesNextCIncorrecta4) || (lines == linesNextCIncorrecta5))
+            {
+                UIManager.InstanceGUI.BurbujaDialogo(13);
+                MainCharacter.sharedInstance.eAnim = 2;
+            }
+
+			if (lines == linesNextACorrecta)
+			{
+				if (index == 0)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(4);
+                }
+
+                if (index == 1)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(0);
+                    MainCharacter.sharedInstance.eAnim = 10;
+                }
+
+                if (index == 2)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(4);
+                    UIManager.InstanceGUI.BurbujaDialogo(13);
+                }
+
+            }
+
+			if (lines == linesNextCCorrecta)
+			{
+                if (index == 0)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(0);
+                    MainCharacter.sharedInstance.eAnim = 22;
+                }
+            }
+
+            if (lines == linesCFinal || lines == linesCFinal1 || lines == linesCFinal2 || lines == linesCFinal3)
+			{
+				if (index == 0)
+				{
+                    UIManager.InstanceGUI.BurbujaDialogo(7);
+                    MainCharacter.sharedInstance.eAnim = 1;
+                }
+
+                if (index == 1)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(12);
+                    MainCharacter.sharedInstance.eAnim = 2;
+                }
+
+
+                if (index == 2)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(13);
+                    MainCharacter.sharedInstance.eAnim = 3;
+                }
+
+            }
+
+
+			if (respuestaDada.id_selector == 1)
+			{
+                if (index == 0)
+                {
+                    MainCharacter.sharedInstance.eAnim = 3;
+
+                }
+
+
+                if (index == 1)
+                {
+
+                    MainCharacter.sharedInstance.eAnim = 2;
+
+
+                }
+
+                if (index == 2)
+                {
+
+                    MainCharacter.sharedInstance.eAnim = 1;
+
+                }
+            }
+			if (lines == linesExtra0 || lines == linesExtra1 || lines == linesExtra2 || lines == linesExtra3 || lines == linesExtra4)
+			{
+                if (index == 0)
+                {
+                    MainCharacter.sharedInstance.eAnim = 3;
+
+                }
+
+
+                if (index == 1)
+                {
+
+                    MainCharacter.sharedInstance.eAnim = 2;
+
+
+                }
+
+                if (index == 2)
+                {
+
+                    MainCharacter.sharedInstance.eAnim = 1;
+
+                }
+            }
+
+			
         }
+       
 
 
         foreach (char letter in lines[index].Substring(1).ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(respuestaDada.speedText);
+            escribiendo = true;
         }
 
 
@@ -803,6 +977,10 @@ public class HouseDialogue : MonoBehaviour
                     if (UIManager.InstanceGUI.isGameOver)
                     {
                         UIManager.InstanceGUI.FinDelJuego();
+                        UIManager.InstanceGUI.ConsejoFinal(consejoFinalA);
+                        MainCharacter.sharedInstance.canMove = false;
+                        MainCharacter.sharedInstance.puedePausar = false;
+
                         noAbrir = true;
                     }
 
@@ -835,10 +1013,17 @@ public class HouseDialogue : MonoBehaviour
                     if (UIManager.InstanceGUI.isGameOver)
                     {
                         UIManager.InstanceGUI.FinDelJuego();
+                        UIManager.InstanceGUI.ConsejoFinal(consejoFinalC);
+                        MainCharacter.sharedInstance.canMove = false;
+                        MainCharacter.sharedInstance.puedePausar = false;
                         noAbrir = true;
 
+					}
+					else
+					{
+
+					}
                     }
-                }
                     else if (talkToLeahn)
                     {
                         didDialogueStart = false;
@@ -877,11 +1062,18 @@ public class HouseDialogue : MonoBehaviour
 
 
 
+		if (UIManager.InstanceGUI.isGameOver)
+		{
 
+		}
+		else
+		{
+            MainCharacter.sharedInstance.puedePausar = true;
+        }
 
-        MainCharacter.sharedInstance.puedePausar = true;
+        
 
-        respuestaDada.capaObj.layer = 20;
+        //respuestaDada.capaObj.layer = 20;
         MainCharacter.sharedInstance.capaObj.layer = 17;
 
     }
@@ -986,41 +1178,66 @@ public class HouseDialogue : MonoBehaviour
  
     void Update()
     {
-
-     
-        if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && talkToLeahn && !respuestaDada.didDialogueStart && (!respuestaDada.rana.didDialogueStart || !respuestaDada.rana.gameObject.activeInHierarchy))
-        {
-
-            Navegate();
-        }
-
-        if (isRange && respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame() && !noAbrir)
-        {
-
-
-            if (!didDialogueStart && Inventory.instance.moverInv)
+		if (!UIManager.InstanceGUI.obCartelPausa.activeInHierarchy)
+		{
+            if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && talkToLeahn && !respuestaDada.didDialogueStart && (!respuestaDada.rana.didDialogueStart || !respuestaDada.rana.gameObject.activeInHierarchy))
             {
-                StartDialogue();
+
+                Navegate();
             }
 
-            else if(UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0)
+            if (isRange && respuestaDada._map.Jugador.Interactuar.WasPressedThisFrame() && !noAbrir)
             {
-                if (dialogueText.text == lines[index].Substring(1))
+
+
+                if (!didDialogueStart && Inventory.instance.moverInv)
                 {
-                    NextDialogue();
+                    StartDialogue();
                 }
 
+                else if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 0)
+                {
+                    if (dialogueText.text == lines[index].Substring(1))
+                    {
+                        NextDialogue();
+
+                        UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+                        AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
+                    }
+
+                }
+
+
+
+
             }
 
-            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+            if (respuestaDada._map.Jugador.SaltarEscena.WasPressedThisFrame() && escribiendo)
+            {
+
+                if (dialogueText.text == lines[index].Substring(1))
+                {
+
+                }
+                else
+                {
+                    escribiendo = false;
+                    StopAllCoroutines();
+                    dialogueText.text = lines[index].Substring(1);
+                    UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+                }
 
 
+            }
         }
-
-
-
-
+     
         
+
+
+
+
+
+
 
     }
     private void OnTriggerEnter(Collider other)

@@ -20,7 +20,7 @@ public class Obstaculo : MonoBehaviour
     {
         if (other.gameObject.CompareTag("P1"))
         {
-            AudioManager.Instance.PlaySoundBien();
+            AudioManager.Instance.PlaySound(AudioManager.Instance.particulasTocar);
             gameObject.SetActive(false);
 
 

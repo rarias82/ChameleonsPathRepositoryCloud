@@ -97,6 +97,7 @@ public class UIManager : MonoBehaviour
     public GameObject ObGameOver;
     public bool isGameOver;
     public GameObject selectorGO;
+    [SerializeField] TextMeshProUGUI dialogoConsejo;
 
 
 
@@ -307,8 +308,16 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
 
-        MainCharacter.sharedInstance.canMove = true;
+        
         MainCharacter.sharedInstance._map.Jugador.Enable();
+
+		if (!UIManager.InstanceGUI.isGameOver)
+		{
+            MainCharacter.sharedInstance.canMove = true;
+            FindObjectOfType<LevelManager>().misionCompletadaHermnanos = true;
+            FindObjectOfType<LevelManager>().TransicionNivel2();
+
+        }
 
 
     }
@@ -334,8 +343,16 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
 
-        MainCharacter.sharedInstance.canMove = true;
+        
         MainCharacter.sharedInstance._map.Jugador.Enable();
+
+        if (!UIManager.InstanceGUI.isGameOver)
+        {
+            MainCharacter.sharedInstance.canMove = true;
+            FindObjectOfType<LevelManager>().misionCompletadaRana = true;
+            FindObjectOfType<LevelManager>().TransicionNivel2();
+
+        }
 
 
     }
@@ -359,17 +376,22 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         manto.SetActive(true);
-
+        cuentaTexto.text = "";
 
         for (int i = 1; i < 6; i++)
         {
             yield return new WaitForSeconds(1f);
             cuentaTexto.text = i.ToString("f1");
+            AudioManager.Instance.PlaySound(AudioManager.Instance.cuentaRegresiva);
 
         }
 
+
         cuentaTexto.text = "Ya!!!";
+        AudioManager.Instance.PlaySound(AudioManager.Instance.clickButton);
         yield return new WaitForSeconds(0.5f);
+
+        AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionComicCarrera));
 
         manto.SetActive(false);
 
@@ -444,6 +466,15 @@ public class UIManager : MonoBehaviour
             dialogosNombre.text = "Rana";
         }
 
+        if (letraInicial == "E")
+        {
+            dialogosNombre.text = "Enano";
+        }
+
+        if (letraInicial == "D")
+        {
+            dialogosNombre.text = "Perdita";
+        }
 
     }
 
@@ -456,9 +487,14 @@ public class UIManager : MonoBehaviour
     {
         dialogos.text = string.Empty;
         ObGameOver.SetActive(true);
+        Time.timeScale = 0.0F;
         
     }
 
+    public void ConsejoFinal(string lineas)
+	{
+        dialogoConsejo.text = lineas;
+	}
     public void MostrarCartelPausa()
     {
         estaPausados = !estaPausados;
@@ -505,6 +541,7 @@ public class UIManager : MonoBehaviour
             switch (id_selectorGO)
             {
                 case 0:
+                    
                     AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
                     MainCharacter.sharedInstance._map.Jugador.Disable();
                     StartCoroutine(Reiniciar());
@@ -536,9 +573,11 @@ public class UIManager : MonoBehaviour
 
         if (MainCharacter.sharedInstance._map.Jugador.BUP.WasPressedThisFrame() && id_selectorP > 0)
         {
-            id_selectorP--; ;
+            id_selectorP--; 
             AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
         }
+
+    
 
         selectorP.transform.SetParent(listOptionsP[id_selectorP].transform);
         selectorP.transform.position = listOptionsP[id_selectorP].transform.position;
@@ -554,16 +593,30 @@ public class UIManager : MonoBehaviour
             switch (id_selectorP)
             {
                 case 0:
-                    obCartelPausa.SetActive(false);
-                    Time.timeScale = 1.0f;
-                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
-                    MainCharacter.sharedInstance._map.Jugador.Disable();
-                    StartCoroutine(Reiniciar());
 
+                    UIManager.InstanceGUI.MostrarCartelPausa();
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.pausas);
 
                     break;
 
                 case 1:
+                    obCartelPausa.SetActive(false);
+                    Time.timeScale = 1.0f;
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+                    MainCharacter.sharedInstance._map.Jugador.Disable();
+
+                    StartCoroutine(Reiniciar());
+                    //obCartelPausa.SetActive(false);
+                    //Time.timeScale = 1.0f;
+                    //AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
+                    //MainCharacter.sharedInstance._map.Jugador.Disable();
+                    //StartCoroutine(VolverMenu());
+
+                    
+
+                    break;
+
+                case 2:
                     //obCartelPausa.SetActive(false);
                     //Time.timeScale = 1.0f;
                     //AudioManager.Instance.PlaySound(AudioManager.Instance.selectButton);
@@ -706,6 +759,10 @@ public class UIManager : MonoBehaviour
             UIManager.InstanceGUI.paletaComicsFinal.SetActive(false);
 
             dialogos.text = string.Empty;
+            blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, 0f);
+
+            dialogosNombre.text = string.Empty;
+            blackScreenN.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, 0f);
             //HUDLienzos[0].SetActive(false);
             HUDLienzos[0].SetActive(false);
             HUDLienzos[1].SetActive(false);
@@ -744,6 +801,8 @@ public class UIManager : MonoBehaviour
 
             LimpiarCOmic();
 
+            AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(AudioManager.Instance.cancionComicCarrera));
+
             isGameOver = false;
         }
 
@@ -754,11 +813,21 @@ public class UIManager : MonoBehaviour
             QuitarHUDInGame();
 
 
+
+
+
             obCartelPausa.SetActive(false);
 
             UIManager.InstanceGUI.paletaComicsFinal.SetActive(false);
 
+
             dialogos.text = string.Empty;
+            blackScreen.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, 0f);
+
+            dialogosNombre.text = string.Empty;
+            blackScreenN.color = new Color(blackScreen.color.r, blackScreen.color.g, blackScreen.color.b, 0f);
+
+            
             GameManager.InstancieInput.ActivarInput();
 
             HUDLienzos[0].SetActive(true);

@@ -308,3 +308,8 @@ MonoBehaviour:
   selectButton: {fileID: 8300000, guid: fdc644996c52a4f4183e2c3f840d3811, type: 3}
   selectGood: {fileID: 8300000, guid: c6f227e59ff3a4947a1b6a0e113475ac, type: 3}
   selectBad: {fileID: 8300000, guid: 7d8b671bb7420624692c60dec410bfe9, type: 3}
+  cuentaRegresiva: {fileID: 8300000, guid: 762955e377fb2514eb3bc2ceaa1c3c4d, type: 3}
+  pausas: {fileID: 8300000, guid: 7a947580448550b4f9c33cc59fd538f8, type: 3}
+  cancionComicCarrera: {fileID: 8300000, guid: 8de3045cfb125af499f7c777ed61f170, type: 3}
+  particulasTocar: {fileID: 8300000, guid: 6663f296a0d03514ca47f558e8e5051c, type: 3}
+  pasarPagina: {fileID: 8300000, guid: e616579382dcb034f8301620e582dc17, type: 3}

@@ -665,7 +665,7 @@
                 {
                     "name": "",
                     "id": "dd3ac782-a9a5-42c6-8612-2a700e94a893",
-                    "path": "<Gamepad>/select",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -676,7 +676,7 @@
                 {
                     "name": "",
                     "id": "f37ed4fe-0f36-4da6-808b-692d1797e2c4",
-                    "path": "<XInputController>/select",
+                    "path": "<XInputController>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

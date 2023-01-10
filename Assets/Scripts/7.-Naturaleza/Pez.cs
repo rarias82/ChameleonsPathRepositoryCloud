@@ -13,6 +13,7 @@ public class Pez : MonoBehaviour
     public Transform model;
     public float speedNPC;
     bool adelante = true;
+  
     //public float distancia;
     void Walking()
     {
@@ -47,6 +48,7 @@ public class Pez : MonoBehaviour
     void Start()
     {
         model = transform.Find("Fish_Armature").transform;
+        
     }
 
     // Update is called once per frame
@@ -54,6 +56,8 @@ public class Pez : MonoBehaviour
     {
         Walking();
     }
+
+   
 
 
 }

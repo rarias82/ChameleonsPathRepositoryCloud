@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public enum Modo
 {
-    InGame, Stop, Mundo, Odnum, MundoAlreves, Principio, Relleno
+    InGame, Stop, Mundo, Odnum, MundoAlreves, Principio, Relleno, Enano
 }
 public class FollowCameras : MonoBehaviour
 {
@@ -15,12 +15,16 @@ public class FollowCameras : MonoBehaviour
 
     [Header("Main Variables")]
     public Transform trPlayer;
+    public Transform trDuende;
     public Vector3 offset;
     [Range(0.01f, 10f)]
     [SerializeField] float smoothness;
     [Range(0.01f, 10f)]
     [SerializeField] float sensivityMouse;
     public Camera MyCameras;
+    [Range(0.01f, 10f)]
+    [SerializeField] float finalSmoothness;
+    bool duendefinal;
 
     [Header("Limit Variables")]
     public float xSmooth = 8f;
@@ -79,6 +83,8 @@ public class FollowCameras : MonoBehaviour
         confetis.Stop();
         confetisB.Stop();
         confetisM.Stop();
+        trDuende = GameObject.Find("Duende").transform;
+        trDuende.gameObject.SetActive(false);
     }
 
 
@@ -90,6 +96,31 @@ public class FollowCameras : MonoBehaviour
         float Z = Mathf.Clamp(posZ, minXandZ.z, maxXandZ.z);
         transform.position = Vector3.Slerp(transform.position, new Vector3(X + offset.x, trPlayer.position.y + offset.y, Z + offset.z), xSmooth * Time.deltaTime);
         transform.LookAt(trPlayer);
+    }
+
+
+    void EnanoSeguir()
+    {
+        posX = trDuende.position.x;
+        posZ = trDuende.position.z;
+        float X = Mathf.Clamp(posX, minXandZ.x, maxXandZ.x);
+        float Z = Mathf.Clamp(posZ, minXandZ.z, maxXandZ.z);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(X + offset.x, trDuende.position.y + offset.y, Z + offset.z), finalSmoothness * Time.deltaTime);
+		if (transform.position.x == 113.5f /*&& 114.0f < transform.position.x*/ && !duendefinal)
+		{
+            duendefinal = true;
+            StartCoroutine(DuendeFinal());
+        }
+    }
+
+    IEnumerator DuendeFinal()
+	{
+        UIManager.InstanceGUI.obAnim.SetTrigger("StartTransition");
+
+        yield return new WaitForSeconds(1f);
+
+        mode = Modo.InGame;
+        MainCharacter.sharedInstance._map.Enable();
     }
 
     void Mundo()
@@ -290,6 +321,11 @@ public class FollowCameras : MonoBehaviour
         if (mode == Modo.Relleno)
         {
             Relleno();
+        }
+
+        if (mode == Modo.Enano)
+        {
+            EnanoSeguir();
         }
 
 

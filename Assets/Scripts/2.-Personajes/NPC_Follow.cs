@@ -51,6 +51,7 @@ public class NPC_Follow : MonoBehaviour
     int random01;
 
     bool fillDialogueLines;
+    bool escribiendo;
 
 
 
@@ -142,15 +143,15 @@ public class NPC_Follow : MonoBehaviour
       
 
 
-        dialogueText.text = string.Empty;
-        UIManager.InstanceGUI.EmptyNames();
+        
+        //UIManager.InstanceGUI.EmptyNames();
 
         if (dObject.index == 0)
         {
             if (dObject.id_selector == 1 || dObject.id_selector == 2)
             {
                 yield return new WaitForSeconds(UIManager.InstanceGUI.timeTransicion);
-                Debug.Log("Mas facil");
+                
                 FollowCameras.instance.mode = Modo.Mundo;
                 FollowCameras.instance.velocidadRotacion = -75.0f;
 
@@ -180,7 +181,7 @@ public class NPC_Follow : MonoBehaviour
 			yield return null;
 		}
 
-
+        dialogueText.text = string.Empty;
 
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
 
@@ -293,6 +294,7 @@ public class NPC_Follow : MonoBehaviour
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(dObject.speedText);
+            escribiendo = true;
         }
 
         if (dialogueText.text == linesNext[dObject.index].Substring(1))
@@ -375,17 +377,40 @@ public class NPC_Follow : MonoBehaviour
 
     private void Update()
     {
-
-        if (dObject._map.Jugador.Interactuar.WasPressedThisFrame() && fillDialogueLines)
-        {
-
-            if (dialogueText.text == linesNext[dObject.index].Substring(1))
+		if (!UIManager.InstanceGUI.obCartelPausa.activeInHierarchy)
+		{
+            if (dObject._map.Jugador.Interactuar.WasPressedThisFrame() && fillDialogueLines)
             {
-                NextDialogue();
+
+                if (dialogueText.text == linesNext[dObject.index].Substring(1))
+                {
+                    NextDialogue();
+                    UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
+                }
+
+
             }
 
-            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+            if (dObject._map.Jugador.SaltarEscena.WasPressedThisFrame() && escribiendo)
+            {
+
+                if (dialogueText.text == linesNext[dObject.index].Substring(1))
+                {
+
+                }
+                else
+                {
+                    escribiendo = false;
+                    StopAllCoroutines();
+                    dialogueText.text = linesNext[dObject.index].Substring(1);
+                    UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+                }
+
+
+            }
         }
+       
 
     }
 }

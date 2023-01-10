@@ -173,6 +173,7 @@ public class MainCharacter : MonoBehaviour
             if (_map.Jugador.Pausa.WasPressedThisFrame()  && mInput.magnitude == 0)
             {
                 UIManager.InstanceGUI.MostrarCartelPausa();
+                AudioManager.Instance.PlaySound(AudioManager.Instance.pausas);
             }
         }
 

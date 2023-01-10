@@ -46,6 +46,8 @@ public class NPC_Rana : MonoBehaviour
 
 
     [SerializeField, TextArea(4, 6)] string[] lines;
+    [SerializeField, TextArea(4, 6)] string consejoFinal;
+    bool escribiendo;
     public int index;
     public bool didDialogueStart;
     [SerializeField] int dialogoAnterior;
@@ -222,7 +224,7 @@ public class NPC_Rana : MonoBehaviour
     public void Interactuar()
     {
 
-        if (isRange && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !noAbrir/*&&*/ /*!UIManager.InstanceGUI.isGameOver*//*!noAbrir*/)
+        if (isRange && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !noAbrir /*&& !UIManager.InstanceGUI.isGameOver*/)
         {
             if (!didDialogueStart)
             {
@@ -233,14 +235,72 @@ public class NPC_Rana : MonoBehaviour
                 NextDialogue();
 
                 UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+                AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
 
             }
 
 
         }
 
-        
-        
+        if (mapeo._map.Jugador.SaltarEscena.WasPressedThisFrame() && escribiendo)
+        {
+
+            if (dialogueText.text == lines[index].Substring(1))
+            {
+
+            }
+            else
+            {
+                escribiendo = false;
+                StopAllCoroutines();
+                dialogueText.text = lines[index].Substring(1);
+                UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+            }
+
+
+        }
+
+    }
+
+    public void InteractuarFinal()
+    {
+
+        if (isRange && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv )
+        {
+            if (!didDialogueStart)
+            {
+                StartDialogue();
+            }
+            else if (dialogueText.text == lines[index].Substring(1))
+            {
+                NextDialogue();
+
+                UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+                AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
+
+            }
+
+
+        }
+
+        if (mapeo._map.Jugador.SaltarEscena.WasPressedThisFrame() && escribiendo)
+        {
+
+            if (dialogueText.text == lines[index].Substring(1))
+            {
+
+            }
+            else
+            {
+                escribiendo = false;
+                StopAllCoroutines();
+                dialogueText.text = lines[index].Substring(1);
+                UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+            }
+
+
+        }
+
     }
     public void StartDialogue()
     {
@@ -388,13 +448,15 @@ public class NPC_Rana : MonoBehaviour
 
         DialogoFinal();
 
+        marker.SetActive(false);
+
         StartCoroutine(WriteDialogue());
 
     }
     public IEnumerator WriteDialogue()
     {
-        
 
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
         marker.SetActive(false);
 
         if (index == 0)
@@ -407,13 +469,13 @@ public class NPC_Rana : MonoBehaviour
                 FollowCameras.instance.mode = Modo.Mundo;
             }
 
-            if (lines[index].Trim().StartsWith("L"))
+            if (lines[index].Trim().StartsWith("R"))
             {
                 FollowCameras.instance.velocidadRotacion = -75.0f;
                 FollowCameras.instance.mode = Modo.Odnum;
             }
 
-
+            marker.SetActive(false);
 
             UIManager.InstanceGUI.BurbujaDialogo(0);
 
@@ -434,62 +496,22 @@ public class NPC_Rana : MonoBehaviour
             }
 
             detector.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            FollowCameras.instance.detenerGiro = true;
+            
 
 
 
 
 		}
-		else
-		{
-            if (lines[index].Trim().StartsWith("P"))
-            {
-                FollowCameras.instance.velocidadRotacion = -75.0f;
-                FollowCameras.instance.mode = Modo.Mundo;
-            }
-
-            if (lines[index].Trim().StartsWith("L"))
-            {
-                FollowCameras.instance.velocidadRotacion = -75.0f;
-                FollowCameras.instance.mode = Modo.Odnum;
-            }
-        }
-
-
-        if (!pregunta)
+        
+        if (index > 0 )
         {
-            if (index == 1)
-            {
-                MainCharacter.sharedInstance.eAnim = 20;
-                UIManager.InstanceGUI.BurbujaDialogo(4);
-            }
-
-            if (index == 3)
-            {
-                MainCharacter.sharedInstance.eAnim = 21;
-                UIManager.InstanceGUI.BurbujaDialogo(2);
-            }
-
-            if (index == 5)
-            {
-                MainCharacter.sharedInstance.eAnim = 22;
-                UIManager.InstanceGUI.BurbujaDialogo(0);
-            }
-
-        }
-        else
-        {
-            if (nextDialogue == 0)
-            {
-                if (index == 2)
-                {
-                    MainCharacter.sharedInstance.eAnim = 20;
-                    UIManager.InstanceGUI.BurbujaDialogo(0);
-                }
-            }
-
-            
+            GiroDeCamara();
         }
 
+
+     
 
 
 
@@ -503,57 +525,41 @@ public class NPC_Rana : MonoBehaviour
             yield return null;
 		}
 
-        if (numeroAnim >= 100 && numeroAnim < 200)
-        {
-            AnimToVar(index + 100);
-        }
-        if (numeroAnim >= 200 && numeroAnim < 300)
-        {
-            AnimToVar(index + 200);
-        }
-
-
-        if (numeroAnim < 100)
-        {
-            AnimToVar(index);
-        }
-        
+      
             
         
 
         dialogueText.text = string.Empty;
-        UIManager.InstanceGUI.EmptyNames();
+        
 
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
 
         IconDialogo(lines[index]);
 
 
-        if (!pregunta)
-        {
+		if (!pregunta)
+		{
+            if (numeroAnim < 100)
+            {
+                AnimToVar(index);
 
-            if (index == 1)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(4);
-            }
-
-            if (index == 2)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(7);
-            }
-
-            if (index == 2)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(0);
-            }
-        }
-        else
-        {
-            if (nextDialogue == 0)
-            {
+				if (index == 0)
+				{
+                    UIManager.InstanceGUI.BurbujaDialogo(15);
+				}
+                if (index == 1)
+                {
+                    MainCharacter.sharedInstance.eAnim = 20;
+                    UIManager.InstanceGUI.BurbujaDialogo(4);
+                }
+                if (index == 2)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(5);
+                }
                 if (index == 3)
                 {
-                    UIManager.InstanceGUI.BurbujaDialogo(3);
+                    MainCharacter.sharedInstance.eAnim = 21;
+                    UIManager.InstanceGUI.BurbujaDialogo(2);
                 }
                 if (index == 4)
                 {
@@ -561,33 +567,308 @@ public class NPC_Rana : MonoBehaviour
                 }
                 if (index == 5)
                 {
-                    UIManager.InstanceGUI.BurbujaDialogo(5);
+                    MainCharacter.sharedInstance.eAnim = 22;
+                    UIManager.InstanceGUI.BurbujaDialogo(0);
                 }
                 if (index == 6)
                 {
                     UIManager.InstanceGUI.BurbujaDialogo(0);
                 }
-                if (index == 7)
+            }
+
+           
+
+		}
+		else
+		{
+            if (numeroAnim >= 100 && numeroAnim < 200)
+            {
+                AnimToVar(index + 100);
+
+                if (index == 0)
                 {
+                    MainCharacter.sharedInstance.eAnim = 2;
+                    UIManager.InstanceGUI.BurbujaDialogo(13);
+                }
+                if (index == 1)
+                {
+                    
+                    UIManager.InstanceGUI.BurbujaDialogo(0);
+                }
+                if (index == 2)
+                {
+                    MainCharacter.sharedInstance.eAnim = 10;
+                    UIManager.InstanceGUI.BurbujaDialogo(5);
+                }
+                if (index == 3)
+                {
+                    
                     UIManager.InstanceGUI.BurbujaDialogo(3);
                 }
 
-                if (index == 8)
+                if (index == 4)
                 {
-                    UIManager.InstanceGUI.BurbujaDialogo(7);
+                    MainCharacter.sharedInstance.eAnim = 2;
+                    UIManager.InstanceGUI.BurbujaDialogo(8);
                 }
 
-                if (index == 8)
+                if (index == 5)
                 {
-                    UIManager.InstanceGUI.BurbujaDialogo(7);
+                    
+                    UIManager.InstanceGUI.BurbujaDialogo(1);
                 }
 
-                if (index == 8)
+                if (index == 6)
                 {
+                    MainCharacter.sharedInstance.eAnim = 10;
                     UIManager.InstanceGUI.BurbujaDialogo(0);
                 }
+
+                if (index == 7)
+                {
+                    
+                    UIManager.InstanceGUI.BurbujaDialogo(13);
+                }
+
+                if (index == 8)
+                {
+                    MainCharacter.sharedInstance.eAnim = 45;
+                    UIManager.InstanceGUI.BurbujaDialogo(12);
+                }
+
+                if (index == 9)
+                {
+                    
+                    UIManager.InstanceGUI.BurbujaDialogo(7);
+                }
+
             }
+            if (numeroAnim >= 200 && numeroAnim < 300)
+            {
+
+                AnimToVar(index + 200);
+
+
+				if (id_selector == 1)
+				{
+                    if (index == 0)
+                    {
+                        MainCharacter.sharedInstance.eAnim = 2;
+                        UIManager.InstanceGUI.BurbujaDialogo(13);
+                    }
+                    if (index == 1)
+                    {
+
+                        UIManager.InstanceGUI.BurbujaDialogo(0);
+                    }
+                    if (index == 2)
+                    {
+                        MainCharacter.sharedInstance.eAnim = 20;
+                        UIManager.InstanceGUI.BurbujaDialogo(4);
+                    }
+
+                    if (index == 3)
+                    {
+
+                        UIManager.InstanceGUI.BurbujaDialogo(2);
+                    }
+
+                    if (index == 4)
+                    {
+                        MainCharacter.sharedInstance.eAnim = 3;
+                        UIManager.InstanceGUI.BurbujaDialogo(7);
+                    }
+
+                    if (index == 5)
+                    {
+
+                        UIManager.InstanceGUI.BurbujaDialogo(7);
+                    }
+
+                    if (index == 6)
+                    {
+                        MainCharacter.sharedInstance.eAnim = 2;
+                        UIManager.InstanceGUI.BurbujaDialogo(8);
+                    }
+
+                    if (index == 7)
+                    {
+
+                        UIManager.InstanceGUI.BurbujaDialogo(4);
+                    }
+
+                    if (index == 8)
+                    {
+                        MainCharacter.sharedInstance.eAnim = 10;
+                        UIManager.InstanceGUI.BurbujaDialogo(5);
+                    }
+                }
+				if (id_selector == 2)
+				{
+                    if (index == 0)
+                    {
+                        MainCharacter.sharedInstance.eAnim = 2;
+                        UIManager.InstanceGUI.BurbujaDialogo(2);
+                    }
+                    if (index == 1)
+                    {
+
+                        UIManager.InstanceGUI.BurbujaDialogo(5);
+                    }
+                    if (index == 2)
+                    {
+                        MainCharacter.sharedInstance.eAnim = 20;
+                        UIManager.InstanceGUI.BurbujaDialogo(6);
+                    }
+
+                    if (index == 3)
+                    {
+
+                        UIManager.InstanceGUI.BurbujaDialogo(2);
+                    }
+
+                    if (index == 4)
+                    {
+                        MainCharacter.sharedInstance.eAnim = 3;
+                        UIManager.InstanceGUI.BurbujaDialogo(1);
+                    }
+
+                    if (index == 5)
+                    {
+
+                        UIManager.InstanceGUI.BurbujaDialogo(4);
+                    }
+
+                    if (index == 6)
+                    {
+                        MainCharacter.sharedInstance.eAnim = 2;
+                        UIManager.InstanceGUI.BurbujaDialogo(5);
+                    }
+
+                  
+                }    
+
+                //}
+
+
+
+
+
+
+            }
+			if (lines == linesEA0 || lines == linesEA1)
+			{
+                if (index == 0)
+                {
+                    numeroAnim = 0;
+                    UIManager.InstanceGUI.BurbujaDialogo(5);
+                }
+ 
+            }
+            if (lines == linesEA4)
+            {
+                if (index == 0)
+                {
+                    numeroAnim = 6;
+                    UIManager.InstanceGUI.BurbujaDialogo(13);
+                }
+
+            }
+            if (lines == linesEA2 || lines == linesEA3)
+            {
+                if (index == 0)
+                {
+                    numeroAnim = 6;
+                    UIManager.InstanceGUI.BurbujaDialogo(4);
+                }
+
+                if (index == 1)
+                {
+                    MainCharacter.sharedInstance.eAnim = 3;
+                    UIManager.InstanceGUI.BurbujaDialogo(8);
+                }
+
+                if (index == 2)
+                {
+                    numeroAnim = 101;
+                    UIManager.InstanceGUI.BurbujaDialogo(13);
+                }
+
+                if (index == 3)
+                {
+                    MainCharacter.sharedInstance.eAnim = 2;
+                    UIManager.InstanceGUI.BurbujaDialogo(6);
+                }
+
+            }
+
+            if (lines == linesFA)
+            {
+                if (index == 0)
+                {
+                    MainCharacter.sharedInstance.eAnim = 22;
+                    UIManager.InstanceGUI.BurbujaDialogo(5);
+               
+                }
+
+                if (index == 1)
+                {
+                    UIManager.InstanceGUI.BurbujaDialogo(2);
+                    numeroAnim = 6;
+                }
+
+                if (index == 2)
+                {
+                    MainCharacter.sharedInstance.eAnim = 45;
+                    UIManager.InstanceGUI.BurbujaDialogo(8);
+                }
+
+                if (index == 3)
+                {
+                    numeroAnim = 201;
+                    UIManager.InstanceGUI.BurbujaDialogo(3);
+                }
+
+                if (index == 4)
+                {
+                    MainCharacter.sharedInstance.eAnim = 2;
+                    UIManager.InstanceGUI.BurbujaDialogo(7);
+                }
+
+                if (index == 5)
+                {
+                    numeroAnim = 203;
+                    UIManager.InstanceGUI.BurbujaDialogo(8);
+                }
+
+            }
+            if (lines == linesFB)
+            {
+                if (index == 0)
+                {
+                    MainCharacter.sharedInstance.eAnim = 22;
+                    UIManager.InstanceGUI.BurbujaDialogo(15);
+
+                }
+
+                if (index == 1)
+                {
+                    numeroAnim = 6;
+                    UIManager.InstanceGUI.BurbujaDialogo(3);
+                    
+                }
+
+
+            }
+
         }
+
+
+
+
+
+
+
 
         foreach (char letter in lines[index].Substring(1).ToCharArray())
         {
@@ -595,6 +876,8 @@ public class NPC_Rana : MonoBehaviour
 
             
             yield return new WaitForSeconds(speedText);
+
+            escribiendo = true;
         }
 
 
@@ -606,6 +889,27 @@ public class NPC_Rana : MonoBehaviour
 
 
 
+    }
+
+    public void GiroDeCamara()
+    {
+        if (lines[index].Trim().StartsWith("R"))
+        {
+            //MainCharacter.sharedInstance.cara.SetActive(false);
+
+            FollowCameras.instance.velocidadRotacion = -75.0f;
+            FollowCameras.instance.mode = Modo.Odnum;
+
+        }
+
+        if (lines[index].Trim().StartsWith("P"))
+        {
+            //MainCharacter.sharedInstance.cara.SetActive(true);
+
+            FollowCameras.instance.velocidadRotacion = -75.0f;
+            FollowCameras.instance.mode = Modo.Mundo;
+
+        }
     }
     void AnimToVar(int indice)
     {
@@ -653,6 +957,8 @@ public class NPC_Rana : MonoBehaviour
     }
     public IEnumerator CloseDialogue()
     {
+        
+
         detector.SetActive(true);
 
         index = 0;
@@ -761,19 +1067,27 @@ public class NPC_Rana : MonoBehaviour
             if (UIManager.InstanceGUI.isGameOver)
             {
                 noAbrir = true;
-
+                MainCharacter.sharedInstance.puedePausar = false;
+                MainCharacter.sharedInstance.canMove = false;
+                UIManager.InstanceGUI.ConsejoFinal(consejoFinal);
                 UIManager.InstanceGUI.FinDelJuego();
             }
         }
 
         MainCharacter.sharedInstance.eAnim = 0;
-        MainCharacter.sharedInstance.puedePausar = true;
-        //if (UIManager.InstanceGUI.isGameOver)
-        //{
-        //    UIManager.InstanceGUI.FinDelJuego();
-        //}
 
-        VolverColores();
+
+        
+		if (UIManager.InstanceGUI.isGameOver)
+		{
+			UIManager.InstanceGUI.FinDelJuego();
+		}
+		else
+		{
+            MainCharacter.sharedInstance.puedePausar = false;
+        }
+
+		VolverColores();
 
     }
     public void Navegate()
@@ -799,7 +1113,7 @@ public class NPC_Rana : MonoBehaviour
         selector.transform.SetSiblingIndex(0);
 
 
-        if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && !UIManager.InstanceGUI.isGameOver)
+        if (mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 /*&& !UIManager.InstanceGUI.isGameOver*/)
         {
 
 
@@ -823,7 +1137,7 @@ public class NPC_Rana : MonoBehaviour
                     break;
 
                 case 1:
-                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectBad);
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.selectGood);
                     numeroAnim = 200;
                     UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
                     finalB = true;
@@ -873,6 +1187,10 @@ public class NPC_Rana : MonoBehaviour
             case 0:
 
                 lines = linesA0;
+                yield return new WaitForSeconds(UIManager.InstanceGUI.timeTransicion);
+                FollowCameras.instance.mode = Modo.Mundo;
+                FollowCameras.instance.velocidadRotacion = -75.0f;
+                MainCharacter.sharedInstance.eAnim = 22;
 
                 break;
 
@@ -1004,9 +1322,11 @@ public class NPC_Rana : MonoBehaviour
             if (numeroCaminoCarrera >= trCaminosCarrera.Length)
             {
                 didDialogueStart = false;
-                mode = ModeNPCRana.FinalB;
-                numeroAnim = 99;
+				mode = ModeNPCRana.FinalB;
+
+				numeroAnim = 99;
                 numeroCaminoCarrera = 0;
+                //gameObject.SetActive(false);
             }
 
         }
@@ -1065,19 +1385,29 @@ public class NPC_Rana : MonoBehaviour
         }
         if (mode == ModeNPCRana.Iddle)
         {
-            if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && (!mapeo.didDialogueStart || !mapeo.gameObject.activeInHierarchy) && !hd.didDialogueStart)
+            if (UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && (!mapeo.didDialogueStart || !mapeo.gameObject.activeInHierarchy) && (!hd.didDialogueStart || hd.didDialogueStart))
             {
                 Navegate();
             }
-            Interactuar();
+			if (!UIManager.InstanceGUI.obCartelPausa.activeInHierarchy)
+			{
+                Interactuar();
+            }
+            
             TurnToLogan();
             //AnimacionTexto();
         }
 
         if (mode == ModeNPCRana.FinalB)
-        {          
-            Interactuar();
-            TurnToLogan();     
+        {
+			if (!UIManager.InstanceGUI.obCartelPausa.activeInHierarchy)
+			{
+                //Interactuar();
+                TurnToLogan();
+                Debug.Log("John");
+                InteractuarFinal();
+            }
+            
         }
 
         if (mode == ModeNPCRana.Carrera)

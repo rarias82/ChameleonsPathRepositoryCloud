@@ -4979,6 +4979,9 @@ MonoBehaviour:
   didDialogueStart: 0
   talkToLeahn: 0
   nombreIncorrecto: 0
+  consejoFinalA: "No olvide recordar nombres para la pr\xF3xima."
+  consejoFinalC: "\xBFPor qu\xE9 no acept\xF3 la misi\xF3n? \xBFmiedo, angustia o
+    ego\xEDsmo?"
   Options: {fileID: 0}
   listOptions:
   - {fileID: 0}

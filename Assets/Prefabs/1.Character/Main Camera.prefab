@@ -14511,7 +14511,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2078455
+    m_Bits: 6272759
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -14607,6 +14607,7 @@ MonoBehaviour:
   radiosShepre: 15
   detenerGiro: 0
   puntosASeguir:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

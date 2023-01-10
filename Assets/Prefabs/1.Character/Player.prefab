@@ -506,11 +506,11 @@ MonoBehaviour:
   eAnim: 0
   polvoTierra: {fileID: 3481909270593523252}
   vocesProtagonista:
-  - {fileID: 8300000, guid: 1b76c89d966aa7a4f8a9e9ae031554eb, type: 3}
-  - {fileID: 8300000, guid: 118c5a0a1b7a9b945a3f1b82fdc02629, type: 3}
-  - {fileID: 8300000, guid: 6765a5cbb4cd1c042a2f1dc09cb7bdc0, type: 3}
-  - {fileID: 8300000, guid: 5ed0eec92573db448a67c4d3f8d09699, type: 3}
-  - {fileID: 8300000, guid: 9730686e57119004a9c897baec8e9b26, type: 3}
+  - {fileID: 8300000, guid: 69c7fcc95d39a4b449b1585e79d22cd9, type: 3}
+  - {fileID: 8300000, guid: 050b4a0227e4d76498c919ff9d61d34e, type: 3}
+  - {fileID: 8300000, guid: dbbd6d1a2ff270e438eaaea9285e4eb1, type: 3}
+  - {fileID: 8300000, guid: aa753eec4fbd739419b50f2aff9e85b9, type: 3}
+  - {fileID: 8300000, guid: 91f0211c13d870c4e81a0de5c3d32e7e, type: 3}
   botonIn: 0
   _leahn: {fileID: 0}
   _rana: {fileID: 0}

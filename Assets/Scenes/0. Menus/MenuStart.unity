@@ -408,6 +408,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1501275796317666192, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 114.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 6078536599450152383, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6908791709405134095, guid: 566e860b7d6c3eb46b3bd31bc4f110f1, type: 3}
       propertyPath: m_Name
       value: UIManager

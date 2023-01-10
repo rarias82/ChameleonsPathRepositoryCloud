@@ -162,7 +162,7 @@ MonoBehaviour:
   - "PNo tengo tiempo para esas preguntas Se\xF1or Rana.\r"
   - "RUiii, qu\xE9 car\xE1cter.\r"
   linesEA3:
-  - "RAmigo camale\xF3n, creo que estamos en confianza para hablar sobre el\nmago.\r\n\n"
+  - "R\xBFHablemos de Samuel?\n\n"
   - "PNo, no, no, no. No soy quien crees, no conozco a ning\xFAn mago."
   - RAl parecer demuestras deshonestidad. Creo que me ocultas algo.
   - P.....................
@@ -201,7 +201,7 @@ MonoBehaviour:
 
 '
   - "PNooooooooooooooooooooooooooooooooooo\r.\n\n\n"
-  - "RAdi\xF3s, aseg\xFArate de cambiar de actitud, un mensaje de\nSamuel el Magoooooooooooo\n\n"
+  - "RAdi\xF3s, aseg\xFArate de cambiar de actitud, un mensaje de Samuel el Magoooooooooooo\n\n"
   linesFB:
   - "PYo gan\xE9\r\n"
   - "RJAJAJAJAJAJA, mentira gan\xE9 yo, jejejeje, espero que nos volvamos a ver \namigo.
@@ -213,12 +213,14 @@ MonoBehaviour:
   - "P\xBFQU\xC9? \xBFQU\xC9? \xBFQU\xC9? No le entiendo nada, absolutamente nada."
   - "RCROAAAK CROAK CROAAAAAAK...  #$$%&/(&%4=!\xB0\"#$=$)$()=."
   - PAlgo estoy entendiendo, creo que es un dialecto antiguo...
-  - "R\"#$%&&/$$&$&$& \xBFPuedes entenderme hombrecillo lagarto? Al parecer no eres
+  - "R\"#$%&&/$$&$&$& \xBFPuedes entenderme hombrecillo lagarto? Al parecer no\neres
     de por aqu\xED, eres un forastero muchachito, ejejeje CROAK."
   - PAhora si comprendo su acento, lo escucho caballero.
   - "R\xBFPero d\xF3nde est\xE1n mis modales? Perm\xEDtame que me presente, soy un\npr\xEDncipe
     que fue castigado por un tal Samuel por andar en malos pasos.\nPero cambiemos
     el tema, cu\xE9nteme sobre usted."
+  consejoFinal: "\xBFPor qu\xE9 cambi\xF3 el tema? Los problemas empeoran si no los
+    cuenta\u2026"
   index: 0
   didDialogueStart: 0
   dialogoAnterior: 0
@@ -269,17 +271,17 @@ MonoBehaviour:
   speedZoom: 3.5
   obAnim: {fileID: 3060069741073976842}
   numeroAnim: 0
-  cancion: {fileID: 8300000, guid: dc54ee1e013677e468ccf5bb340166ee, type: 3}
+  cancion: {fileID: 8300000, guid: abceb35b803e8234fb51d5aa61d4b86b, type: 3}
   voces:
-  - {fileID: 8300000, guid: f4646b3ba05e02c4eb0a60f2e6ffe57d, type: 3}
-  - {fileID: 8300000, guid: 7bf101d7d0e7600459c0ecb684c33f8f, type: 3}
-  - {fileID: 8300000, guid: b09c8a0ed73b3d542bc445b5285deb8b, type: 3}
-  - {fileID: 8300000, guid: bd95c3feab96b1e4a978bcf8e7715ed1, type: 3}
-  voces1:
   - {fileID: 8300000, guid: 84c3156706970ef4f91723df1bc9d0f3, type: 3}
   - {fileID: 8300000, guid: b2cbc885cab81ef49bb83c8a41c26720, type: 3}
   - {fileID: 8300000, guid: 70eeeadcfeca89848a7e40245f8fb618, type: 3}
   - {fileID: 8300000, guid: b2934d5b019e4b74fa9c8ef2ba87f657, type: 3}
+  voces1:
+  - {fileID: 8300000, guid: 84c3156706970ef4f91723df1bc9d0f3, type: 3}
+  - {fileID: 8300000, guid: b2cbc885cab81ef49bb83c8a41c26720, type: 3}
+  - {fileID: 8300000, guid: 70eeeadcfeca89848a7e40245f8fb618, type: 3}
+  - {fileID: 8300000, guid: 14c71c4f6364fec41aaa6cdc7077a5b3, type: 3}
   finalA: 0
   finalB: 0
   finalB2: 0

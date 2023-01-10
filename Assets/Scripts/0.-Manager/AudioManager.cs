@@ -12,6 +12,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip selectButton;
     public AudioClip selectGood;
     public AudioClip selectBad;
+    public AudioClip cuentaRegresiva;
+    public AudioClip pausas;
+    public AudioClip cancionComicCarrera;
+    public AudioClip particulasTocar;
+    public AudioClip pasarPagina;
     public static AudioManager Instance;
     //{
     //    get;

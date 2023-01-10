@@ -231,6 +231,9 @@ MonoBehaviour:
   henry: {fileID: 0}
   detector: {fileID: 0}
   seguiraLogan: 0
+  escribiendo: 0
+  consejoFinal1: "Leahn solo ten\xEDa una oportunidad y usted se neg\xF3 a ayudar."
+  consejoFinal2: "No vaya t\xE1n r\xE1pido para la pr\xF3xima."
   Options: {fileID: 0}
   listOptions:
   - {fileID: 0}

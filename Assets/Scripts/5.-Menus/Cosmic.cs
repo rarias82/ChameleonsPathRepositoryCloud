@@ -153,6 +153,119 @@ public class Cosmic : MonoBehaviour
             }
         }
 
+        if (indexVineta == 17)
+        {
+            while (UIManager.InstanceGUI.listaVinetas1[12].color.a != 0f)
+            {
+
+
+                UIManager.InstanceGUI.listaVinetas1[12].color = new Color(UIManager.InstanceGUI.listaVinetas1[12].color.r,
+                                                                          UIManager.InstanceGUI.listaVinetas1[12].color.g,
+                                                                          UIManager.InstanceGUI.listaVinetas1[12].color.b,
+                                                                          Mathf.MoveTowards(
+                                                                          UIManager.InstanceGUI.listaVinetas1[12].color.a, 0f, (0.75f) * Time.deltaTime));
+
+                UIManager.InstanceGUI.listaVinetas1[13].color = new Color(UIManager.InstanceGUI.listaVinetas1[13].color.r,
+                                                                          UIManager.InstanceGUI.listaVinetas1[13].color.g,
+                                                                          UIManager.InstanceGUI.listaVinetas1[13].color.b,
+                                                                          Mathf.MoveTowards(
+                                                                          UIManager.InstanceGUI.listaVinetas1[13].color.a, 0f, (0.75f) * Time.deltaTime));
+
+                UIManager.InstanceGUI.listaVinetas1[14].color = new Color(UIManager.InstanceGUI.listaVinetas1[14].color.r,
+                                                                          UIManager.InstanceGUI.listaVinetas1[14].color.g,
+                                                                          UIManager.InstanceGUI.listaVinetas1[14].color.b,
+                                                                          Mathf.MoveTowards(
+                                                                          UIManager.InstanceGUI.listaVinetas1[14].color.a, 0f, (0.75f) * Time.deltaTime));
+
+                UIManager.InstanceGUI.listaVinetas1[15].color = new Color(UIManager.InstanceGUI.listaVinetas1[15].color.r,
+                                                                          UIManager.InstanceGUI.listaVinetas1[15].color.g,
+                                                                          UIManager.InstanceGUI.listaVinetas1[15].color.b,
+                                                                          Mathf.MoveTowards(
+                                                                          UIManager.InstanceGUI.listaVinetas1[15].color.a, 0f, (0.75f) * Time.deltaTime));
+
+                UIManager.InstanceGUI.listaVinetas1[16].color = new Color(UIManager.InstanceGUI.listaVinetas1[16].color.r,
+                                                                          UIManager.InstanceGUI.listaVinetas1[16].color.g,
+                                                                          UIManager.InstanceGUI.listaVinetas1[16].color.b,
+                                                                          Mathf.MoveTowards(
+                                                                          UIManager.InstanceGUI.listaVinetas1[16].color.a, 0f, (0.75f) * Time.deltaTime));
+
+
+
+                yield return null;
+
+            }
+        }
+
+        if (indexVineta == 21)
+        {
+            while (UIManager.InstanceGUI.listaVinetas1[17].color.a != 0f)
+            {
+
+
+                UIManager.InstanceGUI.listaVinetas1[17].color = new Color(UIManager.InstanceGUI.listaVinetas1[17].color.r,
+                                                                          UIManager.InstanceGUI.listaVinetas1[17].color.g,
+                                                                          UIManager.InstanceGUI.listaVinetas1[17].color.b,
+                                                                          Mathf.MoveTowards(
+                                                                          UIManager.InstanceGUI.listaVinetas1[17].color.a, 0f, (0.75f) * Time.deltaTime));
+
+                UIManager.InstanceGUI.listaVinetas1[18].color = new Color(UIManager.InstanceGUI.listaVinetas1[18].color.r,
+                                                                          UIManager.InstanceGUI.listaVinetas1[18].color.g,
+                                                                          UIManager.InstanceGUI.listaVinetas1[18].color.b,
+                                                                          Mathf.MoveTowards(
+                                                                          UIManager.InstanceGUI.listaVinetas1[18].color.a, 0f, (0.75f) * Time.deltaTime));
+
+                UIManager.InstanceGUI.listaVinetas1[19].color = new Color(UIManager.InstanceGUI.listaVinetas1[19].color.r,
+                                                                          UIManager.InstanceGUI.listaVinetas1[19].color.g,
+                                                                          UIManager.InstanceGUI.listaVinetas1[19].color.b,
+                                                                          Mathf.MoveTowards(
+                                                                          UIManager.InstanceGUI.listaVinetas1[19].color.a, 0f, (0.75f) * Time.deltaTime));
+
+                UIManager.InstanceGUI.listaVinetas1[20].color = new Color(UIManager.InstanceGUI.listaVinetas1[20].color.r,
+                                                                         UIManager.InstanceGUI.listaVinetas1[20].color.g,
+                                                                         UIManager.InstanceGUI.listaVinetas1[20].color.b,
+                                                                         Mathf.MoveTowards(
+                                                                         UIManager.InstanceGUI.listaVinetas1[20].color.a, 0f, (0.75f) * Time.deltaTime));
+
+
+
+
+                yield return null;
+
+            }
+        }
+
+        if (indexVineta == 24)
+        {
+            while (UIManager.InstanceGUI.listaVinetas1[21].color.a != 0f)
+            {
+                UIManager.InstanceGUI.listaVinetas1[21].color = new Color(UIManager.InstanceGUI.listaVinetas1[21].color.r,
+                                                                        UIManager.InstanceGUI.listaVinetas1[21].color.g,
+                                                                        UIManager.InstanceGUI.listaVinetas1[21].color.b,
+                                                                        Mathf.MoveTowards(
+                                                                        UIManager.InstanceGUI.listaVinetas1[21].color.a, 0f, (0.75f) * Time.deltaTime));
+
+                UIManager.InstanceGUI.listaVinetas1[22].color = new Color(UIManager.InstanceGUI.listaVinetas1[22].color.r,
+                                                                        UIManager.InstanceGUI.listaVinetas1[22].color.g,
+                                                                        UIManager.InstanceGUI.listaVinetas1[22].color.b,
+                                                                        Mathf.MoveTowards(
+                                                                        UIManager.InstanceGUI.listaVinetas1[22].color.a, 0f, (0.75f) * Time.deltaTime));
+
+
+                UIManager.InstanceGUI.listaVinetas1[23].color = new Color(UIManager.InstanceGUI.listaVinetas1[23].color.r,
+                                                                          UIManager.InstanceGUI.listaVinetas1[23].color.g,
+                                                                          UIManager.InstanceGUI.listaVinetas1[23].color.b,
+                                                                          Mathf.MoveTowards(
+                                                                          UIManager.InstanceGUI.listaVinetas1[23].color.a, 0f, (0.75f) * Time.deltaTime));
+
+                
+
+
+
+                yield return null;
+
+            }
+        }
+
         while (UIManager.InstanceGUI.listaVinetas1[indexVineta].color.a != 1f)
         {
 
@@ -200,12 +313,16 @@ public class Cosmic : MonoBehaviour
                 StartCoroutine(PasarVinetas());
                 boton.SetActive(false);
                 colita.SetActive(false);
+                AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
             }
             else if (transicion)
             {
                 UIManager.InstanceGUI.LoadNextScene();
-                _map.Jugador.Disable();
+				_map.Jugador.Disable();
+                AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
             }
+
+            
 
         }
 
@@ -216,8 +333,11 @@ public class Cosmic : MonoBehaviour
             {
                 UIManager.InstanceGUI.LoadNextScene();
                 _map.Jugador.Disable();
+                AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
             }
+
             
+
         }
 
     }

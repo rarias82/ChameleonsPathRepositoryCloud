@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 public enum ModeNPC
 {
-    Help, Busy, Walking, House, Final, Follow
+    Help, Busy, Walking, House, Final, Follow, Agradecer
 }
 public class NPC_Dialogue : MonoBehaviour
 {
@@ -22,6 +22,10 @@ public class NPC_Dialogue : MonoBehaviour
     public NPC_Henry henry;
     public GameObject detector;
     public bool seguiraLogan;
+    public bool escribiendo;
+    [SerializeField, TextArea(4, 6)] string consejoFinal1;
+    [SerializeField, TextArea(4, 6)] string consejoFinal2;
+    bool noAbrir;
 
     [Header("Options References")]
     public GameObject Options;
@@ -287,7 +291,8 @@ public class NPC_Dialogue : MonoBehaviour
     public void StartDialogue()
     {
 
-        
+        marker.SetActive(false);
+
         if (detectarLimites)
         {
             
@@ -408,7 +413,7 @@ public class NPC_Dialogue : MonoBehaviour
 
         if (lineas.Trim().StartsWith("L"))
         {
-            UIManager.InstanceGUI.PosicionarGlobo(transform.position);
+            UIManager.InstanceGUI.PosicionarGlobo(transform.position );
             VocesRandom();
             UIManager.InstanceGUI.NombreDialogo("L");
 
@@ -426,6 +431,7 @@ public class NPC_Dialogue : MonoBehaviour
         if (index == 0)
         {
             UIManager.InstanceGUI.BurbujaDialogo(0);
+            marker.SetActive(false);
 
             if (detectarLimites)
             {
@@ -438,7 +444,9 @@ public class NPC_Dialogue : MonoBehaviour
             }
             else
             {
-				if (lines[index].Trim().StartsWith("P"))
+
+                marker.SetActive(false);
+                if (lines[index].Trim().StartsWith("P"))
 				{
                     FollowCameras.instance.velocidadRotacion = -75.0f;
                     FollowCameras.instance.mode = Modo.Mundo;
@@ -452,9 +460,7 @@ public class NPC_Dialogue : MonoBehaviour
 
 
             }
-            
-            
-            
+        
             posOriginal = FollowCameras.instance.transform.position;
 
             while (obCameras.orthographicSize > 3.5f)
@@ -701,7 +707,7 @@ public class NPC_Dialogue : MonoBehaviour
             if (index == 1)
             {
                 numeroAnim = 35;
-                UIManager.InstanceGUI.BurbujaDialogo(3);
+                UIManager.InstanceGUI.BurbujaDialogo(10);
             }
 
         }
@@ -750,11 +756,14 @@ public class NPC_Dialogue : MonoBehaviour
 
         }
 
+		
         foreach (char letter in lines[index].Substring(1).ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(speedText);
+            escribiendo = true;
         }
+        escribiendo = false;
 
         if (dialogueText.text == lines[index].Substring(1))
         {
@@ -865,7 +874,7 @@ public class NPC_Dialogue : MonoBehaviour
         selector.transform.SetSiblingIndex(0);
 
 
-        if (_map.Jugador.Interactuar.WasPressedThisFrame() && UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 && !UIManager.InstanceGUI.isGameOver)
+        if (_map.Jugador.Interactuar.WasPressedThisFrame() && UIManager.InstanceGUI.obAnimOptionsGame.GetInteger("Show") == 1 /*&& !UIManager.InstanceGUI.isGameOver*/)
         {
             index = 0;
 
@@ -989,12 +998,22 @@ public class NPC_Dialogue : MonoBehaviour
         didDialogueStart = false;
         MainCharacter.sharedInstance.canMove = true;
 
+       
+
         if (UIManager.InstanceGUI.isGameOver)
         {
             UIManager.InstanceGUI.FinDelJuego();
+            UIManager.InstanceGUI.ConsejoFinal(consejoFinal1);
+            MainCharacter.sharedInstance.canMove = false;
+            MainCharacter.sharedInstance.puedePausar = false;
+            noAbrir = true;
+        }
+		else
+		{
+            MainCharacter.sharedInstance.puedePausar = true;
         }
 
-        MainCharacter.sharedInstance.puedePausar = true;
+        
 
         VolverColores();
 
@@ -1146,14 +1165,23 @@ public class NPC_Dialogue : MonoBehaviour
      
         
         
-
+           
 
         if (UIManager.InstanceGUI.isGameOver)
         {
             UIManager.InstanceGUI.FinDelJuego();
+            UIManager.InstanceGUI.ConsejoFinal(consejoFinal2);
+            MainCharacter.sharedInstance.canMove = false;
+            MainCharacter.sharedInstance.puedePausar = false;
+            noAbrir = true;
+
+        }
+		else
+		{
+            MainCharacter.sharedInstance.puedePausar = true;
         }
 
-        MainCharacter.sharedInstance.puedePausar = true;
+        
 
         VolverColores();
 
@@ -1317,17 +1345,19 @@ public class NPC_Dialogue : MonoBehaviour
         if ((mode == ModeNPC.Help || mode == ModeNPC.Busy))
         {
 
+			
+                Vector3 direction = trPlayer.transform.position - transform.position;
+                transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
 
+
+                InteractuarSS();
+            
             //if (!changeInitialDialogue)
             //{
             //    Vector3 direction = trPlayer.transform.position - transform.position;
             //    transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
             //}
-            Vector3 direction = trPlayer.transform.position - transform.position;
-            transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
-
-
-            InteractuarSS();
+          
         }
 
         if (mode == ModeNPC.Follow)
@@ -1353,6 +1383,12 @@ public class NPC_Dialogue : MonoBehaviour
             transform.forward = Vector3.Lerp(transform.forward, directionH, (speedZoom / 2.5f) * Time.deltaTime);
         }
 
+		if (mode == ModeNPC.Agradecer)
+		{
+            Vector3 direction = trPlayer.transform.position - transform.position;
+            transform.forward = Vector3.Lerp(transform.forward, direction, (speedZoom / 2.5f) * Time.deltaTime);
+        }
+
 
         RotateSon();
 
@@ -1361,19 +1397,20 @@ public class NPC_Dialogue : MonoBehaviour
     public void InteractuarSS()
     {
 
-        if (detectarLimites && dialogueText.text == lines[index].Substring(1) && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !enrique.seAcabo /*&& noAbrir*/)
+        if (detectarLimites && dialogueText.text == lines[index].Substring(1) && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !enrique.seAcabo && !noAbrir && !UIManager.InstanceGUI.obCartelPausa.activeInHierarchy /*&& !UIManager.InstanceGUI.isGameOver*/)
         {
 
             logan = true;
             StartCoroutine(CloseDialogueN());
             UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+            AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
         }//Cuando Logan se aleja
 
-        if (isRange && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !houses.henryFinalA && !logan && !detectarLimites && !enrique.seAcabo && !UIManager.InstanceGUI.isGameOver)
+        if (isRange && _map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !houses.henryFinalA && !logan && !detectarLimites && !enrique.seAcabo && !noAbrir/*&& !UIManager.InstanceGUI.isGameOver*/)
         {
-            //UIManager.InstanceGUI.BurbujaDialogo(9);
-            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
-
+            
+            
+            
             if (!didDialogueStart)
             {
                 StartDialogue();
@@ -1385,15 +1422,40 @@ public class NPC_Dialogue : MonoBehaviour
                 if (dialogueText.text == lines[index].Substring(1))
                 {
                     NextDialogue();
-					//UIManager.InstanceGUI.BurbujaDialogo(9);
-
+                    //UIManager.InstanceGUI.BurbujaDialogo(9);
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
+                    UIManager.InstanceGUI.icono.gameObject.SetActive(false);
 				}
+				//else
+				//{
+    //                StopAllCoroutines();
+    //                dialogueText.text = lines[index].Substring(1);
+    //                UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+    //            }
 
             }
 
             
 
         } // Dialogo Normal
+
+		if (_map.Jugador.SaltarEscena.WasPressedThisFrame() && escribiendo)
+		{
+
+			if (dialogueText.text == lines[index].Substring(1))
+			{
+
+			}
+			else
+			{
+                escribiendo = false;
+                StopAllCoroutines();
+                dialogueText.text = lines[index].Substring(1);
+                UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+            }
+           
+
+        }
 
         
     }
@@ -1468,9 +1530,10 @@ public class NPC_Dialogue : MonoBehaviour
     }
     IEnumerator EsperarCorrer()
     {
+        numeroAnim = 1;
         yield return new WaitForSeconds(0.25f);
         polvoTierra.Play();
-        numeroAnim = 1;
+        
         obNMA.speed = 4.2f;
     }
     private void OnTriggerExit(Collider other)

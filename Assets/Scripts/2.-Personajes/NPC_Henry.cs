@@ -38,6 +38,8 @@ public class NPC_Henry : MonoBehaviour
     [SerializeField, TextArea(4, 6)] string[] linesLogan4;
 
     [SerializeField, TextArea(4, 6)] string[] linesFinalA;
+    [SerializeField, TextArea(4, 6)] string consejoFinal;
+    bool escribiendo;
 
     public int index;
     public bool didDialogueStart;
@@ -56,7 +58,7 @@ public class NPC_Henry : MonoBehaviour
     public Vector3 posOriginal;
 
     bool dialogoRandomActivado = false;
-
+    bool noAbrir;
 
     [Header("Move Variables")]
     public sbyte numeroCamino;
@@ -148,7 +150,7 @@ public class NPC_Henry : MonoBehaviour
     }
     public void Interactuar()
     {
-        if (isRange && NPC_Dialogue.instance.isRange && Inventory.instance.moverInv && !logan && !mapeo.logan && !UIManager.InstanceGUI.isGameOver)
+        if (isRange && NPC_Dialogue.instance.isRange && Inventory.instance.moverInv && !logan && !mapeo.logan /*&& !noAbrir*//*&& !UIManager.InstanceGUI.isGameOver*/)
         {
             if (!didDialogueStart)
             {
@@ -160,21 +162,24 @@ public class NPC_Henry : MonoBehaviour
                 NextDialogue();
 
                 UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+                AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
             }
 
         } // Dialogo Final
 
    
 
-        if (detectarLimites && dialogueText.text == lines[index].Substring(1) && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() &&  Inventory.instance.moverInv && !seAcabo) 
+        if (detectarLimites && dialogueText.text == lines[index].Substring(1) && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() &&  Inventory.instance.moverInv && !seAcabo && !noAbrir)
         {
             
             logan = true;
             StartCoroutine(CloseDialogue());
             UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+            AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
+
         } // Cuando Logan se aleja
 
-        if ((isRange) && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !seAcabo && !UIManager.InstanceGUI.isGameOver)
+        if ((isRange) && mapeo._map.Jugador.Interactuar.WasPressedThisFrame() && Inventory.instance.moverInv && !seAcabo /*&& !UIManager.InstanceGUI.isGameOver*/)
         {
             if (!didDialogueStart && !logan && !detectarLimites)
             {
@@ -184,13 +189,34 @@ public class NPC_Henry : MonoBehaviour
             else if (dialogueText.text == lines[index].Substring(1))
             {
                 NextDialogue();
+                AudioManager.Instance.PlaySound(AudioManager.Instance.pasarPagina);
+                UIManager.InstanceGUI.icono.gameObject.SetActive(false);
 
             }
 
-            UIManager.InstanceGUI.icono.gameObject.SetActive(false);
+            
+            
         } //Dialogo comun
 
-        
+        if (mapeo._map.Jugador.SaltarEscena.WasPressedThisFrame() && escribiendo)
+        {
+
+            if (dialogueText.text == lines[index].Substring(1))
+            {
+
+            }
+            else
+            {
+                escribiendo = false;
+                StopAllCoroutines();
+                dialogueText.text = lines[index].Substring(1);
+                UIManager.InstanceGUI.icono.gameObject.SetActive(true);
+            }
+
+
+        }
+
+
     }
     public void IconDialogo(string lineas)
     {
@@ -396,9 +422,11 @@ public class NPC_Henry : MonoBehaviour
         {
             lines = linesFinalA;
             mapeo.QuitarMarca();
+            marker.SetActive(false);
+            numeroAnim = 0;
 
         }
-        
+        marker.SetActive(false);
 
         StartCoroutine(WriteDialogue());
 
@@ -406,6 +434,9 @@ public class NPC_Henry : MonoBehaviour
     public IEnumerator WriteDialogue()
     {
         marker.SetActive(false);
+        UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(false);
+        
+
         if (index == 0)
         {
 
@@ -420,9 +451,9 @@ public class NPC_Henry : MonoBehaviour
             {
                 /*detector.SetActive(true);*/
 
-                UIManager.InstanceGUI.BurbujaDialogo(8);
-                
-               
+
+                marker.SetActive(false);
+
                 AudioManager.Instance.StartCoroutine(AudioManager.Instance.ChangeMusic(cancion));
 
                 if (lines[index].Trim().StartsWith("P"))
@@ -432,6 +463,12 @@ public class NPC_Henry : MonoBehaviour
                 }
 
                 if (lines[index].Trim().StartsWith("L"))
+                {
+                    FollowCameras.instance.velocidadRotacion = -75.0f;
+                    FollowCameras.instance.mode = Modo.Odnum;
+                }
+
+                if (lines[index].Trim().StartsWith("H"))
                 {
                     FollowCameras.instance.velocidadRotacion = -75.0f;
                     FollowCameras.instance.mode = Modo.Odnum;
@@ -450,22 +487,14 @@ public class NPC_Henry : MonoBehaviour
                 if (seAcabo)
                 {
                     mapeo.mode = ModeNPC.Final;
-                    transform.forward = Vector3.Lerp(transform.forward, directionL, (speedZoom) * Time.deltaTime);
+                    //transform.forward = Vector3.Lerp(transform.forward, directionL, (speedZoom) * Time.deltaTime);
                     
                 }
                 else
                 {
                     trPlayer.transform.forward = Vector3.Lerp(trPlayer.transform.forward, directionLogan, (speedZoom) * Time.deltaTime);
                 }
-                //if (!detectarLimites)
-                //{
-                //    trPlayer.transform.forward = Vector3.Lerp(trPlayer.transform.forward, direction, (speedZoom) * Time.deltaTime);
-                //}
-                //else
-                //{
-                //    trPlayer.transform.forward = Vector3.Lerp(trPlayer.transform.forward, otraDirection, (0.5f) * Time.deltaTime);
-                //}
-                
+               
 
                 obCameras.orthographicSize -= speedZoom * Time.deltaTime;
 
@@ -476,40 +505,12 @@ public class NPC_Henry : MonoBehaviour
 
         }
 
-        if (lines == linesA5)
-        {
-
-            if ((index == 0) || (index == 2))
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(1);
-            }
-            
-        }
-
-        if (lines == linesFinalA)
-        {
-            if (index % 2 == 0)
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(7);
-            }
-            else
-            {
-                UIManager.InstanceGUI.BurbujaDialogo(3);
-            }
-
-
-
-        }
-
-
-
         if (!detectarLimites)
         {
 
             detector.SetActive(true);
 
-
-			if (index>0)
+            if (index>0  && !detectarLimites )
 			{
                 if (lines[index].Trim().StartsWith("P"))
                 {
@@ -518,6 +519,12 @@ public class NPC_Henry : MonoBehaviour
                 }
 
                 if (lines[index].Trim().StartsWith("H"))
+                {
+                    FollowCameras.instance.velocidadRotacion = -75.0f;
+                    FollowCameras.instance.mode = Modo.Odnum;
+                }
+
+                if (lines[index].Trim().StartsWith("L"))
                 {
                     FollowCameras.instance.velocidadRotacion = -75.0f;
                     FollowCameras.instance.mode = Modo.Odnum;
@@ -536,6 +543,7 @@ public class NPC_Henry : MonoBehaviour
                 yield return null;
             }
 
+            dialogueText.text = string.Empty;
 
             if (!lines[index].Trim().StartsWith("P"))
             {
@@ -548,12 +556,142 @@ public class NPC_Henry : MonoBehaviour
 
         UIManager.InstanceGUI.ballonDialogue.gameObject.SetActive(true);
 
+
         IconDialogo(lines[index]);
+
+        if (lines == linesA0)
+        {
+            if (index == 0)
+            {
+                numeroAnim = 50;
+                UIManager.InstanceGUI.BurbujaDialogo(7);
+            }
+            if (index == 1)
+            {
+                numeroAnim = 51;
+                UIManager.InstanceGUI.BurbujaDialogo(8);
+            }
+
+        }
+        if (lines == linesA1)
+        {
+            if (index == 0)
+            {
+                numeroAnim = 51;
+
+                UIManager.InstanceGUI.BurbujaDialogo(4);
+            }
+           
+
+        }
+        if (lines == linesA2)
+        {
+            if (index == 0)
+            {
+                numeroAnim = 52;
+                UIManager.InstanceGUI.BurbujaDialogo(8);
+            }
+            if (index == 1)
+            {
+                numeroAnim = 53;
+                UIManager.InstanceGUI.BurbujaDialogo(7);
+            }
+
+
+        }
+        if (lines == linesA3)
+        {
+            if (index == 0)
+            {
+                numeroAnim = 54;
+                MainCharacter.sharedInstance.eAnim = 20;
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+
+        }
+        if (lines == linesA4)
+        {
+            if (index == 0)
+            {
+                numeroAnim = 55;
+
+                MainCharacter.sharedInstance.eAnim = 20;
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+            if (index == 1)
+            {
+
+                numeroAnim = 56;
+                MainCharacter.sharedInstance.eAnim = 20;
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+        }
+
+        if (lines == linesA5)
+        {
+            if (index == 0)
+            {
+                
+
+                MainCharacter.sharedInstance.eAnim = 20;
+                UIManager.InstanceGUI.BurbujaDialogo(6);
+            }
+
+            if (index == 1)
+            {
+                numeroAnim = 65;
+                
+                
+                UIManager.InstanceGUI.BurbujaDialogo(2);
+            }
+
+
+            if (index == 2)
+            {
+                MainCharacter.sharedInstance.eAnim = 2;
+                UIManager.InstanceGUI.BurbujaDialogo(13);
+            }
+
+        }
+
+		if (lines == linesFinalA)
+		{
+			if (index == 0)
+			{
+                numeroAnim = 50;
+			}
+            if (index == 1)
+            {
+                mapeo.numeroAnim = 12;
+            }
+            if (index == 2)
+            {
+                numeroAnim = 71;
+            }
+            if (index == 3)
+            {
+                mapeo.numeroAnim = 10;
+            }
+            if (index == 4)
+            {
+                numeroAnim = 54;
+            }
+
+            if (index == 5)
+            {
+                mapeo.mode = ModeNPC.Agradecer;
+                UIManager.InstanceGUI.GanarPuntos(true, UIManager.InstanceGUI.puntos);
+            }
+        }
 
         foreach (char letter in lines[index].Substring(1).ToCharArray())
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(speedText);
+            escribiendo = true;
         }
 
         if (dialogueText.text == lines[index].Substring(1))
@@ -677,11 +815,12 @@ public class NPC_Henry : MonoBehaviour
 
             if (!mapeo.rana.gameObject.GetComponent<NPC_Rana>().finalA)
             {
-                mapeo.rana.gameObject.SetActive(true);
+                //mapeo.rana.gameObject.SetActive(true);
             }
             else
             {
-                mapeo.rana.gameObject.SetActive(false);
+                //mapeo.rana.gameObject.SetActive(false);
+                mapeo.rana.DesaparecerRana(false);
             }
 
             MainCharacter.sharedInstance.puedePausar = true;
@@ -721,19 +860,27 @@ public class NPC_Henry : MonoBehaviour
             didDialogueStart = false;
             MainCharacter.sharedInstance.canMove = true;
         }
-
+        
+        
         if (UIManager.InstanceGUI.isGameOver)
         {
             UIManager.InstanceGUI.FinDelJuego();
+            UIManager.InstanceGUI.ConsejoFinal(consejoFinal);
+            MainCharacter.sharedInstance.canMove = false;
+            MainCharacter.sharedInstance.puedePausar = false;
+            noAbrir = true;
+
+        }
+		else
+		{
+            MainCharacter.sharedInstance.puedePausar = true;
         }
 
 
-        MainCharacter.sharedInstance.puedePausar = true;
+        
         VolverColores();
 
     }
-
-
     void VolverColores()
     {
 
@@ -781,7 +928,12 @@ public class NPC_Henry : MonoBehaviour
 
         if (mode == ModeNPCHenry.Iddle)
         {
-            Interactuar();
+			if (!UIManager.InstanceGUI.obCartelPausa.activeInHierarchy)
+			{
+                Interactuar();
+            }
+			
+            
             TurnToLogan();
 
         }
@@ -799,10 +951,10 @@ public class NPC_Henry : MonoBehaviour
         if (mode == ModeNPCHenry.Final)
         {
             Interactuar();
-            
+			TurnToLeahn();
 
 
-        }
+		}
         if (mode == ModeNPCHenry.FinalC)
         {
             Interactuar();
@@ -883,10 +1035,12 @@ public class NPC_Henry : MonoBehaviour
             
     }
     IEnumerator Esperar()
-    { 
+    {
+
+        numeroAnim = 30;
         yield return new WaitForSeconds(0.25f);
         polvoTierra.Play();
-        numeroAnim = 30;
+        
         obNMA.speed = speedNPC;
     }
     private void LateUpdate()

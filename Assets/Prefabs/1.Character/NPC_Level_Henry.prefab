@@ -153,13 +153,13 @@ MonoBehaviour:
   linesA2:
   - "HEse Leahn tan despistado. Ser\xE1 mejor que nos apuremos pues hay mucho trabajo
     en nuestro taller. No te lo volver\xE9 a repetir..."
-  - "HGu\xEDame a d\xF3nde demonios est\xE1 mi hermano.\r\n"
+  - "HGu\xEDame a d\xF3nde est\xE1 mi hermano \xA1\xA1\xA1\xA1POR TODOS LOS CIELOS!!!!.\r\n"
   linesA3:
   - "HNo tengo todo el tiempo del mundo. Por favor y no te lo repetir\xE9, ll\xE9vame\nde
     una vez al lugar donde est\xE1 mi hermano.\n"
   linesA4:
   - "HNo tengo tiempo para hablar, solo se que debes guiarme el camino.\r Est\xE1s
-    a punto de lograr que me enoje de ver\xE1s.\r\n"
+    a punto de lograr que me enoje de veras.\r\n"
   - "HTe lo advierto!!!, no te parecer\xE1 agradable verme enfurecido.\r\n"
   linesA5:
   - "PDisculpe caballero, no logro recordar el camino, este bosque me parece muy
@@ -169,17 +169,17 @@ MonoBehaviour:
   lines:
   - 
   linesLogan:
-  - "PMaldici\xF3n, el anciano se ha quedado atr\xE1s, m\xE1s vale apresurarse.\n"
+  - "PNooooooo. El anciano se ha quedado atr\xE1s, m\xE1s vale apresurarse.\n"
   - "PQu\xE9 anciano m\xE1s lento, ser\xE1 mejor que lo espere\u2026"
-  - "PHenry se ha quedado atr\xE1s, maldici\xF3n \xBFcu\xE1nto tardar\xE1?"
+  - "PHenry se ha quedado atr\xE1s, noooooooo \xBFcu\xE1nto tardar\xE1?"
   - "PUn momento, no veo a Henry. Nooo, se ha quedado atr\xE1s.\n"
   - "PUn momento, \xBFd\xF3nde est\xE1 el anciano?\r\n"
   linesLogan0:
-  - "PMaldici\xF3n, el anciano se ha quedado atr\xE1s, m\xE1s vale apresurarse."
+  - "PNooooooo. El anciano se ha quedado atr\xE1s, m\xE1s vale apresurarse."
   linesLogan1:
   - "PQu\xE9 anciano m\xE1s lento, ser\xE1 mejor que lo espere\u2026"
   linesLogan2:
-  - "PHenry se ha quedado atr\xE1s, maldici\xF3n \xBFcu\xE1nto tardar\xE1?"
+  - "PHenry se ha quedado atr\xE1s, noooooooo \xBFcu\xE1nto tardar\xE1?"
   linesLogan3:
   - "PUn momento, no veo a Henry. Nooo, se ha quedado atr\xE1s."
   linesLogan4:
@@ -191,9 +191,10 @@ MonoBehaviour:
     que\nintentastes cruzar el sendero peligroso.\r"
   - LJijijijijiji...
   - HNo tienes remedio.
-  - "LGracias por ayudarme, de no ser por ti de seguro ser\xEDa alimento de oso,
-    no se que te haya pasado para que seas un camale\xF3n pero espero que encuentres
+  - "LGracias por ayudarme, de no ser por ti de seguro ser\xEDa alimento de oso,\nno
+    se que te haya pasado para que seas un camale\xF3n pero espero que\nencuentres
     la soluci\xF3n."
+  consejoFinal: No vuelva a perder a un anciano de vista.
   index: 0
   didDialogueStart: 0
   dialogoAnterior: 0
@@ -220,6 +221,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a59eba3ea99eb534eb701a457a0a7f07, type: 3}
   - {fileID: 8300000, guid: 0879e3ff133967c40ab3c19044d1ac27, type: 3}
   polvoTierra: {fileID: 7505871044521096671}
+  capaObj: {fileID: 2956049149946249190}
+  capa:
+    serializedVersion: 2
+    m_Bits: 524288
+  capa0:
+    serializedVersion: 2
+    m_Bits: 1048576
 --- !u!1 &232833404464568919
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,6 +587,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7029948723529949830, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
       propertyPath: m_Name
       value: Henry_Finish_002
@@ -605,6 +617,11 @@ Transform:
 --- !u!95 &7358864484052360973 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
+  m_PrefabInstance: {fileID: 3996212306935374492}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2956049149946249190 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7029948723529949830, guid: 1f97453b55765ad4d9344b36f70b54a5, type: 3}
   m_PrefabInstance: {fileID: 3996212306935374492}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6918330094505437914
@@ -641,6 +658,10 @@ PrefabInstance:
     - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: EmissionModule.m_BurstCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 587980759008403205, guid: b314ae04a73d9654f8ce5f70f3b8f04f, type: 3}
       propertyPath: InitialModule.maxNumParticles
